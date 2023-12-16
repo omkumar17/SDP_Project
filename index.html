@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="public\css\home.css">
+    <style>
+  
+    </style>
+</head>
+
+<body>
+    <nav class="navbar"></nav>
+    <script src="public\js\nav.js"></script>
+    <!-- hero section -->
+    <header class="hero-section">
+        <!-- <div class="content">
+            <img src="" class="logo" alt="logo">
+            <p class="sub-heading">best fashion collection of all time</p>
+        </div> -->
+        <div class="slider">
+            <div class="container">
+                <div class="parent">
+                    <img src="public\img\shoe1.jpg" alt="" class="img" id="img1">
+                    <img src="public\img\shoe2.png" alt="" class="img" id="img2">
+                    <img src="public\img\shoe3.jpg" alt="" class="img" id="img3">
+                    <img src="public\img\shoe4.jpg" alt="" class="img" id="img4">
+                </div>
+            </div>
+            <!-- <div class="leftbtn">
+        <h4>left</h4>
+    </div>
+    <div class="rightbtn">
+        <h4>right</h4>
+    </div> -->
+            <!-- <script>
+        var leftbtn=document.querySelector(".leftbtn");
+        var rightbtn=document.querySelector(".rightbtn");
+        var par=document.querySelector(".parent");
+        var tr=window.getComputedStyle(par).getPropertyValue('transform');
+        // var st=par.style.transform;
+        console.log(tr);
+        leftbtn.addEventListener("click",()=>{
+            par.style.webkitAnimationPlayState="paused";
+            var ct=0;
+            ct++;
+            console.log(ct);
+            par.style.transform="translateX(-25%)";
+        })
+    </script> -->
+            <!-- <script>
+        var leftbtn = document.querySelector(".leftbtn");
+        var rightbtn = document.querySelector(".rightbtn");
+        var par = document.querySelector(".parent");
+        var ct = 0;
+    
+        leftbtn.addEventListener("click", () => {
+            ct--;
+            if (ct < 0) ct = 3;
+            var transformValue = `translateX(-${ct * 25}%)`;
+            
+            // Remove the animation to directly set the transform style
+            par.style.animation = "none";
+            par.style.transform = transformValue;
+            setTimeout(() => {
+                // Restore the animation after a short delay
+                par.style.animation = "slide 16s infinite linear(0,0 90%,1)";
+            }, 1000);
+        });
+    
+        rightbtn.addEventListener("click", () => {
+            ct++;
+            if (ct > 3) ct = 0;
+            var transformValue = `translateX(-${ct * 25}%)`;
+            
+            // Remove the animation to directly set the transform style
+            par.style.animation = "none";
+            par.style.transform = transformValue;
+            setTimeout(() => {
+                // Restore the animation after a short delay
+                par.style.animation = "slide 16s infinite linear(0,0 90%,1)";
+            }, 1000);
+        });
+    </script> -->
+        </div>
+    </header>
+
+    <section class="product">
+        <h2 class="product-category">best selling</h2>
+        <button class="pre-btn"><img src="public\img\nextbutton.png" alt="prebtn"></button>
+        <button class="nxt-btn"><img src="public\img\nextbutton.png" alt="nxtbtn"></button>
+
+        <div class="product-container">
+
+            <a href="product.html" class="product-link">
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="public\img\bestselling.jpg" class="product-thumb" alt="">
+                        <button class="card-btn">add to whislist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand1</h2>
+                        <p class="product-short-des">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+            </a>
+
+
+            <a href="product.html" class="product-link">
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="" class="product-thumb" alt="">
+                        <button class="card-btn">add to whislist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand1</h2>
+                        <p class="product-short-des">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="product.html" class="product-link">
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="" class="product-thumb" alt="">
+                        <button class="card-btn">add to whislist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand1</h2>
+                        <p class="product-short-des">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="product.html" class="product-link">
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="" class="product-thumb" alt="">
+                        <button class="card-btn">add to whislist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand1</h2>
+                        <p class="product-short-des">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="product.html" class="product-link">
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="" class="product-thumb" alt="">
+                        <button class="card-btn">add to whislist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand1</h2>
+                        <p class="product-short-des">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="product.html" class="product-link">
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="" class="product-thumb" alt="">
+                        <button class="card-btn">add to whislist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand1</h2>
+                        <p class="product-short-des">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="product.html" class="product-link">
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="" class="product-thumb" alt="">
+                        <button class="card-btn">add to whislist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand1</h2>
+                        <p class="product-short-des">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="product.html" class="product-link">
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="" class="product-thumb" alt="">
+                        <button class="card-btn">add to whislist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand1</h2>
+                        <p class="product-short-des">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </section>
+    <!-- collections -->
+    <section class="collection-container">
+        <a href="#" class="collection">
+            <img src="public\img\shoe5.jpg" alt="">
+            <!-- <p class="collection-title">women <br> apparels</p> -->
+        </a>
+        <a href="#" class="collection">
+            <img src="public\img\shoe4.jpg" alt="">
+            <!-- <p class="collection-title">men <br> apparels</p> -->
+        </a>
+        <a href="#" class="collection">
+            <img src="public\img\shoe3.jpg" alt="">
+            <!-- <p class="collection-title">accessories</p> -->
+        </a>
+
+    </section>
+    <br>
+    <h2 class="shopByCat">SHOP BY CATEGORY</h2>
+    <section class="product">
+        <!-- <h2 class="product-category">best selling</h2>
+        <button class="pre-btn"><img src="public\img\nextbutton.png" alt="prebtn"></button>
+        <button class="nxt-btn"><img src="public\img\nextbutton.png" alt="nxtbtn"></button> -->
+        <div id="myBtnContainer">
+            <!-- <button class="btn active" onclick="filterSelection('all')"> Show all</button> -->
+            <button class="btn active" onclick="filterSelection('mens')"> mens</button>
+            <button class="btn" onclick="filterSelection('aurat')"> womens</button>
+            <button class="btn" onclick="filterSelection('kids')"> kids</button>
+            <!--  <button class="btn" onclick="filterSelection('colors')"> Colors</button> -->
+        </div>
+        <div class="productcontainer brands">
+            <div class="filterDiv mens">m
+
+                <a href="selection.html" class="product-link" >
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="discount-tag">50% off</span>
+                            <img src="" class="product-thumb" alt="">
+                            <!-- <button class="card-btn">add to whislist</button> -->
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-brand">brand1</h2>
+                            <!-- <p class="product-short-des">a short line about the cloth..</p>
+                             <span class="price">$20</span><span class="actual-price">$40</span> -->
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="filterDiv mens" >m
+
+                <a href="selection.html" class="product-link" >
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="discount-tag">50% off</span>
+                            <img src="" class="product-thumb" alt="">
+                            <!-- <button class="card-btn">add to whislist</button> -->
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-brand">brand1</h2>
+                            <!-- <p class="product-short-des">a short line about the cloth..</p>
+                             <span class="price">$20</span><span class="actual-price">$40</span> -->
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="filterDiv kids" >k
+
+                <a href="selection.html" class="product-link" >
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="discount-tag">50% off</span>
+                            <img src="" class="product-thumb" alt="">
+                            <!-- <button class="card-btn">add to whislist</button> -->
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-brand">brand1</h2>
+                            <!-- <p class="product-short-des">a short line about the cloth..</p>
+                             <span class="price">$20</span><span class="actual-price">$40</span> -->
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="filterDiv aurat" >w
+
+                <a href="selection.html" class="product-link" >
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="discount-tag">50% off</span>
+                            <img src="" class="product-thumb" alt="">
+                            <!-- <button class="card-btn">add to whislist</button> -->
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-brand">brand1</h2>
+                            <!-- <p class="product-short-des">a short line about the cloth..</p>
+                             <span class="price">$20</span><span class="actual-price">$40</span> -->
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="filterDiv mens" >m
+
+                <a href="selection.html" class="product-link" >
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="discount-tag">50% off</span>
+                            <img src="" class="product-thumb" alt="">
+                            <!-- <button class="card-btn">add to whislist</button> -->
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-brand">brand1</h2>
+                            <!-- <p class="product-short-des">a short line about the cloth..</p>
+                             <span class="price">$20</span><span class="actual-price">$40</span> -->
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="filterDiv aurat" >w
+
+                <a href="selection.html" class="product-link" >
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="discount-tag">50% off</span>
+                            <img src="" class="product-thumb" alt="">
+                            <!-- <button class="card-btn">add to whislist</button> -->
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-brand">brand1</h2>
+                            <!-- <p class="product-short-des">a short line about the cloth..</p>
+                             <span class="price">$20</span><span class="actual-price">$40</span> -->
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="filterDiv kids" >k
+
+                <a href="selection.html" class="product-link" >
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="discount-tag">50% off</span>
+                            <img src="" class="product-thumb" alt="">
+                            <!-- <button class="card-btn">add to whislist</button> -->
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-brand">brand1</h2>
+                            <!-- <p class="product-short-des">a short line about the cloth..</p>
+                             <span class="price">$20</span><span class="actual-price">$40</span> -->
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="filterDiv aurat" >w
+
+                <a href="selection.html" class="product-link" >
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="discount-tag">50% off</span>
+                            <img src="" class="product-thumb" alt="">
+                            <!-- <button class="card-btn">add to whislist</button> -->
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-brand">brand1</h2>
+                            <!-- <p class="product-short-des">a short line about the cloth..</p>
+                             <span class="price">$20</span><span class="actual-price">$40</span> -->
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="filterDiv aurat" >w
+
+                <a href="selection.html" class="product-link" >
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="discount-tag">50% off</span>
+                            <img src="" class="product-thumb" alt="">
+                            <!-- <button class="card-btn">add to whislist</button> -->
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-brand">brand1</h2>
+                            <!-- <p class="product-short-des">a short line about the cloth..</p>
+                             <span class="price">$20</span><span class="actual-price">$40</span> -->
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="filterDiv kids" >k
+
+                <a href="selection.html" class="product-link" >
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="discount-tag">50% off</span>
+                            <img src="" class="product-thumb" alt="">
+                            <!-- <button class="card-btn">add to whislist</button> -->
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-brand">brand1</h2>
+                            <!-- <p class="product-short-des">a short line about the cloth..</p>
+                             <span class="price">$20</span><span class="actual-price">$40</span> -->
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="filterDiv kids" >k
+
+                <a href="selection.html" class="product-link" >
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="discount-tag">50% off</span>
+                            <img src="" class="product-thumb" alt="">
+                            <!-- <button class="card-btn">add to whislist</button> -->
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-brand">brand1</h2>
+                            <!-- <p class="product-short-des">a short line about the cloth..</p>
+                             <span class="price">$20</span><span class="actual-price">$40</span> -->
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="filterDiv mens" >mens
+
+                <a href="selection.html" class="product-link" >
+                    <div class="product-card">
+                        <div class="product-image">
+                            <span class="discount-tag">50% off</span>
+                            <img src="" class="product-thumb" alt="">
+                            <!-- <button class="card-btn">add to whislist</button> -->
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-brand">brand1</h2>
+                            <!-- <p class="product-short-des">a short line about the cloth..</p>
+                             <span class="price">$20</span><span class="actual-price">$40</span> -->
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+
+    <section id="brand-sec">
+        <h2>Brands</h2>
+        <div class="brands">
+            <a href="selection.html" class="product-link" >
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="" class="product-thumb" alt="">
+                        <!-- <button class="card-btn">add to whislist</button> -->
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand1</h2>
+                        <!-- <p class="product-short-des">a short line about the cloth..</p>
+                         <span class="price">$20</span><span class="actual-price">$40</span> -->
+                    </div>
+                </div>
+            </a>
+            <a href="selection.html.html" class="product-link" >
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="" class="product-thumb" alt="">
+                        <!-- <button class="card-btn">add to whislist</button> -->
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand1</h2>
+                        <!-- <p class="product-short-des">a short line about the cloth..</p>
+                         <span class="price">$20</span><span class="actual-price">$40</span> -->
+                    </div>
+                </div>
+            </a>
+            <a href="selection.html" class="product-link" >
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="" class="product-thumb" alt="">
+                        <!-- <button class="card-btn">add to whislist</button> -->
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand1</h2>
+                        <!-- <p class="product-short-des">a short line about the cloth..</p>
+                         <span class="price">$20</span><span class="actual-price">$40</span> -->
+                    </div>
+                </div>
+            </a>
+            <a href="selection.html" class="product-link" >
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="" class="product-thumb" alt="">
+                        <!-- <button class="card-btn">add to whislist</button> -->
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand1</h2>
+                        <!-- <p class="product-short-des">a short line about the cloth..</p>
+                         <span class="price">$20</span><span class="actual-price">$40</span> -->
+                    </div>
+                </div>
+            </a>
+            <a href="selection.html" class="product-link" >
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="" class="product-thumb" alt="">
+                        <!-- <button class="card-btn">add to whislist</button> -->
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand1</h2>
+                        <!-- <p class="product-short-des">a short line about the cloth..</p>
+                         <span class="price">$20</span><span class="actual-price">$40</span> -->
+                    </div>
+                </div>
+            </a>
+            <a href="selection.html.html" class="product-link" >
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="" class="product-thumb" alt="">
+                        <!-- <button class="card-btn">add to whislist</button> -->
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand1</h2>
+                        <!-- <p class="product-short-des">a short line about the cloth..</p>
+                         <span class="price">$20</span><span class="actual-price">$40</span> -->
+                    </div>
+                </div>
+            </a>
+            <a href="selection.html" class="product-link" >
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="" class="product-thumb" alt="">
+                        <!-- <button class="card-btn">add to whislist</button> -->
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand1</h2>
+                        <!-- <p class="product-short-des">a short line about the cloth..</p>
+                         <span class="price">$20</span><span class="actual-price">$40</span> -->
+                    </div>
+                </div>
+            </a>
+            <a href="selection.html" class="product-link" >
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="" class="product-thumb" alt="">
+                        <!-- <button class="card-btn">add to whislist</button> -->
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand1</h2>
+                        <!-- <p class="product-short-des">a short line about the cloth..</p>
+                         <span class="price">$20</span><span class="actual-price">$40</span> -->
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section class="del-icon">
+        <div class="del-icon-cont">
+            <div class="icons">
+                <img src="public\img\shiping-icon.svg" alt="" class="del-img">
+                <div class="icon-text">
+                    On Time Delivery
+                </div>
+            </div>
+            <div class="icons">
+                <img src="public\img\reverse-icon.svg" alt="" class="del-img">
+                <div class="icon-text">
+                    Easy Replacement
+                </div>
+            </div>
+            <div class="icons">
+                <img src="public\img\cod-icon.svg" alt="" class="del-img">
+                <div class="icon-text">
+                    COD Available
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="contactus">
+        <div class="contact-cont">
+            <input type="email" class="contact-input" placeholder="Enter your Email Address">
+            <input type="submit" class="contact-input-btn">
+        </div>
+    </section>
+    <footer>
+    </footer>
+    <script src="public\js\footer.js"></script>
+    <script src="public\js\home.js"></script>
+
+    <script>
+        filterSelection("mens")
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("filterDiv");
+            if (c == "all") c = "";
+            // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+            for (i = 0; i < x.length; i++) {
+                w3RemoveClass(x[i], "show");
+                if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+            }
+        }
+
+        // Show filtered elements
+        function w3AddClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            console.log(arr1);
+            arr2 = name.split(" ");
+            console.log(arr2);
+            for (i = 0; i < arr2.length; i++) {
+                if (arr1.indexOf(arr2[i]) == -1) {
+                    element.className += " " + arr2[i];
+                }
+            }
+        }
+
+        // Hide elements that are not selected
+        function w3RemoveClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            console.log(arr1);
+            arr2 = name.split(" ");
+            console.log(arr2);
+            for (i = 0; i < arr2.length; i++) {
+                while (arr1.indexOf(arr2[i]) > -1) {
+                    arr1.splice(arr1.indexOf(arr2[i]), 1);
+                }
+            }
+            element.className = arr1.join(" ");
+        }
+
+        // Add active class to the current control button (highlight it)
+        var btnContainer = document.getElementById("myBtnContainer");
+        var btns = btnContainer.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+    </script>
+</body>
+
+</html>
