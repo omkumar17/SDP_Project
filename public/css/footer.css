@@ -1,3 +1,6 @@
+*{
+    margin: 0;padding: 0;
+}
 footer{
     position: relative;
     width: 100%;
@@ -61,11 +64,15 @@ footer{
 .footer-category .footer-link{
     text-decoration: none;
     text-transform: capitalize;
-    color:teal;
+    color:black;
+    /* margin-top: 20px; */
+}
+.footer-category li{
+    margin-top: 10px;
 }
 
 .footer-link:hover{
-    color:black;
+    color:teal;
 }
 .footer-title, .info{
     color: teal;

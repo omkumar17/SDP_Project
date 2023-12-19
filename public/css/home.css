@@ -3,6 +3,8 @@
 
 * {
     font-family: 'segoe ui historic';
+    /* overflow: hidden; */
+    margin: 0;padding: 0;
 }
 
 .hero-section {
@@ -56,6 +58,40 @@
     width: 90vw;
     height: 100%;
     margin: 0 5px 0 0;
+}
+
+.notice-container {
+    display: flex;
+    width: 99vw;
+    height: auto;
+    overflow: hidden;
+    margin: auto;
+    object-fit: fill;
+    /* border:1px solid teal; */
+    /* padding: 5px; */
+}
+
+.notice-parent {
+    display: flex;
+    animation: slide 20s infinite;
+    /* animation-delay: 4s; */
+    animation-timing-function: linear(0, 0 90%, 1);
+    transform: translateX(0%);
+    text-align: center;
+    border: 2px solid black;
+}
+.notice-content{
+    background-color: rgb(136, 5, 5);
+    color:white;
+    font-weight: 600;
+    width: 99vw;
+    /* height: 100%; */
+    margin: 0 5px 0 0;
+    padding: 2px 0;
+}
+.notice-content p{
+    background-color: rgb(136, 5, 5);
+    /* font-size: 0.7rem; */
 }
 
 @keyframes slide {
@@ -130,6 +166,8 @@
     scroll-behavior: smooth;
     margin-bottom: 5vh;
     margin-top: 5vh;
+    height:500px;
+    align-items: center;
 }
 
 .product-container::-webkit-scrollbar {
@@ -142,7 +180,7 @@
     flex: 0 0 auto;
     width: 300px;
     height: 450px;
-    margin: 0 20px;
+    margin: 20px 20px;
 }
 
 .brands .product-link {
@@ -202,7 +240,7 @@
 }
 
 .product-card:hover {
-    box-shadow: 2px 2px 20px rgb(184, 184, 184);
+    box-shadow: 2px 2px 20px rgb(136, 135, 135);
 }
 
 .product-card:hover .card-btn {
@@ -369,7 +407,7 @@
 
 #myBtnContainer {
     display: flex;
-    width: 100vw;
+    width: 100%;
     flex-direction: row;
     align-items: center;
     justify-content: center
@@ -401,7 +439,7 @@
 }
 
 .del-icon-cont {
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -429,7 +467,7 @@
 }
 
 .contact-cont {
-    width: 100vw;
+    width: 100%;
     height: 50px;
     display: flex;
     flex-direction: row;
@@ -509,6 +547,10 @@
     .nxt-btn {
         display: none;
     }
+    .product-container::-webkit-scrollbar {
+        display: block;
+    }
+    
 }
 
 @media only screen and (max-width:752px) {
@@ -529,7 +571,10 @@
     .parent {
         height: 100%;
     }
-
+    .notice-content p{
+        background-color: rgb(136, 5, 5);
+        font-size: 0.7rem;
+    }
     .product-container {
         padding: 0;
     }
@@ -596,5 +641,10 @@
     }
     .contact-cont{
         display:none;
+        
     }
+    .product-container::-webkit-scrollbar {
+        display:block;
+    }
+    
 }

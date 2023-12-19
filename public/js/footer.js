@@ -34,61 +34,37 @@ const createFooter = () => {
         </div>
         <div class="footer-ul-container">
             <ul class="footer-category">
-                <li class="category-title">men</li>
-                <li><a href="#" class="footer-link">Shoes</a></li>
-                <li><a href="#" class="footer-link">Sandals</a></li>
-                <li><a href="#" class="footer-link">Sleepers</a></li>
-                <li><a href="#" class="footer-link">Boots</a></li>
-                <li><a href="#" class="footer-link">Snekers</a></li>
-                <li><a href="#" class="footer-link">Formals</a></li>
-                <li><a href="#" class="footer-link">Crocs</a></li>
-                <li><a href="#" class="footer-link">Sports</a></li>
-                <li><a href="#" class="footer-link"></a></li>
+                <li class="category-title">ABOUT COMPANY</li>
+                <li><a href="#" class="footer-link">About Us</a></li>
+                <li><a href="#" class="footer-link">Contact Us</a></li>
+                <li><a href="#" class="footer-link">Store Locator</a></li>
+                <li><a href="#" class="footer-link">Blog</a></li>
                 <li><a href="#" class="footer-link"></a></li>
             </ul>
             <ul class="footer-category">
-                <li class="category-title">women</li>
-                <li><a href="#" class="footer-link">t-shirts</a></li>
-                <li><a href="#" class="footer-link">sweatshirts</a></li>
-                <li><a href="#" class="footer-link">shirts</a></li>
-                <li><a href="#" class="footer-link">jeans</a></li>
-                <li><a href="#" class="footer-link">trousers</a></li>
-                <li><a href="#" class="footer-link">shoes</a></li>
-                <li><a href="#" class="footer-link">casuals</a></li>
-                <li><a href="#" class="footer-link">formals</a></li>
-                <li><a href="#" class="footer-link">sports</a></li>
-                <li><a href="#" class="footer-link">watch</a></li>
+                <li class="category-title">ONLINE SHOPPING</li>
+                <li><a href="#" class="footer-link">New Arrival</a></li>
+                <li><a href="#" class="footer-link">Men</a></li>
+                <li><a href="#" class="footer-link">Women</a></li>
+                <li><a href="#" class="footer-link">Kids</a></li>
+                <li><a href="#" class="footer-link">Brands</a></li>
             </ul>
             <ul class="footer-category">
-                <li class="category-title">men</li>
-                <li><a href="#" class="footer-link">Shoes</a></li>
-                <li><a href="#" class="footer-link">Sandals</a></li>
-                <li><a href="#" class="footer-link">Sleepers</a></li>
-                <li><a href="#" class="footer-link">Boots</a></li>
-                <li><a href="#" class="footer-link">Snekers</a></li>
-                <li><a href="#" class="footer-link">Formals</a></li>
-                <li><a href="#" class="footer-link">Crocs</a></li>
-                <li><a href="#" class="footer-link">Sports</a></li>
-                <li><a href="#" class="footer-link"></a></li>
-                <li><a href="#" class="footer-link"></a></li>
+                <li class="category-title">POLICIES</li>
+                <li><a href="#" class="footer-link">Return Policy</a></li>
+                <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                <li><a href="#" class="footer-link">Terms & Conditions</a></li>
+                <li><a href="#" class="footer-link">Shipping Information</a></li>
             </ul>
             <ul class="footer-category">
-                <li class="category-title">men</li>
-                <li><a href="#" class="footer-link">Shoes</a></li>
-                <li><a href="#" class="footer-link">Sandals</a></li>
-                <li><a href="#" class="footer-link">Sleepers</a></li>
-                <li><a href="#" class="footer-link">Boots</a></li>
-                <li><a href="#" class="footer-link">Snekers</a></li>
-                <li><a href="#" class="footer-link">Formals</a></li>
-                <li><a href="#" class="footer-link">Crocs</a></li>
-                <li><a href="#" class="footer-link">Sports</a></li>
-                <li><a href="#" class="footer-link"></a></li>
-                <li><a href="#" class="footer-link"></a></li>
+                <li class="category-title">CUSTOMER SERVICE</li>
+                <li><a href="#" class="footer-link">FAQ</a></li>
+                <li><a href="#" class="footer-link">Return Request</a></li>
             </ul>
         </div>
     </div>
    
-    <p class="footer-credit">Clothing, Best apparels online store</p>
+    <p class="footer-credit">Footwear, Best footwear online store</p>
     `;
 }
 
