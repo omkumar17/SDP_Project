@@ -194,6 +194,10 @@
 .brands .product-link {
     width: 300px;
 }
+.brands .product-brand{
+    text-align: center;
+    margin-top: 10px;
+}
 
 .filterDiv {
     width: 300px;
@@ -268,7 +272,7 @@
 }
 
 .product-brand {
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-size: 20px;
     font-weight: 600;
     /* margin: px; */
@@ -276,7 +280,7 @@
 
 .product-short-des {
     width: 100%;
-    height: 18px;
+    height: 24px;
     line-height: 20px;
     overflow: hidden;
     opacity: 0.5;
@@ -611,20 +615,20 @@
     }
 
     .product-card {
-        height: 93vw;
+        height: 75vw;
         width: 100%;
     }
 
     .product-link {
         width: 45vw;
         margin: 0 2% 0 2%;
-        height: 93vw;
+        height: 80vw;
     }
 
     .filterDiv {
         width: 44vw;
         margin: 0 2% 5% 2%;
-        height: 70vw;
+        height: 80vw;
         
     }
     .brands .product-link{
@@ -637,17 +641,17 @@
         height:100%;
     }
     .brands .product-image{
-        height:75%;
+        height:80%;
     }
     .brands .product-info{
-        height:25%;
+        height:15%;
     }
     .product-image {
-        height: 60%;
+        height: 70%;
     }
 
     .product-info {
-        height: 32%;
+        height: auto;
         padding-left: 0;
     }
 
@@ -655,11 +659,12 @@
         height: 20px;
         margin: 5px;
         padding: 0;
-        width:80%;
+        /* width:80%; */
+        /* text-align: center; */
     }
 
     .product-short-des {
-        height: auto;
+        height: 24px;
         margin: 5px;
         padding: 0;
         font-size: 90%;

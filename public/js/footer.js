@@ -5,7 +5,7 @@ const createFooter = () => {
     <div class="footer-content">
         <div class="about">
             <div class="logo">
-                <img src="public/img/logo1.jpg" alt="">
+                <img src="public/img/logo.jpg" alt="">
             </div>
             <div class="about-section">
                 <div class="intro">
