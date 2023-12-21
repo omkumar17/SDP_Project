@@ -15,7 +15,7 @@ const createNav = () => {
         </div>
     </section>
         <div class="nav">
-            <img src="public/img/logo1.jpg" class="brand-logo" alt="">
+            <img src="public/img/logo.jpg" class="brand-logo" alt="">
             <div class="search">
                 <input type="text" class="search-box" placeholder="search brand, product">
                 <a href="selection.html" class="search-btn"><button>search</button></a>
@@ -134,6 +134,7 @@ const createNav = () => {
                 <li><a href="#" class="header-link">Campus</a></li>
                 <li><a href="#" class="header-link">Venus</a></li>
             </ul>
+            </div>
             </div>
             <div class="drop-img"><img src="public/img/kidsdropimg.jpg" alt=""></div>
             </ul>

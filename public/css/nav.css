@@ -514,7 +514,7 @@
 
     .links-container{
         position:absolute;
-        top:19vh;
+        top:113px;
         right:0;
         width:80%;
         height:82vh;
@@ -663,6 +663,9 @@
         }
         .search{
             top:89px;
+        }
+        .links-container{
+            top:127px;
         }
     }
     .hide{
