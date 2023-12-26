@@ -353,7 +353,7 @@
 
 .collection img {
     width: 100%;
-    height: 100%;
+    height: 60vh;
     object-fit: fill;
     opacity: 0.8;
 }
@@ -484,9 +484,10 @@
 }
 
 .contact-cont {
+    display: none;
     width: 100%;
     height: 50px;
-    display: flex;
+    /* display: flex; */
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -541,6 +542,9 @@
 
     .collection-container {
         grid-template-columns: repeat(2, 1fr);
+    }
+    .collection img{
+        height:20vh;
     }
 
     
