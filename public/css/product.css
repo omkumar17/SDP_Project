@@ -5,18 +5,7 @@
     justify-content: space-between;
 }
 
-.image-slider {
-    width: 40vw;
-    height: 40vw;
-    position: relative;
-    background-image: url('https://th.bing.com/th/id/R.5c41a5991d5b267c86b4ab83b587fc3c?rik=UWl8HnkxRwG68A&riu=http%3a%2f%2fimage.sportsmansguide.com%2fadimgs%2fl%2f2%2f281555_ts.jpg&ehk=0E6nKyM6RIbxh%2bkfdKw%2b%2bUIziKgd7lO2J2sJ2IAQfHo%3d&risl=&pid=ImgRaw&r=0');
-    background-size: contain;
-    background-repeat: no-repeat;
-    /* box-shadow: 1px 1px 20px black; */
-    margin: 0 5%;
-    position: sticky;
-    top: 0px;
-}
+
 
 .product-images {
     position: absolute;
@@ -216,6 +205,9 @@
 .des {
     color: #383838;
     line-height: 25px;
+}
+.colorpro{
+    width:1000px;
 }
 
 @media only screen and (max-width:810px) {

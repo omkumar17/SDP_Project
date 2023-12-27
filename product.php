@@ -1,12 +1,36 @@
+<?php
+include_once 'connection.php';
+if(isset($_GET['id']))
+{
+    $id=$_GET['id'];
+}
+$sql="SELECT * FROM `product` WHERE `Product_id`='$id'";
+$result=$conn->query($sql);
+$row=$result->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Product</title>
     <link rel="stylesheet" href="public\css\home.css">
     <link rel="stylesheet" href="public\css\product.css">
+    <style>
+        .image-slider {
+    width: 40vw;
+    height: 40vw;
+    position: relative;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    /* box-shadow: 1px 1px 20px black; */
+    margin: 0 5%;
+    position: sticky;
+    top: 0px;
+}
+    </style>
 </head>
 
 <body>
@@ -14,26 +38,68 @@
     <section class="product-details">
         <div class="image-slider">
             <div class="product-images">
-                <img src="https://th.bing.com/th/id/R.5c41a5991d5b267c86b4ab83b587fc3c?rik=UWl8HnkxRwG68A&riu=http%3a%2f%2fimage.sportsmansguide.com%2fadimgs%2fl%2f2%2f281555_ts.jpg&ehk=0E6nKyM6RIbxh%2bkfdKw%2b%2bUIziKgd7lO2J2sJ2IAQfHo%3d&risl=&pid=ImgRaw&r=0"
-                    class="active" alt="">
-                <img src="https://th.bing.com/th/id/OIP.CSw1u5ynr3HFsEBbV3vHuAHaHa?pid=ImgDet&w=206&h=206&c=7&dpr=1.3"
-                    alt="">
-                <img src="https://th.bing.com/th/id/OIP.SIOCkzrpIlE1_1LyfOBBRQAAAA?pid=ImgDet&w=206&h=206&c=7&dpr=1.3"
-                    alt="">
-                <img src="https://th.bing.com/th/id/OIP.hs5kkH0tShdzH-rwhKYfZgHaGc?pid=ImgDet&w=206&h=179&c=7&dpr=1.3"
-                    alt="">
+                <?php
+                    $imgsql="SELECT * FROM product JOIN color ON product.product_id = color.product_id JOIN image ON color.cid = image.cid WHERE product.product_id=$id";
+                    $imgres=$conn->query($imgsql);
+                    $imgrow=$imgres->fetch_assoc();
+                    ?>
+                    <img src="public\img\<?php echo $imgrow['Image_path1']; ?>" class="active" alt="">
+                    <img src="public\img\<?php echo $imgrow['Image_path2']; ?>" alt="">
+                    <img src="public\img\<?php echo $imgrow['Image_path3']; ?>" alt="">
+                    <img src="public\img\<?php echo $imgrow['Image_path4']; ?>" alt="">
+                    <?php
+                ?> 
+                
             </div>
         </div>
 
         <!-- image slider -->
         <div class="details">
-            <div class="product-brand">calvin klein</div>
-            <p class="product-short-des">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-            <span class="product-price">$99</span>
-            <span class="product-actual-price">$200</span>
-            <span class="product-discount">( 50% off )</span><br><br>
-            <span class="avail">Availability: <span class="avail-value">In Stock</span></span>
-            
+            <div class="product-brand"><?php echo $row['product_name']; ?></div>
+            <p class="product-short-des"><?php echo $row['product_details']; ?></p>
+            <span class="product-price"><?php echo "₹".$row['price']; ?></span>
+            <span class="product-actual-price"><?php echo "₹".$row['actual_price']; ?></span>
+            <span class="product-discount">( 30% off )</span><br><br>
+            <?php
+            $sum=0;
+            $flag="IN STOCK";
+                $colsql="SELECT * FROM `color` WHERE `product_id`=$id";
+                $colres=$conn->query($colsql);
+                while($row=$colres->fetch_assoc())
+                {
+                    $a=$row['cid'];
+                    $prodessql="SELECT `quantity` FROM `product_desc` WHERE `cid`=$a";
+                    $prodesres=$conn->query($prodessql);
+                    while($row1=$prodesres->fetch_assoc())
+                    {
+                        $sum+=$row1['quantity'];
+                    }
+
+                }
+                if($sum>0)
+                {
+                    $flag="IN STOCK";
+                }
+                else
+                {
+                    $flag="OUT OF STOCK";
+                }
+            ?>
+            <span class="avail">Availability: <span class="avail-value"><?php echo $flag; ?></span></span>
+            <div>COLOR : 
+                <select name="procol" id="col" class="colorpro">
+                    <?php
+                        $colorsql="SELECT * FROM `color` WHERE `product_id`=$id";
+                        $colorres=$conn->query($colorsql);
+                        while($row2=$colorres->fetch_assoc())
+                        {
+                           ?>
+                                <option value="<?php echo $row2['color']; ?>" ><?php echo $row2['color']; ?></option>
+                           <?php
+                        }
+                    ?>
+                </select>
+            </div>
             <form action="" class="form-container">
                 <span>ENTER YOUR SIZE</span>
                 <input type="number" class="size-height box" placeholder="Enter your height in cm" name="height">
@@ -49,25 +115,29 @@
                 <form action="">
                     <br><span class="product-sub-heading">select size</span><span class="recommendation">size recommendation</span>
                     <div class="size">
-                        <input type="radio" name="size" value="s" checked hidden id="s-size">
-                        <label for="s-size" class="size-radio-btn check">s</label>
-                        <input type="radio" name="size" value="m" hidden id="m-size">
-                        <label for="m-size" class="size-radio-btn">m</label>
-                        <input type="radio" name="size" value="l" hidden id="l-size">
-                        <label for="l-size" class="size-radio-btn">l</label>
-                        <input type="radio" name="size" value="xl" hidden id="xl-size">
-                        <label for="xl-size" class="size-radio-btn">xl</label>
-                        <input type="radio" name="size" value="xxl" hidden id="xxl-size">
-                        <label for="xxl-size" class="size-radio-btn">xxl</label>
-                        <input type="radio" name="size" value="xxl" hidden id="xxl-size">
-                        <label for="xxl-size" class="size-radio-btn">xxl</label>
-                        <input type="radio" name="size" value="xxl" hidden id="xxl-size">
-                        <label for="xxl-size" class="size-radio-btn">xxl</label>
-                        <input type="radio" name="size" value="xxl" hidden id="xxl-size">
-                        <label for="xxl-size" class="size-radio-btn">xxl</label>
-                        <input type="radio" name="size" value="xxl" hidden id="xxl-size">
-                        <label for="xxl-size" class="size-radio-btn">xxl</label>
+                    <?php
+                    
+                          $sizesql="SELECT `cid` FROM `color` WHERE `product_id`=$id";
+                          $ressize=$conn->query($colorsql);
+                          $row3=$ressize->fetch_assoc();
+                          
+                              $a=$row3['cid'];
+                              $prodessql="SELECT `size` FROM `product_desc` WHERE `cid`=$a";
+                              $prodesres=$conn->query($prodessql);
+                              while($row4=$prodesres->fetch_assoc())
+                              {
+                                ?>
+                                 <input type="radio" name="size" value="<?php echo $row4['size']; ?>" hidden id="<?php echo $row4['size']; ?>-size">
+                                 <label for="<?php echo $row4['size']; ?>-size" class="size-radio-btn"><?php echo $row4['size']; ?></label>
+                                <?php
+                              }
+          
+                          
+                         
+                    ?>
                     </div>
+                        
+                    
                         <span class="qty">Quantity: </span><br>
                         <input class="quantity" id="id_form-0-quantity" min="1" name="quantity" value="1" type="number">
                 </form>
@@ -211,6 +281,16 @@
     <script src="public\js\footer.js"></script>
     <script src="public\js\home.js"></script>
     <script src="public\js\product.js"></script>
+    <script>
+        <?php
+ $imgsql="SELECT * FROM product JOIN color ON product.product_id = color.product_id JOIN image ON color.cid = image.cid WHERE product.product_id=$id";
+ $imgres=$conn->query($imgsql);
+ $imgrow=$imgres->fetch_assoc();
+        ?>
+        // const productImageSlide = document.querySelector(".image-slider");
+        productImageSlide.style.backgroundImage = `url('public/img/${<?php echo $imgrow['Image_path1']; ?>}')`;
+
+    </script>
 </body>
 
 </html>
