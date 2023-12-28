@@ -22,7 +22,7 @@ $row=$result->fetch_assoc();
     width: 40vw;
     height: 40vw;
     position: relative;
-    background-image: url('');
+    /* background-image: url(''); */
     background-size: contain;
     background-repeat: no-repeat;
     /* box-shadow: 1px 1px 20px black; */
@@ -30,23 +30,26 @@ $row=$result->fetch_assoc();
     position: sticky;
     top: 0px;
 }
+.colorpro{
+    width:64px;
+}
     </style>
 </head>
 
 <body>
     <nav class="navbar"></nav>
     <section class="product-details">
-        <div class="image-slider">
+    <?php
+        $imgsql="SELECT * FROM product JOIN color ON product.product_id = color.product_id JOIN image ON color.cid = image.cid WHERE product.product_id=$id";
+        $imgres=$conn->query($imgsql);
+        $imgrow=$imgres->fetch_assoc();
+    ?>
+        <div class="image-slider" style="background-image:url('public/img/<?php echo $imgrow['Image_path1']; ?>')">
             <div class="product-images">
-                <?php
-                    $imgsql="SELECT * FROM product JOIN color ON product.product_id = color.product_id JOIN image ON color.cid = image.cid WHERE product.product_id=$id";
-                    $imgres=$conn->query($imgsql);
-                    $imgrow=$imgres->fetch_assoc();
-                    ?>
-                    <img src="public\img\<?php echo $imgrow['Image_path1']; ?>" class="active" alt="">
-                    <img src="public\img\<?php echo $imgrow['Image_path2']; ?>" alt="">
-                    <img src="public\img\<?php echo $imgrow['Image_path3']; ?>" alt="">
-                    <img src="public\img\<?php echo $imgrow['Image_path4']; ?>" alt="">
+                    <img src="public/img/<?php echo $imgrow['Image_path1']; ?>" class="active" alt="">
+                    <img src="public/img/<?php echo $imgrow['Image_path2']; ?>" alt="">
+                    <img src="public/img/<?php echo $imgrow['Image_path3']; ?>" alt="">
+                    <img src="public/img/<?php echo $imgrow['Image_path4']; ?>" alt="">
                     <?php
                 ?> 
                 
@@ -282,15 +285,21 @@ $row=$result->fetch_assoc();
     <script src="public\js\home.js"></script>
     <script src="public\js\product.js"></script>
     <script>
-        <?php
- $imgsql="SELECT * FROM product JOIN color ON product.product_id = color.product_id JOIN image ON color.cid = image.cid WHERE product.product_id=$id";
- $imgres=$conn->query($imgsql);
- $imgrow=$imgres->fetch_assoc();
-        ?>
-        // const productImageSlide = document.querySelector(".image-slider");
-        productImageSlide.style.backgroundImage = `url('public/img/${<?php echo $imgrow['Image_path1']; ?>}')`;
+        const productImages = document.querySelectorAll(".product-images img"); // selecting all image thumbs
+const productImageSlide = document.querySelector(".image-slider"); // seclecting image slider element
 
+let activeImageSlide = 0; // default slider image
+
+productImages.forEach((item, i) => { // loopinh through each image thumb
+    item.addEventListener('click', () => { // adding click event to each image thumbnail
+        productImages[activeImageSlide].classList.remove('active'); // removing active class from current image thumb
+        item.classList.add('active'); // adding active class to the current or clicked image thumb
+        productImageSlide.style.backgroundImage = `url('${item.src}')`; // setting up image slider's background image
+        activeImageSlide = i; // updating the image slider variable to track current thumb
+    })
+})
     </script>
+       
 </body>
 
 </html>
