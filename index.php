@@ -1,10 +1,16 @@
+<?php
+include_once 'connection.php';
+
+$sql="SELECT * FROM `product`";
+$result=$conn->query($sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Foot Fusion</title>
     <link rel="stylesheet" href="public\css\home.css">
     <style>
   
@@ -52,8 +58,10 @@
         <button class="nxt-btn"><img src="public\img\nextbutton.png" alt="nxtbtn"></button>
 
         <div class="product-container">
-
-            <a href="product.html" class="product-link">
+        <?php
+            $row=$result->fetch_assoc();
+        ?>
+            <a href="product.php?id=<?php echo $row['Product_id']; ?>" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">25% off</span>
@@ -62,14 +70,14 @@
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Paragon</h2>
-                        <p class="product-short-des">Paragon R1026L Women Sandals | Casual & Formal Sandals | Stylish, Comfortable & Durable | For Daily & Occasion Wear</p>
-                        <span class="price">₹ 749</span><span class="actual-price">₹ 999</span>
+                        <p class="product-short-des">Paragon K1026G Men Walking Shoes | Athletic Shoes with Comfortable Cushioned Sole for Daily Outdoor Use</p>
+                        <span class="price">₹ 999</span><span class="actual-price">₹ 1599</span>
                     </div>
                 </div>
             </a>
 
 
-            <a href="product.html" class="product-link">
+            <a href="product.php?id=5002" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">10% off</span>
@@ -129,7 +137,7 @@
                 </div>
             </a>
 
-            <a href="product.html" class="product-link">
+            <a href="product.php?id=5687" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">10% off</span>
