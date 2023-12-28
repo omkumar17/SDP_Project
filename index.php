@@ -3,6 +3,7 @@ include_once 'connection.php';
 
 $sql="SELECT * FROM `product`";
 $result=$conn->query($sql);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,8 +20,12 @@ $result=$conn->query($sql);
 
 <body>
     <nav class="navbar">
+    <?php
+        include_once 'nav.php';
+        ?>
 </nav>
-    <script src="public\js\nav.js"></script>
+
+        
     <!-- hero section -->
     <header class="hero-section">
         <!-- <div class="content">
@@ -571,7 +576,7 @@ $result=$conn->query($sql);
     </footer>
     <script src="public\js\footer.js"></script>
     <script src="public\js\home.js"></script>
-
+    
     <script>
         
     </script>
