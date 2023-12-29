@@ -1,4 +1,47 @@
-<script src="public\js\nav.js"></script>
+<style>
+    
+.logindrop{
+    display:none;
+    position:absolute;
+    top:90px;
+    /* height:100px; */
+    width:100px;
+    /* background-color:blue; */
+    border:1px solid teal;
+    /* display:block; */
+
+}
+.logindrop a{
+    list-style:none;
+    text-decoration:none;
+    color:teal;
+    /* margin: 2px; */
+    text-align:center;
+    background-color:red;
+    border:1px solid teal;
+    /* width:100px; */
+    display:block;
+    /* padding: 1px; */
+}
+.logindrop a li{
+    padding:5px;
+}
+.visible{
+       display:block;
+        visibility:visible;    
+        opacity: 1;
+    }
+    @media only screen and (max-width:1068px){
+        .logindrop{
+            top:110px;
+        } 
+    }
+    @media only screen and (max-width:600px){
+        .logindrop{
+            top:70px;
+        } 
+    }
+</style>
 <?php
 include_once 'connection.php';
 if(isset($_COOKIE['userID']))
@@ -24,6 +67,7 @@ if(isset($_COOKIE['userID']))
     </section>
         <div class="nav">
             <img src="public/img/logo.jpg" class="brand-logo" alt="">
+            
             <div class="search">
                 <input type="text" class="search-box" placeholder="search brand, product">
                 <a href="selection.html" class="search-btn"><button>search</button></a>
@@ -38,8 +82,25 @@ if(isset($_COOKIE['userID']))
                         }
                     ?>
                 </div>
-                <a class="login" href="login.php"><img  src="public/img/login.png" alt=""></a>
-                <a class="cart" href="logout.php"><img src="public/img/cart.jpg" alt=""></a>
+                <img class="login"  src="public/img/login.png" alt="" style="cursor:pointer">
+                        <div class="logindrop">
+                            <?php
+                            if(isset($_COOKIE['userID'])){
+                                ?>
+                                <a href=""><li>Profile</li></a>
+                                <a href="logout.php"><li>Logout</li></a>
+                                <?php
+                            }
+                            else{
+                                ?>
+                                <a href="register.php"><li>Register</li></a>
+                                <a href="login.php"><li>Login</li></a>
+                                <?php
+                            }
+                            ?>
+                            
+                        </div>
+                <a class="cart" href="#"><img src="public/img/cart.jpg" alt=""></a>
                 <img src="public/img/menu1.svg" alt="" class="menu">
             </div>
         </div>
@@ -52,10 +113,10 @@ if(isset($_COOKIE['userID']))
             <div class="drop-items">
             <ul class="header-category">
                 <li class="header-category-title">SHOES</li>
-                <li><a href="#" class="header-link">Sports</a></li>
-                <li><a href="#" class="header-link">Casual</a></li>
-                <li><a href="#" class="header-link">Loofers</a></li>
-                <li><a href="#" class="header-link">Sneakers</a></li>
+                <li><a href="selection.php" class="header-link">Casual</a></li>
+                <li><a href="selection.php" class="header-link">Sports</a></li>
+                <li><a href="selection.php" class="header-link">Loofers</a></li>
+                <li><a href="selection.php" class="header-link">Sneakers</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">SANDAL & CLOGS</li>
@@ -193,3 +254,14 @@ if(isset($_COOKIE['userID']))
             
         </ul>
 
+        <script src="public\js\nav.js"></script>
+        <script>
+            const login=document.querySelector(".login");
+const loginitem=document.querySelector(".logindrop");
+
+login.onclick = function () {
+    loginitem.classList.toggle("visible");
+    // console.log("Menu button clicked");
+    // console.log("link-container class list:", menuitem.classList);
+};
+        </script>

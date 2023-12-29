@@ -37,7 +37,7 @@ $row=$result->fetch_assoc();
 </head>
 
 <body>
-    <nav class="navbar"></nav>
+    <nav class="navbar"><?php include_once 'nav.php'; ?></nav>
     <section class="product-details">
     <?php
         $imgsql="SELECT * FROM product JOIN color ON product.product_id = color.product_id JOIN image ON color.cid = image.cid WHERE product.product_id=$id";
@@ -89,20 +89,7 @@ $row=$result->fetch_assoc();
                 }
             ?>
             <span class="avail">Availability: <span class="avail-value"><?php echo $flag; ?></span></span>
-            <div>COLOR : 
-                <select name="procol" id="col" class="colorpro">
-                    <?php
-                        $colorsql="SELECT * FROM `color` WHERE `product_id`=$id";
-                        $colorres=$conn->query($colorsql);
-                        while($row2=$colorres->fetch_assoc())
-                        {
-                           ?>
-                                <option value="<?php echo $row2['color']; ?>" ><?php echo $row2['color']; ?></option>
-                           <?php
-                        }
-                    ?>
-                </select>
-            </div>
+            
             <form action="" class="form-container">
                 <span>ENTER YOUR SIZE</span>
                 <input type="number" class="size-height box" placeholder="Enter your height in cm" name="height">
@@ -121,7 +108,7 @@ $row=$result->fetch_assoc();
                     <?php
                     
                           $sizesql="SELECT `cid` FROM `color` WHERE `product_id`=$id";
-                          $ressize=$conn->query($colorsql);
+                          $ressize=$conn->query($sizesql);
                           $row3=$ressize->fetch_assoc();
                           
                               $a=$row3['cid'];
