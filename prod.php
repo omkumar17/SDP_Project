@@ -9,6 +9,9 @@ class Product{
 	private $productdesc='product_desc';
 	private $color='color'; 
 	private $dbConnect = false;
+	private $cat=array();
+	private $cid=array();
+	private $type=array();
     public function __construct(){
         if(!$this->dbConnect){ 
             $conn = new mysqli($this->host, $this->user, $this->password, $this->database);
@@ -18,6 +21,18 @@ class Product{
                 $this->dbConnect = $conn;
             }
         }
+		if(isset($_GET['type']))
+		{
+			$protype=$_GET['type'];
+			$primaryquery="SELECT * FROM `category` INNER JOIN `product` ON product.Category_ID=category.category_id INNER JOIN `color` ON color.product_id=product.Product_id INNER JOIN `product_desc` ON product_desc.cid=color.cid WHERE product_desc.product_type='$protype';";
+			$result=$conn->query($primaryquery);
+			while($row=$result->fetch_assoc())
+			{
+				$this->cat[]=$row['category_id'];
+				$this->cid[]=$row['cid'];
+				$this->type[]=$row['product_type'];
+			}
+		}
     }
 	// public function join(){
 	// 	$sql="SELECT * FROM `category` INNER JOIN `product` ON product.Category_ID=category.category_id INNER JOIN `color` ON color.product_id=product.Product_id INNER JOIN `product_desc` ON product_desc.cid=color.cid";
@@ -45,18 +60,39 @@ class Product{
 	public function cleanString($str){
 		return str_replace(' ','_',$str);
 	}
-	public function getCategories() {		
+	public function getCategories() {	
 		$sqlQuery = "
 			SELECT category_id, category_name
-			FROM ".$this->categoryTable." 
+			FROM ".$this->categoryTable." WHERE category_id IN ('".implode("','",$this->cat)."')
 			GROUP BY Category_name";
         return  $this->getData($sqlQuery);
 	}
-	public function getBrand () {
-		$sql = '';
+	public function getType(){
+		// $prsql="SELECT `cid` FROM `color` INNER JOIN `product` ON product.Product_id=color.product_id WHERE product.category_id IN ('".implode("','",$this->cat)."')";
+		// $result=$conn->query($prsql);
+		// while($row=$result->fetch_assoc())
+		// {
+
+		// }
 		if(isset($_POST['category']) && $_POST['category']!="") {
 			$category = $_POST['category'];
 			$sql.=" WHERE category_id IN ('".implode("','",$category)."')";
+		}
+		$sqlQuery="
+		SELECT product_type
+			FROM ".$this->productdesc." WHERE cid IN ('".implode("','",$this->cid)."')
+			GROUP BY product_type";
+		return $this->getData($sqlQuery);
+	}
+	public function getBrand () {
+		$sql="";
+		if(isset($_POST['category']) && $_POST['category']!="") {
+			$category = $_POST['category'];
+			$sql.=" WHERE category_id IN ('".implode("','",$category)."')";
+		}
+		else
+		{
+			$sql.= " WHERE category_id IN ('".implode("','",$this->cat)."')";
 		}
 		$sqlQuery = "
 			SELECT distinct product_name
@@ -78,6 +114,10 @@ class Product{
 			}
 			
 			$sql.=" WHERE product_id IN ('".implode("','",$array)."')";
+		}
+		else
+		{
+			$sql.= " WHERE cid IN ('".implode("','",$this->cid)."')";
 		}
 		$sqlQuery = "
 			SELECT distinct color
@@ -169,7 +209,7 @@ class Product{
 				$productHTML .= '<div class="product-card">';
 				$productHTML .= '<div class="product-image">';
 				$productHTML .= '<span class="discount-tag">50% off</span>';
-				$productHTML .= '<img src="images/'.$product['Image_path1'].'" class="product-thumb" alt="'.$product['product_name'].'">';
+				$productHTML .= '<img src="'.$product['Image_path1'].'" class="product-thumb" alt="'.$product['product_name'].'">';
 				$productHTML .= '<button class="card-btn">add to wishlist</button>';
 				$productHTML .= '</div>';
 				$productHTML .= '<div class="product-info">';

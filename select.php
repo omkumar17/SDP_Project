@@ -2,6 +2,7 @@
 include("prod.php");
 $product = new Product();
 $categories = $product->getCategories();
+$type = $product->getType();
 $brands = $product->getBrand();
 $colors = $product->getcolor();
 $productSizes = $product->getProductSize();
@@ -20,7 +21,7 @@ $totalRecords = $product->getTotalProducts();
 <title>Filtering using Ajax, PHP & MySQL</title>
 <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css">
 <link rel="stylesheet" type='text/css' href="public/css/style.css">  
-<link rel="icon" type="image/png" href="https://webdamn.com/wp-content/themes/v2/webdamn.png">
+<link rel="icon" href="public\img\ff logo.jpeg" type="image/x-icon">
 <link rel="stylesheet" href="public\css\nav.css">
 <style>
     .filtermenu{
@@ -80,6 +81,27 @@ aside{
                                 ?>
 								<li class="list-group-item">
 									<div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($category['category_id']); ?>" <?php echo @$categoryCheck; ?> name="category[]" class="sort_rang category"><?php echo ucfirst($category['category_name']); ?></label></div>
+								</li>
+                                <?php } ?>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel list">
+                            <div class="panel-heading"><h3 class="panel-title" data-toggle="collapse" data-target="#panelOne" aria-expanded="true">Type</h3></div>
+                            <div class="panel-body collapse in" id="panelOne">
+                                <ul class="list-group">
+                                <?php 
+								foreach ($type as $key => $type) {
+                                    if(isset($_POST['type'])) {
+                                        if(in_array($product->cleanString($type['product_type']),$_POST['type'])) {
+                                            $typeChecked ='checked="checked"';
+                                        } else {
+											$typeChecked ="";
+                                        }
+									}
+                                ?>
+								<li class="list-group-item">
+									<div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($type['product_type']); ?>" <?php echo @$typeChecked; ?> name="type[]" class="sort_rang type"><?php echo ucfirst($type['product_type']); ?></label></div>
 								</li>
                                 <?php } ?>
                                 </ul>
