@@ -109,9 +109,6 @@ body {
   text-align:center;
   width:100%;
 }
-.brand-logo{
-  margin-right:auto;
-}
 .content{
   width:100%;
 }
@@ -407,6 +404,9 @@ aside {
   aside{
     display:block;
     /* margin:0; */
+  }
+  .brand-logo{
+    margin-right:auto;
   }
 }
 @media screen and (max-width:990px) {

@@ -53,7 +53,7 @@ class Product{
         return  $this->getData($sqlQuery);
 	}
 	public function getBrand () {
-		$sql = '';
+		$sql = ' WHERE category_id IN ('".implode("','",$category)."')';
 		if(isset($_POST['category']) && $_POST['category']!="") {
 			$category = $_POST['category'];
 			$sql.=" WHERE category_id IN ('".implode("','",$category)."')";
