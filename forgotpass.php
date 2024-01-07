@@ -69,7 +69,7 @@ echo<<<_END
         <div class="card">
             <div class="row">
                 <div class="icon">
-                    <img src="fogot.jpeg" height="130" width="130">
+                    <img src="public/img/fogot.jpeg" height="130" width="130">
                 </div>
                 <div class="instr">
                     You can change your password by entering the email and <br>we'll send you a OTP through which you can <br>change your password

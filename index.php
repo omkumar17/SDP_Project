@@ -11,6 +11,7 @@ $result=$conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="public\img\ff logo.jpeg" type="image/x-icon">
     <title>Foot Fusion</title>
     <link rel="stylesheet" href="public\css\home.css">
     <style>
@@ -97,7 +98,7 @@ $result=$conn->query($sql);
                 </div>
             </a>
 
-            <a href="product.html" class="product-link">
+            <a href="product.php?id=4866" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">20% off</span>
@@ -259,11 +260,11 @@ $result=$conn->query($sql);
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
-                            <img src="" class="product-thumb" alt="">
+                            <img src="public\img\568-1-red.jpeg" class="product-thumb" alt="">
                             <!-- <button class="card-btn">add to whislist</button> -->
                         </div>
                         <div class="product-info">
-                            <h2 class="product-brand"></h2>
+                            <h2 class="product-brand">Venus</h2>
                             <!-- <p class="product-short-des">a short line about the cloth..</p>
                              <span class="price">$20</span><span class="actual-price">$40</span> -->
                         </div>
@@ -276,11 +277,11 @@ $result=$conn->query($sql);
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
-                            <img src="" class="product-thumb" alt="">
+                            <img src="public\img\258-1-ma.jpeg" class="product-thumb" alt="">
                             <!-- <button class="card-btn">add to whislist</button> -->
                         </div>
                         <div class="product-info">
-                            <div class="product-brand">brand1</div>
+                            <div class="product-brand">Venus</div>
                             <!-- <p class="product-short-des">a short line about the cloth..</p>
                              <span class="price">$20</span><span class="actual-price">$40</span> -->
                         </div>
@@ -310,11 +311,11 @@ $result=$conn->query($sql);
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
-                            <img src="" class="product-thumb" alt="">
+                            <img src="public\img\8004-1-blu.jpeg" class="product-thumb" alt="">
                             <!-- <button class="card-btn">add to whislist</button> -->
                         </div>
                         <div class="product-info">
-                            <div class="product-brand">brand1</div>
+                            <div class="product-brand">Paragon</div>
                             <!-- <p class="product-short-des">a short line about the cloth..</p>
                              <span class="price">$20</span><span class="actual-price">$40</span> -->
                         </div>
@@ -327,11 +328,11 @@ $result=$conn->query($sql);
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
-                            <img src="" class="product-thumb" alt="">
+                            <img src="public\img\2C-1-bl.jpeg" class="product-thumb" alt="">
                             <!-- <button class="card-btn">add to whislist</button> -->
                         </div>
                         <div class="product-info">
-                            <div class="product-brand">brand1</div>
+                            <div class="product-brand">Campus</div>
                             <!-- <p class="product-short-des">a short line about the cloth..</p>
                              <span class="price">$20</span><span class="actual-price">$40</span> -->
                         </div>
@@ -344,11 +345,11 @@ $result=$conn->query($sql);
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
-                            <img src="" class="product-thumb" alt="">
+                            <img src="public\img\4866-1-crbr.jpeg" class="product-thumb" alt="">
                             <!-- <button class="card-btn">add to whislist</button> -->
                         </div>
                         <div class="product-info">
-                            <div class="product-brand">brand1</div>
+                            <div class="product-brand">Walkaroo</div>
                             <!-- <p class="product-short-des">a short line about the cloth..</p>
                              <span class="price">$20</span><span class="actual-price">$40</span> -->
                         </div>
@@ -361,11 +362,11 @@ $result=$conn->query($sql);
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
-                            <img src="" class="product-thumb" alt="">
+                            <img src="public\img\77075-2-pi.jpeg" class="product-thumb" alt="">
                             <!-- <button class="card-btn">add to whislist</button> -->
                         </div>
                         <div class="product-info">
-                            <div class="product-brand">brand1</div>
+                            <div class="product-brand">Paragon</div>
                             <!-- <p class="product-short-des">a short line about the cloth..</p>
                              <span class="price">$20</span><span class="actual-price">$40</span> -->
                         </div>
@@ -378,11 +379,11 @@ $result=$conn->query($sql);
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
-                            <img src="" class="product-thumb" alt="">
+                            <img src="public\img\897-1-wh.jpeg" class="product-thumb" alt="">
                             <!-- <button class="card-btn">add to whislist</button> -->
                         </div>
                         <div class="product-info">
-                            <div class="product-brand">brand1</div>
+                            <div class="product-brand">Venus</div>
                             <!-- <p class="product-short-des">a short line about the cloth..</p>
                              <span class="price">$20</span><span class="actual-price">$40</span> -->
                         </div>
@@ -395,11 +396,11 @@ $result=$conn->query($sql);
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
-                            <img src="" class="product-thumb" alt="">
+                            <img src="public\img\8004-4-blu.jpeg" class="product-thumb" alt="">
                             <!-- <button class="card-btn">add to whislist</button> -->
                         </div>
                         <div class="product-info">
-                            <div class="product-brand">brand1</div>
+                            <div class="product-brand">Paragon</div>
                             <!-- <p class="product-short-des">a short line about the cloth..</p>
                              <span class="price">$20</span><span class="actual-price">$40</span> -->
                         </div>

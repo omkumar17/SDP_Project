@@ -101,7 +101,7 @@ echo<<<_END
         <div class="card">
             <div class="row">
                 <div class="icon">
-                    <img src="fogot.jpeg" height="130" width="130">
+                    <img src="public/img/fogot.jpeg" height="130" width="130">
                 </div>
                 <div class="text">Enter OTP </div>
                 <div class="col-2 ms-5 mt-3 ps-3">
