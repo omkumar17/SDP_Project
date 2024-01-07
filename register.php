@@ -73,7 +73,7 @@ input[type=number] {
     color:teal;
 }
 body{
-    background-image: url('register.jpeg');
+    background-image: url('public/img/register.jpeg');
     background-size: 1000px 1000px;
 }
 .boricon{

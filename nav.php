@@ -113,33 +113,33 @@ if(isset($_COOKIE['userID']))
             <div class="drop-items">
             <ul class="header-category">
                 <li class="header-category-title">SHOES</li>
-                <li><a href="selection.php" class="header-link">Casual</a></li>
-                <li><a href="selection.php" class="header-link">Sports</a></li>
-                <li><a href="selection.php" class="header-link">Loofers</a></li>
-                <li><a href="selection.php" class="header-link">Sneakers</a></li>
+                <li><a href="selection.php?type=sneakers&cat=m&title=slippers&size=7&color=black" class="header-link">Casual</a></li>
+                <li><a href="selection.php?type=sports&cat=m&title=shoes" class="header-link">Sports</a></li>
+                <li><a href="selection.php?type=loofers&cat=m&title=shoes" class="header-link">Loofers</a></li>
+                <li><a href="selection.php?type=sneakers&cat=m&title=shoes" class="header-link">Sneakers</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">SANDAL & CLOGS</li>
-                <li><a href="#" class="header-link">Sports</a></li>
-                <li><a href="#" class="header-link">Sandal</a></li>
-                <li><a href="#" class="header-link">Clog</a></li>
+                <li><a href="selection.php?type='sports'" class="header-link">Sports</a></li>
+                <li><a href="selection.php?type='sandal'" class="header-link">Sandal</a></li>
+                <li><a href="selection.php?type='clog'" class="header-link">Clog</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">FLIP-FLOP</li>
-                <li><a href="#" class="header-link">Rubber</a></li>
-                <li><a href="#" class="header-link">Sliders</a></li>
+                <li><a href="selection.php?type='rubber'" class="header-link">Rubber</a></li>
+                <li><a href="selection.php?type='slider'" class="header-link">Sliders</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">FESTIVE & HANDMADE</li>
-                <li><a href="#" class="header-link">Heels</a></li>
-                <li><a href="#" class="header-link">Flats</a></li>
+                <li><a href="selection.php?type='heels'" class="header-link">Heels</a></li>
+                <li><a href="selection.php?type='flags'" class="header-link">Flats</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">BRANDS</li>
-                <li><a href="#" class="header-link">Walkaroo</a></li>
-                <li><a href="#" class="header-link">Paragon</a></li>
-                <li><a href="#" class="header-link">Lehar</a></li>
-                <li><a href="#" class="header-link">Campus</a></li>
+                <li><a href="selection.php?type='walkaro'" class="header-link">Walkaroo</a></li>
+                <li><a href="selection.php?type='paragon'" class="header-link">Paragon</a></li>
+                <li><a href="selection.php?type='lehar'" class="header-link">Lehar</a></li>
+                <li><a href="selection.php?type='campus'" class="header-link">Campus</a></li>
             </ul>
             </div>
             </div>
