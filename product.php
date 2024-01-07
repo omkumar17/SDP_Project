@@ -4,13 +4,11 @@ if(isset($_GET['id']))
 {
     $id=$_GET['id'];
 }
-$sql="SELECT * FROM `product` WHERE `Product_id`='$id'";
-$result=$conn->query($sql);
-$row=$result->fetch_assoc();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- background-image: url(&quot;http://localhost/SDP_Project/public/img/1026-1-blu.jpeg&quot;); -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,16 +38,16 @@ $row=$result->fetch_assoc();
     <nav class="navbar"><?php include_once 'nav.php'; ?></nav>
     <section class="product-details">
     <?php
-        $imgsql="SELECT * FROM product JOIN color ON product.product_id = color.product_id JOIN image ON color.cid = image.cid WHERE product.product_id=$id";
+        $imgsql="SELECT * FROM `product` JOIN color ON product.Product_id = color.product_id JOIN image ON color.cid = image.cid WHERE product.Product_id=$id";
         $imgres=$conn->query($imgsql);
         $imgrow=$imgres->fetch_assoc();
     ?>
-        <div class="image-slider" style="background-image:url('public/img/<?php echo $imgrow['Image_path1']; ?>')">
+        <div class="image-slider" style="background-image:url('http://localhost/SDP_Project/<?php echo $imgrow['Image_path1']; ?>')">
             <div class="product-images">
-                    <img src="public/img/<?php echo $imgrow['Image_path1']; ?>" class="active" alt="">
-                    <img src="public/img/<?php echo $imgrow['Image_path2']; ?>" alt="">
-                    <img src="public/img/<?php echo $imgrow['Image_path3']; ?>" alt="">
-                    <img src="public/img/<?php echo $imgrow['Image_path4']; ?>" alt="">
+                    <img src="<?php echo $imgrow['Image_path1']; ?>" class="active" alt="">
+                    <img src="<?php echo $imgrow['Image_path2']; ?>" alt="">
+                    <img src="<?php echo $imgrow['Image_path3']; ?>" alt="">
+                    <img src="<?php echo $imgrow['Image_path4']; ?>" alt="">
                     <?php
                 ?> 
                 
@@ -58,6 +56,11 @@ $row=$result->fetch_assoc();
 
         <!-- image slider -->
         <div class="details">
+            <?php
+                $sql="SELECT * FROM `product` WHERE `Product_id`='$id'";
+                $result=$conn->query($sql);
+                $row=$result->fetch_assoc();
+            ?>
             <div class="product-brand"><?php echo $row['product_name']; ?></div>
             <p class="product-short-des"><?php echo $row['product_details']; ?></p>
             <span class="product-price"><?php echo "₹".$row['price']; ?></span>
