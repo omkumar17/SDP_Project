@@ -1,0 +1,188 @@
+<?php
+class Product{
+	private $host  = 'localhost';
+    private $user  = 'root';
+    private $password   = "";
+    private $database  = "ecomm";
+	private $productTable = 'product';
+	private $categoryTable='category';
+	private $productdesc='product_desc';
+	private $color='color'; 
+	private $dbConnect = false;
+    public function __construct(){
+        if(!$this->dbConnect){ 
+            $conn = new mysqli($this->host, $this->user, $this->password, $this->database);
+            if($conn->connect_error){
+                die("Error failed to connect to MySQL: " . $conn->connect_error);
+            }else{
+                $this->dbConnect = $conn;
+            }
+        }
+    }
+	// public function join(){
+	// 	$sql="SELECT * FROM `category` INNER JOIN `product` ON product.Category_ID=category.category_id INNER JOIN `color` ON color.product_id=product.Product_id INNER JOIN `product_desc` ON product_desc.cid=color.cid";
+	// 	return  $this->getData($sql);
+	// }
+	private function getData($sqlQuery) {
+		$result = mysqli_query($this->dbConnect, $sqlQuery);
+		if(!$result){
+			die('Error in query: '. mysqli_error());
+		}
+		$data= array();
+		while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+			$data[]=$row;            
+		}
+		return $data;
+	}
+	private function getNumRows($sqlQuery) {
+		$result = mysqli_query($this->dbConnect, $sqlQuery);
+		if(!$result){
+			die('Error in query: '. mysqli_error());
+		}
+		$numRows = mysqli_num_rows($result);
+		return $numRows;
+	}	
+	public function cleanString($str){
+		return str_replace(' ','_',$str);
+	}
+	public function getCategories() {		
+		$sqlQuery = "
+			SELECT category_id, category_name
+			FROM ".$this->categoryTable." 
+			GROUP BY Category_name";
+        return  $this->getData($sqlQuery);
+	}
+	public function getBrand () {
+		$sql = '';
+		if(isset($_POST['category']) && $_POST['category']!="") {
+			$category = $_POST['category'];
+			$sql.=" WHERE category_id IN ('".implode("','",$category)."')";
+		}
+		$sqlQuery = "
+			SELECT distinct product_name
+			FROM ".$this->productTable." 
+			$sql GROUP BY product_name";
+        return  $this->getData($sqlQuery);
+	}
+	public function getcolor () {
+		$sql = '';
+		if(isset($_POST['brand']) && $_POST['brand']!="") {
+			$brand = $_POST['brand'];
+			$sub="SELECT product_id FROM `product` WHERE product_name IN ('".implode("','",$brand)."')";
+			$result=$this->dbConnect->query($sub);
+			$array=array();
+			while($row=$result->fetch_assoc())
+			{
+				array_push($array,$row['product_id']);
+
+			}
+			
+			$sql.=" WHERE product_id IN ('".implode("','",$array)."')";
+		}
+		$sqlQuery = "
+			SELECT distinct color
+			FROM ".$this->color." 
+			$sql GROUP BY color";
+        return  $this->getData($sqlQuery);
+	}
+	public function getProductSize () {
+		$sql = '';
+		if(isset($_POST['brand']) && $_POST['brand']!="") {
+			$brand = $_POST['brand'];
+			$sub="SELECT cid FROM `color` INNER JOIN `product` ON product.Product_id=color.product_id  WHERE product.product_name IN ('".implode("','",$brand)."')";
+			$result=$this->dbConnect->query($sub);
+			$array=array();
+			while($row=$result->fetch_assoc())
+			{
+				array_push($array,$row['cid']);
+
+			}
+			$sql.=" WHERE cid IN ('".implode("','",$array)."')";
+		}
+		$sqlQuery = "
+			SELECT distinct size
+			FROM ".$this->productdesc." 
+			$sql GROUP BY size";
+        return  $this->getData($sqlQuery);
+	}
+	public function getTotalProducts () {
+		$sql= "SELECT * FROM `category` INNER JOIN `product` ON product.Category_ID=category.category_id INNER JOIN `color` ON color.product_id=product.Product_id INNER JOIN `product_desc` ON product_desc.cid=color.cid INNER JOIN image ON image.cid=color.cid WHERE product_desc.quantity != 0";
+		if(isset($_POST['category']) && $_POST['category']!="") {
+			$category = $_POST['category'];
+			$sql.=" AND category.category_id IN ('".implode("','",$category)."')";
+		}
+		if(isset($_POST['brand']) && $_POST['brand']!="") {
+			$brand = $_POST['brand'];
+			$sql.=" AND product.product_name IN ('".implode("','",$brand)."')";
+		}
+		if(isset($_POST['color']) && $_POST['color']!="") {
+			$color = $_POST['color'];
+			$sql.=" AND color.color IN ('".implode("','",$color)."')";
+		}
+		if(isset($_POST['size']) && $_POST['size']!="") {
+			$size = $_POST['size'];
+			$sql.=" AND product_desc.size IN (".implode(',',$size).")";
+		}		
+		$productPerPage = 9;		
+		$rowCount = $this->getNumRows($sql);
+		$totalData = ceil($rowCount / $productPerPage);
+		return $totalData;
+	}		
+	public function getProducts() {
+		$productPerPage = 9;	
+		$totalRecord  = strtolower(trim(str_replace("/","",$_POST['totalRecord'])));
+		$start = ceil($totalRecord * $productPerPage);		
+		$sql= "SELECT * FROM `category` INNER JOIN `product` ON product.Category_ID=category.category_id INNER JOIN `color` ON color.product_id=product.Product_id INNER JOIN `product_desc` ON product_desc.cid=color.cid INNER JOIN image ON image.cid=color.cid WHERE product_desc.quantity != 0";	
+		if(isset($_POST['category']) && $_POST['category']!=""){			
+			$sql.=" AND category.category_id IN ('".implode("','",$_POST['category'])."')";
+		}
+		if(isset($_POST['brand']) && $_POST['brand']!=""){			
+			$sql.=" AND product.product_name IN ('".implode("','",$_POST['brand'])."')";
+		}
+		if(isset($_POST['color']) && $_POST['color']!="") {			
+			$sql.=" AND color.color IN ('".implode("','",$_POST['color'])."')";
+		}		
+		if(isset($_POST['size']) && $_POST['size']!="") {			
+			$sql.=" AND product_desc.size IN (".implode(',',$_POST['size']).")";
+		}
+		
+		if(isset($_POST['sorting']) && $_POST['sorting']!="") {
+			$sorting = implode("','",$_POST['sorting']);			
+			if($sorting == 'newest' || $sorting == '') {
+				$sql.=" ORDER BY product.product_id DESC";
+			} else if($sorting == 'low') {
+				$sql.=" ORDER BY product.price ASC";
+			} else if($sorting == 'high') {
+				$sql.=" ORDER BY product.price DESC";
+			}
+		} else {
+			$sql.=" ORDER BY product.product_id DESC";
+		}		
+		// $sql.=" LIMIT $start, $productPerPage";		
+		$products = $this->getData($sql);
+		// echo count($products);
+		$rowcount = $this->getNumRows($sql);
+		$productHTML = '';
+		if(isset($products) && count($products)) {			
+            foreach ($products as $key => $product) {				
+                $productHTML .= '<a class="product-link" style="margin-top:40px">';
+				$productHTML .= '<div class="product-card">';
+				$productHTML .= '<div class="product-image">';
+				$productHTML .= '<span class="discount-tag">50% off</span>';
+				$productHTML .= '<img src="images/'.$product['Image_path1'].'" class="product-thumb" alt="'.$product['product_name'].'">';
+				$productHTML .= '<button class="card-btn">add to wishlist</button>';
+				$productHTML .= '</div>';
+				$productHTML .= '<div class="product-info">';
+				$productHTML .= '<div class="product-brand">'.$product['product_name'].'</div>';
+				$productHTML .= '<p class="product-short-des">'.$product['product_details'].'</p>';
+				$productHTML .= '<span class="price">$'.$product['price'].'</span><span class="actual-price">$40</span>';
+				$productHTML .= '</div>';
+				$productHTML .= '</div>';
+				$productHTML .= '</a>';
+								
+			}
+		}
+		return 	$productHTML;	
+	}	
+}
+?>
