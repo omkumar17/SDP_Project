@@ -1,36 +1,30 @@
 <?php
 session_start();
-if(isset($_SESSION['email']) && isset($_SESSION['otp']))
-{
-    $email=$_SESSION['email'];
-    $otp=$_SESSION['otp'];
-
+if (isset($_SESSION['email']) && isset($_SESSION['otp'])) {
+    $email = $_SESSION['email'];
+    $otp = $_SESSION['otp'];
 }
-        
-        $to_email=$email;
-        $subject="Simple email test via php";
-        $body="Your Otp is ".$otp;
-        $headers="From: harshwadhwani268@gmail.com";
-    
-        if(mail($to_email,$subject,$body,$headers))
-        {
-            echo<<<_END
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Email successfully sent to $to_email...
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            _END;
-        }
-        else
-        {
-            echo<<<_END
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Email Sending Failed
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            _END;
-        }
-     
+
+$to_email = $email;
+$subject = "Simple email test via php";
+$body = "Your Otp is " . $otp;
+$headers = "From: harshwadhwani268@gmail.com";
+
+if (mail($to_email, $subject, $body, $headers)) {
+    echo <<<_END
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Email successfully sent to $to_email...
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    _END;
+} else {
+    echo <<<_END
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Email Sending Failed
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    _END;
+}
 
 if(isset($_POST['n1']) && isset($_POST['n2']) && isset($_POST['n3']) && isset($_POST['n4']))
 {
@@ -61,6 +55,10 @@ if(isset($_POST['n1']) && isset($_POST['n2']) && isset($_POST['n3']) && isset($_
     }
 }
 
+
+?>
+<?php
+
 echo<<<_END
 <!DOCTYPE html>
 <html lang="en">
@@ -70,6 +68,13 @@ echo<<<_END
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <title>Forgot Password</title>
+    <script>
+    function moveFocus(current, next) {
+      if (current.value.length === current.maxLength) {
+        document.getElementById(next).focus();
+      }
+    }
+    </script>
     <style>
     body{
         background-color: #f8f9fa;
@@ -105,16 +110,16 @@ echo<<<_END
                 </div>
                 <div class="text">Enter OTP </div>
                 <div class="col-2 ms-5 mt-3 ps-3">
-                    <input type="text" name="n1" class="form-control"  size="1" maxlength="1" required>
+                    <input type="text" name="n1" class="form-control" id="otp1" maxlength="1" oninput="moveFocus(this,'otp2')" required>
                 </div>
                 <div class="col-2 mt-3">
-                    <input type="text" name="n2" class="form-control" size="1" maxlength="1"required>
+                    <input type="text" name="n2" class="form-control" id="otp2" maxlength="1" oninput="moveFocus(this,'otp3')" required>
                 </div>
                 <div class="col-2 mt-3">
-                    <input type="text" name="n3" class="form-control" size="1" maxlength="1"required>
+                    <input type="text" name="n3" class="form-control" id="otp3" maxlength="1" oninput="moveFocus(this,'otp4')" required>
                 </div>
                 <div class="col-2 mt-3">
-                    <input type="text" name="n4" class="form-control" size="1" maxlength="1"required>
+                    <input type="text" name="n4" class="form-control" id="otp4" maxlength="1" required>
                 </div>
                 <div class="col-8 ms-5 mt-3 pt-4 butt">
                     <button type="submit" class="form-control" style="background-image: linear-gradient(to left,#90EE90,#87CEFA);">Verify</button><br>
