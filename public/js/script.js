@@ -70,6 +70,10 @@ $(document).ready(function() {
         $("#search_form").submit();
         return false;
     });
+	document.querySelector("#typecheck").addEventListener("checked",()=>{
+		$("#search_form").submit();
+        return false;
+	});
 	$(document).on('click', 'label', function() {
 		if($('input:checkbox:checked')) {
 			$('input:checkbox:checked', this).closest('label').addClass('active');

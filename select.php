@@ -31,25 +31,25 @@ $totalRecords = $product->getTotalProducts();
     .filtermenu{
         display:block;
         cursor: pointer;
-  height:50px;
-  font-size:20px;
-  text-align:center;
-  width:100%;
-  border-bottom:5px solid teal;
-  padding:10px;
-  color:teal;
-  font-weight:600;
+        height:50px;
+        font-size:20px;
+        text-align:center;
+        width:100%;
+        border-bottom:5px solid teal;
+        padding:10px;
+        color:teal;
+        font-weight:600;
 
-}
-aside{
-    display:none;
-    position:fixed;
-    top:0;
-    height:85vh;
-    overflow-y:scroll;
-    z-index:8;
-}
-}
+        }
+        aside{
+            display:none;
+            position:fixed;
+            top:0;
+            height:85vh;
+            overflow-y:scroll;
+            z-index:8;
+        }
+    }
 </style>
 <!-- <link rel="stylesheet" href="public\css\home.css"> -->
 </head>
@@ -78,13 +78,23 @@ aside{
 											$categoryCheck="";
                                         }
 									}
-                                    if(isset($_GET['categ']) && ($_GET['categ']===$category['category_name'])){
-                                    ?>
+                                    if(isset($_GET['categ'])){
+                                        if(($_GET['categ']===$category['category_name'])){
+                                            ?>
+                                            <li class="list-group-item">
+                                                <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($category['category_id']); ?>" checked="checked" name="category[]" class="sort_rang category"><?php echo ucfirst($category['category_name']); ?></label></div>
+                                            </li>
+                                        <?php
+                                        }
+                                    
+                                    
+                                    }
+                                    else{
+                                        ?>
                                         <li class="list-group-item">
-                                            <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($category['category_id']); ?>" checked="checked" name="category[]" class="sort_rang category"><?php echo ucfirst($category['category_name']); ?></label></div>
+                                            <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($category['category_id']); ?>" <?php echo @$categoryCheck; ?> name="category[]" class="sort_rang category"><?php echo ucfirst($category['category_name']); ?></label></div>
                                         </li>
-                                    <?php
-                                    break;
+                                        <?php
                                     }
                                 } 
                                 ?>
@@ -104,13 +114,24 @@ aside{
 											$typeChecked ="";
                                         }
 									}
-                                if(isset($_GET['categ']) && $_GET['type'] && ($_GET['type']===$type['product_type'])){
-                                ?>
-								<li class="list-group-item">
-									<div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($type['product_type']); ?>" checked="checked" name="type[]" class="sort_rang type"><?php echo ucfirst($type['product_type']); ?></label></div>
-                                </li>
-                                <?php 
-                                break;
+                                if(isset($_GET['categ']) && $_GET['type']){
+                                    if( ($_GET['type']===$type['product_type'])){
+                                        ?>
+                                        <li class="list-group-item">
+                                            <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($type['product_type']); ?>" checked="checked" name="type[]" class="sort_rang type" id="typecheck"><?php echo ucfirst($type['product_type']);?></label></div>
+                                        </li>
+                                        <?php 
+                                        
+                                    }
+                                    
+                                
+                                }
+                                else{
+                                    ?>
+                                    <li class="list-group-item">
+                                        <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($type['product_type']); ?>" <?php echo @$typeChecked; ?> name="type[]" class="sort_rang type"><?php echo ucfirst($type['product_type']); ?></label></div>
+                                    </li>
+                                    <?php  
                                 }
                             }
                             ?>

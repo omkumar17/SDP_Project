@@ -106,12 +106,20 @@ class Product{
 
 			}
 			
-			$sql.=" WHERE product_id IN ('".implode("','",$array)."')";
+			$sql.=" WHERE color.product_id IN ('".implode("','",$array)."')";
+		}
+		if(isset($_POST['type']) && $_POST['type']!="") {
+			$type = $_POST['type'];
+			$sql.=" AND product_desc.product_type IN ('".implode("','",$type)."')";
 		}
 
-		$sqlQuery = "SELECT distinct color
-			FROM ".$this->color." 
-			$sql GROUP BY color";
+		// $sqlQuery = "SELECT distinct color
+		// 	FROM ".$this->color." 
+		// 	$sql GROUP BY color";
+		$sqlQuery="SELECT DISTINCT color.color
+		FROM `color`
+		JOIN product_desc ON product_desc.cid = color.cid
+		$sql GROUP BY color.color";
         return  $this->getData($sqlQuery);
 	}
 	public function getProductSize () {
@@ -124,15 +132,19 @@ class Product{
 			while($row=$result->fetch_assoc())
 			{
 				array_push($array,$row['cid']);
-
 			}
 			$sql.=" WHERE cid IN ('".implode("','",$array)."')";
 		}
+		// if(isset($_POST['type']) && $_POST['type']!="")
+		// {
+		// 	$type=$_POST['type'];
+		// 	$sql.=" AND product_type IN ('".implode("','",$type)."')";
+		// }
 		$sqlQuery = "
 			SELECT distinct size
-			FROM ".$this->productdesc." 
-			$sql GROUP BY size";
+			FROM `product_desc`	$sql GROUP BY size";
         return  $this->getData($sqlQuery);
+		
 	}
 	public function getTotalProducts () {
 		$sql= "SELECT * FROM `category` INNER JOIN `product` ON product.Category_ID=category.category_id INNER JOIN `color` ON color.product_id=product.Product_id INNER JOIN `product_desc` ON product_desc.cid=color.cid INNER JOIN image ON image.cid=color.cid WHERE product_desc.quantity != 0";
