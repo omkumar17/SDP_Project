@@ -5,6 +5,7 @@ $(document).ready(function() {
     var brand = getCheckboxValues('brand');
     var color = getCheckboxValues('color');
     var size = getCheckboxValues('size');
+    var grp = getCheckboxValues('grp');
     var totalData = $("#totalRecords").val();
 	var sorting = getCheckboxValues('sorting');
 	// console.log(category);
@@ -14,7 +15,7 @@ $(document).ready(function() {
 		type: 'POST',
 		url : "load_products.php",
 		dataType: "json",			
-		data:{totalRecord:totalRecord,type:type, brand:brand, color:color, size:size, category:category, sorting:sorting},
+		data:{totalRecord:totalRecord, grp:grp, type:type, brand:brand, color:color, size:size, category:category, sorting:sorting},
 		success: function (data, textStatus, jqXHR) {
 			console.log("Success Response:", data);
 						console.log("Text Status:", textStatus);
@@ -40,7 +41,7 @@ $(document).ready(function() {
 					type: 'POST',
 					url : "load_products.php",
 					dataType: "json",			
-					data:{totalRecord:totalRecord, type:type, brand:brand, color:color, size:size},
+					data:{totalRecord:totalRecord, grp:grp, type:type, brand:brand, color:color, size:size},
 					success: function (data, textStatus, jqXHR) {
 						console.log("Success Response:", data);
 						console.log("Text Status:", textStatus);

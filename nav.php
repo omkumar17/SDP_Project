@@ -113,10 +113,10 @@ if(isset($_COOKIE['userID']))
             <div class="drop-items">
             <ul class="header-category">
                 <li class="header-category-title">SHOES</li>
-                <li><a href="select.php?categ=shoes&type=casual" class="header-link">Casual</a></li>
-                <li><a href="select.php?categ=shoes&type=sports" class="header-link">Sports</a></li>
-                <li><a href="select.php?categ=shoes&type=loofers" class="header-link">Loofers</a></li>
-                <li><a href="select.php?categ=shoes&type=sneakers" class="header-link">Sneakers</a></li>
+                <li><a href="select.php?categ=shoes&type=casual&grp=w" class="header-link">Casual</a></li>
+                <li><a href="select.php?categ=shoes&type=sports&grp=w" class="header-link">Sports</a></li>
+                <li><a href="select.php?categ=shoes&type=loofers&grp=w" class="header-link">Loofers</a></li>
+                <li><a href="select.php?categ=shoes&type=sneakers&grp=w" class="header-link">Sneakers</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">SANDAL & CLOGS</li>

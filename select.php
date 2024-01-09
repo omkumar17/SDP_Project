@@ -1,6 +1,7 @@
 <?php 
 include("prod.php");
 $product = new Product();
+$grp=$product->getGrp();
 $categories = $product->getCategories();
 $type = $product->getType();
 $brands = $product->getBrand();
@@ -64,7 +65,44 @@ $totalRecords = $product->getTotalProducts();
         </div>		
             <form method="post" id="search_form">               
                 <div class="row main-container">                    
-                    <aside class="col-lg-3 col-md-4">						
+                    <aside class="col-lg-3 col-md-4">
+                    <div class="panel list">
+                            <div class="panel-heading"><h3 class="panel-title" data-toggle="collapse" data-target="#panelOne" aria-expanded="true">GROUP</h3></div>
+                            <div class="panel-body collapse in" id="panelOne">
+                                <ul class="list-group">
+                                <?php 
+								foreach ($grp as $key => $grp) {
+                                    if(isset($_POST['grp'])) {
+                                        if(in_array($product->cleanString($grp['grp']),$_POST['grp'])) {
+                                            $grpChecked ='checked="checked"';
+                                        } else {
+											$grpChecked ="";
+                                        }
+									}
+                                if(isset($_GET['grp'])){
+                                    if( ($_GET['grp']===$grp['grp'])){
+                                        ?>
+                                        <li class="list-group-item">
+                                            <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($grp['grp']); ?>" checked="checked" name="grp[]" class="sort_rang grp" id="grpcheck"><?php echo ucfirst($grp['grp']);?></label></div>
+                                        </li>
+                                        <?php 
+                                        
+                                    }
+                                    
+                                
+                                }
+                                else{
+                                    ?>
+                                    <li class="list-group-item">
+                                        <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($grp['grp']); ?>" <?php echo @$grpChecked; ?> name="grp[]" class="sort_rang grp"><?php echo ucfirst($grp['grp']); ?></label></div>
+                                    </li>
+                                    <?php  
+                                }
+                            }
+                            ?>
+                                </ul>
+                            </div>
+                        </div>						
 						<div class="panel list">
                             <div class="panel-heading"><h3 class="panel-title" data-toggle="collapse" data-target="#panelOne" aria-expanded="true">Categories</h3></div>
                             <div class="panel-body collapse in" id="panelOne">
