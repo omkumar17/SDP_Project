@@ -12,6 +12,8 @@ class Product{
 	private $cat=array();
 	private $cid=array();
 	private $type=array();
+	private $catid=array();
+	// private $grp=array();
     public function __construct(){
         if(!$this->dbConnect){ 
             $conn = new mysqli($this->host, $this->user, $this->password, $this->database);
@@ -60,9 +62,32 @@ class Product{
 	public function cleanString($str){
 		return str_replace(' ',' ',$str);
 	}
+	public function getGrp()
+	{
+		$sql="";
+		if(isset($_GET['grp']))
+		{
+			$grp=$_GET['grp'];
+			$sql.=" WHERE grp=$grp";
+		}
+		$sqlQuery="SELECT grp FROM `product` $sql";
+		return  $this->getData($sqlQuery);
+	}
 	public function getCategories() {	
+		$sql="";
+		if(isset($_GET['grp']))
+		{
+			$grp=$_GET['grp'];
+			$sub="SELECT category.category_id FROM 'category' INNER JOIN `product` ON product.Category_ID=category.category_id WHERE product.grp=$grp";
+			$result=$conn->query($sub);
+			while($row=$result->fetch_assoc())
+			{
+				$catid[]=$row['category_id'];
+			}
+			$sql.=" WHERE category_id IN ('".implode("','",$catid)."')";
+		}
 		$sqlQuery = "SELECT category_id, category_name
-			FROM ".$this->categoryTable." 
+			FROM ".$this->categoryTable." $sql
 			GROUP BY Category_name";
         return  $this->getData($sqlQuery);
 	}
@@ -133,13 +158,13 @@ class Product{
 			{
 				array_push($array,$row['cid']);
 			}
-			$sql.=" WHERE cid IN ('".implode("','",$array)."')";
+			$sql .=" WHERE cid IN ('".implode("','",$array)."')";
 		}
-		if(isset($_POST['type']) && $_POST['type']!="")
-		{
-			$type = $_POST['type'];
-			$sql.=" AND product_type IN ('".implode("','",$type)."')";
-		}
+		// if(isset($_POST['type']) && $_POST['type']!="")
+		// {
+		// 	$type=$_POST['type'];
+		// 	$sql.=" AND product_type IN ('".implode("','",$type)."')";
+		// }
 		$sqlQuery = "
 			SELECT distinct size
 			FROM `product_desc`
