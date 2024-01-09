@@ -126,7 +126,7 @@ class Product{
 		$sql = '';
 		if(isset($_POST['brand']) && $_POST['brand']!="") {
 			$brand = $_POST['brand'];
-			$sub="SELECT cid FROM `color` INNER JOIN `product` ON product.Product_id=color.product_id  WHERE product.product_name IN ('".implode("','",$brand)."')";
+			$sub="SELECT color.cid FROM `color` INNER JOIN `product` ON product.Product_id=color.product_id  WHERE product.product_name IN ('".implode("','",$brand)."')";
 			$result=$this->dbConnect->query($sub);
 			$array=array();
 			while($row=$result->fetch_assoc())
@@ -135,14 +135,15 @@ class Product{
 			}
 			$sql.=" WHERE cid IN ('".implode("','",$array)."')";
 		}
-		// if(isset($_POST['type']) && $_POST['type']!="")
-		// {
-		// 	$type=$_POST['type'];
-		// 	$sql.=" AND product_type IN ('".implode("','",$type)."')";
-		// }
+		if(isset($_POST['type']) && $_POST['type']!="")
+		{
+			$type = $_POST['type'];
+			$sql.=" AND product_type IN ('".implode("','",$type)."')";
+		}
 		$sqlQuery = "
 			SELECT distinct size
-			FROM `product_desc`	$sql GROUP BY size";
+			FROM `product_desc`
+			$sql GROUP BY size";
         return  $this->getData($sqlQuery);
 		
 	}
