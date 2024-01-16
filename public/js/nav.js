@@ -1,21 +1,3 @@
-// const createNav = () => {
-//     let nav = document.querySelector('.navbar');
-
-    
-// }
-
-// createNav();
-// const menuButtons = document.getElementsByClassName("menu");
-
-// for (let i = 0; i < menuButtons.length; i++) {
-//     menuButtons[i].onclick = function () {
-//         const drop = document.getElementsByClassName("links-container")[i];
-//         // readMoreParagraph.style.visibility = "hidden";
-//         // readMoreParagraph.style.display = "none";
-//         // readMoreParagraph.classList.toggle("hidden");
-//         drop.classList.toggle("visible");
-//     }
-// }
 const menubtn = document.querySelector(".menu");
 const menuitem = document.querySelector(".links-container");
 const menuopt = document.querySelectorAll(".menu-opt");

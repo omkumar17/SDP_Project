@@ -82,6 +82,10 @@ if(isset($_GET['flag'])){
     padding-top: 2px;
     cursor: pointer;
 }
+.login{
+    margin-right:20px;
+    cursor: pointer;
+}
 .admin{
     display:flex;
     flex-direction: row;
@@ -383,9 +387,9 @@ if(isset($_GET['flag'])){
     <section class="adminnavbar">
         <div class="navcontainer">
             <div class="navitems head">Admin Panel</div>
-            <div class="navitems amenu"><img src="align-justify.png" alt="" class="menuimg"></div>
+            <div class="navitems amenu"><img src="public/img/menu.png" alt="" class="menuimg"></div>
             <div class="navitems admin">
-                <div class="login"><img src="" alt="" class="logimg"></div>
+                <div class="login" onclick="logfunction()"><img src="public/img/log-out.png" alt="" class="logimg"></div>
                 <div class="subtitle">Administrator</div>
             </div>
         </div>
@@ -1668,6 +1672,11 @@ if(isset($_GET['flag'])){
         var cancela=document.querySelectorAll(".cancela");
         var submita=document.querySelectorAll(".submita")
         var add=document.querySelectorAll(".add");
+
+        
+        function logfunction() {
+        window.location.href="logout.php";
+    }
 
         console.log(addcontainer[0]);
         for(let k=0;k<addcontainer.length;k++){
