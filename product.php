@@ -3,6 +3,7 @@ include_once 'connection.php';
 if(isset($_GET['id']))
 {
     $id=$_GET['id'];
+    $col=$_GET['color'];
 }
 
 ?>
@@ -25,7 +26,7 @@ if(isset($_GET['id']))
     background-repeat: no-repeat;
     /* box-shadow: 1px 1px 20px black; */
     margin: 0 5%;
-    position: sticky;
+    /* position: sticky; */
     top: 0px;
 }
 .colorpro{
@@ -105,7 +106,7 @@ if(isset($_GET['id']))
 
             </form>
             <div class="prod-form">
-                <form action="">
+                <form action="addcart.php" method="get">
                     <br><span class="product-sub-heading">select size</span><span class="recommendation">size recommendation</span>
                     <div class="size">
                     <?php
@@ -120,7 +121,7 @@ if(isset($_GET['id']))
                               while($row4=$prodesres->fetch_assoc())
                               {
                                 ?>
-                                 <input type="radio" name="size" value="<?php echo $row4['size']; ?>" hidden id="<?php echo $row4['size']; ?>-size">
+                                 <input type="radio" name="size" value="<?php echo $row4['size']; ?>" hidden id="<?php echo $row4['size']; ?>-size" required>
                                  <label for="<?php echo $row4['size']; ?>-size" class="size-radio-btn"><?php echo $row4['size']; ?></label>
                                 <?php
                               }
@@ -133,12 +134,14 @@ if(isset($_GET['id']))
                     
                         <span class="qty">Quantity: </span><br>
                         <input class="quantity" id="id_form-0-quantity" min="1" name="quantity" value="1" type="number">
-                </form>
-            </div>
+                
+                        <input type="hidden" value="<?php echo $col;?>" name="color">
+                        <input type="hidden" value="<?php echo $id;?>" name="id">
 
-
-            <button class="btn cart-btn">add to cart</button>
+            <br><button class="btn cart-btn">add to cart</button>
             <button class="btn wish-btn">add to wishlist</button>
+            </form>
+            </div>
         </div>
     </section>
     <section class="detail-des">

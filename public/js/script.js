@@ -32,34 +32,43 @@ $(document).ready(function() {
 	});	
 	// console.log(totalData);
     $(window).scroll(function() {
-		scrollHeight = parseInt($(window).scrollTop() + $(window).height());		
-        if(scrollHeight == $(document).height()){	
-            if(totalRecord <= totalData){
+        scrollHeight = parseInt($(window).scrollTop() + $(window).height());        
+        if (scrollHeight >= $(document).height() - 100 && !loading) { // Adjust the threshold
+            if (totalRecord <= totalData) {
                 loading = true;
-                $('.loader').show();                
-				$.ajax({
-					type: 'POST',
-					url : "load_products.php",
-					dataType: "json",			
-					data:{totalRecord:totalRecord, grp:grp, type:type, brand:brand, color:color, size:size},
-					success: function (data, textStatus, jqXHR) {
-						console.log("Success Response:", data);
-						console.log("Text Status:", textStatus);
-						console.log("XHR Object:", jqXHR);
-						$("#results").append(data.products);
-						$('.loader').hide();
-						totalRecord++;
-					},
-					error: function (jqXHR, textStatus, errorThrown) {
-						console.error("AJAX Error:", textStatus, errorThrown);
-						console.log("Error Response:", jqXHR.responseText);
-						// Handle the error here, for example, display an error message to the user.
-					}
-					
-				});
-            }            
+                $('.loader').show();
+
+                $.ajax({
+                    type: 'POST',
+                    url: "load_products.php",
+                    dataType: "json",
+                    data: {
+                        totalRecord: totalRecord,
+                        grp: grp,
+                        type: type,
+                        brand: brand,
+                        color: color,
+                        size: size
+                    },
+                    success: function(data, textStatus, jqXHR) {
+                        console.log("Success Response:", data);
+                        console.log("Text Status:", textStatus);
+                        console.log("XHR Object:", jqXHR);
+                        $("#results").append(data.products);
+                        $('.loader').hide();
+                        totalRecord++;
+                        loading = false; // Set loading to false after successful response
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error("AJAX Error:", textStatus, errorThrown);
+                        console.log("Error Response:", jqXHR.responseText);
+                        loading = false; // Set loading to false in case of an error
+                    }
+                });
+            }
         }
     });
+
     function getCheckboxValues(checkboxClass){
         var values = new Array();
 		$("."+checkboxClass+":checked").each(function() {
@@ -71,10 +80,6 @@ $(document).ready(function() {
         $("#search_form").submit();
         return false;
     });
-	document.querySelector("#typecheck").addEventListener("checked",()=>{
-		$("#search_form").submit();
-        return false;
-	});
 	$(document).on('click', 'label', function() {
 		if($('input:checkbox:checked')) {
 			$('input:checkbox:checked', this).closest('label').addClass('active');

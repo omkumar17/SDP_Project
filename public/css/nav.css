@@ -97,7 +97,7 @@
 
 .brand-logo{
     height: 60px;
-    margin-right:auto;
+    /* margin-right:auto; */
 }
 
 .search{
@@ -203,7 +203,7 @@
     /* height:100%; */
     left: 0.7vw;
     /* right:1.3vw; */
-    top: calc(95%);
+    top: calc(100%);
     /* margin-top: 10px; */
     /* padding: 10px 0; */
     z-index: 99;
@@ -787,7 +787,6 @@
         color:teal;
         /* margin: 2px; */
         text-align:center;
-        background-color:red;
         border:1px solid teal;
         /* width:100px; */
         display:block;
