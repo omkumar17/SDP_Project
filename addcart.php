@@ -3,6 +3,10 @@ include_once 'connection.php';
 if(isset($_COOKIE['userID'])){
     $userID=$_COOKIE['userID'];
 }
+else
+{
+    header("location:login.php");
+}
 echo "welcome". $userID;
 if(isset($_GET['id'])){
     $prid=$_GET['id'];
