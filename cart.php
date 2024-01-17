@@ -1,5 +1,5 @@
 <html lang="en">
-
+<?php  include 'connection.php'; ?>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -137,31 +137,40 @@
 </head>
 <body>
 <div class="bg-light">
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-10 col-11 mx-auto">
                 <div class="row mt-5 gx-3">
                     <!-- left side div -->
                     <div class="col-md-12 col-lg-8 col-11 mx-auto main_cart mb-lg-0 mb-5 shadow">
-                        <div class="card p-4">
+                    <?php
+                        $sql="SELECT * FROM `cart_tbl`";
+                        $result=$conn->query($sql);
+                        while($row=$result->fetch_assoc())
+                        {
+                            $crtsize=$row['p_size'];
+                            $crtprid=$row['product_id'];
+                            $crtquan=$row['p_quantity'];
+                            $crtcol=$row['p_color'];
+                            $crtsql="SELECT * FROM `product_desc` INNER JOIN `color` ON color.cid=product_desc.cid  INNER JOIN `image` ON image.cid=color.cid INNER JOIN `product` ON product.Product_id=color.product_id  WHERE product.Product_id='$crtprid' AND product_desc.size='$crtsize' AND color.color='$crtcol'";
+                            $crtresult=$conn->query($crtsql);
+                            $crtrow=$crtresult->fetch_assoc();
+                            ?>
+                            <div class="card p-4">
                             <h2 class="py-4 font-weight-bold">Cart</h2>
                             <div class="row">
                                 <div
                                     class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
-                                    <img src="public/img/5687-1-bla.jpeg" class="img-fluid" alt="cart img">
+                                    <img src="<?php echo $crtrow['Image_path1']; ?>" class="img-fluid" alt="cart img">
                                 </div>
-
-
-
                                 <!-- cart product details -->
                                 <div class="col-md-7 col-11 mx-auto px-4 mt-2">
                                     <div class="row">
                                         <!-- product name  -->
                                         <div class="col-6 card-title">
-                                            <h1 class="mb-4 product_name">Blue Zara Shirt</h1>
-                                            <p class="mb-2">COLOR: BLUE</p>
-                                            <p class="mb-3">SIZE: M</p>
+                                            <h1 class="mb-4 product_name"><?php echo $crtrow['product_name']; ?></h1>
+                                            <p class="mb-2">COLOR: <?php echo $crtrow['color']; ?></p>
+                                            <p class="mb-3">SIZE: <?php echo $crtrow['size']; ?></p>
                                         </div>
                                         <!-- quantity inc dec -->
                                         <div class="col-6">
@@ -172,7 +181,7 @@
                                                         <i class="fas fa-minus"></i> </button>
                                                 </li>
                                                 <li class="page-item"><input type="text" name="" class="page-link"
-                                                        value="0" id="textbox">
+                                                        value="<?php echo $quantity; ?>" id="textbox">
                                                 </li>
                                                 <li class="page-item">
                                                     <button class="page-link"
@@ -189,65 +198,18 @@
                                             <p><i class="fas fa-heart"></i>MOVE TO WISH LIST </p>
                                         </div>
                                         <div class="col-4 d-flex justify-content-end price_money">
-                                            <h3>$<span id="itemval">0.00 </span></h3>
+                                            <h3>$<span id="itemval"><?php echo $crtrow['price']; ?></span></h3>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <hr />
-                        <!-- 2nd cart product -->
-                        <div class="card p-4">
-                            <div class="row">
-                                <!-- cart images div -->
-                                <div
-                                    class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
-                                    <img src="SDP_Project\public\img\8004-2-blu.jpeg" class="img-fluid" alt="cart img">
-                                </div>
-
-
-
-                                <!-- cart product details -->
-                                <div class="col-md-7 col-11 mx-auto px-4 mt-2">
-                                    <div class="row">
-                                        <!-- product name  -->
-                                        <div class="col-6 card-title">
-                                            <h1 class="mb-4 product_name">Green Zara Shirt</h1>
-                                            <p class="mb-2">COLOR: Green</p>
-                                            <p class="mb-3">SIZE: M</p>
-                                        </div>
-                                        <!-- quantity inc dec -->
-                                        <div class="col-6">
-                                            <ul class="pagination justify-content-end set_quantity">
-                                                <li class="page-item">
-                                                    <button class="page-link "
-                                                        onclick="decreaseNumber('textbox1','itemval1')"> <i
-                                                            class="fas fa-minus"></i> </button>
-                                                </li>
-                                                <li class="page-item"><input type="text" name="" class="page-link"
-                                                        value="0" id="textbox1">
-                                                </li>
-                                                <li class="page-item">
-                                                    <button class="page-link"
-                                                        onclick="increaseNumber('textbox1','itemval1')"> <i
-                                                            class="fas fa-plus"></i></button>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- //remover move and price -->
-                                    <div class="row">
-                                        <div class="col-8 d-flex justify-content-between remove_wish">
-                                            <p><i class="fas fa-trash-alt"></i> REMOVE ITEM</p>
-                                            <p><i class="fas fa-heart"></i>MOVE TO WISH LIST </p>
-                                        </div>
-                                        <div class="col-4 d-flex justify-content-end price_money">
-                                            <h3>$<span id="itemval1">0.00 </span> </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php
+                        }
+                        
+                    ?>
+                   <!-- 2nd cart product -->
+                        
                     </div>
                     <!-- right side div -->
                     <div class="col-md-12 col-lg-4 col-11 mx-auto mt-lg-0 mt-md-5">
