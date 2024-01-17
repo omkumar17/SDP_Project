@@ -137,7 +137,24 @@
 </head>
 <body>
 <div class="bg-light">
-
+<?php
+if(isset($_COOKIE['userID'])){
+    $userID=$_COOKIE['userID'];
+}
+else{
+    header("Location:login.php");
+}
+echo "welcome". $userID;
+$cart="";
+if(isset($_GET['id'])){
+    $prid=$_GET['id'];
+    $quantity=$_GET['quantity'];
+    $size=$_GET['size'];
+    $color=$_GET['color'];
+    $cart=$cart.$prid.",".$quantity.",".$size.",".$color.",";
+ }
+ echo $cart;
+ ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-10 col-11 mx-auto">

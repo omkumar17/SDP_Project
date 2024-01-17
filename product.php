@@ -106,7 +106,7 @@ if(isset($_GET['id']))
 
             </form>
             <div class="prod-form">
-                <form action="addcart.php" method="get">
+                <form action="cart.php" method="get">
                     <br><span class="product-sub-heading">select size</span><span class="recommendation">size recommendation</span>
                     <div class="size">
                     <?php
