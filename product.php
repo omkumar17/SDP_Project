@@ -5,6 +5,39 @@ if(isset($_GET['id']))
     $id=$_GET['id'];
     $col=$_GET['color'];
 }
+if(isset($_GET['upd'])){
+    $upd=$_GET['upd'];
+    if($upd=='e'){
+        $quant=$_GET['quant'];
+        echo<<<_END
+        <script>
+            alert("quantity must be less than {$quant} ");
+        </script>
+        _END;
+        
+    }
+    if($upd=='u'){
+        ?>
+        <script>
+            alert("Your cart is updated successfully!");
+        </script>
+        <?php
+    }
+    if($upd=='s'){
+        ?>
+        <script>
+            alert("You have already added this item");
+        </script>
+        <?php
+    }
+    if($upd=='i'){
+        ?>
+        <script>
+            alert("Your item is added to cart successfully!");
+        </script>
+        <?php
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -130,15 +163,13 @@ if(isset($_GET['id']))
                          
                     ?>
                     </div>
-                        
-                    
                         <span class="qty">Quantity: </span><br>
                         <input class="quantity" id="id_form-0-quantity" min="1" name="quantity" value="1" type="number">
-                
                         <input type="hidden" value="<?php echo $col;?>" name="color">
                         <input type="hidden" value="<?php echo $id;?>" name="id">
 
-            <br><button class="btn cart-btn">add to cart</button>
+            <br>
+            <button class="btn cart-btn">add to cart</button>
             <button class="btn wish-btn">add to wishlist</button>
             </form>
             </div>

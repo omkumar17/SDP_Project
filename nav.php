@@ -231,39 +231,48 @@ if(isset($_COOKIE['userID']))
                             ?>
                             
                         </div>
-                <a class="cart" href="cart.php"><img src="public/img/cart.jpg" alt=""></a>
+                        <?php
+                           $sql="SELECT * FROM `cart_tbl` WHERE user_id='$user' AND p_quantity!=0";
+                           $result=$conn->query($sql);
+                           $total=0.0;
+                           ?>
+                        <a class="cart" href="cart.php"><img src="public/img/cart.jpg" alt=""></a>
                 <div class="shopping-cart">
-            <div class="shopping-cart-header">
+            <ul class="shopping-cart-items">
+                        <?php
+                           while($row=$result->fetch_assoc())
+                           {
+                               $crtid=$row['cartID'];
+                               $crtsize=$row['p_size'];
+                               $crtprid=$row['product_id'];
+                               $crtquan=$row['p_quantity'];
+                               $crtcol=$row['p_color'];
+                               $crtsql="SELECT * FROM `product_desc` INNER JOIN `color` ON color.cid=product_desc.cid  INNER JOIN `image` ON image.cid=color.cid INNER JOIN `product` ON product.Product_id=color.product_id  WHERE product.Product_id='$crtprid' AND product_desc.size='$crtsize' AND color.color='$crtcol'";
+                               $crtresult=$conn->query($crtsql);
+                               $crtrow=$crtresult->fetch_assoc();   
+                                ?>
+                <!--end shopping-cart-header -->
+
+                        
+                                <li class="clearfix">
+                                    <img src="<?php echo $crtrow['Image_path1'];?>" height="100px" alt="item1" />
+                                    <span class="item-name"><?php echo $crtrow['product_details'];?></span>
+                                    <span class="item-price"><?php echo $crtrow['price'];?></span>
+                                    <span class="item-quantity">Quantity: <?php echo $crtquan;?></span>
+                                </li>
+                            <?php
+                            $total=$total+($crtrow['price']*$crtquan);
+                           }
+                           ?>
+                           <div class="shopping-cart-header">
                 <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
                 <div class="shopping-cart-total">
                     <span class="lighter-text">Total:</span>
-                    <span class="main-color-text">$2,229.97</span>
+                    <span class="main-color-text"><?php echo $total;?></span>
                 </div>
-            </div> <!--end shopping-cart-header -->
-
-            <ul class="shopping-cart-items">
-                <li class="clearfix">
-                    <img src="SDP_Project\public\img\4866-1-crbr.jpeg" height="100px" alt="item1" />
-                    <span class="item-name">Sony DSC-RX100M III</span>
-                    <span class="item-price">$849.99</span>
-                    <span class="item-quantity">Quantity: 01</span>
-                </li>
-
-                <li class="clearfix">
-                    <img src="SDP_Project\public\img\1026-2-wh.jpeg" height="100px" alt="item1" />
-                    <span class="item-name">KS Automatic Mechanic...</span>
-                    <span class="item-price">$1,249.99</span>
-                    <span class="item-quantity">Quantity: 01</span>
-                </li>
-
-                <li class="clearfix">
-                    <img src="SDP_Project\public\img\5002-2-bl.jpeg" height="100px" alt="item1" />
-                    <span class="item-name">Kindle, 6" Glare-Free To...</span>
-                    <span class="item-price">$129.99</span>
-                    <span class="item-quantity">Quantity: 01</span>
-                </li>
-            </ul>
-        </div> 
+            </div> 
+                        </ul>
+                    </div> 
                 <img src="public/img/menu1.svg" alt="" class="menu">
             </div>
         </div>

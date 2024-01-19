@@ -76,10 +76,14 @@ $(document).ready(function() {
 		});
         return values;
     }
+    $('input:checkbox').change(function() {
+        submitForm();
+    });
     $('.sort_rang').change(function(){
         $("#search_form").submit();
         return false;
     });
+    
 	$(document).on('click', 'label', function() {
 		if($('input:checkbox:checked')) {
 			$('input:checkbox:checked', this).closest('label').addClass('active');

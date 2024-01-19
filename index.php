@@ -67,7 +67,7 @@ $result=$conn->query($sql);
         <?php
             $row=$result->fetch_assoc();
         ?>
-            <a href="product.php?id=<?php echo $row['Product_id']; ?>" class="product-link">
+            <a href="product.php?id=1026&color=blue" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">25% off</span>

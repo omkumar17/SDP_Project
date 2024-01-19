@@ -67,6 +67,9 @@ $totalRecords = $product->getTotalProducts();
             margin: 20px 0;
             font-size:20px;
         }
+        .radio{
+            margin:10px 0;
+        }
         .list-group{
             list-style:none;
             text-align:left;
@@ -260,24 +263,24 @@ $totalRecords = $product->getTotalProducts();
                                     $categoryCheck="";
                                 }
                             }
-                            if(isset($_GET['categ'])){
-                                if(($_GET['categ']===$category['Category_name'])){
+                                if(isset($_GET['categ'])){
+                                    if(($_GET['categ']===$category['Category_name'])){
+                                        ?>
+                                        <li class="list-group-item">
+                                            <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($category['category_id']); ?>" checked="checked" name="category[]" class="sort_rang category"><span class="lab"><?php echo ucfirst($category['Category_name']); ?></span></label></div>
+                                        </li>
+                                    <?php
+                                    }
+                                
+                                
+                                }
+                                else{
                                     ?>
                                     <li class="list-group-item">
-                                        <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($category['category_id']); ?>" checked="checked" name="category[]" class="sort_rang category"><span class="lab"><?php echo ucfirst($category['Category_name']); ?></span></label></div>
+                                        <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($category['category_id']); ?>" <?php echo @$categoryCheck; ?> name="category[]" class="sort_rang category"><span class="lab"><?php echo ucfirst($category['Category_name']); ?></span></label></div>
                                     </li>
-                                <?php
+                                    <?php
                                 }
-                            
-                            
-                            }
-                            else{
-                                ?>
-                                <li class="list-group-item">
-                                    <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($category['category_id']); ?>" <?php echo @$categoryCheck; ?> name="category[]" class="sort_rang category"><span class="lab"><?php echo ucfirst($category['Category_name']); ?></span></label></div>
-                                </li>
-                                <?php
-                            }
                         } 
                         ?>
                         
@@ -294,7 +297,7 @@ $totalRecords = $product->getTotalProducts();
                                 }
                             }
                         if(isset($_GET['categ']) && $_GET['type']){
-                            if( ($_GET['type']===$type['product_type']) || isset($_POST['type'])){
+                            if( ($_GET['type']===$type['product_type']) ){
                                 ?>
                                 <li class="list-group-item">
                                     <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($type['product_type']); ?>" checked="checked" name="type[]" class="sort_rang type" id="typecheck"><span class="lab"><?php echo ucfirst($type['product_type']);?></span></label></div>
@@ -330,7 +333,8 @@ $totalRecords = $product->getTotalProducts();
                         <li class="list-group-item">
                             <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($brand['product_name']); ?>" <?php echo @$brandChecked; ?> name="brand[]" class="sort_rang brand"><span class="lab"><?php echo ucfirst($brand['product_name']); ?></span></label></div>
                         </li>
-                        <?php } ?>
+                        <?php 
+                    } ?>
                         
                         </ul>
                         <div class="head">SORTING</div>
