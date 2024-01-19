@@ -227,7 +227,7 @@
     .product-images {
         position: absolute;
     bottom: auto;
-    left: 81vw;
+    left: 56vw;
     transform: translateX(-50%);
     width: 20vw;
     background: #fff;
@@ -236,7 +236,6 @@
     grid-template-columns: 15vh;
     grid-template-rows: 10vh 10vh 10vh 10vh;
     height: 100%;
-    grid-gap: 7vw;
     padding: 10px;
     }
 
@@ -267,7 +266,7 @@
     .product-images {
         position: absolute;
         left: 50%;
-        top: 74%;
+        top: 94%;
         transform: translateX(-50%);
         width: 100%;
         background: #fff;
@@ -388,7 +387,5 @@
         padding: 0;
         margin-bottom: 10px;
     }
-    .details {
-        margin-top: 50px;
-    }
+    
 }

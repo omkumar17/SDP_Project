@@ -68,36 +68,46 @@ class Product{
 		if(isset($_GET['grp']))
 		{
 			$grp=$_GET['grp'];
-			$sql.=" WHERE grp=$grp";
+			// $sql.=" WHERE grp=$grp";
 		}
-		$sqlQuery="SELECT grp FROM `product` $sql";
+		$sqlQuery="SELECT grp FROM `product` $sql GROUP BY grp";
 		return  $this->getData($sqlQuery);
 	}
 	public function getCategories() {	
 		$sql="";
-		if(isset($_GET['grp']))
+		if(isset($_POST['grp']))
 		{
-			$grp=$_GET['grp'];
-			$sub="SELECT category.category_id FROM 'category' INNER JOIN `product` ON product.Category_ID=category.category_id WHERE product.grp=$grp";
-			$result=$conn->query($sub);
+			$grp=$_POST['grp'];
+			$sub="SELECT grp FROM product WHERE grp IN ('".implode("','",$grp)."')";
+			$result=$this->dbConnect->query($sub);
 			while($row=$result->fetch_assoc())
 			{
-				$catid[]=$row['category_id'];
+				$catid[]=$row['grp'];
 			}
-			$sql.=" WHERE category_id IN ('".implode("','",$catid)."')";
+			$sql.=" WHERE product.grp IN ('".implode("','",$catid)."')";
 		}
-		$sqlQuery = "SELECT category_id, category_name
-			FROM ".$this->categoryTable." $sql
-			GROUP BY Category_name";
+		$sqlQuery = "SELECT category.category_id,category.Category_name FROM category INNER JOIN product ON category.category_id=product.Category_ID
+			$sql GROUP BY category.Category_name";
         return  $this->getData($sqlQuery);
 	}
 	public function getType(){
 		$sql='';
+		if((isset($_POST['grp']) && $_POST['grp']!="")){
+			$grp=$_POST['grp'];
+			$sql.=" WHERE product.grp IN ('".implode("','",$grp)."')";
+		}
 		if((isset($_POST['category']) && $_POST['category']!="")) {
 			$category = $_POST['category'];
-			$sql.=" WHERE category.category_id IN ('".implode("','",$category)."')";
+			if((isset($_POST['grp']) && $_POST['grp']!="")){
+				$sql.=" AND category.category_id IN ('".implode("','",$category)."')";
+			}
+			else{
+				$sql.=" WHERE category.category_id IN ('".implode("','",$category)."')";	
+			}
 		}
-			$sqlQuery="SELECT DISTINCT product_desc.product_type FROM product_desc INNER JOIN color ON product_desc.cid = color.cid 
+		
+			$sqlQuery="SELECT DISTINCT product_desc.product_type FROM product_desc 
+			INNER JOIN color ON product_desc.cid = color.cid 
 			INNER JOIN product ON color.product_id = product.product_id 
 			INNER JOIN category ON product.Category_ID = category.category_id
 			$sql GROUP BY product_desc.product_type";
@@ -105,17 +115,28 @@ class Product{
 	}
 	public function getBrand () {
 		$sql='';
-		if(isset($_POST['category']) && $_POST['category']!="") {
-			$category = $_POST['category'];
-			$sql.=" WHERE category_id IN ('".implode("','",$category)."')";
-		}
-		// else
-		// {
-		// 	$sql.= " WHERE category_id IN ('".implode("','",$this->cat)."')";
+		// if(isset($_POST['category']) && $_POST['category']!="") {
+		// 	$category = $_POST['category'];
+		// 	$sql.=" WHERE category.category_id IN ('".implode("','",$category)."')";
 		// }
-		$sqlQuery = "SELECT distinct product_name
-			FROM ".$this->productTable." 
-			$sql GROUP BY product_name";
+		// if((isset($_POST['grp']) && $_POST['grp']!="")){
+		// 	$grp=$_POST['grp'];
+		// 	$sql.=" WHERE product.grp IN ('".implode("','",$grp)."')";
+		// }
+		// 
+		if (isset($_POST['type']) && $_POST['type'] != "") {
+			$type = $_POST['type'];
+			$sql .= " WHERE product_desc.product_type IN ('" . implode("','", $type) . "')";
+		}
+		
+		$sqlQuery = "SELECT DISTINCT product.product_name FROM product  
+		INNER JOIN color ON product.product_id = color.product_id
+		INNER JOIN product_desc ON color.cid = product_desc.cid " . $sql . " GROUP BY product.product_name";
+		
+
+		// $sqlQuery = "SELECT distinct product.product_name
+		// 	FROM ".$this->productTable." 
+		// 	$sql GROUP BY product_name";
         return  $this->getData($sqlQuery);
 	}
 	public function getcolor () {
@@ -181,6 +202,10 @@ class Product{
 	}
 	public function getTotalProducts () {
 		$sql= "SELECT * FROM `category` INNER JOIN `product` ON product.Category_ID=category.category_id INNER JOIN `color` ON color.product_id=product.Product_id INNER JOIN `product_desc` ON product_desc.cid=color.cid INNER JOIN image ON image.cid=color.cid WHERE product_desc.quantity != 0";
+		if(isset($_POST['grp']) && $_POST['grp']!="") {
+			$grp = $_POST['grp'];
+			$sql.=" AND product.grp IN ('".implode("','",$grp)."')";
+		}
 		if(isset($_POST['category']) && $_POST['category']!="") {
 			$category = $_POST['category'];
 			$sql.=" AND category.category_id IN ('".implode("','",$category)."')";
@@ -211,6 +236,10 @@ class Product{
 		$totalRecord  = strtolower(trim(str_replace("/","",$_POST['totalRecord'])));
 		$start = ceil($totalRecord * $productPerPage);		
 		$sql= "SELECT * FROM `category` INNER JOIN `product` ON product.Category_ID=category.category_id INNER JOIN `color` ON color.product_id=product.Product_id INNER JOIN `product_desc` ON product_desc.cid=color.cid INNER JOIN image ON image.cid=color.cid WHERE product_desc.quantity != 0";	
+		if(isset($_POST['grp']) && $_POST['grp']!="") {
+			$grp = $_POST['grp'];
+			$sql.=" AND product.grp IN ('".implode("','",$grp)."')";
+		}
 		if(isset($_POST['category']) && $_POST['category']!=""){			
 			$sql.=" AND category.category_id IN ('".implode("','",$_POST['category'])."')";
 		}

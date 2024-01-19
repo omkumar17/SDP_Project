@@ -1,5 +1,125 @@
 <style>
-    
+     .lighter-text {
+            color: #ABB0BE;
+        }
+
+        .main-color-text {
+            color: $main-color;
+        }
+
+        .badge {
+            background-color: #6394F8;
+            border-radius: 10px;
+            color: white;
+            display: inline-block;
+            font-size: 12px;
+            line-height: 1;
+            padding: 3px 7px;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .shopping-cart {
+            margin: 20px 0;
+            float: right;
+            background: white;
+            width: 363px;
+            position: absolute;
+            top:72px;
+            right:47px;
+            border-radius: 3px;
+            padding: 20px;
+            display:none;
+            /* border:2px solid black; */
+            box-shadow:0px 0px 20px black;
+        }
+
+
+        .shopping-cart-header {
+            border-bottom: 1px solid #E8E8E8;
+            padding-bottom: 15px;
+        }
+
+        .shopping-cart-total {
+                float: right;
+                }
+        
+
+            .shopping-cart-items {
+
+                padding-top: 20px;
+            
+
+                li {
+                    margin-bottom: 18px;
+                    list-style:none;
+                }
+
+                img {
+                    float: left;
+                    margin-right: 12px;
+                }
+
+                .item-name {
+                    display: block;
+                    padding-top: 10px;
+                    font-size: 16px;
+                }
+
+                .item-price {
+                    color: $main-color;
+                    margin-right: 8px;
+                }
+
+                .item-quantity {
+                    color: $light-text;
+                }
+            }
+
+        
+
+        .shopping-cart:after {
+            bottom: 100%;
+            left: 89%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-bottom-color: white;
+            border-width: 8px;
+            margin-left: -8px;
+        }
+
+        .cart-icon {
+            color: #515783;
+            font-size: 24px;
+            margin-right: 7px;
+            float: left;
+        }
+
+
+
+
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+   .search form{
+    width:100%;
+    display:flex;
+    flex-direction:row;
+} 
+.checkout{
+    text-decoration:none;
+    background-color:blue;
+    color:white;
+    height:1000px;
+    width:250px;
+}
 .logindrop{
     display:none;
     position:absolute;
@@ -17,7 +137,7 @@
     color:teal;
     /* margin: 2px; */
     text-align:center;
-    background-color:red;
+    /* background-color:red; */
     border:1px solid teal;
     /* width:100px; */
     display:block;
@@ -35,12 +155,20 @@
         .logindrop{
             top:110px;
         } 
+        .shopping-cart {
+            display:none;
+        }
     }
     @media only screen and (max-width:600px){
         .logindrop{
             top:70px;
         } 
     }
+    /* @media only  screen and (max-width:434px){
+        .search{
+            top:80px;
+        }
+    } */
 </style>
 <?php
 include_once 'connection.php';
@@ -67,10 +195,13 @@ if(isset($_COOKIE['userID']))
     </section>
         <div class="nav">
             <img src="public/img/logo.jpg" class="brand-logo" alt="">
-            
             <div class="search">
-                <input type="text" class="search-box" placeholder="search brand, product">
-                <a href="selection.html" class="search-btn"><button>search</button></a>
+            <form action="select.php" method="get">
+                <input type="text" name="search" class="search-box" placeholder="search brand, product">
+                <button type="submit" class="search-btn">Search</button>
+            </form>
+                <!-- <input type="text" name="search" class="search-box" placeholder="search brand, product">
+                <a href="select.php?" class="search-btn"><button>search</button></a> -->
             </div>
             <div class="right-items">
             
@@ -100,7 +231,39 @@ if(isset($_COOKIE['userID']))
                             ?>
                             
                         </div>
-                <a class="cart" href=""><img src="public/img/cart.jpg" alt=""></a>
+                <a class="cart" href="cart.php"><img src="public/img/cart.jpg" alt=""></a>
+                <div class="shopping-cart">
+            <div class="shopping-cart-header">
+                <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
+                <div class="shopping-cart-total">
+                    <span class="lighter-text">Total:</span>
+                    <span class="main-color-text">$2,229.97</span>
+                </div>
+            </div> <!--end shopping-cart-header -->
+
+            <ul class="shopping-cart-items">
+                <li class="clearfix">
+                    <img src="SDP_Project\public\img\4866-1-crbr.jpeg" height="100px" alt="item1" />
+                    <span class="item-name">Sony DSC-RX100M III</span>
+                    <span class="item-price">$849.99</span>
+                    <span class="item-quantity">Quantity: 01</span>
+                </li>
+
+                <li class="clearfix">
+                    <img src="SDP_Project\public\img\1026-2-wh.jpeg" height="100px" alt="item1" />
+                    <span class="item-name">KS Automatic Mechanic...</span>
+                    <span class="item-price">$1,249.99</span>
+                    <span class="item-quantity">Quantity: 01</span>
+                </li>
+
+                <li class="clearfix">
+                    <img src="SDP_Project\public\img\5002-2-bl.jpeg" height="100px" alt="item1" />
+                    <span class="item-name">Kindle, 6" Glare-Free To...</span>
+                    <span class="item-price">$129.99</span>
+                    <span class="item-quantity">Quantity: 01</span>
+                </li>
+            </ul>
+        </div> 
                 <img src="public/img/menu1.svg" alt="" class="menu">
             </div>
         </div>
@@ -264,4 +427,14 @@ login.onclick = function () {
     // console.log("Menu button clicked");
     // console.log("link-container class list:", menuitem.classList);
 };
+if(screen.width> 1068){
+var cart=document.querySelector(".cart");
+var shopping=document.querySelector(".shopping-cart");
+cart.addEventListener("mouseover",()=>{
+    shopping.style.display="block";
+})
+cart.addEventListener("mouseout",()=>{
+    shopping.style.display="none";
+})
+}
         </script>

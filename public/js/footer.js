@@ -28,7 +28,7 @@ const createFooter = () => {
                 </div>
                 <div class="contact">
                     <li class="mobile">Mobile: <a href="tel:+918799553324">8799553324</a></li>
-                    <li class="email">Email: <a href="mailto:harshwadhwani268@gmail.com">harshwadhwani268@gmail.com</li>
+                    <li class="email">Email: <a href="mailto:harshwadhwani268@gmail.com">harshwadhwani268@gmail.com</a></li>
                 </div>
             </div>
         </div>
