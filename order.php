@@ -147,20 +147,20 @@ include 'connection.php';
     width:250px;
 }
 .paymentcontainer{
-  width:80%;
+  width:100%;
   display:flex;
   justify-content:center;
   align-items:left;
   flex-direction:column;
   background-color:whitesmoke;
-  margin:50px;
+  margin:50px 0;
   padding:20px;
 }
     </style>
 </head>
 <body>
         <div class="container"><?php
-                           $sql="SELECT * FROM `cart_tbl` WHERE user_id='$user' AND p_quantity!=0";
+                           $sql="SELECT * FROM cart_tbl WHERE user_id='$user' AND p_quantity!=0";
                            $result=$conn->query($sql);
                            $total=0.0;
                            ?>
@@ -175,7 +175,7 @@ include 'connection.php';
                                $crtprid=$row['product_id'];
                                $crtquan=$row['p_quantity'];
                                $crtcol=$row['p_color'];
-                               $crtsql="SELECT * FROM `product_desc` INNER JOIN `color` ON color.cid=product_desc.cid  INNER JOIN `image` ON image.cid=color.cid INNER JOIN `product` ON product.Product_id=color.product_id  WHERE product.Product_id='$crtprid' AND product_desc.size='$crtsize' AND color.color='$crtcol'";
+                               $crtsql="SELECT * FROM product_desc INNER JOIN color ON color.cid=product_desc.cid  INNER JOIN image ON image.cid=color.cid INNER JOIN product ON product.Product_id=color.product_id  WHERE product.Product_id='$crtprid' AND product_desc.size='$crtsize' AND color.color='$crtcol'";
                                $crtresult=$conn->query($crtsql);
                                $crtrow=$crtresult->fetch_assoc();   
                                 ?>
@@ -199,82 +199,89 @@ include 'connection.php';
                     <span class="main-color-text"><?php echo $total;?></span>
                 </div>
             </div> 
-                        </ul>
-                    </div> 
-<div class="formcontainer">
-<form>
-  <div class="form-row">
-    <div class="col-md-4 mb-3">
-      <label for="validationDefault01">First name</label>
-      <input type="text" class="form-control" id="validationDefault01" placeholder="First name" value="Mark" required>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label for="validationDefault02">Last name</label>
-      <input type="text" class="form-control" id="validationDefault02" placeholder="Last name" value="Otto" required>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label for="validationDefaultUsername">Email</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroupPrepend2">@</span>
+              </ul>
+        </div> 
+    <div class="formcontainer">
+      <form class="orderform" action="manage.php" method="get">
+          <div class="form-row">
+            <div class="col-md-4 mb-3">
+              <label for="validationDefault01">First name</label>
+              <input type="text" class="form-control" id="validationDefault01" name="fname" placeholder="First name"  required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationDefault02">Last name</label>
+              <input type="text" class="form-control" id="validationDefault02" name="lname" placeholder="Last name"  required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationDefaultUsername">Email</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                </div>
+                <input type="email" class="form-control" id="validationDefaultUsername" name="email" placeholder="Email" aria-describedby="inputGroupPrepend2" required>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="validationDefault03">Phone</label>
+              <input type="number" class="form-control" id="validationDefault03" name="phone" placeholder="Phone" required>
+            </div>
+            <div class="col-md-10 mb-3">
+              <label for="validationDefault03">Shipping Address</label>
+              <textarea class="form-control" id="validationDefault03" name="addr" placeholder="Address" row="3" col="50" required></textarea>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="validationDefault03">City</label>
+              <input class="form-control" id="disabledInput" type="text" placeholder="Ahmedabad" value="Ahmedabad" name="city" disabled>
+              <input class="form-control" id="disabledInput" type="hidden" placeholder="Ahmedabad" value="Ahmedabad" name="city">    </div>
+
+            <div class="col-md-3 mb-3">
+              <label for="validationDefault04">State</label>
+              <input class="form-control" id="disabledInput" type="text" placeholder="Gujarat" value="Gujarat" name="state" disabled> 
+              <input class="form-control" id="disabledInput" type="hidden" placeholder="Gujarat" value="Gujarat" name="state">  </div>
+            <div class="col-md-3 mb-3">
+              <label for="validationDefault05">Zip</label>
+              <input type="text" class="form-control" id="validationDefault05" name="zip" placeholder="Zip" required>
+              <input type="hidden" value="<?php echo $total;?>" name="total">
+            </div>
+          </div>
+          
+          <!-- <button class="btn btn-primary" type="submit">Submit form</button> -->
+
+        
+        <div class="paymentcontainer">
+          <h4>Select Payment method</h4><br>
+
+          <div class="form-check">
+            <input class="form-check-input" value="c" type="radio" name="paymentmet" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+              COD(Charges Applicable)
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" value="o" type="radio" name="paymentmet" id="flexRadioDefault2" checked>
+            <label class="form-check-label" for="flexRadioDefault2">
+              Online Payments
+            </label>
+          </div>
+          <br>
         </div>
-        <input type="email" class="form-control" id="validationDefaultUsername" placeholder="Email" aria-describedby="inputGroupPrepend2" required>
-      </div>
+
+        <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="checked" name="term" id="invalidCheck2" required>
+              <label class="form-check-label" for="invalidCheck2">
+                Agree to terms and conditions
+              </label>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="submit" style="width:200px">
+      </form>
     </div>
-  </div>
-  <div class="form-row">
-  <div class="col-md-6 mb-3">
-      <label for="validationDefault03">Phpne</label>
-      <input type="number" class="form-control" id="validationDefault03" placeholder="Phone" required>
-    </div>
-    <div class="col-md-6 mb-3">
-      <label for="validationDefault03">City</label>
-      <input class="form-control" id="disabledInput" type="text" placeholder="Ahmedabad" value="Ahmedabad" name="city" disabled>    </div>
 
-    <div class="col-md-3 mb-3">
-      <label for="validationDefault04">State</label>
-      <input class="form-control" id="disabledInput" type="text" placeholder="Gujarat" value="Gujarat" name="state" disabled>  </div>
-    <div class="col-md-3 mb-3">
-      <label for="validationDefault05">Zip</label>
-      <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" required>
-    </div>
-  </div>
-  
-  <!-- <button class="btn btn-primary" type="submit">Submit form</button> -->
-
-</div>
-<div class="paymentcontainer">
-<h4>Select Payment method</h4><br>
-
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1">
-    COD(Charges Applicable)
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-  <label class="form-check-label" for="flexRadioDefault2">
-    Online Payments
-  </label>
-</div>
-<br>
-</div>
-
-<div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-      <label class="form-check-label" for="invalidCheck2">
-        Agree to terms and conditions
-      </label>
-    </div>
-  </div>
-<input type="submit" class="btn btn-primary" value="submit" style="width:200px">
-</form>
-
-
-                        </div>
-                        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 

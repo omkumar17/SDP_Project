@@ -8,7 +8,7 @@ if(!isset($_COOKIE['userID']))
 if(isset($_GET['crtquant'])){
     $quan=$_GET['crtquant'];
     $crtid=$_GET['crtid'];
-    $sql="UPDATE `cart_tbl` SET `p_quantity`='$quan' WHERE `cartID`= '$crtid'";
+    $sql="UPDATE cart_tbl SET p_quantity='$quan' WHERE cartID= '$crtid'";
     $res=$conn->query($sql);
 }
 ?>
@@ -169,7 +169,7 @@ if(isset($_GET['crtquant'])){
                     <!-- left side div -->
                     <div class="col-md-12 col-lg-8 col-11 mx-auto main_cart mb-lg-0 mb-5 shadow">
                     <?php
-                        $sql="SELECT * FROM `cart_tbl` WHERE user_id='$user' AND p_quantity!=0";
+                        $sql="SELECT * FROM cart_tbl WHERE user_id='$user' AND p_quantity!=0";
                         $result=$conn->query($sql);
                         $total=0.0;
                         while($row=$result->fetch_assoc())
@@ -179,7 +179,7 @@ if(isset($_GET['crtquant'])){
                             $crtprid=$row['product_id'];
                             $crtquan=$row['p_quantity'];
                             $crtcol=$row['p_color'];
-                            $crtsql="SELECT * FROM `product_desc` INNER JOIN `color` ON color.cid=product_desc.cid  INNER JOIN `image` ON image.cid=color.cid INNER JOIN `product` ON product.Product_id=color.product_id  WHERE product.Product_id='$crtprid' AND product_desc.size='$crtsize' AND color.color='$crtcol'";
+                            $crtsql="SELECT * FROM product_desc INNER JOIN color ON color.cid=product_desc.cid  INNER JOIN image ON image.cid=color.cid INNER JOIN product ON product.Product_id=color.product_id  WHERE product.Product_id='$crtprid' AND product_desc.size='$crtsize' AND color.color='$crtcol'";
                             $crtresult=$conn->query($crtsql);
                             $crtrow=$crtresult->fetch_assoc();
                             
