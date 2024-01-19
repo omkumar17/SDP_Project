@@ -128,7 +128,7 @@ $totalRecords = $product->getTotalProducts();
                                     
                                     }
                                     else{
-                                        ?>
+                                        ?> 
                                         <li class="list-group-item">
                                             <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($category['category_id']); ?>" <?php echo @$categoryCheck; ?> name="category[]" class="sort_rang category"><?php echo ucfirst($category['category_name']); ?></label></div>
                                         </li>

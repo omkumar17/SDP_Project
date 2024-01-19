@@ -35,31 +35,31 @@ const createFooter = () => {
         <div class="footer-ul-container">
             <ul class="footer-category">
                 <li class="category-title">ABOUT COMPANY</li>
-                <li><a href="#" class="footer-link">About Us</a></li>
-                <li><a href="#" class="footer-link">Contact Us</a></li>
-                <li><a href="#" class="footer-link">Store Locator</a></li>
-                <li><a href="#" class="footer-link">Blog</a></li>
+                <li><a href="aboutus.html" class="footer-link">About Us</a></li>
+                <li><a href="contactus.html" class="footer-link">Contact Us</a></li>
+                <li><a href="locater.html" class="footer-link">Store Locator</a></li>
+                <li><a href="blog.html" class="footer-link">Blog</a></li>
                 <li><a href="#" class="footer-link"></a></li>
             </ul>
             <ul class="footer-category">
                 <li class="category-title">ONLINE SHOPPING</li>
-                <li><a href="#" class="footer-link">New Arrival</a></li>
-                <li><a href="#" class="footer-link">Men</a></li>
-                <li><a href="#" class="footer-link">Women</a></li>
-                <li><a href="#" class="footer-link">Kids</a></li>
-                <li><a href="#" class="footer-link">Brands</a></li>
+                <li><a href="select.php" class="footer-link">New Arrival</a></li>
+                <li><a href="select.php?categ=brands&grp=m" class="footer-link">Men</a></li>
+                <li><a href="select.php?categ=brands&grp=w" class="footer-link">Women</a></li>
+                <li><a href="select.php?categ=brands&grp=k" class="footer-link">Kids</a></li>
+                <li><a href="select.php?categ=brands" class="footer-link">Brands</a></li>
             </ul>
             <ul class="footer-category">
                 <li class="category-title">POLICIES</li>
-                <li><a href="#" class="footer-link">Return Policy</a></li>
-                <li><a href="#" class="footer-link">Privacy Policy</a></li>
-                <li><a href="#" class="footer-link">Terms & Conditions</a></li>
-                <li><a href="#" class="footer-link">Shipping Information</a></li>
-            </ul>
+                <li><a href="return.html" class="footer-link">Return Policy</a></li>
+                <li><a href="privacy.html" class="footer-link">Privacy Policy</a></li>
+                <li><a href="term.html" class="footer-link">Terms & Conditions</a></li>
+                <li><a href="shipping.html" class="footer-link">Shipping Information</a></li>
+            </ul> 
             <ul class="footer-category">
                 <li class="category-title">CUSTOMER SERVICE</li>
-                <li><a href="#" class="footer-link">FAQ</a></li>
-                <li><a href="#" class="footer-link">Return Request</a></li>
+                <li><a href="faq.html" class="footer-link">FAQ</a></li>
+                <li><a href="return_req.html" class="footer-link">Return Request</a></li>
             </ul>
         </div>
     </div>
