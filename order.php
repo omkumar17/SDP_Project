@@ -1,0 +1,246 @@
+<?php
+include 'connection.php';
+?>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <head>    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <style>
+        .lighter-text {
+            color: #ABB0BE;
+        }
+
+        .main-color-text {
+            color: $main-color;
+        }
+
+        .badge {
+            background-color: #6394F8;
+            border-radius: 10px;
+            color: white;
+            display: inline-block;
+            font-size: 12px;
+            line-height: 1;
+            padding: 3px 7px;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+        .container{
+            width:100%;
+            height:100%;
+            padding:auto;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .shopping-cart {
+            /* margin: 20px 0; */
+            float: right;
+            background: white;
+            width: 80%;
+            /* margin:100px; */
+            /* position: absolute; */
+            top:72px;
+            right:47px;
+            border-radius: 3px;
+            padding: 20px;
+            /* display:none; */
+            /* border:2px solid black; */
+            /* box-shadow:0px 0px 20px black; */
+        }
+
+
+        .shopping-cart-header {
+            border-bottom: 1px solid #E8E8E8;
+            padding-bottom: 15px;
+        }
+
+        .shopping-cart-total {
+                float: right;
+                }
+        
+
+            .shopping-cart-items {
+
+                padding-top: 20px;
+            
+
+                li {
+                    margin-bottom: 18px;
+                    list-style:none;
+                }
+
+                img {
+                    float: left;
+                    margin-right: 12px;
+                }
+
+                .item-name {
+                    display: block;
+                    padding-top: 10px;
+                    font-size: 16px;
+                }
+
+                .item-price {
+                    color: $main-color;
+                    margin-right: 8px;
+                }
+
+                .item-quantity {
+                    color: $light-text;
+                }
+            }
+
+        
+
+        .shopping-cart:after {
+            bottom: 100%;
+            left: 89%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-bottom-color: white;
+            border-width: 8px;
+            margin-left: -8px;
+        }
+
+        .cart-icon {
+            color: #515783;
+            font-size: 24px;
+            margin-right: 7px;
+            float: left;
+        }
+
+
+
+
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+   .search form{
+    width:100%;
+    display:flex;
+    flex-direction:row;
+} 
+.checkout{
+    text-decoration:none;
+    background-color:blue;
+    color:white;
+    height:1000px;
+    width:250px;
+}
+    </style>
+</head>
+<body>
+        <div class="container"><?php
+                           $sql="SELECT * FROM `cart_tbl` WHERE user_id='$user' AND p_quantity!=0";
+                           $result=$conn->query($sql);
+                           $total=0.0;
+                           ?>
+                        
+                <div class="shopping-cart">
+            <ul class="shopping-cart-items">
+                        <?php
+                           while($row=$result->fetch_assoc())
+                           {
+                               $crtid=$row['cartID'];
+                               $crtsize=$row['p_size'];
+                               $crtprid=$row['product_id'];
+                               $crtquan=$row['p_quantity'];
+                               $crtcol=$row['p_color'];
+                               $crtsql="SELECT * FROM `product_desc` INNER JOIN `color` ON color.cid=product_desc.cid  INNER JOIN `image` ON image.cid=color.cid INNER JOIN `product` ON product.Product_id=color.product_id  WHERE product.Product_id='$crtprid' AND product_desc.size='$crtsize' AND color.color='$crtcol'";
+                               $crtresult=$conn->query($crtsql);
+                               $crtrow=$crtresult->fetch_assoc();   
+                                ?>
+                <!--end shopping-cart-header -->
+
+                        
+                                <li class="clearfix">
+                                    <img src="<?php echo $crtrow['Image_path1'];?>" height="100px" alt="item1" />
+                                    <span class="item-name"><?php echo $crtrow['product_details'];?></span>
+                                    <span class="item-price"><?php echo $crtrow['price'];?></span>
+                                    <span class="item-quantity">Quantity: <?php echo $crtquan;?></span>
+                                </li>
+                            <?php
+                            $total=$total+($crtrow['price']*$crtquan);
+                           }
+                           ?>
+                           <div class="shopping-cart-header">
+                <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
+                <div class="shopping-cart-total">
+                    <span class="lighter-text">Total:</span>
+                    <span class="main-color-text"><?php echo $total;?></span>
+                </div>
+            </div> 
+                        </ul>
+                    </div> 
+<div class="formcontainer">
+<form>
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault01">First name</label>
+      <input type="text" class="form-control" id="validationDefault01" placeholder="First name" value="Mark" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">Last name</label>
+      <input type="text" class="form-control" id="validationDefault02" placeholder="Last name" value="Otto" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationDefaultUsername">Username</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend2">@</span>
+        </div>
+        <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Username" aria-describedby="inputGroupPrepend2" required>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="validationDefault03">City</label>
+      <input type="text" class="form-control" id="validationDefault03" placeholder="City" required>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationDefault04">State</label>
+      <input type="text" class="form-control" id="validationDefault04" placeholder="State" required>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationDefault05">Zip</label>
+      <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+      <label class="form-check-label" for="invalidCheck2">
+        Agree to terms and conditions
+      </label>
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit">Submit form</button>
+</form>
+</div>
+                        </div>
+                        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>

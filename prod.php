@@ -115,24 +115,44 @@ class Product{
 	}
 	public function getBrand () {
 		$sql='';
-		// if(isset($_POST['category']) && $_POST['category']!="") {
-		// 	$category = $_POST['category'];
-		// 	$sql.=" WHERE category.category_id IN ('".implode("','",$category)."')";
-		// }
-		// if((isset($_POST['grp']) && $_POST['grp']!="")){
-		// 	$grp=$_POST['grp'];
-		// 	$sql.=" WHERE product.grp IN ('".implode("','",$grp)."')";
-		// }
-		// 
-		if (isset($_POST['type']) && $_POST['type'] != "") {
-			$type = $_POST['type'];
-			$sql .= " WHERE product_desc.product_type IN ('" . implode("','", $type) . "')";
+		if((isset($_POST['grp']) && $_POST['grp']!="")){
+			$grp=$_POST['grp'];
+			$sql.=" WHERE product.grp IN ('".implode("','",$grp)."')";
+		}
+		if(isset($_POST['category']) && $_POST['category']!="") {
+			$category = $_POST['category'];
+			if((isset($_POST['grp']) && $_POST['grp']!="")){
+				$sql.=" AND category.category_id IN ('".implode("','",$category)."')";
+			}
+			else{
+				$sql.=" WHERE category.category_id IN ('".implode("','",$category)."')";	
+			}
 		}
 		
-		$sqlQuery = "SELECT DISTINCT product.product_name FROM product  
-		INNER JOIN color ON product.product_id = color.product_id
-		INNER JOIN product_desc ON color.cid = product_desc.cid " . $sql . " GROUP BY product.product_name";
 		
+
+		if (isset($_POST['type']) && $_POST['type'] != "") {
+			$type = $_POST['type'];
+			if(isset($_POST['category']) && $_POST['category']!=""){
+				$sql .= " AND product_desc.product_type IN ('" . implode("','", $type) . "')";
+			}
+			else{
+				$sql .= " AND product_desc.product_type IN ('" . implode("','", $type) . "')";
+			}
+		}
+		
+	
+		
+		
+		
+		// $sqlQuery = "SELECT DISTINCT product.product_name FROM product  
+		// INNER JOIN color ON product.product_id = color.product_id
+		// INNER JOIN product_desc ON color.cid = product_desc.cid " . $sql . " GROUP BY product.product_name";
+		$sqlQuery = "SELECT DISTINCT product.product_name FROM product
+		INNER JOIN category ON product.Category_ID = category.category_id 
+		INNER JOIN color ON color.product_id = product.product_id 
+		INNER JOIN product_desc ON product_desc.cid = color.cid 
+		$sql GROUP BY product.product_name";
 
 		// $sqlQuery = "SELECT distinct product.product_name
 		// 	FROM ".$this->productTable." 
@@ -141,62 +161,104 @@ class Product{
 	}
 	public function getcolor () {
 		$sql = '';
-		if(isset($_POST['brand']) && $_POST['brand']!="") {
-			$brand = $_POST['brand'];
-			$sub="SELECT product_id FROM `product` WHERE product_name IN ('".implode("','",$brand)."')";
-			$result=$this->dbConnect->query($sub);
-			$array=array();
-			while($row=$result->fetch_assoc())
-			{
-				array_push($array,$row['product_id']);
+		// if(isset($_POST['brand']) && $_POST['brand']!="") {
+		// 	$brand = $_POST['brand'];
+		// 	$sub="SELECT product_id FROM `product` WHERE product_name IN ('".implode("','",$brand)."')";
+		// 	$result=$this->dbConnect->query($sub);
+		// 	$array=array();
+		// 	while($row=$result->fetch_assoc())
+		// 	{
+		// 		array_push($array,$row['product_id']);
 
-			}
+		// 	}
 			
-			$sql.=" WHERE color.product_id IN ('".implode("','",$array)."')";
+		// 	$sql.=" WHERE color.product_id IN ('".implode("','",$array)."')";
+		// }
+		// if(isset($_POST['type']) && $_POST['type']!="") {
+		// 	$type = $_POST['type'];
+		// 	$sql.=" AND product_desc.product_type IN ('".implode("','",$type)."')";
+		// }
+		if((isset($_POST['grp']) && $_POST['grp']!="")){
+			$grp=$_POST['grp'];
+			$sql.=" WHERE product.grp IN ('".implode("','",$grp)."')";
 		}
-		if(isset($_POST['type']) && $_POST['type']!="") {
+		if(isset($_POST['category']) && $_POST['category']!="") {
+			$category = $_POST['category'];
+			if((isset($_POST['grp']) && $_POST['grp']!="")){
+				$sql.=" AND category.category_id IN ('".implode("','",$category)."')";
+			}
+			else{
+				$sql.=" WHERE category.category_id IN ('".implode("','",$category)."')";	
+			}
+		}
+		
+		
+
+		if (isset($_POST['type']) && $_POST['type'] != "") {
 			$type = $_POST['type'];
-			$sql.=" AND product_desc.product_type IN ('".implode("','",$type)."')";
+			
+			if(isset($_POST['category']) && $_POST['category']!=""){
+				$sql .= " AND product_desc.product_type IN ('" . implode("','", $type) . "')";
+			}
+			else{
+				$sql .= " AND product_desc.product_type IN ('" . implode("','", $type) . "')";
+			}
+		}
+		if(isset($_POST['brand']) && $_POST['brand']!="") {
+				$brand = $_POST['brand'];
+				$sql .= " AND product.product_name IN ('" . implode("','", $brand) . "')";
 		}
 
-		// $sqlQuery = "SELECT distinct color
-		// 	FROM ".$this->color." 
-		// 	$sql GROUP BY color";
-		$sqlQuery="SELECT DISTINCT color.color
-		FROM `color`
-		JOIN product_desc ON product_desc.cid = color.cid
+
+		$sqlQuery="SELECT DISTINCT color.color FROM color 
+		INNER JOIN product_desc ON product_desc.cid = color.cid 
+		INNER JOIN product ON color.product_id = product.product_id 
+		INNER JOIN category ON product.Category_ID = category.category_id
 		$sql GROUP BY color.color";
         return  $this->getData($sqlQuery);
 	}
 	public function getProductSize () {
 		$sql = '';
-		if(isset($_POST['brand']) && $_POST['brand']!="") {
-			$brand = $_POST['brand'];
-			$sub="SELECT color.cid FROM `color` INNER JOIN `product` ON product.Product_id=color.product_id  WHERE product.product_name IN ('".implode("','",$brand)."')";
-			$result=$this->dbConnect->query($sub);
-			$array=array();
-			while($row=$result->fetch_assoc())
-			{
-				array_push($array,$row['cid']);
-			}
-			$sql .=" WHERE cid IN ('".implode("','",$array)."')";
+		if((isset($_POST['grp']) && $_POST['grp']!="")){
+			$grp=$_POST['grp'];
+			$sql.=" WHERE product.grp IN ('".implode("','",$grp)."')";
 		}
-		if(isset($_POST['type']) && $_POST['type']!="")
-		{
-			$type=$_POST['type'];
-			if(isset($_POST['brand'])){
-				$sql .=" AND product_type IN ('".implode("','",$type)."')";
+		if(isset($_POST['category']) && $_POST['category']!="") {
+			$category = $_POST['category'];
+			if((isset($_POST['grp']) && $_POST['grp']!="")){
+				$sql.=" AND category.category_id IN ('".implode("','",$category)."')";
 			}
-			else
-			{
-				$sql .=" WHERE product_type IN ('".implode("','",$type)."')";
+			else{
+				$sql.=" WHERE category.category_id IN ('".implode("','",$category)."')";	
 			}
+		}
+		
+		
+
+		if (isset($_POST['type']) && $_POST['type'] != "") {
+			$type = $_POST['type'];
 			
+			if(isset($_POST['category']) && $_POST['category']!=""){
+				$sql .= " AND product_desc.product_type IN ('" . implode("','", $type) . "')";
+			}
+			else{
+				$sql .= " AND product_desc.product_type IN ('" . implode("','", $type) . "')";
+			}
 		}
-		$sqlQuery = "
-			SELECT distinct size
-			FROM `product_desc`
-			$sql GROUP BY size";
+		if(isset($_POST['brand']) && $_POST['brand']!="") {
+				$brand = $_POST['brand'];
+				$sql .= " AND product.product_name IN ('" . implode("','", $brand) . "')";
+		}
+
+		if(isset($_POST['color']) && $_POST['color']!="") {
+			$color = $_POST['color'];
+			$sql .= " AND color.color IN ('" . implode("','", $color) . "')";
+	}
+		$sqlQuery="SELECT DISTINCT product_desc.size FROM product_desc 
+		INNER JOIN color ON product_desc.cid = color.cid 
+		INNER JOIN product ON color.product_id = product.product_id 
+		INNER JOIN category ON product.Category_ID = category.category_id
+		$sql GROUP BY product_desc.size";
         return  $this->getData($sqlQuery);
 		
 	}
