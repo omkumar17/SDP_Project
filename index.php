@@ -67,7 +67,7 @@ $result=$conn->query($sql);
         <?php
             $row=$result->fetch_assoc();
         ?>
-            <a href="product.php?id=<?php echo $row['Product_id']; ?>" class="product-link">
+            <a href="product.php?id=1026&color=blue" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">25% off</span>
@@ -113,7 +113,7 @@ $result=$conn->query($sql);
                 </div>
             </a>
 
-            <a href="product.html" class="product-link">
+            <a href="product.php?id=5100" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">25% off</span>
@@ -128,7 +128,7 @@ $result=$conn->query($sql);
                 </div>
             </a>
 
-            <a href="product.html" class="product-link">
+            <a href="product.php?id=5109" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">30% off</span>
@@ -158,7 +158,7 @@ $result=$conn->query($sql);
                 </div>
             </a>
 
-            <a href="product.html" class="product-link">
+            <a href="product.php?id=8004" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">25% off</span>
@@ -173,7 +173,7 @@ $result=$conn->query($sql);
                 </div>
             </a>
 
-            <a href="product.html" class="product-link">
+            <a href="product.php?id=77075" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">10% off</span>
@@ -193,15 +193,15 @@ $result=$conn->query($sql);
     <!-- collections -->
     <section class="collection-container">
         <a href="#" class="collection">
-            <img src="public\img\shoe5.jpg" alt="">
+            <img src="public/img/images (2) (7).jpeg" alt="">
             <!-- <p class="collection-title">women <br> apparels</p> -->
         </a>
         <a href="#" class="collection">
-            <img src="public\img\banner4.png" alt="">
+            <img src="public/img/5ca32db482e4e2dedc42c0ea9edc93cc.png" alt="">
             <!-- <p class="collection-title">men <br> apparels</p> -->
         </a>
         <a href="#" class="collection">
-            <img src="public\img\kidsbann.jpeg" alt="">
+            <img src="public/img/images (2) (20).jpeg" alt="">
             <!-- <p class="collection-title">accessories</p> -->
         </a>
 
@@ -222,7 +222,7 @@ $result=$conn->query($sql);
         <div class="productcontainer brands">
             <div class="filterDiv mens">
 
-                <a href="selection.html" class="product-link" >
+                <a href="select.php?categ=brands&type=walkaroo&grp=m" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">20% off</span>
@@ -239,7 +239,7 @@ $result=$conn->query($sql);
             </div>
             <div class="filterDiv mens" >
 
-                <a href="selection.html" class="product-link" >
+                <a href="select.php?categ=brands&type=paragon&grp=m" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">10% off</span>
@@ -256,7 +256,7 @@ $result=$conn->query($sql);
             </div>
             <div class="filterDiv kids" >
 
-                <a href="selection.html" class="product-link" >
+                <a href="select.php?categ=brands&type=venus&grp=k" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -273,7 +273,7 @@ $result=$conn->query($sql);
             </div>
             <div class="filterDiv aurat" >
 
-                <a href="selection.html" class="product-link" >
+                <a href="select.php?categ=brands&type=venus&grp=w" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -290,7 +290,7 @@ $result=$conn->query($sql);
             </div>
             <div class="filterDiv mens" >
 
-                <a href="selection.html" class="product-link" >
+                <a href="select.php?categ=brands&type=lee-copper&grp=m" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">30% off</span>
@@ -307,7 +307,7 @@ $result=$conn->query($sql);
             </div>
             <div class="filterDiv aurat" >
 
-                <a href="selection.html" class="product-link" >
+                <a href="select.php?categ=brands&type=paragon&grp=w" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -324,7 +324,7 @@ $result=$conn->query($sql);
             </div>
             <div class="filterDiv kids" >
 
-                <a href="selection.html" class="product-link" >
+                <a href="select.php?categ=brands&type=campus&grp=k" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -341,7 +341,7 @@ $result=$conn->query($sql);
             </div>
             <div class="filterDiv aurat" >
 
-                <a href="selection.html" class="product-link" >
+                <a href="select.php?categ=brands&type=walkaroo&grp=w" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -358,7 +358,7 @@ $result=$conn->query($sql);
             </div>
             <div class="filterDiv aurat" >
 
-                <a href="selection.html" class="product-link" >
+                <a href="select.php?categ=brands&type=paragon&grp=w" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -375,7 +375,7 @@ $result=$conn->query($sql);
             </div>
             <div class="filterDiv kids" >
 
-                <a href="selection.html" class="product-link" >
+                <a href="select.php?categ=brands&type=venus&grp=k" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -392,7 +392,7 @@ $result=$conn->query($sql);
             </div>
             <div class="filterDiv kids" >
 
-                <a href="selection.html" class="product-link" >
+                <a href="select.php?categ=brands&type=paragon&grp=k" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -409,7 +409,7 @@ $result=$conn->query($sql);
             </div>
             <div class="filterDiv mens" >
 
-                <a href="selection.html" class="product-link" >
+                <a href="select.php?categ=brands&type=campus&grp=m" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -431,7 +431,7 @@ $result=$conn->query($sql);
     <section id="brand-sec">
         <h2>BRANDS</h2>
         <div class="brands">
-            <a href="selection.html" class="product-link" >
+            <a href="select.php?categ=brands&type=walkaroo" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
@@ -445,7 +445,7 @@ $result=$conn->query($sql);
                     </div>
                 </div>
             </a>
-            <a href="selection.html.html" class="product-link" >
+            <a href="select.php?categ=brands&type=paragon" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
@@ -459,7 +459,7 @@ $result=$conn->query($sql);
                     </div>
                 </div>
             </a>
-            <a href="selection.html" class="product-link" >
+            <a href="select.php?categ=brands&type=campus" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
@@ -473,7 +473,7 @@ $result=$conn->query($sql);
                     </div>
                 </div>
             </a>
-            <a href="selection.html" class="product-link" >
+            <a href="select.php?categ=brands&type=lee-copper" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
@@ -487,7 +487,7 @@ $result=$conn->query($sql);
                     </div>
                 </div>
             </a>
-            <a href="selection.html" class="product-link" >
+            <a href="select.php?categ=brands&type=lehar" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
@@ -501,7 +501,7 @@ $result=$conn->query($sql);
                     </div>
                 </div>
             </a>
-            <a href="selection.html.html" class="product-link" >
+            <a href="select.php?categ=brands&type=nike" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
@@ -515,7 +515,7 @@ $result=$conn->query($sql);
                     </div>
                 </div>
             </a>
-            <a href="selection.html" class="product-link" >
+            <a href="select.php?categ=brands&type=adidas" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
@@ -529,7 +529,7 @@ $result=$conn->query($sql);
                     </div>
                 </div>
             </a>
-            <a href="selection.html" class="product-link" >
+            <a href="select.php?categ=brands&type=flite" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
