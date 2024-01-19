@@ -8,9 +8,9 @@ $userID="";
 // }
 
 
-if(isset($_POST['phone']) && isset($_POST['password']))
+if(isset($_POST['email']) && isset($_POST['password']))
 {
-    $phone=$_POST['phone'];
+    $email=$_POST['email'];
     $pass=$_POST['password'];
 
     $servername="localhost";
@@ -19,13 +19,13 @@ if(isset($_POST['phone']) && isset($_POST['password']))
     $database="ecomm";
 
     $conn=new mysqli($servername,$username,$password,$database);
-    $sql="SELECT * FROM `user` WHERE phone='$phone' AND pass='$pass'";
+    $sql="SELECT * FROM `user` WHERE email='$email' AND pass='$pass'";
     $result1=$conn->query($sql);
     if($result1->num_rows==1)
     {
         $row = $result1->fetch_assoc();
         $userID = $row['userID'];
-        if($phone!=7895965854)
+        if($email!='admin890@gmail.com')
         {
             setcookie('userID', $userID, time() + 3600, '/');
             echo "Welcome, User $userID!";
@@ -38,8 +38,9 @@ if(isset($_POST['phone']) && isset($_POST['password']))
             _END;
         }
        
-        if($phone==7895965854)
+        if($email=='admin890@gmail.com')
         {
+            
             header("Refresh:2;url=adminpanel.php");
         }
         else
@@ -172,8 +173,8 @@ echo<<<_END
                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z"/>
                   </svg></span>
                     <div class="form-floating">
-                        <input type="number" class="form-control" id="floatingInputGroup1" placeholder="Mobile Number" name="phone">
-                        <label for="floatingInputGroup1">Mobile Number</label>
+                        <input type="email" class="form-control" id="floatingInputGroup1" placeholder="Email" name="email">
+                        <label for="floatingInputGroup1">Email</label>
                     </div>
                 </div>
                 <div class="input-group col-4 px-5 pt-4">

@@ -34,7 +34,7 @@ if(isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) &&
     }
     else
     {
-        $sql1="INSERT INTO `regis`(`fname`,`lname`, `email`, `phone`,`gender`,`address`,`pin`,`pass`, `city`) VALUES ('$fname','$lname','$email','$phone','$gender','$add','$pin','$pass','$city')";
+        $sql1="INSERT INTO `user`(`fname`,`lname`, `email`, `phone`,`gender`,`address`,`pin`,`pass`, `city`) VALUES ('$fname','$lname','$email','$phone','$gender','$add','$pin','$pass','$city')";
         $result2=$conn->query($sql1);
         if($result2)
         {
@@ -86,22 +86,24 @@ body{
     padding-top:50px;
 }
 
+
 </style>
 <body>
 
 <form action="register.php" method="post">
 <div class="container col-lg-8 mt-4">
 <div class="card">
-<div class="row">
-    <h1 class="text-center" style="font-family:'Palatino Linotype'; color:teal;">Registration Form</h1>
-                <div class="col-5 ms-5 mt-3 ps-3">
-                    <label>First Name : </label>
-                    <input type="text" name="fname" placeholder="Enter your first name" class="form-control" required><br>
+<div class="row gx-3">
+    <h1 class="text-center" style="font-family:'Palatino Linotype'; color:teal">Registration Form</h1>
+                 <div class="col-5 ms-5 mt-3 ps-3">
+                    <label>First Name: </label>
+                    <input type="text" name="fname" placeholder="Enter your first name" class="form-control" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
                 </div>
                 <div class="col-5 mt-3">
-                    <label >Last Name : </label>
-                    <input type="text" name="lname"  placeholder="Enter your last name" class="form-control" required><br>
+                    <label>Last Name: </label>
+                    <input type="text" name="lname" placeholder="Enter your last name" class="form-control" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
                 </div>
+
            
                 <div class="col-10 ms-5 mt-3 ps-3">
                     <label>Email: </label>
@@ -110,15 +112,16 @@ body{
 
                 <div class="col-10 ms-5 mt-3 ps-3">
                     <label>Phone : </label>
-                    <input type="number" name="phone" placeholder="Enter your phone number" class="form-control" required><br>
+                    <input type="tel" name="phone" placeholder="Enter your phone number" class="form-control" pattern="[0-9]{10}" title="(Please enter only 10 numbers)" required><br>
                 </div>
                 <div class="col-5 ms-5 mt-3 ps-3">
-                    <label>Gender: </label>
-                    <select name="gender" class="form-select">
-                        <option value="m">Male</option>
-                        <option value="f">Female</option>
-                    </select>
-                </div>
+                <label>Gender: </label>
+                <select name="gender" class="form-select" required>
+                    <option value="" disabled selected>Select your gender</option>
+                    <option value="m">Male</option>
+                    <option value="f">Female</option>
+                </select>
+            </div>
                 <div class="col-5 mt-3">
                     <label>Password : </label>
                     <input type="password" name="pass" placeholder="Enter your password" class="form-control" id="passwordInput"required><br>
@@ -134,12 +137,13 @@ body{
                 </div>
                 <div class="col-5 ms-5 mt-3 ps-3">
                     <label>City : </label>
-                    <input type="text" name="city" placeholder="Enter your city" class="form-control"><br>
+                    <input type="text" name="city" placeholder="Enter your city" class="form-control" pattern="[A-Za-z]+" title="(Please enter only alphabets)"><br>
                 </div>
                 <div class="col-5 mt-3">
                     <label>Pin Code : </label>
-                    <input type="number" name="pin" placeholder="Enter your pincode" class="form-control" required><br>
+                    <input type="text" name="pin" placeholder="Enter your pincode" class="form-control" pattern="[0-9]{6}" title="Please enter a 6-digit pin code" required>
                 </div>
+
                 <div class="col-3 mx-auto">
                     <br><button type="submit" class="form-control" style="background-image: linear-gradient(to left,#90EE90,#87CEFA);">Submit</button><br>
                 </div>
