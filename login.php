@@ -69,59 +69,104 @@ echo<<<_END
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <title>Login</title>
     <style>
-    body{
-        /* background-color: #f8f9fa; */
+    body {
         height: 90vh;
         align-items: center;
         justify-content: center;
-        /* background-image: linear-gradient(to left,#008080,#98FB98); */
-        background-image:url('public/img/back.jpeg');
-        border-radius:20px;
-        background-repeat:no-repeat;
-        background-size:100%;
-        width:100vw;
-        object-fit:cover;
-        background-position:center;
+        background-image: url('public/img/back.jpeg');
+        border-radius: 20px;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        width: 100vw;
+        object-fit: cover;
+        background-position: center;
+        margin: 0; /* Add to remove default body margin */
     }
-    .link-forgot{
-        text-decoration:none;
-        text-align:right;
-        padding-right:50px;
-        color:blue;
-    }
-    .butt{
-        padding-left:80px;
-    }
-    .signupbutt{
-        padding-left:20px;
-        text-decoration:none;
-        color:blue;
-    }
-    .pad{
-        padding-top:70px;
-    }
-    .logimg{
-        width:30%;
-        height:30%;
-        margin-left:auto;
-        margin-right:auto;
-    }
-    .card{
-      
-    --bs-card-bg: #0000005e;
 
+    .link-forgot {
+        text-decoration: none;
+        text-align: right;
+        padding-right: 50px;
+        color: blue;
     }
-    .container{
-        display:block;
+
+    .butt {
+        padding-left: 80px;
     }
+
+    .signupbutt {
+        padding-left: 20px;
+        text-decoration: none;
+        color: blue;
+    }
+
+    .pad {
+        padding-top: 70px;
+    }
+
+    .logimg {
+        width: 100%; /* Set width to 100% for responsiveness */
+        height: auto; /* Set height to auto for responsiveness */
+        max-width: 300px; /* Set a max-width for the image */
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .card {
+        --bs-card-bg: #0000005e;
+    }
+
+    /* Updated styles for responsiveness */
+    @media (max-width: 576px) {
+        .pad {
+            padding-top: 0;
+        }
+
+        .butt {
+            padding-left: 20px;
+        }
+        body {
+            background-size: cover; /* Adjust background size for mobile */
+            padding-bottom:0;
+        }
+        .container {
+            max-width: 100%; 
+            max-height:100%;
+        }
+    }
+    @media (min-width: 768px) and (max-width: 1024px) {
+        /* Add your styles for iPad Mini here */
+        body {
+            /* Example: Adjust background size for iPad Mini */
+            background-size: cover;
+        }
+        
+        .container {
+            /* Example: Adjust container styles for iPad Mini */
+            max-width: 500px;
+        }
+    }
+    @media (min-width: 582px) and (max-width: 763px) {
+        body {
+            /* Example: Adjust background size for screens between 582px and 763px */
+            background-size: cover;
+        }
+    
+        .container {
+            /* Example: Adjust container styles for screens between 582px and 763px */
+            max-width: 400px;
+        }
+    }
+    
 </style>
 </head>
-<body>
+<body class="img-fluid">
 <form action="login.php" method="post">
     <div class="container col-lg-5 mt-4 mx-auto pad">
         <div class="card">
             <div class="row">
-               <img src="public/img/logo1.png" class="logimg"></img>
+               <img src="public/img/logo1.png" class="logimg img-fluid"></img>
                 <div class="input-group col-4 px-5 mt-5">
                     <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z"/>
