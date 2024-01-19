@@ -146,6 +146,16 @@ include 'connection.php';
     height:1000px;
     width:250px;
 }
+.paymentcontainer{
+  width:80%;
+  display:flex;
+  justify-content:center;
+  align-items:left;
+  flex-direction:column;
+  background-color:whitesmoke;
+  margin:50px;
+  padding:20px;
+}
     </style>
 </head>
 <body>
@@ -203,30 +213,55 @@ include 'connection.php';
       <input type="text" class="form-control" id="validationDefault02" placeholder="Last name" value="Otto" required>
     </div>
     <div class="col-md-4 mb-3">
-      <label for="validationDefaultUsername">Username</label>
+      <label for="validationDefaultUsername">Email</label>
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text" id="inputGroupPrepend2">@</span>
         </div>
-        <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Username" aria-describedby="inputGroupPrepend2" required>
+        <input type="email" class="form-control" id="validationDefaultUsername" placeholder="Email" aria-describedby="inputGroupPrepend2" required>
       </div>
     </div>
   </div>
   <div class="form-row">
+  <div class="col-md-6 mb-3">
+      <label for="validationDefault03">Phpne</label>
+      <input type="number" class="form-control" id="validationDefault03" placeholder="Phone" required>
+    </div>
     <div class="col-md-6 mb-3">
       <label for="validationDefault03">City</label>
-      <input type="text" class="form-control" id="validationDefault03" placeholder="City" required>
-    </div>
+      <input class="form-control" id="disabledInput" type="text" placeholder="Ahmedabad" value="Ahmedabad" name="city" disabled>    </div>
+
     <div class="col-md-3 mb-3">
       <label for="validationDefault04">State</label>
-      <input type="text" class="form-control" id="validationDefault04" placeholder="State" required>
-    </div>
+      <input class="form-control" id="disabledInput" type="text" placeholder="Gujarat" value="Gujarat" name="state" disabled>  </div>
     <div class="col-md-3 mb-3">
       <label for="validationDefault05">Zip</label>
       <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" required>
     </div>
   </div>
-  <div class="form-group">
+  
+  <!-- <button class="btn btn-primary" type="submit">Submit form</button> -->
+
+</div>
+<div class="paymentcontainer">
+<h4>Select Payment method</h4><br>
+
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+    COD(Charges Applicable)
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+  <label class="form-check-label" for="flexRadioDefault2">
+    Online Payments
+  </label>
+</div>
+<br>
+</div>
+
+<div class="form-group">
     <div class="form-check">
       <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
       <label class="form-check-label" for="invalidCheck2">
@@ -234,9 +269,10 @@ include 'connection.php';
       </label>
     </div>
   </div>
-  <button class="btn btn-primary" type="submit">Submit form</button>
+<input type="submit" class="btn btn-primary" value="submit" style="width:200px">
 </form>
-</div>
+
+
                         </div>
                         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
