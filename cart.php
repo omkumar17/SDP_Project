@@ -8,7 +8,7 @@ if(!isset($_COOKIE['userID']))
 if(isset($_GET['crtquant'])){
     $quan=$_GET['crtquant'];
     $crtid=$_GET['crtid'];
-    $sql="UPDATE `cart_tbl` SET `p_quantity`='$quan' WHERE `cartID`= '$crtid'";
+    $sql="UPDATE cart_tbl SET p_quantity='$quan' WHERE cartID= '$crtid'";
     $res=$conn->query($sql);
 }
 ?>
@@ -169,7 +169,7 @@ if(isset($_GET['crtquant'])){
                     <!-- left side div -->
                     <div class="col-md-12 col-lg-8 col-11 mx-auto main_cart mb-lg-0 mb-5 shadow">
                     <?php
-                        $sql="SELECT * FROM `cart_tbl` WHERE user_id='$user' AND p_quantity!=0";
+                        $sql="SELECT * FROM cart_tbl WHERE user_id='$user' AND p_quantity!=0";
                         $result=$conn->query($sql);
                         $total=0.0;
                         while($row=$result->fetch_assoc())
@@ -179,7 +179,7 @@ if(isset($_GET['crtquant'])){
                             $crtprid=$row['product_id'];
                             $crtquan=$row['p_quantity'];
                             $crtcol=$row['p_color'];
-                            $crtsql="SELECT * FROM `product_desc` INNER JOIN `color` ON color.cid=product_desc.cid  INNER JOIN `image` ON image.cid=color.cid INNER JOIN `product` ON product.Product_id=color.product_id  WHERE product.Product_id='$crtprid' AND product_desc.size='$crtsize' AND color.color='$crtcol'";
+                            $crtsql="SELECT * FROM product_desc INNER JOIN color ON color.cid=product_desc.cid  INNER JOIN image ON image.cid=color.cid INNER JOIN product ON product.Product_id=color.product_id  WHERE product.Product_id='$crtprid' AND product_desc.size='$crtsize' AND color.color='$crtcol'";
                             $crtresult=$conn->query($crtsql);
                             $crtrow=$crtresult->fetch_assoc();
                             
@@ -231,7 +231,7 @@ if(isset($_GET['crtquant'])){
                                             <p><i class="fas fa-heart"></i>MOVE TO WISH LIST </p>
                                         </div>
                                         <div class="col-4 d-flex justify-content-end price_money">
-                                            <h3>$<span id="itemval<?php echo $crtsize.$crtcol;?>"><?php echo ($crtrow['price']*$crtquan); ?></span></h3>
+                                            <h3>&#8377;<span id="itemval<?php echo $crtsize.$crtcol;?>"><?php echo ($crtrow['price']*$crtquan); ?></span></h3>
                                         </div>
                                     </div>
                                 </div>
@@ -252,16 +252,16 @@ if(isset($_GET['crtquant'])){
                             <h2 class="product_name mb-5">The Total Amount Of</h2>
                             <div class="price_indiv d-flex justify-content-between">
                                 <p>Product amount</p>
-                                <p>$<span id="product_total_amt"><?php echo $total;?> </span></p>
+                                <p>&#8377;<span id="product_total_amt"><?php echo $total;?> </span></p>
                             </div>
                             <div class="price_indiv d-flex justify-content-between">
                                 <p>Shipping Charge</p>
-                                <p>$<span id="shipping_charge">50.0</span></p>
+                                <p>&#8377;<span id="shipping_charge">50.0</span></p>
                             </div>
                             <hr />
                             <div class="total-amt d-flex justify-content-between font-weight-bold">
                                 <p>The total amount of (including VAT)</p>
-                                <p>$<span id="total_cart_amt"><?php echo ($total+50.0);?></span></p>
+                                <p>&#8377;<span id="total_cart_amt"><?php echo ($total+50.0);?></span></p>
                             </div>
                             <a href="order.php"><button class="btn btn-primary text-uppercase">Checkout</button></a>
                         </div>

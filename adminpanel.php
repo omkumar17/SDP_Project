@@ -931,7 +931,6 @@ if(isset($_GET['flag'])){
                             <thead>
                                 <tr>
                                     <th>order_id</th>
-                                    <th>orderdetail_id</th>
                                     <th>user_id</th>
                                     <th>order_date</th>
                                     <th>order_status</th>
@@ -948,7 +947,6 @@ if(isset($_GET['flag'])){
                             echo <<< _END
                                 <tr>
                                     <td>{$row['order_id']}</td>
-                                    <td>{$row['orderdetail_id']}</td>
                                     <td>{$row['user_id']}</td>
                                     <td>{$row['order_date']}</td>
                                     <td>{$row['order_status']}</td>
@@ -970,8 +968,6 @@ if(isset($_GET['flag'])){
                     <form class="addcat" action="update.php" method="post">
                         <label for="" style="font-size:20px;font-weight:600">order</label>
                         <label for="oid" class="label">	Order_id</label>
-                        <input type="text" id="oid" class="input" name="order_id" >
-                        <label for="odid" class="label">OrderDesc_id</label>
                         <input type="text" id="odid" class="input" name="orderdesc_id">
                         <label for="uid" class="label">User_id</label>
                         <input type="text" id="uid" class="input" name="user_id" >
@@ -994,8 +990,6 @@ if(isset($_GET['flag'])){
                     <label for="" style="font-size:20px;font-weight:600">order</label>
                         <label for="oid" class="label">	Order_id</label>
                         <input type="text" id="oid" class="input" name="order_id" >
-                        <label for="odid" class="label">OrderDesc_id</label>
-                        <input type="text" id="odid" class="input" name="orderdesc_id">
                         <label for="uid" class="label">User_id</label>
                         <input type="text" id="uid" class="input" name="user_id" >
                         <label for="od" class="label">Order_date</label>
@@ -1021,7 +1015,7 @@ if(isset($_GET['flag'])){
                         <div class="add">Add order</div>
                     </div>
                 <?php
-                    $sql = "SELECT * FROM `order_tbl`"; 
+                    $sql = "SELECT * FROM `order_detail`"; 
                     $result = $conn->query($sql);
 
                     if ($result) {
@@ -1029,14 +1023,13 @@ if(isset($_GET['flag'])){
                         <table id="order" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>order_id</th>
                                     <th>orderdetail_id</th>
-                                    <th>user_id</th>
-                                    <th>order_date</th>
-                                    <th>order_status</th>
-                                    <th>order_amount</th>
-                                    <th>shipping_address</th>
-                                    <th>shipping_status</th>
+                                    <th>order_id</th>
+                                    <th>product_id</th>
+                                    <th>quantity</th>
+                                    <th>rate</th>
+                                    <th>discount</th>
+                                    <th>amount</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -1046,14 +1039,14 @@ if(isset($_GET['flag'])){
                         while ($row = $result->fetch_assoc()) {
                             echo <<< _END
                                 <tr>
-                                    <td>{$row['order_id']}</td>
+                                    
                                     <td>{$row['orderdetail_id']}</td>
-                                    <td>{$row['user_id']}</td>
-                                    <td>{$row['order_date']}</td>
-                                    <td>{$row['order_status']}</td>
-                                    <td>{$row['order_amount']}</td>
-                                    <td>{$row['shipping_address']}</td>
-                                    <td>{$row['shipping_status']}</td>
+                                    <td>{$row['order_id']}</td>
+                                    <td>{$row['product_id']}</td>
+                                    <td>{$row['quantity']}</td>
+                                    <td>{$row['rate']}</td>
+                                    <td>{$row['discount']}</td>
+                                    <td>{$row['amount']}</td>
                                     <td><span class="button" id="edit">Edit</span></td>
                                 </tr>
                              _END;
@@ -1068,22 +1061,20 @@ if(isset($_GET['flag'])){
                     <div class="formcontainer">
                     <form class="addcat" action="update.php" method="post">
                         <label for="" style="font-size:20px;font-weight:600">order</label>
-                        <label for="oid" class="label">	Order_id</label>
-                        <input type="text" id="oid" class="input" name="order_id" >
                         <label for="odid" class="label">OrderDesc_id</label>
                         <input type="text" id="odid" class="input" name="orderdesc_id">
-                        <label for="uid" class="label">User_id</label>
-                        <input type="text" id="uid" class="input" name="user_id" >
-                        <label for="od" class="label">Order_date</label>
-                        <input type="text" id="od" class="input" name="order_date" >
-                        <label for="os" class="label">order_status</label>
-                        <input type="text" id="os" class="input" name="order_status" >
-                        <label for="amt" class="label">order_amount</label>
-                        <input type="text" id="amt" class="input" name="order_amount" >
-                        <label for="sadd" class="label">shipping_address</label>
-                        <input type="text" id="sadd" class="input" name="shipping_address" >
-                        <label for="sstat" class="label">shipping_status</label>
-                        <input type="text" id="sstat" class="input" name="shipping_status" >
+                        <label for="oid" class="label">	Order_id</label>
+                        <input type="text" id="oid" class="input" name="order_id" >
+                        <label for="product_id" class="label">product_id</label>
+                        <input type="text" id="product_id" class="input" name="product_id" >
+                        <label for="quantity" class="label">quantity</label>
+                        <input type="text" id="quantity" class="input" name="quantity" >
+                        <label for="rate" class="label">rate</label>
+                        <input type="text" id="rate" class="input" name="rate" >
+                        <label for="discount" class="label">discount</label>
+                        <input type="text" id="discount" class="input" name="discount" >
+                        <label for="amount" class="label">amount</label>
+                        <input type="text" id="amount" class="input" name="amount" >
                         <input type="submit" class="submit" value="submit" >
                         <input type="submit" class="cancel" value="Cancel">
                     </form>
@@ -1091,22 +1082,20 @@ if(isset($_GET['flag'])){
                     <div class="addcontainer">
                     <form class="addcont" action="insert.php" method="post">
                     <label for="" style="font-size:20px;font-weight:600">order</label>
+                    <label for="odid" class="label">OrderDesc_id</label>
+                        <input type="text" id="odid" class="input" name="orderdesc_id">
                         <label for="oid" class="label">	Order_id</label>
                         <input type="text" id="oid" class="input" name="order_id" >
-                        <label for="odid" class="label">OrderDesc_id</label>
-                        <input type="text" id="odid" class="input" name="orderdesc_id">
-                        <label for="uid" class="label">User_id</label>
-                        <input type="text" id="uid" class="input" name="user_id" >
-                        <label for="od" class="label">Order_date</label>
-                        <input type="text" id="od" class="input" name="order_date" >
-                        <label for="os" class="label">order_status</label>
-                        <input type="text" id="os" class="input" name="order_status" >
-                        <label for="amt" class="label">order_amount</label>
-                        <input type="text" id="amt" class="input" name="order_amount" >
-                        <label for="sadd" class="label">shipping_address</label>
-                        <input type="text" id="sadd" class="input" name="shipping_address" >
-                        <label for="sstat" class="label">shipping_status</label>
-                        <input type="text" id="sstat" class="input" name="shipping_status" >
+                        <label for="product_id" class="label">product_id</label>
+                        <input type="text" id="product_id" class="input" name="product_id" >
+                        <label for="quantity" class="label">quantity</label>
+                        <input type="text" id="quantity" class="input" name="quantity" >
+                        <label for="rate" class="label">rate</label>
+                        <input type="text" id="rate" class="input" name="rate" >
+                        <label for="discount" class="label">discount</label>
+                        <input type="text" id="discount" class="input" name="discount" >
+                        <label for="amount" class="label">amount</label>
+                        <input type="text" id="amount" class="input" name="amount" >
                         <input type="submit" class="submita" value="submit" >
                         <input type="submit" class="cancela" value="Cancel">
                     </form>

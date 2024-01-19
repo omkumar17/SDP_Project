@@ -160,7 +160,7 @@ include 'connection.php';
 </head>
 <body>
         <div class="container"><?php
-                           $sql="SELECT * FROM `cart_tbl` WHERE user_id='$user' AND p_quantity!=0";
+                           $sql="SELECT * FROM cart_tbl WHERE user_id='$user' AND p_quantity!=0";
                            $result=$conn->query($sql);
                            $total=0.0;
                            ?>
@@ -175,7 +175,7 @@ include 'connection.php';
                                $crtprid=$row['product_id'];
                                $crtquan=$row['p_quantity'];
                                $crtcol=$row['p_color'];
-                               $crtsql="SELECT * FROM `product_desc` INNER JOIN `color` ON color.cid=product_desc.cid  INNER JOIN `image` ON image.cid=color.cid INNER JOIN `product` ON product.Product_id=color.product_id  WHERE product.Product_id='$crtprid' AND product_desc.size='$crtsize' AND color.color='$crtcol'";
+                               $crtsql="SELECT * FROM product_desc INNER JOIN color ON color.cid=product_desc.cid  INNER JOIN image ON image.cid=color.cid INNER JOIN product ON product.Product_id=color.product_id  WHERE product.Product_id='$crtprid' AND product_desc.size='$crtsize' AND color.color='$crtcol'";
                                $crtresult=$conn->query($crtsql);
                                $crtrow=$crtresult->fetch_assoc();   
                                 ?>
@@ -189,7 +189,7 @@ include 'connection.php';
                                     <span class="item-quantity">Quantity: <?php echo $crtquan;?></span>
                                 </li>
                             <?php
-                            $total=$total+($crtrow['price']*$crtquan);
+                            $total=$total+($crtrow['price']*$crtquan)+50;
                            }
                            ?>
                            <div class="shopping-cart-header">
@@ -226,6 +226,10 @@ include 'connection.php';
             <div class="col-md-6 mb-3">
               <label for="validationDefault03">Phone</label>
               <input type="number" class="form-control" id="validationDefault03" name="phone" placeholder="Phone" required>
+            </div>
+            <div class="col-md-10 mb-3">
+              <label for="validationDefault03">Shipping Address</label>
+              <textarea class="form-control" id="validationDefault03" name="addr" placeholder="Address" row="3" col="50" required></textarea>
             </div>
             <div class="col-md-6 mb-3">
               <label for="validationDefault03">City</label>
