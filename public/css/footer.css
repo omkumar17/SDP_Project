@@ -131,6 +131,10 @@ footer{
 .contact li{
     margin-bottom: 10px;
 }
+.contact li a{
+    text-decoration: none;
+    color:black;
+}
 
 /* .social:nth-child(1){
     margin-left: 0;

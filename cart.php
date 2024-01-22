@@ -24,7 +24,11 @@ if(isset($_GET['crtquant'])){
         crossorigin="anonymous" />
         <link rel="stylesheet" href="public\css\nav.css">
     <link rel="stylesheet" href="public\css\home.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
     <style>
+        
         @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300&display=swap');
 
         * {
@@ -157,6 +161,39 @@ if(isset($_GET['crtquant'])){
         .fa-heart:hover {
             color: red;
         }
+        .alttext{
+            text-align:center;
+            font-size:5vw;
+            color:teal;
+            /* height:100%; */
+            margin:20%;
+            font-weight:800;
+            line-height:90px;
+        }
+        .additem{
+            font-size:1vw;
+            line-height:30px;
+            background:teal;
+            color:white;
+            border:2px solid teal;
+            border-radius:10px;
+            padding:10px;
+            margin-top: 30px;
+            cursor:pointer;
+            text-decoration:none;
+            color:white;
+        }
+        .addbtn{
+            background:teal;
+            color:white;
+            border:2px solid teal;
+        }
+        .additem:hover,.addbtn:hover{
+            background:black;
+            border:2px solid black;
+            color:white;
+
+        }
     </style>
     <title>cart</title>
 </head>
@@ -172,6 +209,7 @@ if(isset($_GET['crtquant'])){
                         $sql="SELECT * FROM cart_tbl WHERE user_id='$user' AND p_quantity!=0";
                         $result=$conn->query($sql);
                         $total=0.0;
+                        if($result->num_rows !=0){
                         while($row=$result->fetch_assoc())
                         {
                             $crtid=$row['cartID'];
@@ -240,6 +278,13 @@ if(isset($_GET['crtquant'])){
                         <?php
                         $total=$total+($crtrow['price']*$crtquan);
                         }
+                    }
+                    else{
+                        ?>
+                        <div class="alttext">No items in cart<br><br><a href="select.php" class="additem">Add items</a></div>
+                        
+                        <?php
+                    }
                     
                         
                     ?>

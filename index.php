@@ -231,7 +231,7 @@ $result=$conn->query($sql);
                         </div>
                         <div class="product-info">
                             <h2 class="product-brand">Walkaroo</h2>
-                             <p class="product-short-des">a short line about the cloth..</p>
+                             <!-- <p class="product-short-des">a short line about the cloth..</p> -->
                              <!--<span class="price">$20</span><span class="actual-price">$40</span> -->
                         </div>
                     </div>

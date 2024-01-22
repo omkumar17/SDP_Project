@@ -139,7 +139,7 @@ if(isset($_GET['upd'])){
 
             </form>
             <div class="prod-form">
-                <form action="addcart.php" method="get">
+                <form id="myForm" action="addcart.php" method="get">
                     <br><span class="product-sub-heading">select size</span><span class="recommendation">size recommendation</span>
                     <div class="size">
                     <?php
@@ -169,8 +169,9 @@ if(isset($_GET['upd'])){
                         <input type="hidden" value="<?php echo $id;?>" name="id">
 
             <br>
-            <button class="btn cart-btn">add to cart</button>
-            <button class="btn wish-btn">add to wishlist</button>
+            <input type="submit" class="btn cart-btn" value="Add to cart">
+            <button class="btn wish-btn" onclick="changeFormAction('wishlist.php')">Add to wishlist</button>
+
             </form>
             </div>
         </div>
@@ -322,6 +323,10 @@ productImages.forEach((item, i) => { // loopinh through each image thumb
         activeImageSlide = i; // updating the image slider variable to track current thumb
     })
 })
+
+    function changeFormAction(actions) {
+        document.querySelector('#myForm').action = actions;
+    }
     </script>
        
 </body>

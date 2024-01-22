@@ -159,6 +159,9 @@ include 'connection.php';
     </style>
 </head>
 <body>
+  <?php if(isset($_COOKIE['userID']) && $user!="")
+  {
+    ?>
         <div class="container"><?php
                            $sql="SELECT * FROM cart_tbl WHERE user_id='$user' AND p_quantity!=0";
                            $result=$conn->query($sql);
@@ -193,7 +196,7 @@ include 'connection.php';
                            }
                            ?>
                            <div class="shopping-cart-header">
-                <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
+                <i class="fa fa-shopping-cart cart-icon"></i><span class="badge"><?php echo $result->num_rows;?></span>
                 <div class="shopping-cart-total">
                     <span class="lighter-text">Total:</span>
                     <span class="main-color-text"><?php echo $total;?></span>
@@ -279,6 +282,13 @@ include 'connection.php';
         <input type="submit" class="btn btn-primary" value="submit" style="width:200px">
       </form>
     </div>
+    <?php
+    }
+    else{
+      header("location:login.php");
+    }
+    ?>
+    
 
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

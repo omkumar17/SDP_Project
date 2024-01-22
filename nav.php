@@ -235,11 +235,13 @@ if(isset($_COOKIE['userID']))
                            $sql="SELECT * FROM `cart_tbl` WHERE user_id='$user' AND p_quantity!=0";
                            $result=$conn->query($sql);
                            $total=0.0;
+                           
                            ?>
                         <a class="cart" href="cart.php"><img src="public/img/cart.jpg" alt=""></a>
                 <div class="shopping-cart">
             <ul class="shopping-cart-items">
                         <?php
+                        if($result->num_rows !=0){
                            while($row=$result->fetch_assoc())
                            {
                                $crtid=$row['cartID'];
@@ -263,9 +265,15 @@ if(isset($_COOKIE['userID']))
                             <?php
                             $total=$total+($crtrow['price']*$crtquan);
                            }
+                        }
+                        else{
+                            ?>
+                            <div class="emptycart">no items in the cart</div>
+                            <?php
+                        }
                            ?>
                            <div class="shopping-cart-header">
-                <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
+                <i class="fa fa-shopping-cart cart-icon"></i><span class="badge"><?php echo $result->num_rows;?></span>
                 <div class="shopping-cart-total">
                     <span class="lighter-text">Total:</span>
                     <span class="main-color-text"><?php echo $total;?></span>
