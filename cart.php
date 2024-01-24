@@ -308,7 +308,7 @@ if(isset($_GET['crtquant'])){
                                 <p>The total amount of (including VAT)</p>
                                 <p>&#8377;<span id="total_cart_amt"><?php echo ($total+50.0);?></span></p>
                             </div>
-                            <a href="order.php"><button class="btn btn-primary text-uppercase">Checkout</button></a>
+                            <a href="order.php?ui=1"><button class="btn btn-primary text-uppercase">Checkout</button></a>
                         </div>
                         <!-- discount code part -->
                         <div class="discount_code mt-3 shadow">

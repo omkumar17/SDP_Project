@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     /* font-family: 'roboto', sans-serif; */
-    background: white;
+    /* background: white; */
     /* overflow-x: hidden; */
 }
 
@@ -775,7 +775,7 @@
         position:absolute;
         top:90px;
         /* height:100px; */
-        width:100px;
+        width:120px;
         /* background-color:blue; */
         border:1px solid teal;
         /* display:block; */

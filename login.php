@@ -25,8 +25,8 @@ if(isset($_POST['email']) && isset($_POST['password']))
     {
         $row = $result1->fetch_assoc();
         $userID = $row['userID'];
-        if($email!='admin890@gmail.com')
-        {
+        // if($email!='admin890@gmail.com')
+        // {
             setcookie('userID', $userID, time() + 3600, '/');
             echo "Welcome, User $userID!";
             $_COOKIE['userID']= $userID;
@@ -36,7 +36,7 @@ if(isset($_POST['email']) && isset($_POST['password']))
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             _END;
-        }
+        // }
        
         if($email=='admin890@gmail.com')
         {
