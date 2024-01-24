@@ -1,4 +1,7 @@
 <style>
+    .nav{
+        width:100%;
+    }
      .lighter-text {
             color: #ABB0BE;
         }
@@ -196,8 +199,8 @@ if(isset($_COOKIE['userID']))
         <div class="nav">
             <img src="public/img/logo.jpg" class="brand-logo" alt="">
             <div class="search">
-            <form action="select.php" method="get">
-                <input type="text" name="search" class="search-box" placeholder="search brand, product">
+            <form action="search.php" method="get">
+                <input type="text" name="search" class="search-box" placeholder="search brand, product" style="text-transform:none" required>
                 <button type="submit" class="search-btn">Search</button>
             </form>
                 <!-- <input type="text" name="search" class="search-box" placeholder="search brand, product">
@@ -206,26 +209,29 @@ if(isset($_COOKIE['userID']))
             <div class="right-items">
             
                 <div class="usrname">
-                    <?php
-                        if($name!="")
-                        {
-                            echo "Welcome ,$name";
-                        }
-                    ?>
+
                 </div>
                 <img class="login"  src="public/img/login.png" alt="" style="cursor:pointer">
-                        <div class="logindrop">
+                        <div class="logindrop" style="width:120px;background:white">
                             <?php
                             if(isset($_COOKIE['userID'])){
                                 ?>
-                                <a href=""><li>Profile</li></a>
-                                <a href="logout.php"><li>Logout</li></a>
+                                <a><li style="color:white;font-width:800;background:rgb(20,22,78);font-size:14px">
+                                <?php
+                                    if($name!="")
+                                    {
+                                        echo "logged in as $name";
+                                    }
+                                ?>
+                                </li></a>
+                                <a href="customerpanel.php"><li><img src="public\img\circle-user-round.png" alt="">&nbsp;&nbsp; Profile</li></a>
+                                <a href="logout.php"><li><img src="public\img\log-out-profile.png" alt="">&nbsp;&nbsp; Logout</li></a>
                                 <?php
                             }
                             else{
                                 ?>
-                                <a href="register.php"><li>Register</li></a>
-                                <a href="login.php"><li>Login</li></a>
+                                <a href="register.php"><li><img src="public\img\notebook-text.png" alt="">&nbsp;&nbsp; Register</li></a>
+                                <a href="login.php"><li><img src="public\img\log-in.png" alt="">&nbsp;&nbsp; Login</li></a>
                                 <?php
                             }
                             ?>
@@ -455,3 +461,4 @@ cart.addEventListener("mouseout",()=>{
 })
 }
         </script>
+        

@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-$servername = "localhost";
-$user = "root";
-$password = "";
-$database = "ecomm";
+include 'connection.php';
+if($user!=1){
+    header("location:login.php");
+}
+// echo $user;
 $page = 0;
 $flag = 0;
-
-$conn = new mysqli($servername, $user, $password, $database);
 $proquery="SELECT COUNT(Product_id) FROM `product`";
 $prores=$conn->query($proquery);
 $row=$prores->fetch_assoc();
@@ -379,6 +378,51 @@ if(isset($_GET['flag'])){
         font-size: 15px;
     }
 }
+.logindrop{
+    display:none;
+    position:absolute;
+    top:50px;
+    /* height:100px; */
+    width:100px;
+    background-color:white;
+    border:1px solid teal;
+    /* display:block; */
+    z-index:10;
+
+}
+.logindrop a{
+    list-style:none;
+    text-decoration:none;
+    color:teal;
+    /* margin: 2px; */
+    text-align:center;
+    /* background-color:red; */
+    border:1px solid teal;
+    /* width:100px; */
+    display:block;
+    /* padding: 1px; */
+}
+.logindrop a li{
+    padding:5px;
+}
+.visible{
+       display:block;
+        visibility:visible;    
+        opacity: 1;
+    }
+    @media only screen and (max-width:1068px){
+        .logindrop{
+            top:110px;
+        } 
+        .shopping-cart {
+            display:none;
+        }
+    }
+    @media only screen and (max-width:600px){
+        .logindrop{
+            top:70px;
+        } 
+    }
 
 </style>
 </head>
@@ -390,7 +434,18 @@ if(isset($_GET['flag'])){
             <div class="navitems amenu"><img src="public/img/menu.png" alt="" class="menuimg"></div>
             <div class="navitems admin">
                 <div class="login" onclick="logfunction()"><img src="public/img/log-out.png" alt="" class="logimg"></div>
-                <div class="subtitle">Administrator</div>
+                <div class="subtitle" >Administrator</div>
+                <div class="logindrop" style="width:120px">
+                            <?php
+                            if(isset($_COOKIE['userID'])){
+                                ?>
+                                <a href="user.html"><li><img src="public\img\circle-user-round.png" alt="">&nbsp;&nbsp; Profile</li></a>
+                                <a href="logout.php"><li><img src="public\img\log-out-profile.png" alt="">&nbsp;&nbsp; Logout</li></a>
+                                <?php
+                            }
+                            ?>
+                            
+                        </div>
             </div>
         </div>
     </section>
@@ -1666,6 +1721,9 @@ if(isset($_GET['flag'])){
         function logfunction() {
         window.location.href="logout.php";
     }
+    function profile(){
+        windows.location.href="user.html";
+    }
 
         console.log(addcontainer[0]);
         for(let k=0;k<addcontainer.length;k++){
@@ -1715,6 +1773,14 @@ if(isset($_GET['flag'])){
 
            })
         }
+        const login=document.querySelector(".subtitle");
+const loginitem=document.querySelector(".logindrop");
+
+login.onclick = function () {
+    loginitem.classList.toggle("visible");
+    // console.log("Menu button clicked");
+    // console.log("link-container class list:", menuitem.classList);
+};
     </script>
 </body>
 

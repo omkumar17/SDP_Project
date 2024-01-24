@@ -1,4 +1,8 @@
 <?php
+if(!isset($_COOKIE['userID'])){
+    header("location:login.php");
+}
+else{
 $servername = "localhost";
 $user = "root";
 $password = "";
@@ -40,5 +44,5 @@ else if(isset($_POST['product_id']))
     
 }
 
-
+}
 ?> 
