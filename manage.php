@@ -12,7 +12,11 @@ if(isset($_GET['fname']) && isset($_GET['lname']) && isset($_GET['phone']) && is
     $term=$_GET['term'];
     $addr=$_GET['addr'];
     $total=$_GET['total'];
-}   
+} 
+$pid="";
+$size="";
+$col="";
+$quan="";  
 $sql="SELECT * FROM cart_tbl WHERE user_id='$user' AND p_quantity!=0";
 $result=$conn->query($sql);
 if(isset($_GET['paymentmet'])){
@@ -37,12 +41,21 @@ if(isset($_GET['paymentmet'])){
             $tot=($quan*$price)-$dis;
             $ins="INSERT INTO order_detail(order_id, product_id, quantity, rate, discount, amount) VALUES ('$order_id','$pid','$quan','$price','$dis','$tot')";
             $rein=$conn->query($ins);
+            
         }
     }
     $sql="DELETE FROM `cart_tbl` WHERE user_id='$user'";
     $result=$conn->query($sql);
     echo "Order Placed Successfully";
-    header("Refresh:2;url=index.php");
+    // header("Refresh:2;url=index.php");
+    $insel="SELECT * FROM `product_desc` JOIN `color` ON color.cid=product_desc.cid WHERE color.product_id='$pid' AND product_desc.size='$size' AND color.color='$col'";
+    $inres=$conn->query($insel);
+    $row1=$inres->fetch_assoc();
+    $upquan=$row1['quantity'];
+    $uppid=$row1['prodesc_ID'];
+    $quanty=$upquan-$quan;
+    $sqldel="UPDATE `product_desc` SET `quantity` = `$quanty` WHERE `prodesc_ID` = '$uppid'";
+    $result=$conn->query($sqldel);
 }
 else
 {

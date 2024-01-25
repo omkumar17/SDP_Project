@@ -13,6 +13,7 @@ if(isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) &&
     $pin=$_POST['pin'];
     $city=$_POST['city'];
     
+
     
     $servername="localhost";
     $username="root";
@@ -20,9 +21,16 @@ if(isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) &&
     $database="ecomm";
 
     $conn=new mysqli($servername,$username,$password,$database);
-    $sql="SELECT * FROM `user` WHERE phone='$phone'";
+    $sql="SELECT * FROM `user` WHERE phone='$phone' OR email='$email'"; 
     $result1=$conn->query($sql);
-    if($result1->num_rows==1)
+    function hash_password($password) {
+        // Generate a hash using bcrypt
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+        return $hashed_password;
+    }
+    
+    $hashed_password = hash_password($pass);   
+    if($result1->num_rows>0)
     {
         echo<<<_END
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -30,11 +38,11 @@ if(isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) &&
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         _END;
-        header("Refresh:3;url=U4p3.html");
+        header("Refresh:3;url=login.php");
     }
     else
     {
-        $sql1="INSERT INTO `user`(`fname`,`lname`, `email`, `phone`,`gender`,`address`,`pin`,`pass`, `city`) VALUES ('$fname','$lname','$email','$phone','$gender','$add','$pin','$pass','$city')";
+        $sql1="INSERT INTO `user`(`fname`,`lname`, `email`, `phone`,`gender`,`address`,`pin`,`pass`, `city`) VALUES ('$fname','$lname','$email','$phone','$gender','$add','$pin','$hashed_password','$city')";
         $result2=$conn->query($sql1);
         if($result2)
         {
@@ -48,8 +56,7 @@ if(isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) &&
     }
    
 }
-
-         
+    
 echo<<<_END
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -85,12 +92,24 @@ body{
 .ic{
     padding-top:50px;
 }
-
-
+.validation-dropdown {
+    position: absolute;
+    margin-top: 5px;
+    background-color: #fff;
+    border: 1px solid skyblue;
+    border-radius: 4px;
+    max-height: 100px;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+  .validation-message {
+    padding: 8px;
+    color:red;
+  }
 </style>
 <body>
 
-<form action="register.php" method="post">
+<form action="register.php" method="post" onsubmit="return validateForm()">
 <div class="container col-lg-8 mt-4">
 <div class="card">
 <div class="row gx-3">
@@ -122,15 +141,16 @@ body{
                     <option value="f">Female</option>
                 </select>
             </div>
-                <div class="col-5 mt-3">
-                    <label>Password : </label>
-                    <input type="password" name="pass" placeholder="Enter your password" class="form-control" id="passwordInput"required><br>
-                </div>
-                <div class="col-1 ic">
-                    <a href="#" class="text-dark boricon" id="icon-click" onclick="togglePasswordVisibility()">
-                    <i id="eyeIcon" class="fas fa-eye"></i>
-                    </a>
-                </div>
+            <div class="col-5 mt-3 position-relative" >
+            <label>Password : </label>
+            <input type="password" name="pass" placeholder="Enter your password" class="form-control" id="passwordInput" oninput="validatePassword(this.value)" required>
+            <div id="validationDropdown" class="validation-dropdown" style="display: none;"></div>
+          </div>
+          <div class="col-1 ic">
+            <a href="#" class="text-dark boricon" id="icon-click" onclick="togglePasswordVisibility()">
+              <i id="eyeIcon" class="fas fa-eye"></i>
+            </a>
+          </div>
                 <div class="col-10 ms-5 mt-3 ps-3">
                     <label>Address : </label>
                     <input type="text" name="add" placeholder="Enter your Address" class="form-control" required><br>
@@ -169,7 +189,28 @@ function togglePasswordVisibility() {
           eyeIcon.classList.add('fa-eye');
         }
     }
-      
+    let isPasswordValid = false;
+    function validatePassword(password) {
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasNumber = /\d/.test(password);
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        let message = '';
+        
+        const validationDropdown = document.getElementById('validationDropdown');
+    
+        if (hasUpperCase && hasNumber && hasSpecialChar) {
+          validationDropdown.style.display = 'none';
+          isPasswordValid = true;
+        } else {
+            validationDropdown.innerHTML = `<div class="validation-message">Password must contain at least one uppercase letter, one number, and one special character</div>`;
+            validationDropdown.style.display = 'block';
+            isPasswordValid = false;
+        }
+      }
+      function validateForm() {
+        return isPasswordValid;
+      }
+    
 </script>
 </body>
 _END;
