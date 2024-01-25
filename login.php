@@ -8,54 +8,66 @@ $userID="";
 // }
 
 
-if(isset($_POST['email']) && isset($_POST['password']))
-{
-    $email=$_POST['email'];
-    $pass=$_POST['password'];
+if (isset($_POST['email']) && isset($_POST['password'])) {
+    $email = $_POST['email'];
+    $entered_password = $_POST['password'];
 
-    $servername="localhost";
-    $username="root";
-    $password="";
-    $database="ecomm";
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "ecomm";
 
-    $conn=new mysqli($servername,$username,$password,$database);
-    $sql="SELECT * FROM `user` WHERE email='$email' AND pass='$pass'";
-    $result1=$conn->query($sql);
-    if($result1->num_rows==1)
-    {
+    $conn = new mysqli($servername, $username, $password, $database);
+
+    $sql = "SELECT * FROM `user` WHERE email='$email'";
+    $result1 = $conn->query($sql);
+
+    if ($result1->num_rows == 1) {
         $row = $result1->fetch_assoc();
-        $userID = $row['userID'];
-        // if($email!='admin890@gmail.com')
-        // {
-            setcookie('userID', $userID, time() + 3600, '/');
-            echo "Welcome, User $userID!";
-            $_COOKIE['userID']= $userID;
+
+        $stored_hashed_password = $row['pass'];
+
+        // Verify the entered password with the stored hashed password
+        if (password_verify($entered_password, $stored_hashed_password)) {
+            // Password is correct
+            $userID = $row['userID'];
+
+            if ($email != 'admin890@gmail.com') {
+                setcookie('userID', $userID, time() + 3600, '/');
+                echo "Welcome, User $userID!";
+                $_COOKIE['userID'] = $userID;
+                echo<<<_END
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Your Login is successful
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                _END;
+            }
+
+            if ($email == 'admin890@gmail.com') {
+                header("Refresh:2;url=adminpanel.php");
+            } else {
+                header("Refresh:2;url=index.php");
+            }
+        } else {
+            // Incorrect password
+
             echo<<<_END
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Wrong Username or Password! Please try again
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            _END;
+
+        }
+    } else {
+        // User not found
+
+        echo<<<_END
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Your Login is successfull
+                <strong>Wrong Username or Password! Please try again
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            _END;
-        // }
-       
-        if($email=='admin890@gmail.com')
-        {
-            
-            header("Refresh:2;url=adminpanel.php");
-        }
-        else
-        {
-
-            header("Refresh:2;url=index.php");
-        }
-    }
-    else
-    {
-        echo<<<_END
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Wrong Username or Password! Please try again
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
         _END;
     }
 }
@@ -81,7 +93,7 @@ echo<<<_END
         width: 100vw;
         object-fit: cover;
         background-position: center;
-        margin: 0; /* Add to remove default body margin */
+        margin: 0; 
     }
 
     .link-forgot {
@@ -117,7 +129,6 @@ echo<<<_END
     .card {
         --bs-card-bg: #0000005e;
     }
-
     /* Updated styles for responsiveness */
     @media (max-width: 576px) {
         .pad {

@@ -13,7 +13,11 @@ if(isset($_GET['fname']) && isset($_GET['lname']) && isset($_GET['phone']) && is
     $term=$_GET['term'];
     $addr=$_GET['addr'];
     $total=$_GET['total'];
-  
+} 
+$pid="";
+$size="";
+$col="";
+$quan="";  
 $sql="SELECT * FROM cart_tbl WHERE user_id='$user' AND p_quantity!=0";
 $result=$conn->query($sql);
 if(isset($_GET['paymentmet'])){
@@ -38,6 +42,7 @@ if(isset($_GET['paymentmet'])){
             $tot=($quan*$price)-$dis;
             $ins="INSERT INTO order_detail(order_id, product_id, quantity, rate, discount, amount) VALUES ('$order_id','$pid','$quan','$price','$dis','$tot')";
             $rein=$conn->query($ins);
+            
         }
     }
     $sql="DELETE FROM `cart_tbl` WHERE user_id='$user'";
@@ -52,6 +57,7 @@ if(isset($_GET['paymentmet'])){
     $sql="UPDATE `product_desc` SET quantity='$orquant' WHERE prodesc_ID='$prodescid'";
     $res=$conn->query($sql);
     header("Refresh:2;url=index.php");
+
 }
 else
 {
