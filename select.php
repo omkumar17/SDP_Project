@@ -2,7 +2,7 @@
 include("prod.php");
 $product = new Product();
 $grp=$product->getGrp();
-$categories = $product->getCategories();
+$category = $product->getCategories();
 $type = $product->getType();
 $brands = $product->getBrand();
 $colors = $product->getcolor();
@@ -223,6 +223,14 @@ $totalRecords = $product->getTotalProducts();
                         <ul class="list-group">
                             <?php 
                             foreach ($grp as $key => $grp) {
+                                // if(isset($_GET['grop'])){
+                                //     if( ($_GET['grop']===$grp['grp'])){
+                                //         $grpChecked ='checked="checked"';
+                                //     }
+                                //     else{
+                                //         $grpChecked =''; 
+                                //     }
+                                // }
                                 if(isset($_POST['grp'])) {
                                     if(in_array($product->cleanString($grp['grp']),$_POST['grp'])) {
                                         $grpChecked ='checked="checked"';
@@ -242,20 +250,22 @@ $totalRecords = $product->getTotalProducts();
                                     
                                 
                                 }
-                                else{
+                                
+                                else{                                    
                                     ?>
                                     <li class="list-group-item">
                                         <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($grp['grp']); ?>" <?php echo @$grpChecked; ?> name="grp[]" class="sort_rang grp"><span class="lab"><?php echo ucfirst($grp['grp']); ?></span></label></div>
                                     </li>
                                     <?php  
+                                     }
                                 }
-                            }
+                            
                             ?>
                         </ul>
                         <div class="head">CATEGORY</div>
                         <ul class="list-group">
                         <?php 
-                        foreach ($categories as $key => $category) {
+                        foreach ($category as $key => $category) {
                             if(isset($_POST['category'])) {
                                 if(in_array($product->cleanString($category['category_id']),$_POST['category'])) {
                                     $categoryCheck ='checked="checked"';

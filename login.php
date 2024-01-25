@@ -24,6 +24,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
     if ($result1->num_rows == 1) {
         $row = $result1->fetch_assoc();
+
         $stored_hashed_password = $row['pass'];
 
         // Verify the entered password with the stored hashed password
@@ -50,15 +51,18 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             }
         } else {
             // Incorrect password
+
             echo<<<_END
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>Wrong Username or Password! Please try again
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             _END;
+
         }
     } else {
         // User not found
+
         echo<<<_END
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <strong>Wrong Username or Password! Please try again

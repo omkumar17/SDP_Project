@@ -1,5 +1,6 @@
 <?php
 include 'connection.php';
+if(isset($_COOKIE['userID']) && $user!=""){
 if(isset($_GET['fname']) && isset($_GET['lname']) && isset($_GET['phone']) && isset($_GET['email'])){
     $fname=$_GET['fname'];
     $lname=$_GET['lname'];
@@ -47,18 +48,27 @@ if(isset($_GET['paymentmet'])){
     $sql="DELETE FROM `cart_tbl` WHERE user_id='$user'";
     $result=$conn->query($sql);
     echo "Order Placed Successfully";
-    // header("Refresh:2;url=index.php");
-    $insel="SELECT * FROM `product_desc` JOIN `color` ON color.cid=product_desc.cid WHERE color.product_id='$pid' AND product_desc.size='$size' AND color.color='$col'";
-    $inres=$conn->query($insel);
-    $row1=$inres->fetch_assoc();
-    $upquan=$row1['quantity'];
-    $uppid=$row1['prodesc_ID'];
-    $quanty=$upquan-$quan;
-    $sqldel="UPDATE `product_desc` SET `quantity` = `$quanty` WHERE `prodesc_ID` = '$uppid'";
-    $result=$conn->query($sqldel);
+    $sql="SELECT * FROM `product_desc` JOIN `color` ON color.cid=product_desc.cid JOIN `product` ON product.Product_id=color.product_id WHERE product.Product_id='$pid' AND product_desc.size='$size' AND color.color='$col' ";
+    $res=$conn->query($sql);
+    $row=$res->fetch_assoc();
+    $quanty=$row['quantity'];
+    $prodescid=$row['prodesc_ID'];
+    $orquant=$quanty-$quan;
+    $sql="UPDATE `product_desc` SET quantity='$orquant' WHERE prodesc_ID='$prodescid'";
+    $res=$conn->query($sql);
+    header("Refresh:2;url=index.php");
+
 }
 else
 {
     echo "sfffffffffffffffffffffffffff";
+}
+}
+else{
+    header("Location:select.php");
+}
+}
+else{
+    header("Location:login.php");
 }
 ?>

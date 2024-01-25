@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<?php
+include 'connection.php';
+if($user=="" || $user==1){
+    header("location:login.php");
+}
+$userquery="SELECT * FROM `user` WHERE userID='$user'";
+$res=$conn->query($userquery);
+$userrow=$res->fetch_assoc();
+
+$usercart="SELECT count(cartID) AS cartcount FROM `cart_tbl` WHERE user_id='$user' AND p_quantity!=0";
+$res=$conn->query($usercart);
+$usercart=$res->fetch_assoc();
+
+$userorder="SELECT count(order_id) AS ordercount FROM `order_tbl` WHERE user_id='$user' AND order_status!='complete'";
+$res=$conn->query($userorder);
+$userorder=$res->fetch_assoc();
+
+$order="SELECT * FROM `order_tbl` WHERE user_id='$user'";
+$res=$conn->query($order);
+
+
+
+?>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="adminpanel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="public\css\home.css"> -->
+<style>
+    * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    /* font-family: 'Poppins', sans-serif; */
+}
+
+
+
+#sidebar {
+    padding: 15px 0px 15px 0px;
+    border-radius: 10px;
+}
+
+#sidebar .h4 {
+    font-weight: 500;
+    padding-left: 15px;
+}
+
+#sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0rem;
+}
+
+#sidebar ul li {
+    padding: 10px 0;
+    display: block;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-left: 5px solid transparent;
+}
+
+#sidebar ul li.active {
+    border-left: 5px solid #ff5252;
+    background-color: #44007c;
+}
+
+#sidebar ul li a {
+    display: block;
+}
+
+#sidebar ul li a .fas,
+#sidebar ul li a .far {
+    color: #ddd;
+}
+
+#sidebar ul li a .link {
+    color: #fff;
+    font-weight: 500;
+}
+
+#sidebar ul li a .link-desc {
+    font-size: 0.8rem;
+    color: #ddd;
+}
+
+#main-content {
+    padding: 30px;
+    border-radius: 15px;
+}
+
+#main-content .h5,
+#main-content .text-uppercase {
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+#main-content .h5+div {
+    font-size: 0.9rem;
+}
+
+#main-content .box {
+    padding: 10px;
+    border-radius: 6px;
+    width: 170px;
+    height: 90px;
+}
+
+#main-content .box img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+#main-content .box .tag {
+    font-size: 0.9rem;
+    color: #000;
+    font-weight: 500;
+}
+
+#main-content .box .number {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.order {
+    padding: 10px 30px;
+    min-height: 150px;
+}
+
+.order .order-summary {
+    height: 100%;
+}
+
+.order .blue-label {
+    background-color: #aeaeeb;
+    color: #0046dd;
+    font-size: 0.9rem;
+    padding: 0px 3px;
+}
+
+.order .green-label {
+    background-color: #a8e9d0;
+    color: #008357;
+    font-size: 0.9rem;
+    padding: 0px 3px;
+}
+
+.order .fs-8 {
+    font-size: 0.85rem;
+}
+
+.order .rating img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.order .rating .fas,
+.order .rating .far {
+    font-size: 0.9rem;
+}
+
+.order .rating .fas {
+    color: #daa520;
+}
+
+.order .status {
+    font-weight: 600;
+}
+
+.order .btn.btn-primary {
+    background-color: #fff;
+    color: #4e2296;
+    border: 1px solid #4e2296;
+}
+
+.order .btn.btn-primary:hover {
+    background-color: #4e2296;
+    color: #fff;
+}
+
+.order .progressbar-track {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.order .progressbar-track .progressbar {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 0rem;
+}
+
+.order .progressbar-track .progressbar li {
+    font-size: 1.5rem;
+    border: 1px solid #333;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background-color: #dddddd;
+    z-index: 100;
+    position: relative;
+}
+
+.order .progressbar-track .progressbar li.green {
+    border: 1px solid #007965;
+    background-color: #d5e6e2;
+}
+
+.order .progressbar-track .progressbar li::after {
+    position: absolute;
+    font-size: 0.9rem;
+    top: 50px;
+    left: 0px;
+}
+
+#tracker {
+    position: absolute;
+    border-top: 1px solid #bbb;
+    width: 100%;
+    top: 25px;
+}
+
+#step-1::after {
+    content: 'Placed';
+}
+
+#step-2::after {
+    content: 'Accepted';
+    left: -10px;
+}
+
+#step-3::after {
+    content: 'Packed';
+}
+
+#step-4::after {
+    content: 'Shipped';
+}
+
+#step-5::after {
+    content: 'Delivered';
+    left: -10px;
+}
+
+
+
+/* Backgrounds */
+.bg-purple {
+    background-color: #55009b;
+}
+
+.bg-light {
+    background-color: #f0ecec !important;
+}
+
+.green {
+    color: #007965 !important;
+}
+
+/* Media Queries */
+@media(max-width: 1199.5px) {
+    nav ul li {
+        padding: 0 10px;
+    }
+}
+
+@media(max-width: 500px) {
+    .order .progressbar-track .progressbar li {
+        font-size: 1rem;
+    }
+
+    .order .progressbar-track .progressbar li::after {
+        font-size: 0.8rem;
+        top: 35px;
+    }
+
+    #tracker {
+        top: 20px;
+    }
+}
+
+@media(max-width: 440px) {
+    #main-content {
+        padding: 20px;
+    }
+
+    .order {
+        padding: 20px;
+    }
+
+    #step-4::after {
+        left: -5px;
+    }
+}
+
+@media(max-width: 395px) {
+    .order .progressbar-track .progressbar li {
+        font-size: 0.8rem;
+    }
+
+    .order .progressbar-track .progressbar li::after {
+        font-size: 0.7rem;
+        top: 35px;
+    }
+
+    #tracker {
+        top: 15px;
+    }
+
+    .order .btn.btn-primary {
+        font-size: 0.85rem;
+    }
+}
+
+@media(max-width: 355px) {
+    #main-content {
+        padding: 15px;
+    }
+
+    .order {
+        padding: 10px;
+    }
+}
+</style>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+.adminnavbar{
+    height:50px;
+    width:80%;
+    margin:auto;
+    /* margin-bottom: 20px; */
+}
+.navcontainer{
+    height:100%;
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    background-color: teal;
+    color:white;
+    
+}
+.navitems{
+    height:100%;
+    padding: 5px;
+}
+.head{
+    height:100%;
+    width:auto;
+    color:white;
+    text-align: center;
+    /* margin:auto; */
+    margin-left: 10px;
+    padding-top: 10px;
+    font-weight: 600;
+    font-size: 25px;
+}
+.amenu{
+    visibility: hidden;
+    margin-left: 2%;
+}
+.menuimg{
+    height:90%;
+    padding-top: 2px;
+    cursor: pointer;
+}
+.admin{
+    display:flex;
+    flex-direction: row;
+    align-items:center ;
+    width:auto;
+    margin-right: 20px;
+    margin-left: auto;
+    /* justify-content: flex-end; */
+
+}
+.bodypage{
+    height:100%;
+    width:80%;
+    margin:auto;
+    display:flex;
+    flex-direction: row;
+}
+.bodypage .sidebar{
+    width:25%;
+    height:70%;
+    background-color: teal;
+    margin-top:20px;
+   border-radius:15px;
+
+}
+.bodypage .sidecontainer{
+    height:100%;
+    width:100%;
+    background-color: teal;
+    color:white;
+    /* padding: 20px 10px 10px 0px; */
+    /* padding-right: 10px; */
+    padding-left: 0px;
+    border-right: 2px solid black;
+    border-radius:15px;
+    padding:20px 0;
+}
+
+.bodypage .sideitem1{
+    width:calc(100%-10px);
+    height:45px;
+    /* border:2px solid white; */
+    /* text-align:center; */
+    padding:10px 0px;
+    padding-left: 10px;
+    font-size: 14px;
+    background-color: teal;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin:0px 0px 5px 0px;
+    /* overflow-x:hidden */
+}
+
+.bodypage .sideimg{
+    height:65%;
+    width:15px;
+    margin: 10px 10px 10px 0px;
+}
+.bodypage .subprod{
+    background-color:black;
+    margin: 0;
+    padding: 0;
+    padding-left: 20px;
+    font-size:13px;
+    display:none;
+}
+.bodypage .main{
+    width:75%;
+    height:93vh;
+    background-color:white;
+
+}
+.bodypage .mainpage{
+    height:100%;
+    width:100%;
+    display:none;
+
+    /* overflow-y: scroll;
+    overflow-x:scroll; */
+}
+.bodypage .heading{
+    height:55px;
+    width:85%;
+    font-size: 35px;
+    padding:  10px 20px 20px 20px;
+}
+.bodypage .mainitemcont{
+    /* height:100%; */
+    padding-left: 10px;
+    width:100%;
+    display:grid;
+    grid-template-columns:auto auto auto auto;
+}
+.bodypage .maincontent{
+    height:120px;
+    /* width:290px; */
+    /* background-color: bisque; */
+    margin: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+}
+.bodypage .subcontent{
+    width:75%;
+    height:100%;
+    color:white;
+}
+.bodypage .count{
+    width:100%;
+    height:50%;
+    padding:10px 10px 10px 20px;
+    font-size:50px;
+    font-weight: 500;
+    /* text-align: center; */
+}
+.bodypage .counttitle{
+    width:100%;
+    height:50%;
+    padding: 15px 10px 10px 20px;
+    font-size:18px;
+    font-weight: 500;
+    /* text-align: center; */
+}
+.bodypage .contimg{
+    width:25%;
+    height:100%;
+}
+.bodypage .cmcontainer{
+    padding: 0 20px 30px 20px;
+    overflow-y:scroll;
+    overflow-x:scroll;
+    height:100%;
+}
+.bodypage .cmheader{
+    height:55px;
+    /* font-size: 35px; */
+    padding:  20px 20px 60px 0px;
+    /* margin-bottom: 20px; */
+    display:flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    align-items: center;
+    border-bottom: 2px solid black;
+    
+}
+.bodypage .cmheader .heading{
+    padding-left: 0;
+}
+.add{
+    color:white;
+    background-color: rgb(29, 1, 1);
+    height:40px;
+    width:140px;
+    /* text-align: center; */
+    margin-top: 30px;
+    /* width:100px; */
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.button{
+    color:white;
+    background-color: red;
+    /* height:20px; */
+    /* width:50px; */
+    padding: 2px;
+    margin: 5px;
+    border:1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.editor{
+    display:none;
+    height:250px;
+    width:250px;
+    background-color: blue;
+    position:absolute;
+    top:0;
+    left:auto;
+    right:auto;
+}
+.formcontainer,.addcontainer,.custcontainer{
+    display:none;
+    position:absolute;
+    /* top:0; */
+    left:25%;
+    background-color: white;
+    /* height:500px;
+    width:500px; */
+    z-index: 10;
+    border: 2px solid teal;
+
+    /* box-shadow: 2px 2px 30px black; */
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    /* padding: 20px; */
+}
+.formcontainer,.addcontainer,.custcontainer{
+    display:none;
+    position:absolute;
+    top:50px;
+    background-color: white;
+    height:calc(100% - 50px);
+    width:calc(65%);
+    z-index: 10;
+    overflow-y:scroll;
+}
+.custcontainer{
+    display:block;
+    /* overflow-y:scroll; */
+    overflow-x:hidden;
+}
+.addcat,.addcont{
+
+    width:90%;
+    height:95%;
+    margin:2.5% 5%;
+   }
+   .label{
+       display:block;
+       margin: 5px 10px;
+       padding: 5px;
+   }
+   .input{
+       display:block;
+       margin: 5px 10px;
+       padding: 5px;
+       width:90%;
+   }
+   .submit,.submita{
+       display:inline-block;
+       width:80px;
+       height:40px;
+       margin: 10px;
+       color:white;
+       background:blue;
+   }
+
+   .cancel,.cancela{
+       display:inline-block;
+       width:80px;
+       height:40px;
+       margin: 10px;
+       margin-right: 10px;
+       margin-left: auto;
+       color:white;
+       background:red;
+   }
+   .cancel:hover,.submit:hover,.cancela:hover,.submita:hover{
+       background-color: teal;
+   }
+   .custdetails{
+    display:flex;
+    flex-direction:row;
+    padding: 0px 30px 0px 30px;
+   }
+   .subcustdetails{
+    width:50%;
+   }
+   .subdetail{
+    margin: 50px;
+   }
+
+@media only screen and (max-width:1347px){
+    .amenu{
+        visibility: visible;
+    }
+    .adminnavbar{
+        width:100%;
+    }
+    .bodypage{
+    height:100%;
+    width:100%;
+    margin:auto;
+    /* display:flex; */
+    /* flex-direction: row; */
+}
+    .sidebar{
+        position:absolute;
+        width:30%;
+        display:none;
+        margin: 0;
+        z-index:1;
+        height:93%;
+        border-radius:0;
+    }
+    .sview{
+        display:block;
+    }
+    .main{
+        width:100%;
+    }
+    .mainitemcont{
+        
+        grid-template-columns:auto auto auto;
+    }
+
+}
+@media only screen and (max-width:800px){
+    .mainitemcont{
+        grid-template-columns:auto auto;
+    }
+    .sidebar{
+        position:absolute;
+        width:100%;
+        /* display:none; */
+        z-index:1;
+    }
+}
+@media only screen and (max-width:500px){
+    .mainitemcont{
+        width:90vw;
+        margin-right: 5%;
+        margin-left: 5%;
+        grid-template-columns:auto;
+    }
+    .head{
+        height:100%;
+        width:auto;
+        color:white;
+        text-align: center;
+        /* margin:auto; */
+        margin-left: 10px;
+        padding-top: 10px;
+        font-weight: 600;
+        font-size: 15px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+    <section class="adminnavbar">
+        <div class="navcontainer">
+            <div class="navitems head">customer page</div>
+            <div class="navitems amenu"><img src="align-justify.png" alt="" class="menuimg"></div>
+            <div class="navitems admin">
+                <div class="login"><img src="" alt="" class="logimg"></div>&nbsp;
+                <a href="index.php" style="text-decoration:none;color:white"><div class="subtitle">Go To Home page</div></a>
+            </div>
+        </div>
+    </section>
+    <section class="bodypage">
+        <section class="sidebar">
+            <ul class="sidecontainer">
+                <li class="sideitem1 sideitem"><img src="layout-dashboard.png" alt="" class="sideimg"><span class="itemdesc">Dashboard</span></li>
+                <li class="sideitem1 sideitem"><img src="layers-3.png" alt="" class="sideimg"><span class="itemdesc">Profile</span>
+                </li>
+                <!-- <li class="sideitem1" id="prod"><img src="shopping-bag.png" alt="" class="sideimg"><span class="itemdesc">Product Management</span>
+                </li>
+                <li class="sideitem1 sideitem subprod"><img src="" alt="" class="sideimg"><span class="itemdesc">Product</span></li>
+                 <li class="sideitem1 sideitem subprod"><img src="" alt="" class="sideimg"><span class="itemdesc">Product description</span></li> 
+                 <li class="sideitem1 sideitem subprod"><img src="" alt="" class="sideimg"><span class="itemdesc">Image</span></li>  -->
+
+                <li class="sideitem1 sideitem"><img src="book-check.png" alt="" class="sideimg"><span class="itemdesc">Order</span>
+                </li>
+                <li class="sideitem1 sideitem"><img src="file-question.png" alt="" class="sideimg"><span class="itemdesc">Feedback</span></li>
+                <li class="sideitem1 sideitem"><img src="thumbs-up.png" alt="" class="sideimg"><span class="itemdesc">wishlist</span></li>
+                <li class="sideitem1 sideitem"><img src="badge-percent.png" alt="" class="sideimg"><span class="itemdesc">Offer</span></li>
+                <li class="sideitem1 sideitem"><img src="paym.png" alt="" class="sideimg"><span class="itemdesc">Payment</span></li>
+                <!-- <li class="sideitem1 sideitem"><img src="" alt="" class="sideimg"><span class="itemdesc"></span></li>
+            <li class="sideitem1 sideitem"><img src="" alt="" class="sideimg"><span class="itemdesc"></span></li>
+            <li class="sideitem1 sideitem"><img src="" alt="" class="sideimg"><span class="itemdesc"></span></li> -->
+            </ul>
+        </section>
+        <section class="main">
+            <div class="mainpage" id="dbpage">
+                
+                <div class="mainitemcont">
+                <div class="col-lg-20 my-lg-0 my-1">
+                <div id="main-content" class="bg-white border">
+                    <div class="d-flex flex-column">
+                        <div class="h3" style="text-transform:capitalize;font-weight:500"><?php echo $userrow['fname'];?></div>
+                        <div>Logged in as: <?php echo $userrow['email'];?></div>
+                    </div>
+                    <div class="d-flex my-4 flex-wrap">
+                        <div class="box me-4 my-1 bg-light">
+                            <img src="https://www.freepnglogos.com/uploads/box-png/cardboard-box-brown-vector-graphic-pixabay-2.png"
+                                alt="">
+                            <div class="d-flex align-items-center mt-2">
+                                <div class="tag">Orders placed</div>
+                                <div class="ms-auto number"><?php echo $userorder['ordercount'];?></div>
+                            </div>
+                        </div>
+                        <div class="box me-4 my-1 bg-light">
+                            <img src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-campus-recreation-university-nebraska-lincoln-30.png"
+                                alt="">
+                            <div class="d-flex align-items-center mt-2">
+                                <div class="tag">Items in Cart</div>
+                                <div class="ms-auto number"><?php echo $usercart['cartcount'];?></div>
+                            </div>
+                        </div>
+                        <div class="box me-4 my-1 bg-light">
+                            <img src="https://www.freepnglogos.com/uploads/love-png/love-png-heart-symbol-wikipedia-11.png"
+                                alt="">
+                            <div class="d-flex align-items-center mt-2">
+                                <div class="tag">Wishlist</div>
+                                <div class="ms-auto number">10</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-uppercase">My recent orders</div>
+                    <?php
+                            while($orderrow=$res->fetch_assoc()){
+                                ?>
+                    <div class="order my-3 bg-light">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="d-flex flex-column justify-content-between order-summary">
+                                    <div class="d-flex align-items-center">
+                                        <div class="text-uppercase">Order #<?php echo $orderrow['order_id'];?></div>
+                                        <div class="blue-label ms-auto text-uppercase">paid</div>
+                                    </div>
+                                    <div class="fs-8">Products #03</div>
+                                    <div class="fs-8"><?php echo $orderrow['order_date'];?></div>
+                                    <div class="rating d-flex align-items-center pt-1">
+                                        <img src="https://www.freepnglogos.com/uploads/like-png/like-png-hand-thumb-sign-vector-graphic-pixabay-39.png"
+                                            alt=""><span class="px-2">Rating:</span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="far fa-star"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="d-sm-flex align-items-sm-start justify-content-sm-between">
+                                    <div class="status">Status : <?php echo $orderrow['order_status'];?></div>
+                                    <div class="btn btn-primary text-uppercase">order info</div>
+                                </div>
+                                <div class="progressbar-track">
+                                    <ul class="progressbar">
+                                        <li id="step-1" class="text-muted green">
+                                            <span class="fas fa-gift"></span>
+                                        </li>
+                                        <li id="step-2" class="text-muted green">
+                                            <span class="fas fa-check"></span>
+                                        </li>
+                                        <li id="step-3" class="text-muted green">
+                                            <span class="fas fa-box"></span>
+                                        </li>
+                                        <li id="step-4" class="text-muted green">
+                                            <span class="fas fa-truck"></span>
+                                        </li>
+                                        <li id="step-5" class="text-muted green">
+                                            <span class="fas fa-box-open"></span>
+                                        </li>
+                                    </ul>
+                                    <div id="tracker"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+
+                            }
+                            ?>
+                    <!-- <div class="order my-3 bg-light">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="d-flex flex-column justify-content-between order-summary">
+                                    <div class="d-flex align-items-center">
+                                        <div class="text-uppercase">Order #fur10001</div>
+                                        <div class="green-label ms-auto text-uppercase">cod</div>
+                                    </div>
+                                    <div class="fs-8">Products #03</div>
+                                    <div class="fs-8">22 August, 2020 | 12:05 PM</div>
+                                    <div class="rating d-flex align-items-center pt-1">
+                                        <img src="https://www.freepnglogos.com/uploads/like-png/like-png-hand-thumb-sign-vector-graphic-pixabay-39.png"
+                                            alt=""><span class="px-2">Rating:</span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="far fa-star"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="d-sm-flex align-items-sm-start justify-content-sm-between">
+                                    <div class="status">Status : Delivered</div>
+                                    <div class="btn btn-primary text-uppercase">order info</div>
+                                </div>
+                                <div class="progressbar-track">
+                                    <ul class="progressbar">
+                                        <li id="step-1" class="text-muted green">
+                                            <span class="fas fa-gift"></span>
+                                        </li>
+                                        <li id="step-2" class="text-muted">
+                                            <span class="fas fa-check"></span>
+                                        </li>
+                                        <li id="step-3" class="text-muted">
+                                            <span class="fas fa-box"></span>
+                                        </li>
+                                        <li id="step-4" class="text-muted">
+                                            <span class="fas fa-truck"></span>
+                                        </li>
+                                        <li id="step-5" class="text-muted">
+                                            <span class="fas fa-box-open"></span>
+                                        </li>
+                                    </ul>
+                                    <div id="tracker"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+                </div>
+            </div>
+            <div class="mainpage" id="profilepage">
+                <div class="cmcontainer"> 
+                <div class="cmheader">
+                        <div class="heading">profile</div>
+                        <div class="add">Edit profile</div>
+                    </div> 
+                    
+                    <?php
+                    $n=3;
+                    $sql = "SELECT * FROM `user` WHERE `userID`='$user'"; 
+                    $result = $conn->query($sql);
+                    $row = $result->fetch_assoc();
+                    // console.log($row);
+                    if ($result) {
+                        echo <<< _END
+                        <div class="custdetails">
+                        <div class="subcustdetails">
+                        <p class="subdetail">
+                            <h5 class="detailheading">First Name</h5>
+                            <h6 class="detailcontent">{$row['fname']}</h6>
+                        </p>
+                        <p class="subdetail">
+                            <h5 class="detailheading">Last Name</h5>
+                            <h6 class="detailcontent">{$row['lname']}</h6>
+                        </p>
+                        <p class="subdetail">
+                            <h5 class="detailheading">Email</h5>
+                            <h6 class="detailcontent">{$row['email']}</h6>
+                        </p>
+                        <p class="subdetail">
+                            <h5 class="detailheading">Phone</h5>
+                            <h6 class="detailcontent">{$row['phone']}</h6>
+                        </p>
+                        </div>
+                        <div class="subcustdetails">
+                        <p class="subdetail">
+                            <h5 class="detailheading">Gender(m/f)</h5>
+                            <h6 class="detailcontent">{$row['gender']}</h6>
+                        </p>
+                        <p class="subdetail">
+                            <h5 class="detailheading">Address</h5>
+                            <h6 class="detailcontent">{$row['address']}</h6>
+                        </p>
+                        <p class="subdetail">
+                            <h4 class="detailheading">Pin Code</h4>
+                            <h6 class="detailcontent">{$row['pin']}</h6>
+                        </p>
+                        <p class="subdetail">
+                            <h5 class="detailheading">City</h5>
+                            <h6 class="detailcontent">{$row['city']}</h6>
+                        </p>
+                        </div>
+                    </div>
+                    <div class="addcontainer">
+                    <form class="addcat" action="" method="get">
+                        <label for="" style="font-size:20px;font-weight:600">User Details</label>
+                        <label for="fname" class="label">First name</label>
+                        <input type="text" id="fname" class="input" name="fname" value="{$row['fname']}">
+                        <label for="lname" class="label">Last Name</label>
+                        <input type="text" id="lname" class="input" name="lname" value="{$row['lname']}">
+                        <label for="email" class="label">Email</label>
+                        <input type="text" id="email" class="input" name="email" value="{$row['email']}">
+                        <label for="phone" class="label">Phone</label>
+                        <input type="text" id="phone" class="input" name="phone" value="{$row['phone']}">
+                        <label for="gender" class="label">Gender</label>
+                        <input type="text" id="gender" class="input" name="gender" value="{$row['gender']}">
+                        <label for="address" class="label">Address</label>
+                        <textarea type="text" rows="5" cols="30" id="address" class="input" name="address" ">{$row['address']}</textarea>
+                        <label for="pin" class="label">Pin</label>
+                        <input type="text" id="pin" class="input" name="pin" value="{$row['pin']}">
+                        <label for="city" class="label">City</label>
+                        <input type="text" id="gender" class="input" name="city" value="{$row['city']}">
+                        <input type="submit" class="submit" value="submit" >
+                        <input type="submit" class="cancel" value="Cancel">
+                    </form>
+                    </div> 
+                    _END;
+                    }
+                    ?>               
+                </div>
+            </div>
+            <div class="mainpage" id="pmpage">
+            <div class="cmcontainer">
+            <div class="cmheader">
+                        <div class="heading">Payment</div>
+                        <div class="add">Add payment</div>
+                    </div> 
+            </div>
+            </div>
+            
+            <!-- <div class="mainpage" id="pmpage">
+            <div class="cmcontainer">
+            <div class="cmheader">
+                        <div class="heading">Payment</div>
+                        <div class="add">Add payment</div>
+                    </div> 
+                    
+            </div>
+            </div>
+            <div class="mainpage" id="pmpage">
+            <div class="cmcontainer">
+            <div class="cmheader">
+                        <div class="heading">Payment</div>
+                        <div class="add">Add payment</div>
+                    </div>  
+                    
+            </div>
+            </div>
+            <div class="mainpage" id="ompage">
+            <div class="cmcontainer">
+            <div class="cmheader">
+                        <div class="heading">Payment</div>
+                        <div class="add">Add payment</div>
+                    </div>  
+            </div>
+            </div> -->
+            <div class="mainpage" id="feedpage">
+            <div class="cmcontainer">
+            <div class="cmheader">
+                        <div class="heading">Payment</div>
+                        <div class="add">Add payment</div>
+                    </div>  
+            </div>
+            </div>
+            
+            <div class="mainpage" id="subpage"></div>
+            <div class="mainpage" id="ofpage">
+            <div class="cmcontainer">
+            <div class="cmheader">
+                        <div class="heading">Payment</div>
+                        <div class="add">Add payment</div>
+                    </div>
+            </div>
+            </div>
+            <div class="mainpage" id="paypage">
+            <div class="cmcontainer">
+                    <div class="cmheader">
+                        <div class="heading">Payment</div>
+                        <div class="add">Add payment</div>
+                    </div>
+                <?php
+                    $sql = "SELECT * FROM `payment`"; 
+                    $result = $conn->query($sql);
+
+                    if ($result) {
+                        echo <<< _END
+                        <table id="offer" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>transaction_id</th>
+                                    <th>order_id</th>
+                                    <th>payment_mode</th>
+                                    <th>payment_date</th>
+                                    <th>payment_status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        _END;
+
+                        while ($row = $result->fetch_assoc()) {
+                            echo <<< _END
+                                <tr>
+                                    <td>{$row['transaction_id']}</td>
+                                    <td>{$row['order_id']}</td>
+                                    <td>{$row['payment_mode']}</td>
+                                    <td>{$row['payment_date']}</td>
+                                    <td>{$row['payment_status']}</td>
+                                    <td><span class="button" id="edit">Edit</span></td>
+                                </tr>
+                             _END;
+                        }
+
+                        echo <<< _END
+                            </tbody>
+                        </table>
+                    _END;
+                    }
+                    ?>
+            </div>
+            </div>
+        </section>
+    </section>
+    
+    <script src="adminpanel.js" type="text/javascript"></script>
+    <script>
+        var title = document.querySelectorAll(".sideitem");
+        var subtitle = document.querySelectorAll(".mainpage");
+        var menu = document.querySelector(".amenu");
+        var sidebar = document.querySelector(".sidebar");
+        var prod=document.querySelector("#prod");
+        menu.addEventListener("click", () => {
+            sidebar.classList.toggle("sview");
+        })
+
+        subtitle[0].style.display = "block";
+        title[0].style.background = "grey";
+        for (let i = 0; i < title.length; i++) {
+            // prod.addEventListener("click",()=>{
+            //     prod.style.margin="0px";
+            // title[2].style.display="block";
+            // title[3].style.display="block";
+            // title[2].style.background="seagreen";
+            // title[4].style.display="block";
+            // title[4].style.background="seagreen";
+            // title[3].style.background="seagreen";
+            // })
+            title[i].addEventListener("click", () => {
+                
+                for (let j = 0; j < subtitle.length; j++) {
+                    subtitle[j].style.display = "none";
+                    title[j].style.background = "teal";
+                }
+            //     if(i==2 || i==3 || i==4){
+            //         title[2].style.background="seagreen";
+            // title[3].style.background="seagreen";
+            // title[4].style.background="seagreen";
+            //     }
+                title[i].style.background = "grey";
+                subtitle[i].style.display = "block";
+                // if(i==2){
+                //     title[2].style.margin="0px";
+                //     title[3].style.display="block";
+                //     title[3].style.background="grey";
+                //     title[4].style.display="block";
+                //     title[4].style.background="black";
+                // }
+                // if(i==3){
+                //     title[3].style.display="block";
+                //     title[3].style.background="grey";
+                //     // title[4].style.display="block";
+                //     title[4].style.background="black";
+                // }
+                // if(i==4){
+                //     title[4].style.display="block";
+                //     title[4].style.background="grey";
+                //     title[3].style.background="black";
+                // }
+                // if(i!=2 && i!=3 && i!=4){
+                //     prod.style.margin="0px 0px 5px 0px";
+                //     title[2].style.display="none";
+                //     title[3].style.display="none";
+                //     title[4].style.display="none";
+                // }
+            });
+        }
+        // new DataTable('#example');
+        // new DataTable('#product');
+        // new DataTable('#order');
+        new DataTable('.table');
+        var formcontainer=document.querySelectorAll(".formcontainer");
+        var addcontainer=document.querySelectorAll(".addcontainer");
+        var edit=document.querySelectorAll(".edit");
+        // var form=document.querySelector(".addcat");
+        var cancel=document.querySelectorAll(".cancel");
+        var submit=document.querySelectorAll(".submit");
+        var cancela=document.querySelectorAll(".cancela");
+        var submita=document.querySelectorAll(".submita")
+        var add=document.querySelectorAll(".add");
+
+        // console.log(addcontainer[0]);
+        for(let k=0;k<addcontainer.length;k++){
+            console.log(k);
+            add[k].addEventListener("click",()=>{
+            addcontainer[k].style.display="block";
+             })
+            submit[k].addEventListener("click",()=>{
+            addcontainer[k].style.display = "none";
+             })
+            cancel[k].addEventListener("click", (event) => {
+            event.preventDefault();
+            // box.childNodes[6].reset();
+            addcontainer[k].style.display="none";
+            });
+         }
+        for(let i=0;i<edit.length;i++){
+            edit[i].addEventListener("click",(e)=>{
+                // e.preventDefault();
+                
+                var len=e.currentTarget.parentNode.parentNode.getElementsByTagName('td').length;
+                console.log(len);
+                var arr = new Array(len-1);
+                for(var j=0;j<len-1;j++){
+                
+                
+                
+                var box=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[j].parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+                console.log(box);
+                box.childNodes[5].style.display="block";
+                for(var k=0;k<cancel.length;k++){
+                    submit[k].addEventListener("click",()=>{
+                        box.childNode[5].style.display = "none";
+                     })
+                    cancel[k].addEventListener("click", (event) => {
+                        event.preventDefault();
+                        // box.childNodes[6].reset();
+                        box.childNodes[5].style.display="none";
+                    });
+                }
+                // console.log(box.childNodes[5]);
+                arr[j]=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[j].textContent;
+                console.log(arr[j]);
+                box.querySelectorAll(".input")[j].value=arr[j];
+            }
+
+           })
+        }
+       
+            
+
+        // form.addEventListener("submit", (event) => {
+        // // event.preventDefault();
+        
+    // });
+//     for(var i=0;i<cancel.length;i++){
+//     cancel[i].addEventListener("click", (event) => {
+//         event.preventDefault();
+//         form.reset();
+//         formcontainer[i].style.display = "none";
+//     });
+// }
+    </script>
+    
+</body>
+
+</html>

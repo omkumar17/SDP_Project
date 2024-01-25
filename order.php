@@ -159,7 +159,7 @@ include 'connection.php';
     </style>
 </head>
 <body>
-  <?php if(isset($_COOKIE['userID']) && $user!="")
+  <?php if(isset($_COOKIE['userID']) && $user!="" && isset($_GET['ui']))
   {
     ?>
         <div class="container"><?php

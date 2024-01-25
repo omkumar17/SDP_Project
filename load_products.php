@@ -1,6 +1,11 @@
 <?php include("prod.php");
 $product = new Product();
-$products = $product->getProducts();
+if(isset($_GET['grop'])){
+	$products = $product->getSearch();
+}
+else{
+	$products = $product->getProducts();
+}
 $productData = array(
 	"products" => $products
 );

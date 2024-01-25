@@ -4,6 +4,9 @@ if (isset($_SESSION['email']) && isset($_SESSION['otp'])) {
     $email = $_SESSION['email'];
     $otp = $_SESSION['otp'];
 }
+else{
+    header("location:login.php");
+}
 
 $to_email = $email;
 $subject = "Simple email test via php";
