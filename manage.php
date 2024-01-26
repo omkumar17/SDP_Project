@@ -40,7 +40,7 @@ if(isset($_GET['paymentmet'])){
             $row=$resjoi->fetch_assoc();
             $price=$row['price'];
             $tot=($quan*$price)-$dis;
-            $ins="INSERT INTO order_detail(order_id, product_id, quantity, rate, discount, amount) VALUES ('$order_id','$pid','$quan','$price','$dis','$tot')";
+            $ins="INSERT INTO order_detail(order_id, product_id, size, color ,quantity, rate, discount, amount) VALUES ('$order_id','$pid','$size','$col','$quan','$price','$dis','$tot')";
             $rein=$conn->query($ins);
             
         }
