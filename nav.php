@@ -1,5 +1,5 @@
 <style>
-    .nav{
+.nav{
         width:100%;
     }
      .lighter-text {
@@ -188,7 +188,7 @@ if(isset($_COOKIE['userID']))
         <div class="notice-slider">
             <div class="notice-container">
                 <div class="notice-parent">
-                    <div class="notice-content"><p>Get 50% off on your first order</p></div>
+                    <div class="notice-content"><p>Get 10% instant off on prepaid orders above ₹5999 or 5% instant off on prepaid orders below ₹5999</p></div>
                     <div class="notice-content"><p>Shop great brands at an even better price</p></div>
                     <div class="notice-content"><p>Receive a free gift with purchase</p></div>
                     <div class="notice-content"><p>Great Freedom Festival | Live noe</p></div>
@@ -199,8 +199,8 @@ if(isset($_COOKIE['userID']))
         <div class="nav">
             <img src="public/img/logo.jpg" class="brand-logo" alt="">
             <div class="search">
-            <form action="search.php" method="get">
-                <input type="text" name="search" class="search-box" placeholder="search brand, product" style="text-transform:none" required>
+            <form action="select.php" method="get">
+                <input type="text" name="search" class="search-box" placeholder="search brand, product">
                 <button type="submit" class="search-btn">Search</button>
             </form>
                 <!-- <input type="text" name="search" class="search-box" placeholder="search brand, product">
@@ -209,29 +209,26 @@ if(isset($_COOKIE['userID']))
             <div class="right-items">
             
                 <div class="usrname">
-
+                    <?php
+                        if($name!="")
+                        {
+                            echo "Welcome ,$name";
+                        }
+                    ?>
                 </div>
                 <img class="login"  src="public/img/login.png" alt="" style="cursor:pointer">
-                        <div class="logindrop" style="width:120px;background:white">
+                        <div class="logindrop">
                             <?php
                             if(isset($_COOKIE['userID'])){
                                 ?>
-                                <a><li style="color:white;font-width:800;background:rgb(20,22,78);font-size:14px">
-                                <?php
-                                    if($name!="")
-                                    {
-                                        echo "logged in as $name";
-                                    }
-                                ?>
-                                </li></a>
-                                <a href="customerpanel.php"><li><img src="public\img\circle-user-round.png" alt="">&nbsp;&nbsp; Profile</li></a>
-                                <a href="logout.php"><li><img src="public\img\log-out-profile.png" alt="">&nbsp;&nbsp; Logout</li></a>
+                                <a href=""><li>Profile</li></a>
+                                <a href="logout.php"><li>Logout</li></a>
                                 <?php
                             }
                             else{
                                 ?>
-                                <a href="register.php"><li><img src="public\img\notebook-text.png" alt="">&nbsp;&nbsp; Register</li></a>
-                                <a href="login.php"><li><img src="public\img\log-in.png" alt="">&nbsp;&nbsp; Login</li></a>
+                                <a href="register.php"><li>Register</li></a>
+                                <a href="login.php"><li>Login</li></a>
                                 <?php
                             }
                             ?>
@@ -461,4 +458,3 @@ cart.addEventListener("mouseout",()=>{
 })
 }
         </script>
-        

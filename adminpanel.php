@@ -2,9 +2,9 @@
 <html lang="en">
 <?php
 include 'connection.php';
-if($user!=1){
-    header("location:login.php");
-}
+// if($user!=1){
+//     header("location:login.php");
+// }
 // echo $user;
 $page = 0;
 $flag = 0;
@@ -25,7 +25,7 @@ if(isset($_GET['flag'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin Panel</title>
     <link rel="stylesheet" href="adminpanel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
