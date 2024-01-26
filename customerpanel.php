@@ -141,32 +141,7 @@ $res=$conn->query($order);
     padding: 10px 30px;
     min-height: 150px;
 }
-.ordercard{
-    height:auto;
-    width:300px;
-    border:2px solid black;
-    margin:20px;
-    
-    background:whitesmoke;
-    border-radius:10px;
-    display:flex;
-    flex-direction:row;
-    cursor:pointer
-    /* justify-content:center; */
 
-}
-.ordercard .cardcontainer{
-    width:80%;
-    padding:20px;
-}
-.orderbox{
-    width:20%;
-    text-align:center;
-    padding:30px 30px 30px 30px;
-    font-size:38px;
-    background:teal;
-    color:white;
-}
 .order .order-summary {
     height: 100%;
 }
@@ -251,7 +226,7 @@ $res=$conn->query($order);
 .order .progressbar-track .progressbar li::after {
     position: absolute;
     font-size: 0.9rem;
-    top: 20px;
+    top: 50px;
     left: 0px;
 }
 
@@ -307,21 +282,13 @@ $res=$conn->query($order);
 }
 
 @media(max-width: 500px) {
-    .progressbar{
-        width:10px;
-    }
     .order .progressbar-track .progressbar li {
         font-size: 1rem;
-        margin:5px;
     }
 
     .order .progressbar-track .progressbar li::after {
         font-size: 0.8rem;
-        top: -1px;
-        left:30px;
-    }
-    #step-2::after,#step-5::after{
-        left:30px;
+        top: 35px;
     }
 
     #tracker {
@@ -339,7 +306,7 @@ $res=$conn->query($order);
     }
 
     #step-4::after {
-        /* left: -5px; */
+        left: -5px;
     }
 }
 
@@ -350,7 +317,7 @@ $res=$conn->query($order);
 
     .order .progressbar-track .progressbar li::after {
         font-size: 0.7rem;
-        top: -1px;
+        top: 35px;
     }
 
     #tracker {
@@ -435,7 +402,7 @@ $res=$conn->query($order);
     display:flex;
     flex-direction: row;
 }
- .sidebar{
+.bodypage .sidebar{
     width:25%;
     height:70%;
     background-color: teal;
@@ -510,7 +477,7 @@ $res=$conn->query($order);
     padding-left: 10px;
     width:100%;
     display:grid;
-    /* grid-template-columns:auto auto auto auto; */
+    grid-template-columns:auto auto auto auto;
 }
 .bodypage .maincontent{
     height:120px;
@@ -633,13 +600,6 @@ $res=$conn->query($order);
     /* overflow-y:scroll; */
     overflow-x:hidden;
 }
-.orderdetail{
-    display:none;
-}
-.visible{
-    display:block;
-}
-
 .addcat,.addcont{
 
     width:90%;
@@ -690,17 +650,6 @@ $res=$conn->query($order);
    .subdetail{
     margin: 50px;
    }
-   .detailtable tr td{
-    height:80px;
-    max-height:80px;
-    overflow:hidden;
-   }
-   .detailtable tr th{
-    padding:10px;
-   }
-   .detailtable tr td{
-    padding: 10px;
-   }
 
 @media only screen and (max-width:1347px){
     .amenu{
@@ -728,37 +677,32 @@ $res=$conn->query($order);
     .sview{
         display:block;
     }
-    .bodypage .main{
-        width:80%;
-        margin:auto;
+    .main{
+        width:100%;
     }
     .mainitemcont{
-        display:block;
-        /* grid-template-columns:auto auto auto; */
+        
+        grid-template-columns:auto auto auto;
     }
 
 }
 @media only screen and (max-width:800px){
     .mainitemcont{
-        /* grid-template-columns:auto auto; */
+        grid-template-columns:auto auto;
     }
     .sidebar{
         position:absolute;
-        width:200px;
+        width:100%;
         /* display:none; */
         z-index:1;
     }
 }
 @media only screen and (max-width:500px){
-    .bodypage .main{
-        width:100%;
-        margin:auto;
-    }
     .mainitemcont{
-        width:100%;
-        /* margin-right: 5%; */
-        /* margin-left: 5%; */
-        /* grid-template-columns:auto; */
+        width:90vw;
+        margin-right: 5%;
+        margin-left: 5%;
+        grid-template-columns:auto;
     }
     .head{
         height:100%;
@@ -770,10 +714,6 @@ $res=$conn->query($order);
         padding-top: 10px;
         font-weight: 600;
         font-size: 15px;
-    }
-    .progressbar{
-        display:flex;
-        flex-direction:column;
     }
 }
 
@@ -834,7 +774,7 @@ $res=$conn->query($order);
                                 <div class="ms-auto number"><?php echo $userorder['ordercount'];?></div>
                             </div>
                         </div>
-                        <div class="box me-4 my-1 bg-light" style="cursor:pointer" onclick="redirect()">
+                        <div class="box me-4 my-1 bg-light">
                             <img src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-campus-recreation-university-nebraska-lincoln-30.png"
                                 alt="">
                             <div class="d-flex align-items-center mt-2">
@@ -854,8 +794,6 @@ $res=$conn->query($order);
                     <div class="text-uppercase">My recent orders</div>
                     <?php
                             while($orderrow=$res->fetch_assoc()){
-                                    $oid=$orderrow['order_id'];
-                                    
                                 ?>
                     <div class="order my-3 bg-light">
                         <div class="row">
@@ -881,7 +819,7 @@ $res=$conn->query($order);
                             <div class="col-lg-8">
                                 <div class="d-sm-flex align-items-sm-start justify-content-sm-between">
                                     <div class="status">Status : <?php echo $orderrow['order_status'];?></div>
-                                    <div class="btn btn-primary text-uppercase order-info">order info</div>
+                                    <div class="btn btn-primary text-uppercase">order info</div>
                                 </div>
                                 <div class="progressbar-track">
                                     <ul class="progressbar">
@@ -906,89 +844,59 @@ $res=$conn->query($order);
                             </div>
                         </div>
                     </div>
-                    <div class="orderdetail">
-                        <table class="detailtable">
-                            <tr style="border-bottom:1px solid black">
-                                <th>
-                                    Image
-                                </th>
-                                <th>
-                                    product detail
-                                </th>
-                                <th>
-                                    product id
-                                </th>
-                                <th>
-                                    size
-                                </th>
-                                <th>
-                                    color
-                                </th>
-                                <th>
-                                    product quantity
-                                </th>
-                                <th>
-                                    product price
-                                </th>
-                                <th>
-                                    discount
-                                </th>
-                                <th>
-                                    amount
-                                </th>
-                            </tr>
-                            <?php
-                    $ordet="SELECT * FROM `order_detail` WHERE order_id='$oid'";
-                    $detres=$conn->query($ordet);
-                    
-                    while($ordrow=$detres->fetch_assoc()){
-                        $pid=$ordrow['product_id'];
-                        $col=$ordrow['color'];
-                        echo $col;
-                        echo $pid;
-                        $img="SELECT image.Image_path1,product.product_details FROM `image` JOIN color ON image.cid=color.cid JOIN product ON product.Product_id=color.product_id WHERE product.Product_id='$pid' AND color.color='$col'";
-                        $resimg=$conn->query($img);
-                        $imgrow=$resimg->fetch_assoc();
-                        ?>
-                        <tr style="border-bottom:1px solid black">
-                            <td>
-                                <img src="<?php echo $imgrow['Image_path1'];?>" alt="" style="width:60px;height:60px">
-                            </td>
-                            <td>
-                                <div style="height:90px"><?php echo $imgrow['product_details'];?></div>
-                            </td>
-                            <td>
-                                <?php echo $ordrow['product_id'];?>
-                            </td>
-                            <td>
-                                <?php echo $ordrow['size'];?>
-                            </td>
-                            <td>
-                                <?php echo $ordrow['color'];?>
-                            </td>
-                            <td>
-                                <?php echo $ordrow['quantity'];?>
-                            </td>
-                            <td>
-                                <?php echo $ordrow['rate'];?>
-                            </td>
-                            <td>
-                                <?php echo $ordrow['discount'];?>
-                            </td>
-                            <td>
-                                <?php echo $ordrow['amount'];?>
-                            </td>
-                        </tr>
-                        
-                        <?php
-                    }
-                    ?>
-                            
-                        </table>
-                    </div>
                     <?php
+
                             }
                             ?>
+                    <!-- <div class="order my-3 bg-light">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="d-flex flex-column justify-content-between order-summary">
+                                    <div class="d-flex align-items-center">
+                                        <div class="text-uppercase">Order #fur10001</div>
+                                        <div class="green-label ms-auto text-uppercase">cod</div>
+                                    </div>
+                                    <div class="fs-8">Products #03</div>
+                                    <div class="fs-8">22 August, 2020 | 12:05 PM</div>
+                                    <div class="rating d-flex align-items-center pt-1">
+                                        <img src="https://www.freepnglogos.com/uploads/like-png/like-png-hand-thumb-sign-vector-graphic-pixabay-39.png"
+                                            alt=""><span class="px-2">Rating:</span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="far fa-star"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="d-sm-flex align-items-sm-start justify-content-sm-between">
+                                    <div class="status">Status : Delivered</div>
+                                    <div class="btn btn-primary text-uppercase">order info</div>
+                                </div>
+                                <div class="progressbar-track">
+                                    <ul class="progressbar">
+                                        <li id="step-1" class="text-muted green">
+                                            <span class="fas fa-gift"></span>
+                                        </li>
+                                        <li id="step-2" class="text-muted">
+                                            <span class="fas fa-check"></span>
+                                        </li>
+                                        <li id="step-3" class="text-muted">
+                                            <span class="fas fa-box"></span>
+                                        </li>
+                                        <li id="step-4" class="text-muted">
+                                            <span class="fas fa-truck"></span>
+                                        </li>
+                                        <li id="step-5" class="text-muted">
+                                            <span class="fas fa-box-open"></span>
+                                        </li>
+                                    </ul>
+                                    <div id="tracker"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
                 </div>
             </div>
                 </div>
@@ -1077,31 +985,9 @@ $res=$conn->query($order);
             <div class="mainpage" id="pmpage">
             <div class="cmcontainer">
             <div class="cmheader">
-                        <div class="heading">orders</div>
-                        <div class="add" style="visibility:hidden">Add payment</div>
-                    </div>
-                    <?php
-                    $res1=$conn->query($order);
-                    while($orderrow=$res1->fetch_assoc()){
-                        $oid=$orderrow['order_id'];
-                        ?> 
-                    <a href="orderdetail.php?oid=<?php echo $oid;?>" style="color:black;text-decoration:none"><div class="ordercard">
-                        <div class="cardcontainer">
-                            <div class="date">Order id: #<?php echo $orderrow['order_id'];?></div>
-                            <div class="orderid">Order Date: <?php echo $orderrow['order_date'];?></div>
-                            <div class="orderamount">Order Amount: <?php echo $orderrow['order_amount'];?></div>
-                        </div>
-                        <div class="orderbox">
-                            >
-                        </div>
-                    </div>
-                    <div class="orderdetailed" style="height:auto;width:100%">
-                    
-                    </div></a>
-                    <?php
-                    }
-                    ?>
-                    
+                        <div class="heading">Payment</div>
+                        <div class="add">Add payment</div>
+                    </div> 
             </div>
             </div>
             
@@ -1307,7 +1193,7 @@ $res=$conn->query($order);
                 for(var k=0;k<cancel.length;k++){
                     submit[k].addEventListener("click",()=>{
                         box.childNode[5].style.display = "none";
-                     });
+                     })
                     cancel[k].addEventListener("click", (event) => {
                         event.preventDefault();
                         // box.childNodes[6].reset();
@@ -1322,17 +1208,8 @@ $res=$conn->query($order);
 
            })
         }
-       let k=0;
-        var info=document.querySelectorAll(".order-info");
-        var detail=document.querySelectorAll(".orderdetail");
-        var len=info.length
-        for (let k = 0; k < len; k++) {
-    info[k].addEventListener("click", (function (index) {
-        return function () {
-            detail[index].classList.toggle("visible");
-        };
-    })(k));
-}
+       
+            
 
         // form.addEventListener("submit", (event) => {
         // // event.preventDefault();
@@ -1345,10 +1222,6 @@ $res=$conn->query($order);
 //         formcontainer[i].style.display = "none";
 //     });
 // }
-
-function redirect(){
-    window.location.href="cart.php";
-}
     </script>
     
 </body>
