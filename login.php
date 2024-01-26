@@ -45,7 +45,6 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             }
 
             if ($email == 'admin890@gmail.com') {
-                setcookie('userID', $userID, time() + 3600, '/');
                 header("Refresh:2;url=adminpanel.php");
             } else {
                 header("Refresh:2;url=index.php");
