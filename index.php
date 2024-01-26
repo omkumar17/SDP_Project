@@ -83,7 +83,7 @@ $result=$conn->query($sql);
             </a>
 
 
-            <a href="product.php?id=5002&color=blue" class="product-link">
+            <a href="product.php?id=5002" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">10% off</span>
