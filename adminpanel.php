@@ -2,9 +2,9 @@
 <html lang="en">
 <?php
 include 'connection.php';
-// if($user!=1){
-//     header("location:login.php");
-// }
+if($user!=1){
+    header("location:login.php");
+}
 // echo $user;
 $page = 0;
 $flag = 0;
