@@ -1,5 +1,8 @@
 <?php
 include 'connection.php';
+if(!isset($_COOKIE['userID'])){
+    header("Location:login.php");
+}
 if(isset($_COOKIE['userID']) && $user!=""){
 if(isset($_GET['fname']) && isset($_GET['lname']) && isset($_GET['phone']) && isset($_GET['email'])){
     $fname=$_GET['fname'];
@@ -67,8 +70,6 @@ else
 else{
     header("Location:select.php");
 }
-}
-else{
-    header("Location:login.php");
-}
+
+
 ?>
