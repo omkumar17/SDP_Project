@@ -390,8 +390,8 @@ $res=$conn->query($order);
     width:100%;
     display:flex;
     flex-direction: row;
-    background-color: teal;
-    color:white;
+    background-color: white;
+    color:teal;
     
 }
 .navitems{
@@ -401,7 +401,7 @@ $res=$conn->query($order);
 .head{
     height:100%;
     width:auto;
-    color:white;
+    color:teal;
     text-align: center;
     /* margin:auto; */
     margin-left: 10px;
@@ -570,7 +570,7 @@ $res=$conn->query($order);
 .add{
     color:white;
     background-color: rgb(29, 1, 1);
-    height:40px;
+    height:auto;
     width:140px;
     /* text-align: center; */
     margin-top: 30px;
@@ -623,7 +623,7 @@ $res=$conn->query($order);
     position:absolute;
     top:50px;
     background-color: white;
-    height:calc(100% - 50px);
+    height:calc(100% - 150px);
     width:calc(65%);
     z-index: 10;
     overflow-y:scroll;
@@ -738,6 +738,17 @@ $res=$conn->query($order);
     }
 
 }
+@media only screen and (max-width:860px){
+    .bodypage{
+        width:100%;
+    }
+    .bodypage .main{
+        width:100%;
+    }
+    .mainpage{
+        width:100%;
+    }
+}
 @media only screen and (max-width:800px){
     .mainitemcont{
         /* grid-template-columns:auto auto; */
@@ -747,6 +758,9 @@ $res=$conn->query($order);
         width:200px;
         /* display:none; */
         z-index:1;
+    }
+    .wishcontainer{
+        margin-left:0px;
     }
 }
 @media only screen and (max-width:500px){
@@ -763,13 +777,13 @@ $res=$conn->query($order);
     .head{
         height:100%;
         width:auto;
-        color:white;
+        /* color:white; */
         text-align: center;
         /* margin:auto; */
         margin-left: 10px;
         padding-top: 10px;
         font-weight: 600;
-        font-size: 15px;
+        /* font-size: 15px; */
     }
     .progressbar{
         display:flex;
@@ -792,7 +806,8 @@ $res=$conn->query($order);
     border-radius:10px;
 }
 .head{
-    height:20px;
+    height:auto;
+    /* width:50%; */
 }
 
 
@@ -946,6 +961,208 @@ $res=$conn->query($order);
                 transform: translateY(0);
             }
         }
+.product-link {
+    display:block;
+    text-decoration: none;
+    color: black;
+    flex: 0 0 auto;
+    /* width: 300px; */
+    height: 150px;
+    margin: 20px 20px;
+}
+.product-link:hover{
+    text-decoration:none;
+    color:black
+}
+.product-card{
+    display:flex;
+    flex-direction:row;
+}
+.product-image {
+    position: relative;
+    width: 20%;
+    height: 150px;
+    overflow: hidden;
+    /* object-fit:; */
+    /* border:1px solid grey; */
+    
+}
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit: fill;
+    /* border:1px solid grey; */
+}
+
+.product-thumb {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.discount-tag {
+    position: absolute;
+    background: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    color: #ff7d7d;
+    right: 10px;
+    top: 10px;
+    text-transform: capitalize;
+}
+
+.card-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    width: 90%;
+    text-transform: capitalize;
+    border: none;
+    outline: none;
+    background: #fff;
+    border-radius: 5px;
+    transition: 0.5s;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.product-card:hover {
+    box-shadow: 2px 2px 20px rgb(136, 135, 135);
+}
+
+.product-card:hover .card-btn {
+    opacity: 1;
+}
+
+.card-btn:hover {
+    background: #efefef;
+}
+.product-info {
+    text-decoration:none;
+    /* border:1px solid black; */
+    width: 80%;
+    height: 100px;
+    padding: 10px;
+}
+
+.product-brand {
+    text-decoration:none;
+    text-transform: capitalize;
+    font-size: 20px;
+    font-weight: 600;
+    /* margin: px; */
+}
+
+.product-short-des {
+    text-decoration:none;
+    width: 100%;
+    height: 23px;
+    line-height: 20px;
+    overflow: hidden;
+    opacity: 0.5;
+    text-transform: capitalize;
+    margin: 5px 0;
+}
+
+.price {
+    text-decoration:none;
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.actual-price {
+    text-decoration:none;
+    margin-left: 20px;
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+@media only screen and (max-width:500px){
+    .product-link{
+        margin:20px 0;
+    }
+    .product-image{
+        width:40%;
+    }
+    .product-info{
+        width:60%;
+    }
+}
+.wishcontainer{
+    display:flex;
+    flex-direction:column;
+    width:80%;
+    margin-left:50px;
+}
+
+.ordercontainer{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    width:80%;
+    margin-left:50px;
+}
+.offercontainer{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    width:80%;
+    margin-left:50px;
+}
+@media only screen and (max-width:860px){
+    .wishcontainer,.ordercontainer,.offercontainer,.cmheader,.custdetails{
+        width:100%;
+        margin-left:0;
+    }
+}
+.offer{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    height:auto;
+    /* width:80%; */
+    border:1px solid black;
+    margin:20px 0;
+}
+.offerleft{
+    display:flex;
+    flex-direction:column;
+    /* align-items:center; */
+    justify-content:space-between;
+    width:80%;
+    padding: 5px 20px;
+}
+.offerright{
+    /* width:30%; */
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:space-between;
+    width:140px;
+    padding: 5px 20px;
+}
+.offerhead{
+    font-weight:600;
+    color:teal;
+    font-size:28px;
+}
+.offerdet{
+    font-size:18px;
+}
+.validity{
+    /* float:right; */
+    width:auto;
+
+    font-size:18px;
+}
+.condition{
+    /* float:right; */
+    font-size:18px;
+
+}
 </style>
 </head>
 
@@ -954,10 +1171,10 @@ $res=$conn->query($order);
     <section class="adminnavbar">
         <div class="navcontainer">
             <div class="navitems head">customer page</div>
-            <div class="navitems amenu"><img src="align-justify.png" alt="" class="menuimg"></div>
+            <div class="navitems amenu" ><img src="public\img\menu.png" alt="" class="menuimg" style="background:teal"></div>
             <div class="navitems admin">
                 <div class="login"><img src="" alt="" class="logimg"></div>&nbsp;
-                <a href="index.php" style="text-decoration:none;color:white"><div class="subtitle">Go To Home page</div></a>
+                <a href="index.php" style="text-decoration:none;color:blue"><div class="subtitle">home</div></a>
             </div>
         </div>
     </section>
@@ -975,7 +1192,7 @@ $res=$conn->query($order);
 
                 <li class="sideitem1 sideitem"><img src="book-check.png" alt="" class="sideimg"><span class="itemdesc">Order</span>
                 </li>
-                <li class="sideitem1 sideitem"><img src="file-question.png" alt="" class="sideimg"><span class="itemdesc">manage Address</span></li>
+                <!-- <li class="sideitem1 sideitem"><img src="file-question.png" alt="" class="sideimg"><span class="itemdesc">manage Address</span></li> -->
                 <li class="sideitem1 sideitem"><img src="thumbs-up.png" alt="" class="sideimg"><span class="itemdesc">wishlist</span></li>
                 <li class="sideitem1 sideitem"><img src="badge-percent.png" alt="" class="sideimg"><span class="itemdesc">Offer</span></li>
                 <li class="sideitem1 sideitem"><img src="paym.png" alt="" class="sideimg"><span class="itemdesc">Payment</span></li>
@@ -1244,17 +1461,18 @@ $res=$conn->query($order);
                 </div>
             </div>
             <div class="mainpage" id="pmpage">
-            <div class="cmcontainer">
+            <div class="cmcontainer" >
             <div class="cmheader">
                         <div class="heading">orders</div>
                         <div class="add" style="visibility:hidden">Add payment</div>
                     </div>
+                    <div class="ordercontainer" >
                     <?php
                     $res1=$conn->query($order);
                     while($orderrow=$res1->fetch_assoc()){
                         $oid=$orderrow['order_id'];
                         ?> 
-                    <a href="orderdetail.php?oid=<?php echo $oid;?>" style="color:black;text-decoration:none"><div class="ordercard">
+                    <a href="orderdetail.php?oid=<?php echo $oid;?>" style="color:black;text-decoration:none;margin:auto"><div class="ordercard">
                         <div class="cardcontainer">
                             <div class="date">Order id: #<?php echo $orderrow['order_id'];?></div>
                             <div class="orderid">Order Date: <?php echo $orderrow['order_date'];?></div>
@@ -1270,7 +1488,7 @@ $res=$conn->query($order);
                     <?php
                     }
                     ?>
-                    
+                   </div> 
             </div>
             </div>
             
@@ -1300,62 +1518,99 @@ $res=$conn->query($order);
                     </div>  
             </div>
             </div> -->
-            <div class="mainpage" id="feedpage">
+            
+            
+            <div class="mainpage" id="subpage">
             <div class="cmcontainer">
             <div class="cmheader">
-                        <div class="heading">Saved address</div>
-                        <div class="add">Add New Address</div>
-                    </div>  
-                    <div class="addrcontainer">
-                        <?php
-                        $addr="SELECT user.address , order_tbl.shipping_address FROM `user` JOIN `order_tbl` ON order_tbl.user_id=user.userID WHERE user.userID='$user' GROUP BY user.address";
-                        $adrres=$conn->query($addr);
-                        $addrrow=$adrres->fetch_assoc();
-                        ?>
-                        <div class="subaddress">
-                            
-                        <h3>Address 1</h3><hr>
-                            <?php echo $addrrow['address'];?>
-                        </div>
-                        <?php
-                        if($addrrow['shipping_address']!=''){?>
-                        <div class="subaddress">
-                        <h3>Address 2</h3><hr>
-                            <?php echo $addrrow['shipping_address'];?>
-                        </div>
-                        <?php
-                        }
-                        $c=2;
-                       while( $addrrow=$adrres->fetch_assoc()){
-                        $c++;
-                        ?>
-                        <div class="subaddress">
-                        
-                                <h3>Address <?php echo $c;?></h3><hr>
-                           
-                            <?php echo $addrrow['Shipping_address'];?>
-                        </div>
-                        <?php
-                        }
-                        ?>
+                        <div class="heading">Wishlist</div>
+                        <!-- <div class="add"></div> -->
                     </div>
+                    <div class="wishcontainer">
+                    <a href="product.php?id=5002&color=blue" class="product-link">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="discount-tag">10% off</span>
+                                <img src="public\img\5002-3-bl.jpeg" class="product-thumb" alt="">
+                                <button class="card-btn">add to whislist</button>
+                            </div>
+                            <div class="product-info">
+                                <h2 class="product-brand">Walkaroo</h2>
+                                <p class="product-short-des">WALKAROO MEN SOLID THONG SANDALS ART WG5002</p>
+                                <span class="price">₹ 299</span><span class="actual-price">₹ 329</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="product.php?id=5002&color=blue" class="product-link">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <span class="discount-tag">10% off</span>
+                                <img src="public\img\5002-3-bl.jpeg" class="product-thumb" alt="">
+                                <button class="card-btn">add to whislist</button>
+                            </div>
+                            <div class="product-info">
+                                <h2 class="product-brand">Walkaroo</h2>
+                                <p class="product-short-des">WALKAROO MEN SOLID THONG SANDALS ART WG5002</p>
+                                <span class="price">₹ 299</span><span class="actual-price">₹ 329</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
             </div>
-            
-            <div class="mainpage" id="subpage"></div>
             <div class="mainpage" id="ofpage">
             <div class="cmcontainer">
             <div class="cmheader">
-                        <div class="heading">Payment</div>
-                        <div class="add">Add payment</div>
+                        <div class="heading">Offers</div>
+                        <div class="add">Add offers</div>
                     </div>
+                    <div class="offercontainer">
+                        <?php
+                        // $off="SELECT * FROM `offer`";
+                        // $ofres=$conn->query($off);
+                        // while($offrow=$ofres->fetch_assoc()){
+                        ?>
+                        <div class="offer">
+                            <div class="offerleft">
+                                <div class="offerhead">offer id</div>
+                                <div class="offerdet">Lorem ipsum dolor sit amet consectetur adipisicing elit. A, nam?</div>
+                            </div>
+                            <div class="offerright">
+                                <div class="validity">2024-01-31</div>
+                                <div class="condition">T & C</div>
+                            </div>
+                        </div>
+                        <?php
+                        // }?>
+                    </div>
+                    <div class="addcontainer">
+                    <form class="addcont" action="insert.php" method="post">
+                    <label for="" style="font-size:20px;font-weight:600">ADD IMAGE</label>
+                        <label for="img_id" class="label">	Image_ID</label>
+                        <input type="text" id="img_id" class="input" name="Image_ID" >
+                        <label for="col_id" class="label">cid</label>
+                        <input type="text" id="col_id" class="input" name="cid">
+                        <label for="p1" class="label">Image_path1</label>
+                        <input type="text" id="p1" class="input" name="Image_path1" >
+                        <label for="p2" class="label">Image_path2</label>
+                        <input type="text" id="p2" class="input" name="Image_path2" >
+                        <label for="p3" class="label">Image_path3</label>
+                        <input type="text" id="p3" class="input" name="Image_path3" >
+                        <label for="p4" class="label">Image_path4</label>
+                        <input type="text" id="p4" class="input" name="Image_path4" >
+                        <label for="img_desc" class="label">Image_desc</label>
+                        <input type="text" id="img_desc" class="input" name="Image_desc" >
+                        <input type="submit" class="submita" value="submit" >
+                        <input type="submit" class="cancela" value="Cancel">
+                    </form>
+                </div>
             </div>
             </div>
             <div class="mainpage" id="paypage">
             <div class="cmcontainer">
                     <div class="cmheader">
                         <div class="heading">Payment</div>
-                        <div class="add">Add payment</div>
+                        <!-- <div class="add">Add payment</div> -->
                     </div>
                 <?php
                     $sql = "SELECT * FROM `payment`"; 
