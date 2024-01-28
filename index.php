@@ -225,6 +225,13 @@ footer{
     }
 }
     </style>
+    <style>
+        .collection:nth-child(3) {
+    grid-column:span 1;
+    margin-bottom: 10px;
+    height:60vh;
+}
+    </style>
 </head>
 
 <body>
@@ -401,18 +408,21 @@ footer{
     <!-- collections -->
     <section class="collection-container">
         <a href="#" class="collection">
-            <img src="public/img/images (2) (7).jpeg" alt="">
+            <img src="public\img\21.png" alt="">
             <!-- <p class="collection-title">women <br> apparels</p> -->
         </a>
         <a href="#" class="collection">
-            <img src="public/img/5ca32db482e4e2dedc42c0ea9edc93cc.png" alt="">
+            <img src="public\img\1.png" alt="">
             <!-- <p class="collection-title">men <br> apparels</p> -->
         </a>
         <a href="#" class="collection">
-            <img src="public/img/images (2) (20).jpeg" alt="">
+            <img src="public\img\3.png" alt="">
             <!-- <p class="collection-title">accessories</p> -->
         </a>
-
+        <a href="#" class="collection">
+            <img src="public\img\3.png" alt="">
+            <!-- <p class="collection-title">accessories</p> -->
+        </a>
     </section>
     <br>
     <h2 class="shopByCat">SHOP BY CATEGORY</h2>
@@ -844,7 +854,7 @@ footer{
             <ul class="footer-category">
                 <li class="category-title">CUSTOMER SERVICE</li>
                 <li><a href="faq.php" class="footer-link">FAQ</a></li>
-                <li><a href="return_req.html" class="footer-link">Return Request</a></li>
+                <li><a href="return_req.php" class="footer-link">Return Request</a></li>
             </ul>
         </div>
     </div>

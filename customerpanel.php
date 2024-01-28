@@ -567,13 +567,14 @@ $res=$conn->query($order);
 .bodypage .cmheader .heading{
     padding-left: 0;
 }
-.add{
+.add1{
     color:white;
     background-color: rgb(29, 1, 1);
-    height:40px;
+    height:auto;
     width:140px;
     /* text-align: center; */
     margin-top: 30px;
+    margin-left: 10px;
     /* width:100px; */
     font-size: 14px;
     padding: 10px 20px;
@@ -867,7 +868,7 @@ $res=$conn->query($order);
             font-weight: bold;
         }
 
-        .add {
+        .add1 {
             background-color: #2ecc71;
             color: #fff;
             padding: 10px 20px;
@@ -877,7 +878,7 @@ $res=$conn->query($order);
             transition: background-color 0.3s;
         }
 
-        .add:hover {
+        .add1:hover {
             background-color: #27ae60;
         }
         .addcontainer {
@@ -1063,12 +1064,6 @@ $res=$conn->query($order);
                                         <li id="step-3" class="text-muted green">
                                             <span class="fas fa-box"></span>
                                         </li>
-                                        <li id="step-4" class="text-muted green">
-                                            <span class="fas fa-truck"></span>
-                                        </li>
-                                        <li id="step-5" class="text-muted green">
-                                            <span class="fas fa-box-open"></span>
-                                        </li>
                                     </ul>
                                     <div id="tracker"></div>
                                 </div>
@@ -1166,7 +1161,8 @@ $res=$conn->query($order);
                 <div class="cmcontainer"> 
                 <div class="cmheader">
                         <div class="heading">profile</div>
-                        <div class="add">Edit profile</div>
+                        <a href="chanpass.php" style="text-decoration:none"><div class="add1" style="background-color:red;">Change Pasword</div></a>
+                        <div class="add add1">Edit profile</div>
                     </div> 
                     
                     <?php
