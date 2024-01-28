@@ -217,7 +217,7 @@ if(isset($_GET['flag'])){
     height:55px;
     /* font-size: 35px; */
     padding:  20px 20px 60px 0px;
-    /* margin-bottom: 20px; */
+    margin-bottom: 20px;
     display:flex;
     flex-direction: row;
     /* flex-wrap: wrap; */
@@ -452,28 +452,28 @@ if(isset($_GET['flag'])){
     <section class="bodypage">
         <section class="sidebar">
             <ul class="sidecontainer">
-                <li class="sideitem1 sideitem"><img src="layout-dashboard.png" alt="" class="sideimg"><span class="itemdesc">Dashboard</span></li>
-                <li class="sideitem1 sideitem"><img src="layers-3.png" alt="" class="sideimg"><span class="itemdesc">Category
+                <li class="sideitem1 sideitem"><img src="public\img\layout-dashboard.png" alt="" class="sideimg"><span class="itemdesc">Dashboard</span></li>
+                <li class="sideitem1 sideitem"><img src="public\img\layers-3.png" alt="" class="sideimg"><span class="itemdesc">Category
                         Management</span>
                 </li>
-                <li class="sideitem1" id="prod"><img src="shopping-bag.png" alt="" class="sideimg"><span class="itemdesc">Product Management</span>
+                <li class="sideitem1" id="prod"><img src="public\img\shopping-bag.png" alt="" class="sideimg"><span class="itemdesc">Product Management</span>
                 </li>
-                <li class="sideitem1 sideitem subprod"><img src="shopping-cart (1).png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Product</span></li>
-                 <li class="sideitem1 sideitem subprod"><img src="book-text.png" alt="" class="sideimg" style="height:50%; width:20px;"><span class="itemdesc">Product description</span></li> 
-                 <li class="sideitem1 sideitem subprod"><img src="crop.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Image</span></li> 
-                 <li class="sideitem1 sideitem subprod"><img src="palette.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Color</span></li>
+                <li class="sideitem1 sideitem subprod"><img src="public\img\shopping-cart (1).png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Product</span></li>
+                 <li class="sideitem1 sideitem subprod"><img src="public\img\book-text.png" alt="" class="sideimg" style="height:50%; width:20px;"><span class="itemdesc">Product description</span></li> 
+                 <li class="sideitem1 sideitem subprod"><img src="public\img\crop.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Image</span></li> 
+                 <li class="sideitem1 sideitem subprod"><img src="public\img\palette.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Color</span></li>
 
-                <li class="sideitem1 " id="prod1"><img src="book-check.png" alt="" class="sideimg"><span class="itemdesc">Order Management</span></li>
-                <li class="sideitem1 sideitem subprod"><img src="list-ordered.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Orders</span></li> 
-                 <li class="sideitem1 sideitem subprod"><img src="book-user.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Order Details</span></li>
+                <li class="sideitem1 " id="prod1"><img src="public\img\book-check.png" alt="" class="sideimg"><span class="itemdesc">Order Management</span></li>
+                <li class="sideitem1 sideitem subprod"><img src="public\img\list-ordered.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Orders</span></li> 
+                 <li class="sideitem1 sideitem subprod"><img src="public\img\book-user.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Order Details</span></li>
 
-                <li class="sideitem1 sideitem"><img src="file-question.png" alt="" class="sideimg"><span class="itemdesc">Feedback</span></li>
-                <li class="sideitem1 sideitem"><img src="user-round-plus.png" alt="" class="sideimg"><span class="itemdesc">Customer
+                <li class="sideitem1 sideitem"><img src="public\img\file-question.png" alt="" class="sideimg"><span class="itemdesc">Feedback</span></li>
+                <li class="sideitem1 sideitem"><img src="public\img\user-round-plus.png" alt="" class="sideimg"><span class="itemdesc">Customer
                         Management</span>
                 </li>
-                <li class="sideitem1 sideitem"><img src="badge-indian-rupee.png" alt="" class="sideimg"><span class="itemdesc">Refund</span></li>
-                <li class="sideitem1 sideitem"><img src="badge-percent.png" alt="" class="sideimg"><span class="itemdesc">Offer</span></li>
-                <li class="sideitem1 sideitem"><img src="paym.png" alt="" class="sideimg"><span class="itemdesc">Payment</span></li>
+                <li class="sideitem1 sideitem"><img src="public\img\badge-indian-rupee.png" alt="" class="sideimg"><span class="itemdesc">Refund</span></li>
+                <li class="sideitem1 sideitem"><img src="public\img\badge-percent.png" alt="" class="sideimg"><span class="itemdesc">Offer</span></li>
+                <li class="sideitem1 sideitem"><img src="public\img\paym.png" alt="" class="sideimg"><span class="itemdesc">Payment</span></li>
                 <!-- <li class="sideitem1 sideitem"><img src="" alt="" class="sideimg"><span class="itemdesc"></span></li>
             <li class="sideitem1 sideitem"><img src="" alt="" class="sideimg"><span class="itemdesc"></span></li>
             <li class="sideitem1 sideitem"><img src="" alt="" class="sideimg"><span class="itemdesc"></span></li> -->
@@ -490,73 +490,52 @@ if(isset($_GET['flag'])){
                         </div>
                         <div class="contimg"></div>
                     </div>
-                    <div class="maincontent" style="background:rgb(255, 37, 37)">
+                    <div class="maincontent" style="background:rgb(115, 198, 182 )">
                         <div class="subcontent">
                             <div class="count">0</div>
                             <div class="counttitle">Pending Orders</div>
                         </div>
                         <div class="contimg"></div>
                     </div>
-                    <div class="maincontent" style="background:rgb(169, 251, 45)">
+                    <div class="maincontent" style="background:rgb(245, 203, 167)">
                         <div class="subcontent">
                             <div class="count">4</div>
                             <div class="counttitle">Completed Orders</div>
                         </div>
                         <div class="contimg"></div>
                     </div>
-                    <div class="maincontent" style="background:rgb(4, 230, 255)">
+                    <div class="maincontent" style="background:rgb(174, 214, 241 )">
                         <div class="subcontent">
                             <div class="count">3</div>
                             <div class="counttitle">Completed Shipping</div>
                         </div>
                         <div class="contimg"></div>
                     </div>
-                    <div class="maincontent" style="background:rgb(255, 166, 0)">
+                    <div class="maincontent" style="background:rgb(128, 139, 150">
                         <div class="subcontent">
                             <div class="count">1</div>
                             <div class="counttitle">Pending Shipping</div>
                         </div>
                         <div class="contimg"></div>
                     </div>
-                    <div class="maincontent" style="background:rgb(255, 105, 240)">
+                    <div class="maincontent" style="background:rgb(215, 189, 226)">
                         <div class="subcontent">
                             <div class="count">10</div>
                             <div class="counttitle">Active Customers</div>
                         </div>
                         <div class="contimg"></div>
                     </div>
-                    <div class="maincontent" style="background:rgb(213, 213, 51)">
-                        <div class="subcontent">
-                            <div class="count">6</div>
-                            <div class="counttitle">Subscriber</div>
-                        </div>
-                        <div class="contimg"></div>
-                    </div>
-                    <div class="maincontent" style="background:rgb(0, 183, 67)">
+                    <div class="maincontent" style="background:rgb(93, 173, 226)">
                         <div class="subcontent">
                             <div class="count">4</div>
                             <div class="counttitle">Total Shippings</div>
                         </div>
                         <div class="contimg"></div>
                     </div>
-                    <div class="maincontent" style="background:rgb(56, 112, 255)">
+                    <div class="maincontent" style="background:rgb(243, 156, 18 )">
                         <div class="subcontent">
                             <div class="count"><?php echo $row1['COUNT(category_id)']; ?></div>
                             <div class="counttitle">Categories</div>
-                        </div>
-                        <div class="contimg"></div>
-                    </div>
-                    <div class="maincontent" style="background:rgb(249, 41, 26)">
-                        <div class="subcontent">
-                            <div class="count"></div>
-                            <div class="counttitle"></div>
-                        </div>
-                        <div class="contimg"></div>
-                    </div>
-                    <div class="maincontent" style="background:rgb(127, 74, 252)">
-                        <div class="subcontent">
-                            <div class="count"></div>
-                            <div class="counttitle"></div>
                         </div>
                         <div class="contimg"></div>
                     </div>
@@ -587,6 +566,7 @@ if(isset($_GET['flag'])){
                                     <th>category_id</th>
                                     <th>Category_name</th>
                                     <th>Category_desc</th>
+                                    <th>Category_status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -599,7 +579,9 @@ if(isset($_GET['flag'])){
                                     <td>{$row['category_id']}</td>
                                     <td>{$row['Category_name']}</td>
                                     <td>{$row['Category_desc']}</td>
-                                    <td><span class="button edit">Edit</span><span class="button">Disable</span></td>
+                                    <td>{$row['cat_status']}</td>
+
+                                    <td><span class="button edit">Edit</span><span class="button disable">Disable</span></td>
                                 </tr>
                     _END;
                         }
@@ -662,6 +644,8 @@ if(isset($_GET['flag'])){
                                     <th>product_name</th>
                                     <th>product_details</th>
                                     <th>price</th>
+                                    <th>actual_price</th>
+                                    <th>product_status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -677,7 +661,9 @@ if(isset($_GET['flag'])){
                                     <td>{$row['product_name']}</td>
                                     <td>{$row['product_details']}</td>
                                     <td>{$row['price']}</td>
-                                    <td><span class="button edit">Edit</span><span class="button">Disable</span></td>
+                                    <td>{$row['actual_price']}</td>
+                                    <td>{$row['pro_status']}</td>
+                                    <td><span class="button edit">Edit</span><span class="button disable">Disabled</span></td>
                                 </tr>
                              _END;
                         }
@@ -704,6 +690,8 @@ if(isset($_GET['flag'])){
                         <input type="text" id="prod_det" class="input" name="product_details" >
                         <label for="pprice" class="label">Price</label>
                         <input type="text" id="pprice" class="input" name="price" >
+                        <label for="pactpri" class="label">Actual Price</label>
+                        <input type="text" id="pactpri" class="input" name="actprice" >
                         <input type="submit" class="submit" value="submit" >
                         <input type="submit" class="cancel" value="Cancel">
                     </form>
@@ -750,6 +738,7 @@ if(isset($_GET['flag'])){
                                     <th>cid</th>
                                     <th>product_type</th>
                                     <th>size</th>
+                                    <th>Product_desc_status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -763,7 +752,8 @@ if(isset($_GET['flag'])){
                                     <td>{$row['cid']}</td>
                                     <td>{$row['product_type']}</td>
                                     <td>{$row['size']}</td>
-                                    <td><span class="button edit">Edit</span><span class="button">Disable</span></td>
+                                    <td>{$row['prodesc_status']}</td>
+                                    <td><span class="button edit">Edit</span><span class="button disable">Disabled</span></td>
                                 </tr>
                              _END;
                         }
@@ -845,7 +835,7 @@ if(isset($_GET['flag'])){
                                     <td><img src="{$row['Image_path3']}" class="tblimg"><br>{$row['Image_path3']}</td>
                                     <td><img src="{$row['Image_path4']}" class="tblimg"><br>{$row['Image_path4']}</td>
                                     <td>{$row['Image_desc']}</td>
-                                    <td><span class="button edit">Edit</span><span class="button">Disable</span></td>
+                                    <td><span class="button edit">Edit</span></td>
                                 </tr>
                              _END;
                         }
@@ -863,16 +853,26 @@ if(isset($_GET['flag'])){
                         <input type="text" id="img_id" class="input" name="Image_ID" >
                         <label for="col_id" class="label">cid</label>
                         <input type="text" id="col_id" class="input" name="cid">
+
                         <label for="p1" class="label">Image_path1</label>
-                        <input type="text" id="p1" class="input" name="Image_path1" >
+                        <input type="text" class="input" name="Image_path1" disabled>
+                        
                         <label for="p2" class="label">Image_path2</label>
-                        <input type="text" id="p2" class="input" name="Image_path2" >
+                        <input type="text" class="input" name="Image_path2" disabled>
+                        
                         <label for="p3" class="label">Image_path3</label>
-                        <input type="text" id="p3" class="input" name="Image_path3" >
+                        <input type="text" class="input" name="Image_path3" disabled>
+                        
                         <label for="p4" class="label">Image_path4</label>
-                        <input type="text" id="p4" class="input" name="Image_path4" >
+                        <input type="text" class="input" name="Image_path5" disabled>
+                        
                         <label for="img_desc" class="label">Image_desc</label>
                         <input type="text" id="img_desc" class="input" name="Image_desc" >
+                        <hr style="height:10px">
+                        Image_Path1 : <input type="file" id="p1" class="input" name="Image_path1">
+                        Image_Path2 : <input type="file" id="p2" class="input" name="Image_path2">
+                        Image_Path3 : <input type="file" id="p3" class="input" name="Image_path3" >
+                        Image_Path4 : <input type="file" id="p4" class="input" name="Image_path4" >
                         <input type="submit" class="submit" value="submit" >
                         <input type="submit" class="cancel" value="Cancel">
                     </form>
@@ -885,13 +885,13 @@ if(isset($_GET['flag'])){
                         <label for="col_id" class="label">cid</label>
                         <input type="text" id="col_id" class="input" name="cid">
                         <label for="p1" class="label">Image_path1</label>
-                        <input type="text" id="p1" class="input" name="Image_path1" >
+                        <input type="file" id="p1" class="input" name="Image_path1" >
                         <label for="p2" class="label">Image_path2</label>
-                        <input type="text" id="p2" class="input" name="Image_path2" >
+                        <input type="file" id="p2" class="input" name="Image_path2" >
                         <label for="p3" class="label">Image_path3</label>
-                        <input type="text" id="p3" class="input" name="Image_path3" >
+                        <input type="file" id="p3" class="input" name="Image_path3" >
                         <label for="p4" class="label">Image_path4</label>
-                        <input type="text" id="p4" class="input" name="Image_path4" >
+                        <input type="file" id="p4" class="input" name="Image_path4" >
                         <label for="img_desc" class="label">Image_desc</label>
                         <input type="text" id="img_desc" class="input" name="Image_desc" >
                         <input type="submit" class="submita" value="submit" >
@@ -918,6 +918,7 @@ if(isset($_GET['flag'])){
                                     <th>cid</th>
                                     <th>Product_id</th>
                                     <th>color</th>
+                                    <th>color_status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -930,7 +931,8 @@ if(isset($_GET['flag'])){
                                     <td>{$row['cid']}</td>
                                     <td>{$row['product_id']}</td>
                                     <td>{$row['color']}</td>
-                                    <td><span class="button edit">Edit</span><span class="button">Disable</span></td>
+                                    <td>{$row['color_status']}</td>
+                                    <td><span class="button edit">Edit</span><span class="button disable">Disable</span></td>
                                 </tr>
                              _END;
                         }
@@ -974,7 +976,6 @@ if(isset($_GET['flag'])){
             <div class="cmcontainer">
                     <div class="cmheader">
                         <div class="heading">Order</div>
-                        <div class="add">Add order</div>
                     </div>
                 <?php
                     $sql = "SELECT * FROM `order_tbl`"; 
@@ -1008,7 +1009,7 @@ if(isset($_GET['flag'])){
                                     <td>{$row['order_amount']}</td>
                                     <td>{$row['shipping_address']}</td>
                                     <td>{$row['shipping_status']}</td>
-                                    <td><span class="button" id="edit">Edit</span></td>
+                                    <td><span class="button edit">Edit</span></td>
                                 </tr>
                              _END;
                         }
@@ -1040,7 +1041,7 @@ if(isset($_GET['flag'])){
                         <input type="submit" class="cancel" value="Cancel">
                     </form>
                     </div>
-                    <div class="addcontainer">
+                    <!-- <div class="addcontainer">
                     <form class="addcont" action="insert.php" method="post">
                     <label for="" style="font-size:20px;font-weight:600">order</label>
                         <label for="oid" class="label">	Order_id</label>
@@ -1060,7 +1061,7 @@ if(isset($_GET['flag'])){
                         <input type="submit" class="submita" value="submit" >
                         <input type="submit" class="cancela" value="Cancel">
                     </form>
-                </div>    
+                </div>     -->
             </div>
             </div>
             <div class="mainpage" id="ompage">
@@ -1102,7 +1103,7 @@ if(isset($_GET['flag'])){
                                     <td>{$row['rate']}</td>
                                     <td>{$row['discount']}</td>
                                     <td>{$row['amount']}</td>
-                                    <td><span class="button" id="edit">Edit</span></td>
+                                    <td><span class="button edit">Edit</span></td>
                                 </tr>
                              _END;
                         }
@@ -1161,7 +1162,6 @@ if(isset($_GET['flag'])){
             <div class="cmcontainer">
                     <div class="cmheader">
                         <div class="heading">Feedback</div>
-                        <div class="add">Add Feedback</div>
                     </div>
                 <?php
                     $sql = "SELECT * FROM `feedback`"; 
@@ -1193,7 +1193,6 @@ if(isset($_GET['flag'])){
                                     <td>{$row['feedback_rating']}</td>
                                     <td>{$row['feedback_desc']}</td>
                                     <td>{$row['feedback_date']}</td>
-                                    <td><span class="button" id="edit">Edit</span></td>
                                 </tr>
                              _END;
                         }
@@ -1204,55 +1203,13 @@ if(isset($_GET['flag'])){
                     _END;
                     }
                     ?>
-                    <div class="formcontainer">
-                    <form class="addcat" action="update.php" method="post">
-                        <label for="" style="font-size:20px;font-weight:600">IMAGE</label>
-                        <label for="img_id" class="label">	Image_ID</label>
-                        <input type="text" id="img_id" class="input" name="Image_ID" >
-                        <label for="col_id" class="label">cid</label>
-                        <input type="text" id="col_id" class="input" name="cid">
-                        <label for="p1" class="label">Image_path1</label>
-                        <input type="text" id="p1" class="input" name="Image_path1" >
-                        <label for="p2" class="label">Image_path2</label>
-                        <input type="text" id="p2" class="input" name="Image_path2" >
-                        <label for="p3" class="label">Image_path3</label>
-                        <input type="text" id="p3" class="input" name="Image_path3" >
-                        <label for="p4" class="label">Image_path4</label>
-                        <input type="text" id="p4" class="input" name="Image_path4" >
-                        <label for="img_desc" class="label">Image_desc</label>
-                        <input type="text" id="img_desc" class="input" name="Image_desc" >
-                        <input type="submit" class="submit" value="submit" >
-                        <input type="submit" class="cancel" value="Cancel">
-                    </form>
-                    </div>
-                    <div class="addcontainer">
-                    <form class="addcont" action="insert.php" method="post">
-                    <label for="" style="font-size:20px;font-weight:600">ADD IMAGE</label>
-                        <label for="img_id" class="label">	Image_ID</label>
-                        <input type="text" id="img_id" class="input" name="Image_ID" >
-                        <label for="col_id" class="label">cid</label>
-                        <input type="text" id="col_id" class="input" name="cid">
-                        <label for="p1" class="label">Image_path1</label>
-                        <input type="text" id="p1" class="input" name="Image_path1" >
-                        <label for="p2" class="label">Image_path2</label>
-                        <input type="text" id="p2" class="input" name="Image_path2" >
-                        <label for="p3" class="label">Image_path3</label>
-                        <input type="text" id="p3" class="input" name="Image_path3" >
-                        <label for="p4" class="label">Image_path4</label>
-                        <input type="text" id="p4" class="input" name="Image_path4" >
-                        <label for="img_desc" class="label">Image_desc</label>
-                        <input type="text" id="img_desc" class="input" name="Image_desc" >
-                        <input type="submit" class="submita" value="submit" >
-                        <input type="submit" class="cancela" value="Cancel">
-                    </form>
-                </div>    
+                    
             </div>
             </div>
             <div class="mainpage" id="cumpage">
             <div class="cmcontainer">
                     <div class="cmheader">
                         <div class="heading">Customer</div>
-                        <div class="add">Add Feedback</div>
                     </div>
                 <?php
                     $sql = "SELECT * FROM `user`"; 
@@ -1269,11 +1226,11 @@ if(isset($_GET['flag'])){
                                     <th>email</th>
                                     <th>phone</th>
                                     <th>gender</th>
-                                    <th>password</th>
                                     <th>Address</th>
                                     <th>PIN</th>
                                     <th>City</th>
                                     <th>Registration_date</th>
+                                    <th>usr_status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -1289,12 +1246,12 @@ if(isset($_GET['flag'])){
                                     <td>{$row['email']}</td>
                                     <td>{$row['phone']}</td>
                                     <td>{$row['gender']}</td>
-                                    <td>{$row['pass']}</td>
                                     <td>{$row['address']}</td>
                                     <td>{$row['pin']}</td>
                                     <td>{$row['city']}</td>
                                     <td>{$row['registration_date']}</td>
-                                    <td><span class="button" id="edit">Edit</span></td>
+                                    <td>{$row['usr_status']}</td>
+                                    <td><span class="button edit">Edit</span><span class="button disable">Active</span></td>
                                 </tr>
                              _END;
                         }
@@ -1308,52 +1265,36 @@ if(isset($_GET['flag'])){
                     <div class="formcontainer">
                     <form class="addcat" action="update.php" method="post">
                         <label for="" style="font-size:20px;font-weight:600">IMAGE</label>
-                        <label for="img_id" class="label">	Image_ID</label>
-                        <input type="text" id="img_id" class="input" name="Image_ID" >
-                        <label for="col_id" class="label">cid</label>
-                        <input type="text" id="col_id" class="input" name="cid">
-                        <label for="p1" class="label">Image_path1</label>
-                        <input type="text" id="p1" class="input" name="Image_path1" >
-                        <label for="p2" class="label">Image_path2</label>
-                        <input type="text" id="p2" class="input" name="Image_path2" >
-                        <label for="p3" class="label">Image_path3</label>
-                        <input type="text" id="p3" class="input" name="Image_path3" >
-                        <label for="p4" class="label">Image_path4</label>
-                        <input type="text" id="p4" class="input" name="Image_path4" >
-                        <label for="img_desc" class="label">Image_desc</label>
-                        <input type="text" id="img_desc" class="input" name="Image_desc" >
+                        <label for="userID" class="label">	userID</label>
+                        <input type="text" id="userID" class="input" name="userID" >
+                        <label for="fname" class="label">First name</label>
+                        <input type="text" id="fname" class="input" name="fname">
+                        <label for="lname" class="label">Last name</label>
+                        <input type="text" id="lname" class="input" name="lname" >
+                        <label for="email" class="label">email</label>
+                        <input type="text" id="email" class="input" name="email" >
+                        <label for="phone" class="label">phone</label>
+                        <input type="text" id="phone" class="input" name="phone" >
+                        <label for="gender" class="label">gender</label>
+                        <input type="text" id="gender" class="input" name="gender" >
+                        <label for="add" class="label">Address</label>
+                        <input type="text" id="add" class="input" name="add" >
+                        <label for="pin" class="label">pin</label>
+                        <input type="text" id="pass" class="input" name="pin" >
+                        <label for="city" class="label">city</label>
+                        <input type="text" id="city" class="input" name="city" >
                         <input type="submit" class="submit" value="submit" >
                         <input type="submit" class="cancel" value="Cancel">
                     </form>
                     </div>
-                    <div class="addcontainer">
-                    <form class="addcont" action="insert.php" method="post">
-                    <label for="" style="font-size:20px;font-weight:600">ADD IMAGE</label>
-                        <label for="img_id" class="label">	Image_ID</label>
-                        <input type="text" id="img_id" class="input" name="Image_ID" >
-                        <label for="col_id" class="label">cid</label>
-                        <input type="text" id="col_id" class="input" name="cid">
-                        <label for="p1" class="label">Image_path1</label>
-                        <input type="text" id="p1" class="input" name="Image_path1" >
-                        <label for="p2" class="label">Image_path2</label>
-                        <input type="text" id="p2" class="input" name="Image_path2" >
-                        <label for="p3" class="label">Image_path3</label>
-                        <input type="text" id="p3" class="input" name="Image_path3" >
-                        <label for="p4" class="label">Image_path4</label>
-                        <input type="text" id="p4" class="input" name="Image_path4" >
-                        <label for="img_desc" class="label">Image_desc</label>
-                        <input type="text" id="img_desc" class="input" name="Image_desc" >
-                        <input type="submit" class="submita" value="submit" >
-                        <input type="submit" class="cancela" value="Cancel">
-                    </form>
-                </div>    
+                    
             </div>
             </div>
             <div class="mainpage" id="subpage">
             <div class="cmcontainer">
             <div class="cmheader">
                         <div class="heading">Refund</div>
-                        <div class="add">Add Refund</div>
+                        
                     </div>
                 <?php
                     $sql = "SELECT * FROM `refund`"; 
@@ -1387,7 +1328,7 @@ if(isset($_GET['flag'])){
                                     <td>{$row['refund_reason']}</td>
                                     <td>{$row['refund_amt']}</td>
                                     <td>{$row['refund_status']}</td>
-                                    <td><span class="button" id="edit">Edit</span><span class="button">Disable</span></td>
+                                    <td><span class="button edit">Edit</span></td>
                                 </tr>
                              _END;
                         }
@@ -1419,27 +1360,7 @@ if(isset($_GET['flag'])){
                         <input type="submit" class="cancel" value="Cancel">
                     </form>
                     </div>
-                    <div class="addcontainer">
-                    <form class="addcont" action="insert.php" method="post">
-                    <label for="" style="font-size:20px;font-weight:600">REFUND</label>
-                        <label for="refund_id" class="label">refund_id</label>
-                        <input type="text" id="refund_id" class="input" name="refund_id" >
-                        <label for="order_id" class="label">order_id</label>
-                        <input type="text" id="order_id" class="input" name="order_id">
-                        <label for="request_date" class="label">request_date</label>
-                        <input type="text" id="request_date" class="input" name="request_date" >
-                        <label for="refund_date" class="label">refund_date</label>
-                        <input type="text" id="refund_date" class="input" name="refund_date" >
-                        <label for="refund_reason" class="label">refund_reason</label>
-                        <input type="text" id="refund_reason" class="input" name="refund_reason" >
-                        <label for="refund_amt" class="label">refund_amt</label>
-                        <input type="text" id="refund_amt" class="input" name="refund_amt" >
-                        <label for="refund_status" class="label">refund_status</label>
-                        <input type="text" id="refund_status" class="input" name="refund_status" >
-                        <input type="submit" class="submita" value="submit" >
-                        <input type="submit" class="cancela" value="Cancel">
-                    </form>
-                </div>    
+                   
             </div>
             </div> 
             </div>
@@ -1459,8 +1380,7 @@ if(isset($_GET['flag'])){
                             <thead>
                                 <tr>
                                     <th>offer_id</th>
-                                    <th>user_id</th>
-                                    <th>product_id</th>
+                                    <th>offer_name</th>
                                     <th>offer_details</th>
                                     <th>offer_status</th>
                                     <th>Action</th>
@@ -1473,11 +1393,10 @@ if(isset($_GET['flag'])){
                             echo <<< _END
                                 <tr>
                                     <td>{$row['offer_id']}</td>
-                                    <td>{$row['user_id']}</td>
-                                    <td>{$row['product_id']}</td>
+                                    <td>{$row['offer_name']}</td>
                                     <td>{$row['offer_details']}</td>
                                     <td>{$row['offer_status']}</td>
-                                    <td><span class="button" id="edit">Edit</span><span class="button">Disable</span></td>
+                                    <td><span class="button edit">Edit</span><span class="button disable">Disable</span></td>
                                 </tr>
                              _END;
                         }
@@ -1493,14 +1412,10 @@ if(isset($_GET['flag'])){
                         <label for="" style="font-size:20px;font-weight:600">OFFER</label>
                         <label for="offer_id" class="label">offer_id</label>
                         <input type="text" id="offer_id" class="input" name="offer_id" >
-                        <label for="user_id" class="label">user_id</label>
-                        <input type="text" id="user_id" class="input" name="user_id">
-                        <label for="product_id" class="label">product_id</label>
-                        <input type="text" id="p1" class="input" name="product_id" >
+                        <label for="offer_nm" class="label">offer_name</label>
+                        <input type="text" id="offer_nm" class="input" name="offer_nm" >
                         <label for="offer_details" class="label">offer_details</label>
                         <input type="text" id="p2" class="input" name="offer_details" >
-                        <label for="offer_status" class="label">offer_status</label>
-                        <input type="text" id="offer_status" class="input" name="offer_status" >
                         <input type="submit" class="submit" value="submit" >
                         <input type="submit" class="cancel" value="Cancel">
                     </form>
@@ -1510,14 +1425,10 @@ if(isset($_GET['flag'])){
                     <label for="" style="font-size:20px;font-weight:600">OFFER</label>
                         <label for="offer_id" class="label">offer_id</label>
                         <input type="text" id="offer_id" class="input" name="offer_id" >
-                        <label for="user_id" class="label">user_id</label>
-                        <input type="text" id="user_id" class="input" name="user_id">
-                        <label for="product_id" class="label">product_id</label>
-                        <input type="text" id="p1" class="input" name="product_id" >
+                        <label for="offer_nm" class="label">offer_name</label>
+                        <input type="text" id="offer_nm" class="input" name="offer_nm" >
                         <label for="offer_details" class="label">offer_details</label>
                         <input type="text" id="p2" class="input" name="offer_details" >
-                        <label for="offer_status" class="label">offer_status</label>
-                        <input type="text" id="offer_status" class="input" name="offer_status" >
                         <input type="submit" class="submita" value="submit" >
                         <input type="submit" class="cancela" value="Cancel">
                     </form>
@@ -1528,7 +1439,6 @@ if(isset($_GET['flag'])){
             <div class="cmcontainer">
                     <div class="cmheader">
                         <div class="heading">Payment</div>
-                        <div class="add">Add payment</div>
                     </div>
                 <?php
                     $sql = "SELECT * FROM `payment`"; 
@@ -1558,7 +1468,7 @@ if(isset($_GET['flag'])){
                                     <td>{$row['payment_mode']}</td>
                                     <td>{$row['payment_date']}</td>
                                     <td>{$row['payment_status']}</td>
-                                    <td><span class="button" id="edit">Edit</span></td>
+                                    <td><span class="button edit">Edit</span></td>
                                 </tr>
                              _END;
                         }
@@ -1586,23 +1496,7 @@ if(isset($_GET['flag'])){
                         <input type="submit" class="cancel" value="Cancel">
                     </form>
                     </div>
-                    <div class="addcontainer">
-                    <form class="addcont" action="insert.php" method="post">
-                    <label for="" style="font-size:20px;font-weight:600">PAYMENT</label>
-                        <label for="transaction_id" class="label">transaction_id</label>
-                        <input type="text" id="transaction_id" class="input" name="transaction_id" >
-                        <label for="order_id" class="label">order_id</label>
-                        <input type="text" id="order_id" class="input" name="order_id">
-                        <label for="payment_mode" class="label">payment_mode</label>
-                        <input type="text" id="payment_mode" class="input" name="payment_mode" >
-                        <label for="payment_date" class="label">payment_date</label>
-                        <input type="text" id="payment_date" class="input" name="payment_date" >
-                        <label for="payment_status" class="label">payment_status</label>
-                        <input type="text" id="payment_status" class="input" name="payment_status" >
-                        <input type="submit" class="submita" value="submit" >
-                        <input type="submit" class="cancela" value="Cancel">
-                    </form>
-                </div>    
+                   
             </div>
             </div>
         </section>
@@ -1710,6 +1604,7 @@ if(isset($_GET['flag'])){
         var formcontainer=document.querySelectorAll(".formcontainer");
         var addcontainer=document.querySelectorAll(".addcontainer");
         var edit=document.querySelectorAll(".edit");
+        var disable=document.querySelectorAll(".disable");
         // var form=document.querySelector(".addcat");
         var cancel=document.querySelectorAll(".cancel");
         var submit=document.querySelectorAll(".submit");
@@ -1740,6 +1635,53 @@ if(isset($_GET['flag'])){
             addcontainer[k].style.display="none";
             });
          }
+         for(let i=0;i<disable.length;i++){
+            var con=disable[i].textContent;
+                    if(con=='Enabled'){
+                        disable[i].innerHTML='bkabh';
+                    }
+                    console.log(disable[i])
+            disable[i].addEventListener("click",(e)=>{
+                // e.preventDefault();
+                
+                var len=e.currentTarget.parentNode.parentNode.getElementsByTagName('td').length;
+                var prid=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[0].textContent;
+                var header=e.currentTarget.parentNode.parentNode.parentNode.parentNode.getElementsByTagName('tr')[0].getElementsByTagName('th')[0].textContent;
+                console.log(header);
+                if(header=='category_id')
+                {
+
+                    var value=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[3].textContent;
+                    window.location.href="update.php?pid="+prid+"&value="+value+"&header="+header;
+
+                }
+                else if(header=='Product_id'){
+                    var value1=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[7].textContent;
+                    window.location.href="update.php?pid="+prid+"&value1="+value1+"&header="+header;
+                }
+                else if(header=='prodesc_ID'){
+                    var value2=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[4].textContent;
+                    window.location.href="update.php?pid="+prid+"&value2="+value2+"&header="+header;
+                }
+                else if(header=='cid'){
+                    var value3=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[3].textContent;
+                    window.location.href="update.php?pid="+prid+"&value3="+value3+"&header="+header;
+                }
+                else if(header=='offer_id'){
+                    var value4=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[3].textContent;
+                    window.location.href="update.php?pid="+prid+"&value4="+value4+"&header="+header;
+                }
+                else if(header=='userID'){
+                    var value5=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[10].textContent;
+                    window.location.href="update.php?pid="+prid+"&value5="+value5+"&header="+header;
+                }
+            //    console.log(header);
+            //    console.log(value);
+                // console.log(prid)
+            
+        })
+            
+        }
         for(let i=0;i<edit.length;i++){
             edit[i].addEventListener("click",(e)=>{
                 // e.preventDefault();
