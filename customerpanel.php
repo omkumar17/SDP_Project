@@ -1123,9 +1123,9 @@ $res=$conn->query($order);
     display:flex;
     flex-direction:row;
     justify-content:space-between;
-    height:auto;
+    height:130px;
     /* width:80%; */
-    border:1px solid black;
+    border:1px solid lightgrey;
     margin:20px 0;
 }
 .offerleft{
@@ -1142,7 +1142,7 @@ $res=$conn->query($order);
     flex-direction:column;
     align-items:center;
     justify-content:space-between;
-    width:140px;
+    width:180px;
     padding: 5px 20px;
 }
 .offerhead{
@@ -1157,7 +1157,7 @@ $res=$conn->query($order);
     /* float:right; */
     width:auto;
 
-    font-size:18px;
+    font-size:14px;
 }
 .condition{
     /* float:right; */
@@ -1558,7 +1558,7 @@ $res=$conn->query($order);
             <div class="cmcontainer">
             <div class="cmheader">
                         <div class="heading">Offers</div>
-                        <div class="add">Add offers</div>
+                       
                     </div>
                     <div class="offercontainer">
                         <?php
@@ -1568,38 +1568,18 @@ $res=$conn->query($order);
                         ?>
                         <div class="offer">
                             <div class="offerleft">
-                                <div class="offerhead">offer id</div>
-                                <div class="offerdet">Lorem ipsum dolor sit amet consectetur adipisicing elit. A, nam?</div>
+                                <div class="offerhead" style="color:teal">Get Extra 20% Off</div>
+                                <div class="offerdet">Get ready for summer with our stylish sandals. Discounts on selected styles.</div>
                             </div>
                             <div class="offerright">
-                                <div class="validity">2024-01-31</div>
-                                <div class="condition">T & C</div>
+                                <div class="validity">Valid till 31 jan, 2024</div>
+                                <div class="condition"><a href="term.php" style="text-decoration:none">View T&C</a></div>
                             </div>
                         </div>
                         <?php
                         // }?>
                     </div>
-                    <div class="addcontainer">
-                    <form class="addcont" action="insert.php" method="post">
-                    <label for="" style="font-size:20px;font-weight:600">ADD IMAGE</label>
-                        <label for="img_id" class="label">	Image_ID</label>
-                        <input type="text" id="img_id" class="input" name="Image_ID" >
-                        <label for="col_id" class="label">cid</label>
-                        <input type="text" id="col_id" class="input" name="cid">
-                        <label for="p1" class="label">Image_path1</label>
-                        <input type="text" id="p1" class="input" name="Image_path1" >
-                        <label for="p2" class="label">Image_path2</label>
-                        <input type="text" id="p2" class="input" name="Image_path2" >
-                        <label for="p3" class="label">Image_path3</label>
-                        <input type="text" id="p3" class="input" name="Image_path3" >
-                        <label for="p4" class="label">Image_path4</label>
-                        <input type="text" id="p4" class="input" name="Image_path4" >
-                        <label for="img_desc" class="label">Image_desc</label>
-                        <input type="text" id="img_desc" class="input" name="Image_desc" >
-                        <input type="submit" class="submita" value="submit" >
-                        <input type="submit" class="cancela" value="Cancel">
-                    </form>
-                </div>
+                    
             </div>
             </div>
             <div class="mainpage" id="paypage">
