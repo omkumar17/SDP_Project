@@ -26,7 +26,7 @@ $result=$conn->query($sql);
 if(isset($_GET['paymentmet'])){
     $paymet=$_GET['paymentmet'];
     if($paymet=='c'){
-        $ordins="INSERT INTO `order_tbl`(user_id, order_status, order_amount, shipping_address, shipping_status) VALUES ('$user','pending','$total','$addr','processing')";
+        $ordins="INSERT INTO `order_tbl`(user_id, order_status, order_amount,fname,lname,mobile,email, shipping_address, shipping_status) VALUES ('$user','pending','$total','$fname','$lname','$phone','$email','$addr','processing')";
         $orderres=$conn->query($ordins);
         $ordsel="SELECT order_id FROM `order_tbl` WHERE user_id='$user' ORDER BY order_id DESC LIMIT 1";
         $selres=$conn->query($ordsel);
@@ -59,7 +59,7 @@ if(isset($_GET['paymentmet'])){
     $orquant=$quanty-$quan;
     $sql="UPDATE `product_desc` SET quantity='$orquant' WHERE prodesc_ID='$prodescid'";
     $res=$conn->query($sql);
-    header("Refresh:2;url=index.php");
+    // header("Refresh:2;url=index.php");
 
 }
 else

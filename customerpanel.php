@@ -776,6 +776,25 @@ $res=$conn->query($order);
         flex-direction:column;
     }
 }
+.addrcontainer{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+
+}
+.subaddress{
+    height:auto;
+    width:200px;
+    margin:20px;
+    padding:20px;
+    border:2px solid black;
+    background:whitesmoke;
+    border-radius:10px;
+}
+.head{
+    height:20px;
+}
+
 
 </style>
 <style>
@@ -956,7 +975,7 @@ $res=$conn->query($order);
 
                 <li class="sideitem1 sideitem"><img src="book-check.png" alt="" class="sideimg"><span class="itemdesc">Order</span>
                 </li>
-                <li class="sideitem1 sideitem"><img src="file-question.png" alt="" class="sideimg"><span class="itemdesc">Feedback</span></li>
+                <li class="sideitem1 sideitem"><img src="file-question.png" alt="" class="sideimg"><span class="itemdesc">manage Address</span></li>
                 <li class="sideitem1 sideitem"><img src="thumbs-up.png" alt="" class="sideimg"><span class="itemdesc">wishlist</span></li>
                 <li class="sideitem1 sideitem"><img src="badge-percent.png" alt="" class="sideimg"><span class="itemdesc">Offer</span></li>
                 <li class="sideitem1 sideitem"><img src="paym.png" alt="" class="sideimg"><span class="itemdesc">Payment</span></li>
@@ -1284,9 +1303,42 @@ $res=$conn->query($order);
             <div class="mainpage" id="feedpage">
             <div class="cmcontainer">
             <div class="cmheader">
-                        <div class="heading">Payment</div>
-                        <div class="add">Add payment</div>
+                        <div class="heading">Saved address</div>
+                        <div class="add">Add New Address</div>
                     </div>  
+                    <div class="addrcontainer">
+                        <?php
+                        $addr="SELECT user.address , order_tbl.shipping_address FROM `user` JOIN `order_tbl` ON order_tbl.user_id=user.userID WHERE user.userID='$user' GROUP BY user.address";
+                        $adrres=$conn->query($addr);
+                        $addrrow=$adrres->fetch_assoc();
+                        ?>
+                        <div class="subaddress">
+                            
+                        <h3>Address 1</h3><hr>
+                            <?php echo $addrrow['address'];?>
+                        </div>
+                        <?php
+                        if($addrrow['shipping_address']!=''){?>
+                        <div class="subaddress">
+                        <h3>Address 2</h3><hr>
+                            <?php echo $addrrow['shipping_address'];?>
+                        </div>
+                        <?php
+                        }
+                        $c=2;
+                       while( $addrrow=$adrres->fetch_assoc()){
+                        $c++;
+                        ?>
+                        <div class="subaddress">
+                        
+                                <h3>Address <?php echo $c;?></h3><hr>
+                           
+                            <?php echo $addrrow['Shipping_address'];?>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
             </div>
             </div>
             

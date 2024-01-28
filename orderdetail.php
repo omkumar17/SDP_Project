@@ -209,6 +209,60 @@ if(isset($_GET['oid'])){
             color: white;
 
         }
+        @media only screen and (max-width:500px){
+            .description{
+                width:100%;
+            }
+        }
+        .action{
+            display:flex;
+            justify-content:space-around;
+            align-items:center;
+            margin-top:60px;
+        }
+        .buttons{
+            /* margin:auto; */
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:60px;
+            width:140px;
+            color:white;
+            background:red;
+            border-radius:10px;
+            font-size:18px;
+            font-weight:800;
+            cursor:pointer;
+        }
+        .canceltext{
+            
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            display:none;
+        }
+        .details{
+            border-top:1px solid black;
+            display:flex;
+            flex-direction:column;
+            height:auto;
+            width:100%;
+            justify-content:center;
+            align-items:center;
+        }
+        .details div{
+            display:flex;
+            flex-direction:row;
+            width:60%;
+        }
+        .title{
+            margin:10px 0;
+            width:30%;
+        }
+        .titledetail{
+            margin:10px 0;
+            width:70%;
+        }
     </style>
     <title>cart</title>
 </head>
@@ -239,7 +293,7 @@ if(isset($_GET['oid'])){
                             
                             ?>
                             <div class="card p-4">
-                                <h2 class="py-4 font-weight-bold">Cart</h2>
+                                <!-- <h2 class="py-4 font-weight-bold">Cart</h2> -->
                                 <div class="row">
                                     <div
                                         class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
@@ -250,7 +304,7 @@ if(isset($_GET['oid'])){
                                     <div class="col-md-7 col-11 mx-auto px-4 mt-2">
                                         <div class="row">
                                             <!-- product name  -->
-                                            <div class="col-6 card-title">
+                                            <span class=" description col-5 card-title">
                                                 <h1 class="mb-4 product_name">
                                                     <?php echo $crtrow['product_name']; ?>
                                                 </h1>
@@ -260,46 +314,23 @@ if(isset($_GET['oid'])){
                                                 <p class="mb-3">SIZE:
                                                     <?php echo $crtrow['size']; ?>
                                                 </p>
-                                            </div>
+                                                </span>
+                                            <span class="description col-7 card-title">
+                                                <?php echo ($crtrow['product_details']); ?>
+                                            </span>
                                             <!-- quantity inc dec -->
-                                            <div class="col-6">
-                                                <ul class="pagination justify-content-end set_quantity">
-                                                    <li class="page-item">
-                                                        <button class="page-link "
-                                                            onclick="decreaseNumber('textbox<?php echo $crtsize.$crtcol;?>','itemval<?php echo $crtsize.$crtcol;?>','<?php echo $crtrow['price'];?>')">
-                                                            <i class="fas fa-minus"></i> </button>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <form action="cart.php" class="quanform" method="get">
-                                                            <input type="text" name="crtquant" class="page-link quant"
-                                                                value="<?php echo $crtquan; ?>"
-                                                                id="textbox<?php echo $crtsize.$crtcol;?>">
-                                                            <input type="hidden" name="crtid"
-                                                                value="<?php echo $crtid;?>">
-                                                            <input type="submit" value="click to update" class="submit">
-                                                        </form>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <button class="page-link"
-                                                            onclick="increaseNumber('textbox<?php echo $crtsize.$crtcol;?>','itemval<?php echo $crtsize.$crtcol;?>','<?php echo $crtrow['price'];?>')">
-                                                            <i class="fas fa-plus"></i></button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                            <!--  -->
                                         <!-- //remover move and price -->
-                                        <div class="row">
-                                            <div class="col-8 d-flex justify-content-between remove_wish">
-                                                <p><i class="fas fa-trash-alt"></i> REMOVE ITEM</p>
-                                                <p><i class="fas fa-heart"></i>MOVE TO WISH LIST </p>
-                                            </div>
-                                            <div class="col-4 d-flex justify-content-end price_money">
+                                        <div class="description row">
+                                            
+                                            <div class="description col-4 d-flex justify-content-end price_money" style="justify-content:flex-start!important">
                                                 <h3>&#8377;<span id="itemval<?php echo $crtsize.$crtcol;?>">
                                                         <?php echo ($crtrow['price']*$crtquan); ?>
                                                     </span></h3>
                                             </div>
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                             <?php
@@ -319,12 +350,61 @@ if(isset($_GET['oid'])){
                             <!-- 2nd cart product -->
 
                         </div>
+                        <div class="details" >
+                            <?php
+                            $det="SELECT * FROM `order_tbl` WHERE order_id='$orid'";
+                            $detres=$conn->query($det);
+                            while($detrow=$detres->fetch_assoc()){?>
+                            <div><div class="title">Order id</div><div class="titledetail"><?php echo $detrow['order_id'];?></div></div>
+                            <div><div class="title">User id</div><div class="titledetail"><?php echo $detrow['user_id'];?></div></div>
+                            <div><div class="title">Name</div><div class="titledetail"><?php echo $detrow['fname'].' '.$detrow['lname'];?></div></div>
+                            <div><div class="title">Mobile no.</div><div class="titledetail"><?php echo $detrow['mobile'];?></div></div>
+                            <div><div class="title">Email</div><div class="titledetail"><?php echo $detrow['email'];?></div></div>
+                            <div><div class="title">Order date</div><div class="titledetail"><?php echo $detrow['order_date'];?></div></div>
+                            <div><div class="title">shipping address</div><div class="titledetail"><?php echo $detrow['shipping_address'];?></div></div>
+                            <div><div class="title">order Status</div><div class="titledetail"><?php echo $detrow['order_status'];?></div></div>
+                            <div><div class="title">order Amount</div><div class="titledetail"><?php echo $detrow['order_amount'];?></div></div>
+                            <div><div class="title">shipping status</div><div class="titledetail"><?php echo $detrow['shipping_status'];?></div></div>
+                            
+                            <?php
+                            }
+                            ?>
+                        </div>
                         <!-- right side div -->
+                        
                     </div>
                 </div>
             </div>
         </div>
+        
     </div>
+    <div class="action">
+        <div class="buttons cancel" onclick=cancelorder()>Cancel Order</div>
+        <!-- <div class="buttons"></div> -->
+        
+    </div>
+    <div class="canceltext">
+        <div class="cancelcontainer">
+            <form action="" method="post">
+                <input type="radio" name="cancel" value="">
+                <label for="">Dont want product</label><br>
+                <input type="radio" name="cancel" value="">
+                <label for="">Wrong product</label><br>
+                <input type="radio" name="cancel" value="">
+                <label for="">Defective product</label><br>
+                <input type="radio" name="cancel" value="">
+                <label for="">Wrong Details provided</label><br>
+                <!-- <input type="radio" name="cancel" value="">
+                <label for=""></label><br>
+                <input type="radio" name="cancel" value="">
+                <label for=""></label><br> -->
+                <br>
+                <input type="submit" class="buttons" value="submit"><br>
+                <button class="buttons reject" style="background:blue" value="Reject cancellation">Reject cancellation</button>
+            </form>
+        </div>
+    </div>
+    
     
     <!-- Optional JavaScript -->
     <!-- Popper.js first, then Bootstrap JS -->
@@ -396,6 +476,24 @@ if(isset($_GET['oid'])){
         //             crtfrm[i].submit();
         //         })
         // }
+        var rejectButton = document.querySelector(".reject");
+
+rejectButton.addEventListener("click", function(event) {
+    document.querySelector(".canceltext").style.display="none";
+    document.querySelector(".cancel").style.display="flex";
+    event.preventDefault(); // This prevents the default form submission behavior
+});
+        function cancelorder(){
+            
+            if(confirm("are you sure you want to cancel order ?")){
+                document.querySelector(".canceltext").style.display="flex";
+                document.querySelector(".cancel").style.display="none";
+
+            }
+            else{
+                alert("bye");
+            }
+        }
     </script>
 
 </body>
