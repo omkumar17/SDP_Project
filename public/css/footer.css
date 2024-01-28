@@ -5,6 +5,7 @@ footer{
     position: relative;
     width: 100%;
     padding: 40px 5vw;
+    padding-top:0;
     padding-bottom: 80px;
     /* background: #e2e2e2; */
     border-top: 0.5px solid #818181;
@@ -28,6 +29,7 @@ footer{
 .about-section{
     display:flex;
     flex-direction: column;
+   
 }
 .logo{
     width:80%;
@@ -39,6 +41,7 @@ footer{
 }
 .footer-ul-container{
     width: 70%;
+    margin:47px 0 0 0;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -51,6 +54,7 @@ footer{
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
     list-style: none;
+    justify-content:space-between;
 }
 
 .category-title{
@@ -69,7 +73,7 @@ footer{
     /* margin-top: 20px; */
 }
 .footer-category li{
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .footer-link:hover{
@@ -94,7 +98,8 @@ footer{
 .intro{
     margin: 10px;
     margin-left: 0;
-    color:teal;
+    color:black;
+    text-align:justify;
 }
 .social{
     margin:10px;

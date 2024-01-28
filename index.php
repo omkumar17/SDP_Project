@@ -14,8 +14,216 @@ $result=$conn->query($sql);
     <link rel="icon" href="public\img\ff logo.jpeg" type="image/x-icon">
     <title>Foot Fusion</title>
     <link rel="stylesheet" type="text/css" href="public\css\home.css">
+
     <style>
-  
+        .pre-btn,
+.nxt-btn {
+    /* display:none; */
+    border: none;
+    width: 10vw;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, #fff 100%);
+    cursor: pointer;
+    z-index: 8;
+}
+ *{
+    margin: 0;padding: 0;
+}
+footer{
+    position: relative;
+    width: 100%;
+    padding: 40px 5vw;
+    padding-top:0;
+    padding-bottom: 80px;
+    /* background: #e2e2e2; */
+    border-top: 0.5px solid #818181;
+    box-shadow: -2px -2px 50px #818181;
+}
+
+.footer-content{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    justify-content: space-between;
+    /* background: #e2e2e2; */
+}
+
+.about{
+    width:30%;
+    display: flex;
+    flex-direction: column;
+    /* background: #e2e2e2; */
+}
+.about-section{
+    display:flex;
+    flex-direction: column;
+   
+}
+.logo{
+    width:80%;
+    height:40%;
+}
+.logo img{
+    height:100%;
+    width:100%;
+}
+.footer-ul-container{
+    width: 70%;
+    margin:47px 0 0 0;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding-right: 10vw;
+}
+
+.footer-category{
+    /* width: 200px; */
+    /* display: grid; */
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    list-style: none;
+    justify-content:space-between;
+}
+
+.category-title{
+    /* grid-column: span 2; */
+    text-transform: capitalize;
+    color:teal;
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.footer-category .footer-link{
+    text-decoration: none;
+    text-transform: capitalize;
+    color:black;
+    /* margin-top: 20px; */
+}
+.footer-category li{
+    margin-top: 20px;
+}
+
+.footer-link:hover{
+    color:teal;
+}
+.footer-title, .info{
+    color: teal;
+    margin: 20px 0;
+    text-transform: capitalize;
+}
+
+.footer-title{
+    margin-top: 80px;
+    color:teal;
+}
+
+.footer-social-container{
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.intro{
+    margin: 10px;
+    margin-left: 0;
+    color:black;
+    text-align:justify;
+}
+.social{
+    margin:10px;
+    margin-top: 5px;
+    color: teal;
+    margin-left: 0px;
+    text-transform: capitalize;
+    
+}
+.social ul{
+    display:flex;
+    flex-direction: row;
+}
+.social ul a{
+    height:25px;
+    width:25px;
+    margin:10px;
+    margin-left: 0px;
+    margin-right: 15px;
+    text-decoration: none;
+    list-style: none;
+    color:teal
+}
+.social ul a li img{
+    width:100%;
+    height:100%;
+}
+.contact{
+    margin:10px;
+    margin-left: 0px;
+    list-style: none;
+    color:teal;
+}
+.contact li{
+    margin-bottom: 10px;
+}
+.contact li a{
+    text-decoration: none;
+    color:black;
+}
+
+/* .social:nth-child(1){
+    margin-left: 0;
+} */
+
+.footer-credit{
+    width: 100%;
+    padding: 10px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    color: teal;
+    background: rgba(0, 0, 0, 0.2);
+}
+@media only screen and (max-width:1068px){
+    .footer-content{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .footer-ul-container{
+        width:90%;
+        margin-top: 40px;
+        flex-direction:row;
+        flex-wrap: wrap;
+    }
+    .footer-category{
+        margin:10px;
+    }
+    .about{
+        width:100%;
+    }
+    .intro{
+        /* width:80%; */
+        margin-bottom: 40px;
+    }
+}
+@media only screen and (max-width:600px){
+    .footer-content{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .footer-ul-container{
+        /* width:90%; */
+        flex-direction:row;
+        flex-wrap: wrap;
+    }
+    .footer-category{
+        margin:10px;
+    }
+}
     </style>
 </head>
 
@@ -575,7 +783,78 @@ $result=$conn->query($sql);
     </section>
     <footer>
     </footer>
-    <script src="public\js\footer.js"></script>
+    <script>
+        const createFooter = () => {
+    let footer = document.querySelector('footer');
+
+    footer.innerHTML = `
+    <div class="footer-content">
+        <div class="about">
+            <div class="logo">
+                <img src="public/img/logo.jpg" alt="">
+            </div>
+            <div class="about-section">
+                <div class="intro">
+                Welcome to Foot Fusion, where innovation meets comfort in the world of footwear! We specialize in the art of foot fusion, a cutting-edge approach that seamlessly blends style and support to create the perfect pair of shoes for your unique needs.
+                </div><br>
+                <h3 style="color:teal">Follow Us On<h3>
+                <div class="social">
+                    <ul>
+                    <a href="https://www.instagram.com"><li class="instagram">
+                    <img src="public/img/instagram.jpg" alt="ins">
+                    </li></a>
+                    <a href="www.facebook.com"><li class="facebook">
+                    <img src="public/img/facebook.jpg" alt="fac">
+                    </li></a>
+                    <a href="www.linkedin.com"><li class="insta">
+                    <img src="public/img/linkedin.jpg" alt="lin">
+                    </li></a>
+                    </ul>
+                </div>
+                <div class="contact">
+                    <li class="mobile">Mobile: <a href="tel:+918799553324">8799553324</a></li>
+                    <li class="email">Email: <a href="mailto:footfusion16@gmail.com">footfusion16@gmail.com</a></li>
+                </div>
+            </div>
+        </div>
+        <div class="footer-ul-container">
+            <ul class="footer-category">
+                <li class="category-title">ABOUT COMPANY</li>
+                <li><a href="aboutus.php" class="footer-link">About Us</a></li>
+                <li><a href="contactus.php" class="footer-link">Contact Us</a></li>
+                <li><a href="locator.php" class="footer-link">Store Locator</a></li>
+                <li><a href="blog.php" class="footer-link">Blog</a></li>
+                <li><a href="#" class="footer-link"></a></li>
+            </ul>
+            <ul class="footer-category">
+                <li class="category-title">ONLINE SHOPPING</li>
+                <li><a href="select.php" class="footer-link">New Arrival</a></li>
+                <li><a href="select.php?categ=brands&grp=m" class="footer-link">Men</a></li>
+                <li><a href="select.php?categ=brands&grp=w" class="footer-link">Women</a></li>
+                <li><a href="select.php?categ=brands&grp=k" class="footer-link">Kids</a></li>
+                <li><a href="select.php?categ=brands" class="footer-link">Brands</a></li>
+            </ul>
+            <ul class="footer-category">
+                <li class="category-title">POLICIES</li>
+                <li><a href="return.php" class="footer-link">Return Policy</a></li>
+                <li><a href="privacy.php" class="footer-link">Privacy Policy</a></li>
+                <li><a href="term.php" class="footer-link">Terms & Conditions</a></li>
+                <li><a href="shipping.php" class="footer-link">Shipping Information</a></li>
+            </ul> 
+            <ul class="footer-category">
+                <li class="category-title">CUSTOMER SERVICE</li>
+                <li><a href="faq.php" class="footer-link">FAQ</a></li>
+                <li><a href="return_req.html" class="footer-link">Return Request</a></li>
+            </ul>
+        </div>
+    </div>
+   
+    <p class="footer-credit">Footwear, Best footwear online store</p>
+    `;
+}
+
+createFooter();
+    </script>
     <script src="public\js\home.js"></script>
     
     <script>

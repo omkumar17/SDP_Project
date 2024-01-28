@@ -89,7 +89,7 @@ echo<<<_END
         height: 90vh;
         align-items: center;
         justify-content: center;
-        background-image: url('public/img/back.jpeg');
+        background-image: url('public/img/loginfinal.png');
         border-radius: 20px;
         background-repeat: no-repeat;
         background-size: 100%;

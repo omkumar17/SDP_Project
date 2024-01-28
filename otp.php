@@ -9,9 +9,70 @@ else{
 }
 
 $to_email = $email;
-$subject = "Simple email test via php";
-$body = "Your Otp is " . $otp;
-$headers = "From: harshwadhwani268@gmail.com";
+$subject = "Unlock Your Account with a New Password";
+// $image_url="SDP_Project/public/img/ff logo.jpeg";
+// $body = "Your Otp is " . $otp;
+// $headers = "From: footfusion16@gmail.com";
+$body = '
+    <html>
+    <head>
+    <html>
+    <head>
+        <style>
+            body {
+                font-family: "Arial", sans-serif;
+                background-color: #f4f4f4;
+            }
+
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            h2.sub {
+                color: green;
+            }
+
+            h3 {
+                font-size: 16px;
+                line-height: 1.5;
+                color: #666;
+            }
+
+            h2.otp {
+                background-color: #4CAF50;
+                color: #fff;
+                padding: 10px 15px;
+                display: inline-block;
+                border-radius: 5px;
+                font-weight: bold;
+                margin: 0 auto; /* Center-align the OTP */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2 class="sub">' . $subject . '</h2>
+            <h3>Hello user,</h3>
+            <h3>Please use the verification code below on the FootFusion Website <br>to change your password </h3><center><h2 class="otp">' . $otp . '</h2></center>
+            <h3>If You did not request this then you can ignore the email</h3>
+            <h3>Thanks!<br>FootFusion Team</h3>
+        </div>
+    </body>
+    </html>
+';
+
+$headers = "MIME-Version: 1.0" . "\r\n";
+$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+$headers .= "From: <footfusion16@gmail.com>" . "\r\n";
+
+// Sending email
+// mail($to_email, $subject, $body, $headers);
+
 
 if (mail($to_email, $subject, $body, $headers)) {
     echo <<<_END

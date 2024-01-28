@@ -9,9 +9,8 @@ const createFooter = () => {
             </div>
             <div class="about-section">
                 <div class="intro">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum vitae, quis autem voluptate eaque nesciunt quidem
-                    in, aspernatur tempora inventore quod.
-                </div>
+                Welcome to Foot Fusion, where innovation meets comfort in the world of footwear! We specialize in the art of foot fusion, a cutting-edge approach that seamlessly blends style and support to create the perfect pair of shoes for your unique needs.
+                </div><br>
                 <h3 style="color:teal">Follow Us On<h3>
                 <div class="social">
                     <ul>
@@ -28,17 +27,17 @@ const createFooter = () => {
                 </div>
                 <div class="contact">
                     <li class="mobile">Mobile: <a href="tel:+918799553324">8799553324</a></li>
-                    <li class="email">Email: <a href="mailto:harshwadhwani268@gmail.com">harshwadhwani268@gmail.com</a></li>
+                    <li class="email">Email: <a href="mailto:footfusion16@gmail.com">footfusion16@gmail.com</a></li>
                 </div>
             </div>
         </div>
         <div class="footer-ul-container">
             <ul class="footer-category">
                 <li class="category-title">ABOUT COMPANY</li>
-                <li><a href="aboutus.html" class="footer-link">About Us</a></li>
-                <li><a href="contactus.html" class="footer-link">Contact Us</a></li>
-                <li><a href="locater.html" class="footer-link">Store Locator</a></li>
-                <li><a href="blog.html" class="footer-link">Blog</a></li>
+                <li><a href="aboutus.php" class="footer-link">About Us</a></li>
+                <li><a href="contactus.php" class="footer-link">Contact Us</a></li>
+                <li><a href="locator.php" class="footer-link">Store Locator</a></li>
+                <li><a href="blog.php" class="footer-link">Blog</a></li>
                 <li><a href="#" class="footer-link"></a></li>
             </ul>
             <ul class="footer-category">
@@ -51,14 +50,14 @@ const createFooter = () => {
             </ul>
             <ul class="footer-category">
                 <li class="category-title">POLICIES</li>
-                <li><a href="return.html" class="footer-link">Return Policy</a></li>
-                <li><a href="privacy.html" class="footer-link">Privacy Policy</a></li>
-                <li><a href="term.html" class="footer-link">Terms & Conditions</a></li>
-                <li><a href="shipping.html" class="footer-link">Shipping Information</a></li>
+                <li><a href="return.php" class="footer-link">Return Policy</a></li>
+                <li><a href="privacy.php" class="footer-link">Privacy Policy</a></li>
+                <li><a href="term.php" class="footer-link">Terms & Conditions</a></li>
+                <li><a href="shipping.php" class="footer-link">Shipping Information</a></li>
             </ul> 
             <ul class="footer-category">
                 <li class="category-title">CUSTOMER SERVICE</li>
-                <li><a href="faq.html" class="footer-link">FAQ</a></li>
+                <li><a href="faq.php" class="footer-link">FAQ</a></li>
                 <li><a href="return_req.html" class="footer-link">Return Request</a></li>
             </ul>
         </div>

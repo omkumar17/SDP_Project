@@ -26,7 +26,7 @@ $res=$conn->query($order);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin Panel</title>
     <link rel="stylesheet" href="adminpanel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
@@ -682,7 +682,7 @@ $res=$conn->query($order);
    .custdetails{
     display:flex;
     flex-direction:row;
-    padding: 0px 30px 0px 30px;
+    padding: 0px 30px 0px 50px;
    }
    .subcustdetails{
     width:50%;
@@ -777,6 +777,156 @@ $res=$conn->query($order);
     }
 }
 
+</style>
+<style>
+    .custdetails {
+            display: flex;
+            justify-content: space-around;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            margin: 20px;
+            margin-left:50px;
+            box-sizing: border-box;
+            padding: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .subcustdetails {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .subdetail {
+            margin-bottom: 20px;
+        }
+
+        .detailheading {
+            font-size: 18px;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+
+        .detailcontent {
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .cmheader {
+            display: flex;
+            justify-content: space-between;
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            margin-left:50px;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            
+            text-transform: uppercase; /* Add margin to match your form */
+        }
+
+        .heading {
+            font-size: 24px;
+            margin-top:40px;
+            font-weight: bold;
+        }
+
+        .add {
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top:40px;
+            transition: background-color 0.3s;
+        }
+
+        .add:hover {
+            background-color: #27ae60;
+        }
+        .addcontainer {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 750px;
+            margin: 20px;
+            box-sizing: border-box;
+            padding: 20px;
+            animation: fadeIn 1s ease-out;
+            margin-left:150px;
+            margin-top:90px;
+        }
+
+        .label {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .input,
+        textarea {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .input:focus,
+        textarea:focus {
+            border-color: #3498db;
+        }
+
+        .submit,
+        .cancel {
+            background-color: green;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .submit:hover,
+        .cancel:hover {
+            background-color: teal;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 </style>
 </head>
 
@@ -1048,7 +1198,7 @@ $res=$conn->query($order);
                     </div>
                     <div class="addcontainer">
                     <form class="addcat" action="" method="get">
-                        <label for="" style="font-size:20px;font-weight:600">User Details</label>
+                        <label for="" style="font-size:30px;font-weight:600;color:green;">User Details</label>
                         <label for="fname" class="label">First name</label>
                         <input type="text" id="fname" class="input" name="fname" value="{$row['fname']}">
                         <label for="lname" class="label">Last Name</label>

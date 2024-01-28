@@ -349,7 +349,7 @@ class Product{
 				$productHTML .= '<div class="product-info">';
 				$productHTML .= '<div class="product-brand">'.$product['product_name'].'</div>';
 				$productHTML .= '<p class="product-short-des">'.$product['product_details'].'</p>';
-				$productHTML .= '<span class="price">$'.$product['price'].'</span><span class="actual-price">$40</span>';
+				$productHTML .= '<span class="price">₹'.$product['price'].'</span><span class="actual-price">₹'.$product['actual_price'].'</span>';
 				$productHTML .= '</div>';
 				$productHTML .= '</div>';
 				$productHTML .= '</a>';

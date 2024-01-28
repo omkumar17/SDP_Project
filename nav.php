@@ -126,28 +126,30 @@
 .logindrop{
     display:none;
     position:absolute;
-    top:90px;
+    top:100px;
     /* height:100px; */
-    width:100px;
+    width:150px;
     /* background-color:blue; */
-    border:1px solid teal;
+    border:1px solid white;
     /* display:block; */
 
 }
 .logindrop a{
     list-style:none;
     text-decoration:none;
-    color:teal;
+    color:black;
     /* margin: 2px; */
     text-align:center;
     /* background-color:red; */
-    border:1px solid teal;
+    border:1px solid white;
     /* width:100px; */
     display:block;
     /* padding: 1px; */
 }
 .logindrop a li{
-    padding:5px;
+    padding:7px;
+    display:flex;
+    flex-direction:row;
 }
 .visible{
        display:block;
@@ -212,26 +214,26 @@ if(isset($_COOKIE['userID']))
 
                 </div>
                 <img class="login"  src="public/img/login.png" alt="" style="cursor:pointer">
-                        <div class="logindrop" style="width:120px;background:white">
+                        <div class="logindrop" style="width:150px;background:white;border-top:4px solid teal;">
                             <?php
                             if(isset($_COOKIE['userID'])){
                                 ?>
-                                <a><li style="color:white;font-width:800;background:rgb(20,22,78);font-size:14px">
+                                <a><li style="color:teal;font-weight:bold;font-size:15px;border-color:white;">
                                 <?php
                                     if($name!="")
                                     {
-                                        echo "logged in as $name";
+                                        echo "Logged in as $name";
                                     }
                                 ?>
                                 </li></a>
-                                <a href="customerpanel.php"><li><img src="public\img\circle-user-round.png" alt="">&nbsp;&nbsp; Profile</li></a>
-                                <a href="logout.php"><li><img src="public\img\log-out-profile.png" alt="">&nbsp;&nbsp; Logout</li></a>
+                                <a href="customerpanel.php"><li style="border-color:white;"><img src="public\img\square-user-round.png" alt="">&nbsp;&nbsp; Profile</li></a>
+                                <a href="logout.php"><li style="border-color:white;"><img src="public\img\logut.png" alt="">&nbsp;&nbsp; Logout</li></a>
                                 <?php
                             }
                             else{
                                 ?>
-                                <a href="register.php"><li><img src="public\img\notebook-text.png" alt="">&nbsp;&nbsp; Register</li></a>
-                                <a href="login.php"><li><img src="public\img\log-in.png" alt="">&nbsp;&nbsp; Login</li></a>
+                                <a href="register.php"><li style="border-color:white;"><img src="public\img\book-lock.png" alt="">&nbsp;&nbsp; Register</li></a>
+                                <a href="login.php"><li style="border-color:white;"><img src="public\img\logn.png" alt="">&nbsp;&nbsp; Login</li></a>
                                 <?php
                             }
                             ?>
