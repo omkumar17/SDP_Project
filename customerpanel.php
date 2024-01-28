@@ -35,12 +35,18 @@ $res=$conn->query($order);
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-EXAMPLEHASH" crossorigin="anonymous" />
+   
     <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     
+        
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
     <!-- <link rel="stylesheet" type="text/css" href="public\css\home.css"> -->
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap');
     * {
     padding: 0;
     margin: 0;
@@ -48,7 +54,9 @@ $res=$conn->query($order);
     /* font-family: 'Poppins', sans-serif; */
 }
 
-
+.gold-star {
+            color: gold;
+        }
 
 #sidebar {
     padding: 15px 0px 15px 0px;
@@ -223,6 +231,7 @@ $res=$conn->query($order);
     margin-top: 20px;
     margin-bottom: 20px;
     position: relative;
+    width:50%;
 }
 
 .order .progressbar-track .progressbar {
@@ -259,7 +268,7 @@ $res=$conn->query($order);
     position: absolute;
     border-top: 1px solid #bbb;
     width: 100%;
-    top: 25px;
+    top: 6px;
 }
 
 #step-1::after {
@@ -325,7 +334,12 @@ $res=$conn->query($order);
     }
 
     #tracker {
-        top: 20px;
+        position:absolute;
+        /* top: 20px; */
+        transform:rotate(90deg);
+        left:-30px;
+        top:31px;
+        width:40%;
     }
 }
 
@@ -340,6 +354,14 @@ $res=$conn->query($order);
 
     #step-4::after {
         /* left: -5px; */
+    }
+    #tracker {
+        position:absolute;
+        /* top: 20px; */
+        transform:rotate(90deg);
+        left:-26px;
+        top:31px;
+        width:40%;
     }
 }
 
@@ -360,6 +382,14 @@ $res=$conn->query($order);
     .order .btn.btn-primary {
         font-size: 0.85rem;
     }
+    #tracker {
+        position:absolute;
+        /* top: 20px; */
+        transform:rotate(90deg);
+        left:-25px;
+        top:31px;
+        width:40%;
+    }
 }
 
 @media(max-width: 355px) {
@@ -369,6 +399,14 @@ $res=$conn->query($order);
 
     .order {
         padding: 10px;
+    }
+    #tracker {
+        position:absolute;
+        /* top: 20px; */
+        transform:rotate(90deg);
+        left:-25px;
+        top:31px;
+        width:40%;
     }
 }
 </style>
@@ -1164,6 +1202,18 @@ $res=$conn->query($order);
     font-size:18px;
 
 }
+.rate{
+    width:100px;
+    color:white;
+    background:green;
+    margin: 10px;
+    border-radius:20px;
+    cursor:pointer;
+
+}
+.rate:hover{
+    background:black;
+}
 </style>
 </head>
 
@@ -1257,12 +1307,13 @@ $res=$conn->query($order);
                                     <div class="rating d-flex align-items-center pt-1">
                                         <img src="https://www.freepnglogos.com/uploads/like-png/like-png-hand-thumb-sign-vector-graphic-pixabay-39.png"
                                             alt=""><span class="px-2">Rating:</span>
-                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star gold-star"></span>
                                         <span class="fas fa-star"></span>
                                         <span class="fas fa-star"></span>
                                         <span class="fas fa-star"></span>
                                         <span class="far fa-star"></span>
                                     </div>
+                                    <button class="rate">Rate</button>
                                 </div>
                             </div>
                             <div class="col-lg-8">
@@ -1558,7 +1609,7 @@ $res=$conn->query($order);
             <div class="cmcontainer">
             <div class="cmheader">
                         <div class="heading">Offers</div>
-                        <div class="add">Add offers</div>
+                        
                     </div>
                     <div class="offercontainer">
                         <?php
@@ -1579,27 +1630,7 @@ $res=$conn->query($order);
                         <?php
                         // }?>
                     </div>
-                    <div class="addcontainer">
-                    <form class="addcont" action="insert.php" method="post">
-                    <label for="" style="font-size:20px;font-weight:600">ADD IMAGE</label>
-                        <label for="img_id" class="label">	Image_ID</label>
-                        <input type="text" id="img_id" class="input" name="Image_ID" >
-                        <label for="col_id" class="label">cid</label>
-                        <input type="text" id="col_id" class="input" name="cid">
-                        <label for="p1" class="label">Image_path1</label>
-                        <input type="text" id="p1" class="input" name="Image_path1" >
-                        <label for="p2" class="label">Image_path2</label>
-                        <input type="text" id="p2" class="input" name="Image_path2" >
-                        <label for="p3" class="label">Image_path3</label>
-                        <input type="text" id="p3" class="input" name="Image_path3" >
-                        <label for="p4" class="label">Image_path4</label>
-                        <input type="text" id="p4" class="input" name="Image_path4" >
-                        <label for="img_desc" class="label">Image_desc</label>
-                        <input type="text" id="img_desc" class="input" name="Image_desc" >
-                        <input type="submit" class="submita" value="submit" >
-                        <input type="submit" class="cancela" value="Cancel">
-                    </form>
-                </div>
+                    
             </div>
             </div>
             <div class="mainpage" id="paypage">
