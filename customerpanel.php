@@ -1161,9 +1161,9 @@ $res=$conn->query($order);
     display:flex;
     flex-direction:row;
     justify-content:space-between;
-    height:auto;
+    height:130px;
     /* width:80%; */
-    border:1px solid black;
+    border:1px solid lightgrey;
     margin:20px 0;
 }
 .offerleft{
@@ -1180,7 +1180,7 @@ $res=$conn->query($order);
     flex-direction:column;
     align-items:center;
     justify-content:space-between;
-    width:140px;
+    width:180px;
     padding: 5px 20px;
 }
 .offerhead{
@@ -1195,7 +1195,7 @@ $res=$conn->query($order);
     /* float:right; */
     width:auto;
 
-    font-size:18px;
+    font-size:14px;
 }
 .condition{
     /* float:right; */
@@ -1609,7 +1609,9 @@ $res=$conn->query($order);
             <div class="cmcontainer">
             <div class="cmheader">
                         <div class="heading">Offers</div>
-                        
+
+                       
+
                     </div>
                     <div class="offercontainer">
                         <?php
@@ -1619,12 +1621,12 @@ $res=$conn->query($order);
                         ?>
                         <div class="offer">
                             <div class="offerleft">
-                                <div class="offerhead">offer id</div>
-                                <div class="offerdet">Lorem ipsum dolor sit amet consectetur adipisicing elit. A, nam?</div>
+                                <div class="offerhead" style="color:teal">Get Extra 20% Off</div>
+                                <div class="offerdet">Get ready for summer with our stylish sandals. Discounts on selected styles.</div>
                             </div>
                             <div class="offerright">
-                                <div class="validity">2024-01-31</div>
-                                <div class="condition">T & C</div>
+                                <div class="validity">Valid till 31 jan, 2024</div>
+                                <div class="condition"><a href="term.php" style="text-decoration:none">View T&C</a></div>
                             </div>
                         </div>
                         <?php
