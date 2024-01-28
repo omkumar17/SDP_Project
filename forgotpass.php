@@ -1,6 +1,6 @@
 <?php
 session_start();
-$otp=rand(0000,9999);
+$otp=rand(1111,9999);
 $_SESSION['otp']=$otp;
 if(isset($_POST['email']))
 {

@@ -26,7 +26,7 @@
 .notice-container {
     display: flex;
     width: 99vw;
-    height: auto;
+    height: 27px;
     overflow: hidden;
     margin: auto;
     object-fit: fill;
@@ -794,6 +794,8 @@
     }
     .logindrop a li{
         padding:5px;
+        display:flex;
+        flex-direction:row;
     }
     .visible{
            display:block;
