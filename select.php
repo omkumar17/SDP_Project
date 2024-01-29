@@ -89,7 +89,7 @@ $totalRecords = $product->getTotalProducts();
             margin-top:20px;
         }
     .filtermenu{
-        position:sticky;
+        position:fixed;
         display:block;
         top:170px;
         cursor: pointer;
@@ -102,6 +102,7 @@ $totalRecords = $product->getTotalProducts();
         color:teal;
         font-weight:600;
         z-index: 7;
+        background:white;
 
         }
         .aside{
@@ -115,6 +116,7 @@ $totalRecords = $product->getTotalProducts();
             margin-right:0;
             border:1px solid black;
             padding:0px 50px 100px 50px;
+            background:white;
         }
         .maincontent{
             width:100%;

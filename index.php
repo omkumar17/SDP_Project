@@ -229,7 +229,7 @@ footer{
         .collection:nth-child(3) {
     grid-column:span 1;
     margin-bottom: 10px;
-    height:60vh;
+    /* height:60vh; */
 }
     </style>
 </head>

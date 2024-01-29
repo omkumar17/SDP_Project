@@ -458,7 +458,7 @@ if(isset($_GET['flag'])){
                 </li>
                 <li class="sideitem1" id="prod"><img src="public\img\shopping-bag.png" alt="" class="sideimg"><span class="itemdesc">Product Management</span>
                 </li>
-                <li class="sideitem1 sideitem subprod"><img src="public\img\shopping-cart (1).png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Product</span></li>
+                <li class="sideitem1 sideitem subprod"><img src="public\img\shopping-cart.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Product</span></li>
                  <li class="sideitem1 sideitem subprod"><img src="public\img\book-text.png" alt="" class="sideimg" style="height:50%; width:20px;"><span class="itemdesc">Product description</span></li> 
                  <li class="sideitem1 sideitem subprod"><img src="public\img\crop.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Image</span></li> 
                  <li class="sideitem1 sideitem subprod"><img src="public\img\palette.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Color</span></li>
@@ -473,7 +473,7 @@ if(isset($_GET['flag'])){
                 </li>
                 <li class="sideitem1 sideitem"><img src="public\img\badge-indian-rupee.png" alt="" class="sideimg"><span class="itemdesc">Refund</span></li>
                 <li class="sideitem1 sideitem"><img src="public\img\badge-percent.png" alt="" class="sideimg"><span class="itemdesc">Offer</span></li>
-                <li class="sideitem1 sideitem"><img src="public\img\paym.png" alt="" class="sideimg"><span class="itemdesc">Payment</span></li>
+                <li class="sideitem1 sideitem"><img src="public\img\credit-card.png" alt="" class="sideimg"><span class="itemdesc">Payment</span></li>
                 <!-- <li class="sideitem1 sideitem"><img src="" alt="" class="sideimg"><span class="itemdesc"></span></li>
             <li class="sideitem1 sideitem"><img src="" alt="" class="sideimg"><span class="itemdesc"></span></li>
             <li class="sideitem1 sideitem"><img src="" alt="" class="sideimg"><span class="itemdesc"></span></li> -->
