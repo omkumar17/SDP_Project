@@ -27,7 +27,8 @@ $result=$conn->query($sql);
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, #fff 100%);
+    /* background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, #fff 100%); */
+    background:transparent;
     cursor: pointer;
     z-index: 8;
 }
