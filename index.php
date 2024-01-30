@@ -753,7 +753,7 @@ footer{
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
-                        <img src="public\img\flibrand.jpeg" class="product-thumb" alt="">
+                        <img src="public/img/flitebrand.jpeg" class="product-thumb" alt="">
                         <!-- <button class="card-btn">add to whislist</button> -->
                     </div>
                     <div class="product-info">
@@ -812,13 +812,13 @@ footer{
                 <h3 style="color:teal">Follow Us On<h3>
                 <div class="social">
                     <ul>
-                    <a href="https://www.instagram.com"><li class="instagram">
+                    <a href="https://www.instagram.com" target="_blank"><li class="instagram">
                     <img src="public/img/instagram.jpg" alt="ins">
                     </li></a>
-                    <a href="www.facebook.com"><li class="facebook">
+                    <a href="https://www.facebook.com" target="_blank"><li class="facebook">
                     <img src="public/img/facebook.jpg" alt="fac">
                     </li></a>
-                    <a href="www.linkedin.com"><li class="insta">
+                    <a href="https://www.linkedin.com" target="_blank"><li class="insta">
                     <img src="public/img/linkedin.jpg" alt="lin">
                     </li></a>
                     </ul>

@@ -158,7 +158,15 @@ body{
                 </div>
                 <div class="col-5 ms-5 mt-3 ps-3">
                     <label>City : </label>
-                    <input type="text" name="city" placeholder="Enter your city" class="form-control" pattern="[A-Za-z]+" title="(Please enter only alphabets)"><br>
+                    <input list="city" name="city" placeholder="Enter your city" class="form-control" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required><br>
+                    <datalist id="city">
+                        <option value="Mumbai"></option>
+                        <option value="Ahmedabad"></option>
+                        <option value="Delhi"></option>
+                        <option value="Jaipur"></option>
+                        <option value="Anand"></option>
+                        <option value="Ujjain"></option>
+                    </datalist>
                 </div>
                 <div class="col-5 mt-3">
                     <label>Pin Code : </label>

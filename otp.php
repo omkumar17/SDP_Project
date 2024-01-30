@@ -129,7 +129,7 @@ if(isset($_POST['n1']) && isset($_POST['n2']) && isset($_POST['n3']) && isset($_
     else{
         echo<<<_END
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>otp expired
+            <strong>OTP Expired
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         _END;
@@ -152,13 +152,6 @@ echo<<<_END
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <title>Forgot Password</title>
-    <script>
-    function moveFocus(current, next) {
-      if (current.value.length === current.maxLength) {
-        document.getElementById(next).focus();
-      }
-    }
-    </script>
     <style>
     body{
         background-color: #f8f9fa;
@@ -194,16 +187,16 @@ echo<<<_END
                 </div>
                 <div class="text">Enter OTP </div>
                 <div class="col-2 ms-5 mt-3 ps-3">
-                    <input type="text" name="n1" class="form-control" id="otp1" maxlength="1" oninput="moveFocus(this,'otp2')" required>
+                    <input type="text" name="n1" class="form-control" id="otp1" maxlength="1" oninput="moveFocus(this,'otp2')" oninput="remfocus(this, 'null')" required>
                 </div>
                 <div class="col-2 mt-3">
-                    <input type="text" name="n2" class="form-control" id="otp2" maxlength="1" oninput="moveFocus(this,'otp3')" required>
+                    <input type="text" name="n2" class="form-control" id="otp2" maxlength="1" oninput="moveFocus(this,'otp3')" oninput="remfocus(this, 'otp1')" required>
                 </div>
                 <div class="col-2 mt-3">
-                    <input type="text" name="n3" class="form-control" id="otp3" maxlength="1" oninput="moveFocus(this,'otp4')" required>
+                    <input type="text" name="n3" class="form-control" id="otp3" maxlength="1" oninput="moveFocus(this,'otp4')" oninput="remfocus(this, 'otp2')" required>
                 </div>
                 <div class="col-2 mt-3">
-                    <input type="text" name="n4" class="form-control" id="otp4" maxlength="1" required>
+                    <input type="text" name="n4" class="form-control" id="otp4" maxlength="1" oninput="remfocus(this, 'otp3')" required>
                 </div>
                 <div class="col-8 ms-5 mt-3 pt-4 butt">
                     <button type="submit" class="form-control" style="background-image: linear-gradient(to left,#90EE90,#87CEFA);">Verify</button><br>
@@ -212,6 +205,18 @@ echo<<<_END
          </div>
     </div>
 </form>
+<script>
+function moveFocus(current, next) {
+  if (current.value.length === current.maxLength) {
+    document.getElementById(next).focus();
+  }
+}
+function remfocus(current, prev) {
+    if (current.value.length === 0) {
+      document.getElementById(prev).focus();
+    }
+  }
+</script>
 </body>
 </html>
 _END;

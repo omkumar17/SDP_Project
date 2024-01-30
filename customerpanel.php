@@ -1226,7 +1226,7 @@ $res=$conn->query($order);
             <div class="navitems amenu" ><img src="public\img\menu.png" alt="" class="menuimg" style="background:teal"></div>
             <div class="navitems admin">
                 <div class="login"><img src="" alt="" class="logimg"></div>&nbsp;
-                <a href="index.php" style="text-decoration:none;color:blue"><div class="subtitle">home</div></a>
+                <a href="index.php" style="text-decoration:none;color:white;background-color:#154360;height:40px;width:140px;text-align:center;border-radius:7px;padding-top: 7px;"><div class="subtitle">Go Back to Home</div></a>
             </div>
         </div>
     </section>
@@ -1484,21 +1484,21 @@ $res=$conn->query($order);
                     <form class="addcat" action="" method="get">
                         <label for="" style="font-size:30px;font-weight:600;color:green;">User Details</label>
                         <label for="fname" class="label">First name</label>
-                        <input type="text" id="fname" class="input" name="fname" value="{$row['fname']}">
+                        <input type="text" id="fname" class="input" name="fname" value="{$row['fname']}" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
                         <label for="lname" class="label">Last Name</label>
-                        <input type="text" id="lname" class="input" name="lname" value="{$row['lname']}">
+                        <input type="text" id="lname" class="input" name="lname" value="{$row['lname']}" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
                         <label for="email" class="label">Email</label>
-                        <input type="text" id="email" class="input" name="email" value="{$row['email']}">
+                        <input type="email" id="email" class="input" name="email" value="{$row['email']}" required>
                         <label for="phone" class="label">Phone</label>
-                        <input type="text" id="phone" class="input" name="phone" value="{$row['phone']}">
+                        <input type="tel" id="phone" class="input" name="phone" value="{$row['phone']}" pattern="[0-9]{10}" title="(Please enter only numbers)" required>
                         <label for="gender" class="label">Gender</label>
-                        <input type="text" id="gender" class="input" name="gender" value="{$row['gender']}">
+                        <input type="text" id="gender" class="input" name="gender" value="{$row['gender']}" required>
                         <label for="address" class="label">Address</label>
-                        <textarea type="text" rows="5" cols="30" id="address" class="input" name="address" ">{$row['address']}</textarea>
+                        <textarea type="text" rows="5" cols="30" id="address" class="input" name="address" required>{$row['address']}</textarea>
                         <label for="pin" class="label">Pin</label>
-                        <input type="text" id="pin" class="input" name="pin" value="{$row['pin']}">
+                        <input type="text" id="pin" class="input" name="pin" value="{$row['pin']}" pattern="[0-9]{6}" title="(Please enter only numbers)" required>
                         <label for="city" class="label">City</label>
-                        <input type="text" id="gender" class="input" name="city" value="{$row['city']}">
+                        <input type="text" id="gender" class="input" name="city" value="{$row['city']}" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
                         <input type="submit" class="submit" value="submit" >
                         <input type="submit" class="cancel" value="Cancel">
                     </form>
