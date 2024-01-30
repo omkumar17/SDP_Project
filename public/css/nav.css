@@ -44,7 +44,7 @@
     border: 2px solid black;
 }
 .notice-content{
-    background-color: rgb(20,22,78);
+    background-color: teal;
     color:white;
     font-weight: 600;
     width: 99vw;
@@ -53,7 +53,7 @@
     padding: 2px 0;
 }
 .notice-content p{
-    background-color: rgb(20,22,78);
+    background-color: teal;
     /* font-size: 0.7rem; */
 }
 

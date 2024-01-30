@@ -1221,7 +1221,7 @@ $res=$conn->query($order);
 
     <section class="adminnavbar">
         <div class="navcontainer">
-            <div class="navitems head">customer page</div>
+            <div class="navitems head">CUSTOMER PAGE</div>
             <div class="navitems amenu" ><img src="public\img\menu.png" alt="" class="menuimg" style="background:teal"></div>
             <div class="navitems admin">
                 <div class="login"><img src="" alt="" class="logimg"></div>&nbsp;
