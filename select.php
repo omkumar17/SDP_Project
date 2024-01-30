@@ -63,6 +63,7 @@ $totalRecords = $product->getTotalProducts();
             font-size:18px;
         }
         .head{
+            font-weight:600;
             text-align:left;
             margin: 20px 0;
             font-size:20px;
@@ -209,12 +210,20 @@ $totalRecords = $product->getTotalProducts();
     justify-content:space-around;
   }
 }
+.poster{
+    margin-top:10px;
+    width:100%;
+    height:200px;
+}
+.imgcontainer, .imgcontainer img{
+    height:100%;
+    width:100%;
+}
 
     </style>
 </head>
 <body>
 <nav class="navbar"><?php include_once 'nav.php'; ?></nav>
-
         <div class="selectcontainer">
             <div class="filtermenu">Filter and sorting </div>
             <div class="filtercontent">
@@ -400,7 +409,19 @@ $totalRecords = $product->getTotalProducts();
                     
                 </div>
                 <div class="maincontent">
+                <?php 
+if(isset($_GET["poster"])){
+    ?>
+    <div class="poster">
+        <div class="imgcontainer">
+            <img src="public\img\images (2) (5).jpeg" alt="">
+        </div>
+    </div>
+    <?php
+}
+?>
                 <div id="results">
+                
                 </div>
                 </div>
                 <input type="hidden" id="totalRecords" value="<?php echo $totalRecords; ?>">
