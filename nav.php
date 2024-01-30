@@ -185,7 +185,7 @@ if(isset($_COOKIE['userID']))
     $name=$row['fname'];
 }
 ?>
-
+<head><link rel="icon" href="public/img/ff logo.jpeg" type="image/x-icon"></head>
 <section class="notice">
         <div class="notice-slider">
             <div class="notice-container">

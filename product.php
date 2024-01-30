@@ -47,6 +47,7 @@ if(isset($_GET['upd'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product</title>
+    <link rel="icon" href="public/img/ff logo.jpeg" type="image/x-icon">
     <link rel="stylesheet" href="public\css\home.css">
     <link rel="stylesheet" href="public\css\product.css">
     <style>

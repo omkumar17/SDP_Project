@@ -12,6 +12,7 @@ $result=$conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="public\img\ff logo.jpeg" type="image/x-icon">
+    <link rel="icon" href="public\img\ff logo.jpeg" type="image/x-icon">
     <title>Foot Fusion</title>
     <link rel="stylesheet" type="text/css" href="public\css\home.css">
 
@@ -424,11 +425,11 @@ footer{
             <!-- <p class="collection-title">men <br> apparels</p> -->
         </a>
         <a href="#" class="collection">
-            <img src="public\img\3.png" alt="">
+            <img src="public\img\kids.png" alt="">
             <!-- <p class="collection-title">accessories</p> -->
         </a>
         <a href="#" class="collection">
-            <img src="public\img\3.png" alt="">
+            <img src="public\img\accessories.png" alt="">
             <!-- <p class="collection-title">accessories</p> -->
         </a>
     </section>
@@ -759,7 +760,7 @@ footer{
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
-                        <img src="public\img\flibrand.jpeg" class="product-thumb" alt="">
+                        <img src="public/img/flitebrand.jpeg" class="product-thumb" alt="">
                         <!-- <button class="card-btn">add to whislist</button> -->
                     </div>
                     <div class="product-info">
@@ -818,13 +819,13 @@ footer{
                 <h3 style="color:teal">Follow Us On<h3>
                 <div class="social">
                     <ul>
-                    <a href="https://www.instagram.com"><li class="instagram">
+                    <a href="https://www.instagram.com" target="_blank"><li class="instagram">
                     <img src="public/img/instagram.jpg" alt="ins">
                     </li></a>
-                    <a href="www.facebook.com"><li class="facebook">
+                    <a href="https://www.facebook.com" target="_blank"><li class="facebook">
                     <img src="public/img/facebook.jpg" alt="fac">
                     </li></a>
-                    <a href="www.linkedin.com"><li class="insta">
+                    <a href="https://www.linkedin.com" target="_blank"><li class="insta">
                     <img src="public/img/linkedin.jpg" alt="lin">
                     </li></a>
                     </ul>
