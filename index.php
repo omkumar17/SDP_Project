@@ -274,7 +274,7 @@ footer{
     </section> -->
 
     <section class="product">
-        <div class="product-category">best selling</div>
+        <div class="product-category" style="color:teal;font-weight:800">BEST SELLING</div>
         <button class="pre-btn"><img src="public\img\nextbutton.png" alt="prebtn"></button>
         <button class="nxt-btn"><img src="public\img\nextbutton.png" alt="nxtbtn"></button>
 
@@ -425,7 +425,7 @@ footer{
         </a>
     </section>
     <br>
-    <h2 class="shopByCat">SHOP BY CATEGORY</h2>
+    <h2 class="shopByCat" style="color:teal;font-weight:bold;">SHOP BY CATEGORY</h2>
     <section class="product">
         <!-- <div class="product-category">best selling</div>
         <button class="pre-btn"><img src="public\img\nextbutton.png" alt="prebtn"></button>
@@ -647,7 +647,7 @@ footer{
     
 
     <section id="brand-sec">
-        <h2>BRANDS</h2>
+        <h2 style="color:teal;font-weight:bold">BRANDS</h2>
         <div class="brands">
             <a href="select.php?categ=brands&type=walkaroo" class="product-link" >
                 <div class="product-card">

@@ -157,6 +157,7 @@ include 'connection.php';
   padding:20px;
 }
     </style>
+    
 </head>
 <body>
   <?php if(isset($_COOKIE['userID']) && $user!="" && isset($_GET['ui']))
@@ -253,10 +254,10 @@ include 'connection.php';
           <!-- <button class="btn btn-primary" type="submit">Submit form</button> -->
 
         
-        <div class="paymentcontainer">
+        <div class="paymentcontainer" >
           <h4>Select Payment method</h4><br>
 
-          <div class="form-check">
+          <div class="form-check" style="margin-bottom:15px">
             <input class="form-check-input" value="c" type="radio" name="paymentmet" id="flexRadioDefault1">
             <label class="form-check-label" for="flexRadioDefault1">
               COD(Charges Applicable)
