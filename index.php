@@ -12,6 +12,7 @@ $result=$conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="public\img\ff logo.jpeg" type="image/x-icon">
+    <link rel="icon" href="public\img\ff logo.jpeg" type="image/x-icon">
     <title>Foot Fusion</title>
     <link rel="stylesheet" type="text/css" href="public\css\home.css">
 
@@ -416,11 +417,11 @@ footer{
             <!-- <p class="collection-title">men <br> apparels</p> -->
         </a>
         <a href="#" class="collection">
-            <img src="public\img\3.png" alt="">
+            <img src="public\img\kids.png" alt="">
             <!-- <p class="collection-title">accessories</p> -->
         </a>
         <a href="#" class="collection">
-            <img src="public\img\3.png" alt="">
+            <img src="public\img\accessories.png" alt="">
             <!-- <p class="collection-title">accessories</p> -->
         </a>
     </section>

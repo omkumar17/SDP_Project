@@ -1,13 +1,20 @@
 <?php
 session_start();
-if (isset($_SESSION['email']) && isset($_SESSION['otp'])) {
+if (isset($_SESSION['email']) && isset($_SESSION['otp']) && isset($_SESSION['currentDateTime'])) {
     $email = $_SESSION['email'];
     $otp = $_SESSION['otp'];
+    $currentDateTime=$_SESSION['currentDateTime'];
 }
+
 else{
     header("location:login.php");
 }
+// $currentDateTime = time();
 
+// Add 10 minutes to the current time
+$tenMinutesAhead = strtotime('+1 minutes', $currentDateTime);
+echo time();
+echo $tenMinutesAhead;
 $to_email = $email;
 $subject = "Unlock Your Account with a New Password";
 // $image_url="SDP_Project/public/img/ff logo.jpeg";
@@ -98,25 +105,37 @@ if(isset($_POST['n1']) && isset($_POST['n2']) && isset($_POST['n3']) && isset($_
     $n4=$_POST['n4'];
 
     $otp1=$n1.$n2.$n3.$n4;
-    if($otp1==$otp)
-    {
-        echo<<<_END
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Congrats! You can change your password
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        _END;
-        header("Refresh:1;url=changepassclick.php");
+    if (time() <= $tenMinutesAhead){
+        if($otp1==$otp)
+        {
+            echo<<<_END
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Congrats! You can change your password
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            _END;
+            header("Refresh:1;url=changepassclick.php");
+        }
+        else
+        {
+            echo<<<_END
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Please write correct otp
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            _END;
+        }
     }
-    else
-    {
+    else{
         echo<<<_END
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Please write correct otp
+            <strong>otp expired
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         _END;
+        header("Refresh:1;url=forgotpass.php");
     }
+   
 }
 
 
@@ -129,6 +148,7 @@ echo<<<_END
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="public\img\ff logo.jpeg" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <title>Forgot Password</title>
