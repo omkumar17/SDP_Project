@@ -69,7 +69,7 @@ input::-webkit-inner-spin-button {
     width:30px;
     height:30px;
     border-radius:2px;
-    margin-left:-55px;
+    margin:auto;
 }
 .ic{
     padding-top:60px;
@@ -78,14 +78,21 @@ input::-webkit-inner-spin-button {
         padding-top:5px;
     }
     .icon{
-        padding-left:180px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
     }
     .butt{
-        padding-left:180px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        margin:auto;
     }
     .checlab{
         display:inline;
     }
+    .auto{
+        margin:auto;
 </style>
 <h1 class="text-center" style="font-family:'Palatino Linotype';">Change Password</h1>
 <form action="chanpass.php" method="post">
@@ -95,27 +102,27 @@ input::-webkit-inner-spin-button {
                 <div class="icon">
                     <img src="public/img/change.png" height="130" width="130">
                 </div>
-                <div class="col-9 ms-5 mt-3">
+                <div class="col-9 mt-3 auto">
                     <label>Old Password: </label>
                     <input type="password" name="oldp" placeholder="enter your old password" class="form-control"  required><br>
                 </div>
-                <div class="col-9 ms-5 ps-2">
+                <div class="col-9 ps-2 auto">
                     <label>New Password : </label>
                     <input type="password" name="newp" placeholder="enter your new password" class="form-control" required><br>
                 </div>
                
-                <div class="col-9 ms-5 mt-3">
+                <div class="col-9 mt-3 auto">
                     <label>Confirm Password : </label>
                     <input type="password" name="confirmp" placeholder="reenter your new password" class="form-control" id="passwordInput" required>
                     
                 </div>
-                <div class="col-1 ic">
+                <div class="col-1 ic auto" style="position:absolute;top:66%;right:5%">
                         <a href="#" class="text-dark boricon" id="icon-click" onclick="togglePasswordVisibility()">
                         <i id="eyeIcon" class="fas fa-eye"></i>
                     </a>
                 </div>
                
-                <div class="col-7 ms-3 pt-5 butt">
+                <div class="col-7 pt-5 butt auto">
                     <button type="submit" class="form-control" style="background-image: linear-gradient(to left,#90EE90,#87CEFA);">Submit</button><br>
                 </div>
             </div>
