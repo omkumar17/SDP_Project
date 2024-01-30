@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="public\css\home.css">
     <link rel="stylesheet" type="text/css" href="public\css\nav.css">
+    <link rel="icon" href="public/img/ff logo.jpeg" type="image/x-icon">
     <title>FootFusion - Terms and Conditions</title>
     <style>
         body {

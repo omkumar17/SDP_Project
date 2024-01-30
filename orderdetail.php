@@ -25,6 +25,7 @@ if(isset($_GET['oid'])){
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
         integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+        <link rel="icon" href="public/img/ff logo.jpeg" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
         integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
         crossorigin="anonymous" />
@@ -258,10 +259,39 @@ if(isset($_GET['oid'])){
         .title{
             margin:10px 0;
             width:30%;
+            color:teal;
+            font-weight:bold;
         }
         .titledetail{
             margin:10px 0;
             width:70%;
+        }
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .canceltext {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .cancelcontainer {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 900px;
+            margin: auto;
+        }
+        .sub{
+            margin-left:200px;
+        }
+        .rej{
+            margin-left:200px;
         }
     </style>
     <title>cart</title>
@@ -386,21 +416,21 @@ if(isset($_GET['oid'])){
     <div class="canceltext">
         <div class="cancelcontainer">
             <form action="" method="post">
-                <input type="radio" name="cancel" value="">
-                <label for="">Dont want product</label><br>
-                <input type="radio" name="cancel" value="">
-                <label for="">Wrong product</label><br>
-                <input type="radio" name="cancel" value="">
-                <label for="">Defective product</label><br>
-                <input type="radio" name="cancel" value="">
-                <label for="">Wrong Details provided</label><br>
+                <input type="radio" name="cancel" value="" id="r1">
+                <label for="r1">Dont want product</label><br>
+                <input type="radio" name="cancel" value="" id="r2">
+                <label for="r2">Wrong product</label><br>
+                <input type="radio" name="cancel" value="" id="r3">
+                <label for="r3">Defective product</label><br>
+                <input type="radio" name="cancel" value="" id="r4">
+                <label for="r4">Wrong Details provided</label><br>
                 <!-- <input type="radio" name="cancel" value="">
                 <label for=""></label><br>
                 <input type="radio" name="cancel" value="">
                 <label for=""></label><br> -->
                 <br>
-                <input type="submit" class="buttons" value="submit"><br>
-                <button class="buttons reject" style="background:blue" value="Reject cancellation">Reject cancellation</button>
+                <input type="submit" class="buttons sub" value="submit">
+                <button class="buttons reject rej" style="background:blue" value="Reject cancellation">Reject cancellation</button>
             </form>
         </div>
     </div>

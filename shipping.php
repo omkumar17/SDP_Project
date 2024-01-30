@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="public\css\home.css">
+    <link rel="icon" href="public/img/ff logo.jpeg" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="public\css\nav.css">
     <title>FootFusion - Shipping Information</title>
     <style>

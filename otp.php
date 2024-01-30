@@ -1,13 +1,20 @@
 <?php
 session_start();
-if (isset($_SESSION['email']) && isset($_SESSION['otp'])) {
+if (isset($_SESSION['email']) && isset($_SESSION['otp']) && isset($_SESSION['currentDateTime'])) {
     $email = $_SESSION['email'];
     $otp = $_SESSION['otp'];
+    $currentDateTime=$_SESSION['currentDateTime'];
 }
+
 else{
     header("location:login.php");
 }
+// $currentDateTime = time();
 
+// Add 10 minutes to the current time
+$tenMinutesAhead = strtotime('+1 minutes', $currentDateTime);
+echo time();
+echo $tenMinutesAhead;
 $to_email = $email;
 $subject = "Unlock Your Account with a New Password";
 // $image_url="SDP_Project/public/img/ff logo.jpeg";
@@ -98,25 +105,37 @@ if(isset($_POST['n1']) && isset($_POST['n2']) && isset($_POST['n3']) && isset($_
     $n4=$_POST['n4'];
 
     $otp1=$n1.$n2.$n3.$n4;
-    if($otp1==$otp)
-    {
-        echo<<<_END
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Congrats! You can change your password
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        _END;
-        header("Refresh:1;url=changepassclick.php");
+    if (time() <= $tenMinutesAhead){
+        if($otp1==$otp)
+        {
+            echo<<<_END
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Congrats! You can change your password
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            _END;
+            header("Refresh:1;url=changepassclick.php");
+        }
+        else
+        {
+            echo<<<_END
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Please write correct otp
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            _END;
+        }
     }
-    else
-    {
+    else{
         echo<<<_END
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Please write correct otp
+            <strong>OTP Expired
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         _END;
+        header("Refresh:1;url=forgotpass.php");
     }
+   
 }
 
 
@@ -129,16 +148,10 @@ echo<<<_END
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="public\img\ff logo.jpeg" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <title>Forgot Password</title>
-    <script>
-    function moveFocus(current, next) {
-      if (current.value.length === current.maxLength) {
-        document.getElementById(next).focus();
-      }
-    }
-    </script>
     <style>
     body{
         background-color: #f8f9fa;
@@ -174,16 +187,16 @@ echo<<<_END
                 </div>
                 <div class="text">Enter OTP </div>
                 <div class="col-2 ms-5 mt-3 ps-3">
-                    <input type="text" name="n1" class="form-control" id="otp1" maxlength="1" oninput="moveFocus(this,'otp2')" required>
+                    <input type="text" name="n1" class="form-control" id="otp1" maxlength="1" oninput="moveFocus(this,'otp2')" oninput="remfocus(this, 'null')" required>
                 </div>
                 <div class="col-2 mt-3">
-                    <input type="text" name="n2" class="form-control" id="otp2" maxlength="1" oninput="moveFocus(this,'otp3')" required>
+                    <input type="text" name="n2" class="form-control" id="otp2" maxlength="1" oninput="moveFocus(this,'otp3')" oninput="remfocus(this, 'otp1')" required>
                 </div>
                 <div class="col-2 mt-3">
-                    <input type="text" name="n3" class="form-control" id="otp3" maxlength="1" oninput="moveFocus(this,'otp4')" required>
+                    <input type="text" name="n3" class="form-control" id="otp3" maxlength="1" oninput="moveFocus(this,'otp4')" oninput="remfocus(this, 'otp2')" required>
                 </div>
                 <div class="col-2 mt-3">
-                    <input type="text" name="n4" class="form-control" id="otp4" maxlength="1" required>
+                    <input type="text" name="n4" class="form-control" id="otp4" maxlength="1" oninput="remfocus(this, 'otp3')" required>
                 </div>
                 <div class="col-8 ms-5 mt-3 pt-4 butt">
                     <button type="submit" class="form-control" style="background-image: linear-gradient(to left,#90EE90,#87CEFA);">Verify</button><br>
@@ -192,6 +205,18 @@ echo<<<_END
          </div>
     </div>
 </form>
+<script>
+function moveFocus(current, next) {
+  if (current.value.length === current.maxLength) {
+    document.getElementById(next).focus();
+  }
+}
+function remfocus(current, prev) {
+    if (current.value.length === 0) {
+      document.getElementById(prev).focus();
+    }
+  }
+</script>
 </body>
 </html>
 _END;
