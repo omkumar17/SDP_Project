@@ -34,7 +34,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
             if ($email != 'admin890@gmail.com') {
                 setcookie('userID', $userID, time() + 3600, '/');
-                echo "Welcome, User $userID!";
+                // echo "Welcome, User $userID!";
                 $_COOKIE['userID'] = $userID;
                 echo<<<_END
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -46,8 +46,14 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
             if ($email == 'admin890@gmail.com') {
                 setcookie('userID', $userID, time() + 3600, '/');
-                echo "Welcome, User $userID!";
+                // echo "Welcome, User $userID!";
                 $_COOKIE['userID'] = $userID;
+                echo<<<_END
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Your Login is successful
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                _END;
                 header("Refresh:2;url=adminpanel.php");
             } else {
                 header("Refresh:2;url=index.php");

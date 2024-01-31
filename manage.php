@@ -45,21 +45,22 @@ if(isset($_GET['paymentmet'])){
             $tot=($quan*$price)-$dis;
             $ins="INSERT INTO order_detail(order_id, product_id, size, color ,quantity, rate, discount, amount) VALUES ('$order_id','$pid','$size','$col','$quan','$price','$dis','$tot')";
             $rein=$conn->query($ins);
+            $sql="SELECT * FROM `product_desc` JOIN `color` ON color.cid=product_desc.cid JOIN `product` ON product.Product_id=color.product_id WHERE product.Product_id='$pid' AND product_desc.size='$size' AND color.color='$col' ";
+            $res=$conn->query($sql);
+            $row=$res->fetch_assoc();
+            $quanty=$row['quantity'];
+            $prodescid=$row['prodesc_ID'];
+            $orquant=$quanty-$quan;
+            $sql="UPDATE `product_desc` SET quantity='$orquant' WHERE prodesc_ID='$prodescid'";
+            $res=$conn->query($sql);
             
         }
     }
     $sql="DELETE FROM `cart_tbl` WHERE user_id='$user'";
     $result=$conn->query($sql);
     echo "Order Placed Successfully";
-    $sql="SELECT * FROM `product_desc` JOIN `color` ON color.cid=product_desc.cid JOIN `product` ON product.Product_id=color.product_id WHERE product.Product_id='$pid' AND product_desc.size='$size' AND color.color='$col' ";
-    $res=$conn->query($sql);
-    $row=$res->fetch_assoc();
-    $quanty=$row['quantity'];
-    $prodescid=$row['prodesc_ID'];
-    $orquant=$quanty-$quan;
-    $sql="UPDATE `product_desc` SET quantity='$orquant' WHERE prodesc_ID='$prodescid'";
-    $res=$conn->query($sql);
-    // header("Refresh:2;url=index.php");
+    
+    header("Refresh:2;url=index.php");
 
 }
 else

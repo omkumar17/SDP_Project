@@ -5,40 +5,6 @@ if(isset($_GET['id']))
     $id=$_GET['id'];
     $col=$_GET['color'];
 }
-if(isset($_GET['upd'])){
-    $upd=$_GET['upd'];
-    if($upd=='e'){
-        $quant=$_GET['quant'];
-        echo<<<_END
-        <script>
-            alert("quantity must be less than {$quant} ");
-        </script>
-        _END;
-        
-    }
-    if($upd=='u'){
-        ?>
-        <script>
-            alert("Your cart is updated successfully!");
-        </script>
-        <?php
-    }
-    if($upd=='s'){
-        ?>
-        <script>
-            alert("You have already added this item");
-        </script>
-        <?php
-    }
-    if($upd=='i'){
-        ?>
-        <script>
-            alert("Your item is added to cart successfully!");
-        </script>
-        <?php
-    }
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,9 +17,56 @@ if(isset($_GET['upd'])){
     <link rel="stylesheet" href="public\css\home.css">
     <link rel="stylesheet" href="public\css\product.css">
     <style>
+        .alert{
+            position:absolute;
+            top:35px;
+            left:30vw;
+            line-height:30px;
+            height:auto;
+            border:1px solid teal;
+            border-radius:15px;
+            width:40vw;
+            background-color:rgba(0,0,0,0.8);
+            color:white;
+            display:flex;
+            flex-direction:row;
+            /* justify-content:center; */
+            align-items:center;
+            padding:10px 10px;
+            z-index:100;
+            /* opacity:0.5; */
+
+        }
+        /* .alert::before{
+            content:'';
+            position:relative;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            opacity:0.5;
+            background:black;
+        } */
+        .alerttext{
+            display:flex;
+            align-items:center;
+            height:100%;
+            width:100%;
+            padding:5px;
+            font-size:20px;
+            font-weight:600;
+        }
+        .crossed{
+            float:right;
+            font-size:20px;
+            font-weight:600;
+            cursor:pointer;
+        }
+    </style>
+    <style>
         .image-slider {
     width: 40vw;
-    height: 40vw;
+    height: 31vw;
     position: relative;
     /* background-image: url(''); */
     background-size: contain;
@@ -63,11 +76,19 @@ if(isset($_GET['upd'])){
     /* position: sticky; */
     top: 0px;
 }
+@media only screen and (max-width: 810px){
+.image-slider {
+    position: relative;
+    width: 90vw;
+    height: 70vw;
+}
+}
 .colorpro{
     width:64px;
 }
 .recommendation{
-    line-height:14px;
+    height:40px;
+    line-height:35px;
 } 
 @media only screen and (max-width:500px){
     .image-slider{
@@ -132,6 +153,44 @@ if(isset($_GET['upd'])){
 </head>
 
 <body>
+    <?php
+if(isset($_GET['upd'])){
+    $upd=$_GET['upd'];
+    if($upd=='e'){
+        $quant=$_GET['quant'];
+        echo<<<_END
+        <div class="alert">
+        <div class="alerttext">quantity must be less than {$quant} </div><span class="cross" onclick="cross()">✔</span>
+        </div>
+        _END;
+        
+    }
+    if($upd=='u'){
+        ?>
+        <div class="alert">
+        <div class="alerttext">Your cart is updated successfully!</div><span class="crossed" onclick="cross()">✔</span>
+    </div>
+        <?php
+    }
+    if($upd=='s'){
+        ?>
+        <div class="alert">
+        <div class="alerttext">You have already added this item </div><span class="crossed" onclick="cross()">✔</span>
+    </div>
+        <?php
+    }
+    if($upd=='i'){
+        ?>
+        <div class="alert">
+        <div class="alerttext">Your item is added to cart successfully!</div><span class="crossed" onclick="cross()">✔</span>
+    </div>
+        <?php
+    }
+}
+
+?>
+
+
     <nav class="navbar"><?php include_once 'nav.php'; ?></nav>
     <section class="product-details">
     <?php
@@ -162,7 +221,7 @@ if(isset($_GET['upd'])){
             <p class="product-short-des"><?php echo $row['product_details']; ?></p>
             <span class="product-price"><?php echo "₹".$row['price']; ?></span>
             <span class="product-actual-price"><?php echo "₹".$row['actual_price']; ?></span>
-            <span class="product-discount">( 30% off )</span><br><br>
+            <span class="product-discount">( 30% off )</span><br>
             <?php
             $sum=0;
             $flag="IN STOCK";
@@ -204,7 +263,7 @@ if(isset($_GET['upd'])){
             </form>
             <div class="prod-form">
                 <form id="myForm" action="addcart.php" method="get">
-                    <br><span class="product-sub-heading">Size Chart :</span><span class="recommendation">size recommendation</span>
+                    <br><span class="recommendation">size recommendation</span>
                     <div class="size">
                     <?php
                     
@@ -432,6 +491,19 @@ productImages.forEach((item, i) => { // loopinh through each image thumb
             }
         }
     </script>
+    <script>
+    function cross(){
+        var alerttext=document.querySelector(".alerttext");
+        var alert=document.querySelector(".alert");
+        alerttext.textContent="";
+        alert.style.display="none";
+    }
+    var alert=document.querySelector(".alert");
+    setTimeout(function() {
+        alert.style.display="none";
+        }, 4000);
+    
+</script>
 </body>
 
 </html>
