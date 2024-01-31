@@ -222,7 +222,7 @@ if(isset($_GET['oid'])){
             margin-top:60px;
         }
         .buttons{
-            /* margin:auto; */
+            margin-right:30px;
             display:flex;
             justify-content:center;
             align-items:center;
@@ -429,8 +429,11 @@ if(isset($_GET['oid'])){
                 <input type="radio" name="cancel" value="">
                 <label for=""></label><br> -->
                 <br>
-                <input type="submit" class="buttons sub" value="submit">
-                <button class="buttons reject rej" style="background:blue" value="Reject cancellation">Reject cancellation</button>
+                <div class="all" style="display:flex;flex-direction:row;justify-content:center">
+                <input type="submit" class="buttons " value="submit">
+                <button class="buttons reject" style="background:green" value="Initiate Return">Initiate Returns</button>
+                <button class="buttons reject" style="background:blue" value="Reject cancellation">Reject cancellation</button>
+                </div>
             </form>
         </div>
     </div>

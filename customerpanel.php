@@ -1240,7 +1240,7 @@ $res=$conn->query($order);
 
         /* Styles for label */
         .label {
-            text-align:center;
+            text-align:left;
             font-size: 1.2em;
             font-weight: bold;
             margin-bottom: 10px;

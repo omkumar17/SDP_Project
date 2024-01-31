@@ -1055,7 +1055,7 @@ if(isset($_GET['flag'])){
                         <label for="od" class="label">Order_date</label>
                         <input type="date" id="od" class="input" name="order_date" required disabled>
                         <label for="os" class="label">order_status</label>
-                        <input type="text" id="os" class="input" name="order_status" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+                        <!-- <input type="text" id="os" class="input" name="order_status" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required> -->
                         <label for="amt" class="label">order_amount</label>
                         <input type="text" id="amt" class="input" name="order_amount" pattern="[0-9]" title="(Please enter only numbers)" required disabled>
                         <label for="sadd" class="label">shipping_address</label>
