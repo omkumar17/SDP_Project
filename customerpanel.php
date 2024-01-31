@@ -1135,6 +1135,12 @@ $res=$conn->query($order);
     width:80%;
     margin-left:50px;
 }
+.pancontainer{
+    display:flex;
+    flex-direction:column;
+    width:80%;
+    margin-left:50px;
+}
 
 .ordercontainer{
     display:flex;
@@ -1153,7 +1159,7 @@ $res=$conn->query($order);
     margin-left:50px;
 }
 @media only screen and (max-width:860px){
-    .wishcontainer,.ordercontainer,.offercontainer,.cmheader,.custdetails{
+    .wishcontainer,.ordercontainer,.offercontainer,.cmheader,.custdetails,.pancontainer{
         width:100%;
         margin-left:0;
     }
@@ -1215,6 +1221,98 @@ $res=$conn->query($order);
 .rate:hover{
     background:black;
 }
+.subtitle{
+    width:170%;
+    height:auto;
+    color:white;
+    background:teal;
+    border-radius:10px;
+}
+.pancontainer {
+            max-width: 100%;
+            /* margin: 0 auto; */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styles for label */
+        .label {
+            text-align:center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Styles for note */
+        .note {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .noteleft {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        /* Styles for textbox */
+        .textbox input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+
+        /* Styles for declare */
+        .declare {
+            margin-bottom: 15px;
+        }
+
+        .declare input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .declare span {
+            font-size: 0.9em;
+        }
+
+        /* Styles for confirm button */
+        .confirm input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .confirm input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Styles for blue link */
+        .blue {
+            color: #007bff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        /* Styles for declare */
+.declare input[type="checkbox"] {
+    margin-right: 30px;
+    transform: scale(1.5); /* Adjust the scale factor as needed */
+}
+
+.declare span {
+    font-size: 0.9em;
+}
+
 </style>
 </head>
 
@@ -1226,7 +1324,7 @@ $res=$conn->query($order);
             <div class="navitems amenu" ><img src="public\img\menu.png" alt="" class="menuimg" style="background:teal"></div>
             <div class="navitems admin">
                 <div class="login"><img src="" alt="" class="logimg"></div>&nbsp;
-                <a href="index.php" style="text-decoration:none;color:white;background-color:#154360;height:40px;width:140px;text-align:center;border-radius:7px;padding-top: 7px;"><div class="subtitle">Go Back to Home</div></a>
+                <a href="index.php" style="text-decoration:none;color:blue"><button class="subtitle">home</button></a>
             </div>
         </div>
     </section>
@@ -1247,7 +1345,7 @@ $res=$conn->query($order);
                 <!-- <li class="sideitem1 sideitem"><img src="file-question.png" alt="" class="sideimg"><span class="itemdesc">manage Address</span></li> -->
                 <li class="sideitem1 sideitem"><img src="thumbs-up.png" alt="" class="sideimg"><span class="itemdesc">wishlist</span></li>
                 <li class="sideitem1 sideitem"><img src="badge-percent.png" alt="" class="sideimg"><span class="itemdesc">Offer</span></li>
-                <li class="sideitem1 sideitem"><img src="paym.png" alt="" class="sideimg"><span class="itemdesc">Payment</span></li>
+                <li class="sideitem1 sideitem"><img src="paym.png" alt="" class="sideimg"><span class="itemdesc">Pan Card</span></li>
                 <!-- <li class="sideitem1 sideitem"><img src="" alt="" class="sideimg"><span class="itemdesc"></span></li>
             <li class="sideitem1 sideitem"><img src="" alt="" class="sideimg"><span class="itemdesc"></span></li>
             <li class="sideitem1 sideitem"><img src="" alt="" class="sideimg"><span class="itemdesc"></span></li> -->
@@ -1639,49 +1737,29 @@ $res=$conn->query($order);
             <div class="mainpage" id="paypage">
             <div class="cmcontainer">
                     <div class="cmheader">
-                        <div class="heading">Payment</div>
+                        <div class="heading">Pan card</div>
                         <!-- <div class="add">Add payment</div> -->
                     </div>
-                <?php
-                    $sql = "SELECT * FROM `payment`"; 
-                    $result = $conn->query($sql);
+                    <div class="pancontainer">
+                        <div class="label">PAN Card Information</div>
+                        <div class="note">
+                            <div class="noteleft">note:</div>
+                            <div class="noteright">For orders exceeding the value of 2,00,000 , PAN Card Details is mandatory.</div>
+                        </div>
+                        <form action="">
+                        <div class="textbox">
+                            <input type="text" placeholder="PAN Number" pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}" title="Please Enter correct PAN">
+                        </div>
+                        <div class="declare">
+                            <input type="checkbox" name="declare" id="declare" required><span><label for="declare">I agree to the term mentioned in the declaration. <div class="blue">View Declaration</div></label></span>
 
-                    if ($result) {
-                        echo <<< _END
-                        <table id="offer" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>transaction_id</th>
-                                    <th>order_id</th>
-                                    <th>payment_mode</th>
-                                    <th>payment_date</th>
-                                    <th>payment_status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                        _END;
-
-                        while ($row = $result->fetch_assoc()) {
-                            echo <<< _END
-                                <tr>
-                                    <td>{$row['transaction_id']}</td>
-                                    <td>{$row['order_id']}</td>
-                                    <td>{$row['payment_mode']}</td>
-                                    <td>{$row['payment_date']}</td>
-                                    <td>{$row['payment_status']}</td>
-                                    <td><span class="button" id="edit">Edit</span></td>
-                                </tr>
-                             _END;
-                        }
-
-                        echo <<< _END
-                            </tbody>
-                        </table>
-                    _END;
-                    }
-                    ?>
-            </div>
+                        </div>
+                        <div class="confirm">
+                            <input type="submit" value="Confirm">
+                        </div>
+                        </form>
+                    </div>
+             </div>
             </div>
         </section>
     </section>

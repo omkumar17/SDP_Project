@@ -294,7 +294,7 @@ if(isset($_COOKIE['userID']))
         </div>
         <ul class="links-container" id="link-con">
             <li class="link-item"><a href="index.php" class="link">Home</a></li>
-            <li class="link-item"><a href="select.php" class="link">New Arrivals</a></li>
+            <li class="link-item"><a href="select.php?poster=true" class="link">New Arrivals</a></li>
             <li class="link-item women menu-opt"><a  class="link">Women  +</a>
             <ul class="women-drop drop">
             <div class="drop-container">       

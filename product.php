@@ -5,40 +5,6 @@ if(isset($_GET['id']))
     $id=$_GET['id'];
     $col=$_GET['color'];
 }
-if(isset($_GET['upd'])){
-    $upd=$_GET['upd'];
-    if($upd=='e'){
-        $quant=$_GET['quant'];
-        echo<<<_END
-        <script>
-            alert("quantity must be less than {$quant} ");
-        </script>
-        _END;
-        
-    }
-    if($upd=='u'){
-        ?>
-        <script>
-            alert("Your cart is updated successfully!");
-        </script>
-        <?php
-    }
-    if($upd=='s'){
-        ?>
-        <script>
-            alert("You have already added this item");
-        </script>
-        <?php
-    }
-    if($upd=='i'){
-        ?>
-        <script>
-            alert("Your item is added to cart successfully!");
-        </script>
-        <?php
-    }
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,9 +17,56 @@ if(isset($_GET['upd'])){
     <link rel="stylesheet" href="public\css\home.css">
     <link rel="stylesheet" href="public\css\product.css">
     <style>
+        .alert{
+            position:absolute;
+            top:35px;
+            left:30vw;
+            line-height:30px;
+            height:auto;
+            border:1px solid teal;
+            border-radius:15px;
+            width:40vw;
+            background-color:rgba(0,0,0,0.8);
+            color:white;
+            display:flex;
+            flex-direction:row;
+            /* justify-content:center; */
+            align-items:center;
+            padding:10px 10px;
+            z-index:100;
+            /* opacity:0.5; */
+
+        }
+        /* .alert::before{
+            content:'';
+            position:relative;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            opacity:0.5;
+            background:black;
+        } */
+        .alerttext{
+            display:flex;
+            align-items:center;
+            height:100%;
+            width:100%;
+            padding:5px;
+            font-size:20px;
+            font-weight:600;
+        }
+        .crossed{
+            float:right;
+            font-size:20px;
+            font-weight:600;
+            cursor:pointer;
+        }
+    </style>
+    <style>
         .image-slider {
     width: 40vw;
-    height: 40vw;
+    height: 31vw;
     position: relative;
     /* background-image: url(''); */
     background-size: contain;
@@ -63,8 +76,29 @@ if(isset($_GET['upd'])){
     /* position: sticky; */
     top: 0px;
 }
+@media only screen and (max-width: 810px){
+.image-slider {
+    position: relative;
+    width: 90vw;
+    height: 70vw;
+}
+}
 .colorpro{
     width:64px;
+}
+.recommendation{
+    height:40px;
+    line-height:35px;
+} 
+@media only screen and (max-width:500px){
+    .image-slider{
+        width: 60vw;
+        height: 60vw;
+    }
+    .form-container{
+        height:70vh;
+        top:15%;
+    }
 }
 
     </style>
@@ -112,11 +146,51 @@ if(isset($_GET['upd'])){
                 opacity: 1;
             }
         }
-
+        .cartbtn:hover{
+            color:white;
+        }
     </style>
 </head>
 
 <body>
+    <?php
+if(isset($_GET['upd'])){
+    $upd=$_GET['upd'];
+    if($upd=='e'){
+        $quant=$_GET['quant'];
+        echo<<<_END
+        <div class="alert">
+        <div class="alerttext">quantity must be less than {$quant} </div><span class="cross" onclick="cross()">✔</span>
+        </div>
+        _END;
+        
+    }
+    if($upd=='u'){
+        ?>
+        <div class="alert">
+        <div class="alerttext">Your cart is updated successfully!</div><span class="crossed" onclick="cross()">✔</span>
+    </div>
+        <?php
+    }
+    if($upd=='s'){
+        ?>
+        <div class="alert">
+        <div class="alerttext">You have already added this item </div><span class="crossed" onclick="cross()">✔</span>
+    </div>
+        <?php
+    }
+    if($upd=='i'){
+        ?>
+        <div class="alert">
+        <div class="alerttext">Your item is added to cart successfully!</div><span class="crossed" onclick="cross()">✔</span>
+    </div>
+        <?php
+    }
+}
+
+?>
+
+
     <nav class="navbar"><?php include_once 'nav.php'; ?></nav>
     <section class="product-details">
     <?php
@@ -147,7 +221,7 @@ if(isset($_GET['upd'])){
             <p class="product-short-des"><?php echo $row['product_details']; ?></p>
             <span class="product-price"><?php echo "₹".$row['price']; ?></span>
             <span class="product-actual-price"><?php echo "₹".$row['actual_price']; ?></span>
-            <span class="product-discount">( 30% off )</span><br><br>
+            <span class="product-discount">( 30% off )</span><br>
             <?php
             $sum=0;
             $flag="IN STOCK";
@@ -175,7 +249,8 @@ if(isset($_GET['upd'])){
             ?>
             <span class="avail">Availability: <span class="avail-value"><?php echo $flag; ?></span></span>
             
-            <form action="" class="form-container">
+            <form action="" class="form-container" style="top:5%;z-index:14;overflow-y:scroll">
+                <div class="imgchart" style="width:100%;height:400px"><img style="width:100%;height:100%;border:2px solid black" src="public\img\sizechart.jpg" alt=""></div>
                 <span>ENTER YOUR SIZE</span>
                 <input type="number" class="size-height box" placeholder="Enter your height in cm" name="height">
                 <input type="number" class="feet-height box" placeholder="Enter your feet length in cm" name="feet">
@@ -188,23 +263,24 @@ if(isset($_GET['upd'])){
             </form>
             <div class="prod-form">
                 <form id="myForm" action="addcart.php" method="get">
-                    <br><span class="product-sub-heading">Size Chart :</span><span class="recommendation">size recommendation</span>
+                    <br><span class="recommendation">size recommendation</span>
                     <div class="size">
                     <?php
                     
                           $sizesql="SELECT `cid` FROM `color` WHERE `product_id`=$id";
                           $ressize=$conn->query($sizesql);
                           $row3=$ressize->fetch_assoc();
-                          
+                            $i=0;
                               $a=$row3['cid'];
                               $prodessql="SELECT `size` FROM `product_desc` WHERE `cid`=$a";
                               $prodesres=$conn->query($prodessql);
                               while($row4=$prodesres->fetch_assoc())
                               {
                                 ?>
-                                 <input type="radio" name="size" value="<?php echo $row4['size']; ?>" hidden id="<?php echo $row4['size']; ?>-size" required>
-                                 <label for="<?php echo $row4['size']; ?>-size" class="size-radio-btn"><?php echo $row4['size']; ?></label>
+                                 <input type="radio" name="size" value="<?php echo $row4['size']; ?>" hidden id="<?php echo $row4['size']; ?>-size" required <?php if ($i == 0) echo "checked"; ?>>
+                                 <label for="<?php echo $row4['size']; ?>-size" class="size-radio-btn <?php if ($i == 0) echo "check"; ?>"><?php echo $row4['size']; ?></label>
                                 <?php
+                                $i+=1;
                               }
           
                           
@@ -217,7 +293,7 @@ if(isset($_GET['upd'])){
                         <input type="hidden" value="<?php echo $id;?>" name="id">
 
             <br>
-            <input type="submit" class="btn cart-btn" value="Add to cart">
+            <input type="submit" class="btn cart-btn cartbtn" value="Add to cart">
             <button class="btn wish-btn" onclick="changeFormAction('wishlist.php')">Add to wishlist</button>
 
             </form>
@@ -226,7 +302,7 @@ if(isset($_GET['upd'])){
     </section>
     <section class="faq-container faq">
     <div class="qa-container">
-            <div class="question" onclick="toggleAnswer('q1')">More Information<span style="margin-left:1050px;font-size:20px;font-weight:800;">+</span></div>
+            <div class="question" onclick="toggleAnswer('q1')">More Information<span style="float:right;font-size:20px;font-weight:800;">+</span></div>
             <div class="answer" id="q1">   
                   <p><strong>Material:</strong> High-quality leather</p>
                     <p><strong>Color:</strong> Brown</p>
@@ -234,7 +310,7 @@ if(isset($_GET['upd'])){
                     <p><strong>Features:</strong> Waterproof, comfortable insole, durable sole</p></div>
             </div>
     <div class="qa-container">
-            <div class="question" onclick="toggleAnswer('q2')">Product Details<span style="margin-left:1070px;font-size:20px;font-weight:800;">+</span></div>
+            <div class="question" onclick="toggleAnswer('q2')">Product Details<span style="float:right;font-size:20px;font-weight:800;">+</span></div>
             <div class="answer" id="q2"> 
             <p>The waterproof design ensures that you can confidently wear them in any weather conditions. The cushioned insole provides maximum comfort, making these shoes ideal for long walks or daily use. The durable rubber sole guarantees long-lasting performance.
         Available in a range of US sizes from 6 to 12, the ComfortStride 2000 caters to different foot sizes. Whether you're heading to the office, a casual outing, or a special event, these shoes complement your style effortlessly.
@@ -243,7 +319,7 @@ if(isset($_GET['upd'])){
             </div>
         </div>
     <div class="qa-container">
-            <div class="question" onclick="toggleAnswer('q3')">Return & Exchange Policy<span style="margin-left:990px;font-size:20px;font-weight:800;">+</span></div>
+            <div class="question" onclick="toggleAnswer('q3')">Return & Exchange Policy<span style="float:right;font-size:20px;font-weight:800;">+</span></div>
             <div class="answer" id="q3">Our return policy allows you to return items within 30 days of purchase. Please see our <a href="return.php">return policy</a> for more details.</div>
         </div>
      </section>
@@ -415,6 +491,19 @@ productImages.forEach((item, i) => { // loopinh through each image thumb
             }
         }
     </script>
+    <script>
+    function cross(){
+        var alerttext=document.querySelector(".alerttext");
+        var alert=document.querySelector(".alert");
+        alerttext.textContent="";
+        alert.style.display="none";
+    }
+    var alert=document.querySelector(".alert");
+    setTimeout(function() {
+        alert.style.display="none";
+        }, 4000);
+    
+</script>
 </body>
 
 </html>

@@ -126,13 +126,14 @@ if(isset($_GET['crtquant'])){
             top:40px;
             left:80px;
             color:white;
-            background-color:black;
+            background-color:teal;
             border:2px solid black;
             border-radius:5px;
-            opacity:0.5;
+            opacity:1;
         }
         .submit:hover{
             opacity:1;
+            background:green;
         }
 
         .page-item input {
@@ -309,7 +310,7 @@ if(isset($_GET['crtquant'])){
                                 <p>The total amount of (including VAT)</p>
                                 <p>&#8377;<span id="total_cart_amt"><?php echo ($total+50.0);?></span></p>
                             </div>
-                            <a href="order.php?ui=1"><button class="btn btn-primary text-uppercase">Checkout</button></a>
+                            <a href="order.php?ui=1"><button class="btn btn-primary text-uppercase" style="background:teal">Checkout</button></a>
                         </div>
                         <!-- discount code part -->
                         <div class="discount_code mt-3 shadow">
@@ -327,7 +328,7 @@ if(isset($_GET['crtquant'])){
                                                 placeholder="Enter the discount code">
                                             <small id="error_trw" class="text-dark mt-3">code is foot15</small>
                                         </div>
-                                        <button class="btn btn-primary btn-sm mt-3"
+                                        <button class="btn btn-primary btn-sm mt-3 " style="background:teal"
                                             onclick="discount_code()">Apply</button>
                                     </div>
                                 </div>

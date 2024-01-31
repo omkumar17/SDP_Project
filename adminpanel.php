@@ -417,7 +417,7 @@ if(isset($_GET['flag'])){
     text-decoration:none;
     color:teal;
     /* margin: 2px; */
-    text-align:center;
+    text-align:left;
     /* background-color:red; */
     border:1px solid teal;
     /* width:100px; */
@@ -435,6 +435,7 @@ if(isset($_GET['flag'])){
     @media only screen and (max-width:1068px){
         .logindrop{
             top:110px;
+            
         } 
         .shopping-cart {
             display:none;
@@ -456,12 +457,12 @@ if(isset($_GET['flag'])){
             <div class="navitems amenu"><img src="public/img/menu.png" alt="" class="menuimg"></div>
             <div class="navitems admin">
                 <div class="login" onclick="logfunction()"><img src="public/img/log-out.png" alt="" class="logimg"></div>
-                <div class="subtitle" >Administrator</div>
-                <div class="logindrop" style="width:120px">
+                <div class="subtitle" style="cursor:pointer">Administrator</div>
+                <div class="logindrop" style="right:10px;width:180px">
                             <?php
                             if(isset($_COOKIE['userID'])){
                                 ?>
-                                <a href="user.html"><li><img src="public\img\circle-user-round.png" alt="">&nbsp;&nbsp; Profile</li></a>
+                                <a href="chanpass.php"><li><img src="public\img\circle-user-round.png" alt="">&nbsp;&nbsp;Change Password</li></a>
                                 <a href="logout.php"><li><img src="public\img\log-out-profile.png" alt="">&nbsp;&nbsp; Logout</li></a>
                                 <?php
                             }

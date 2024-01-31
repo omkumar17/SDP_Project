@@ -280,7 +280,7 @@ include 'connection.php';
               </label>
             </div>
         </div>
-        <input type="submit" class="btn btn-primary" value="submit" style="width:200px">
+        <input type="submit" class="btn btn-primary" value="Proceed" style="width:200px">
       </form>
     </div>
     <?php
