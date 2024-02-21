@@ -162,6 +162,7 @@ foreach($color as $cl){
         ?>
     <input type="text" name="type[]" value="<?php echo $prtype;?>"><?php
     }
+
     if($brand!=''){
     ?>
     <input type="text" name="brand[]" value="<?php echo $brand;?>"><?php

@@ -84,9 +84,9 @@ $result=$conn->query($sql);
 if(isset($_GET['paymentmet'])){
     $paymet=$_GET['paymentmet'];
     if($paymet=='c'){
-        $ordins="INSERT INTO `order_tbl`(user_id, order_status, order_amount,fname,lname,mobile,email, shipping_address, shipping_status) VALUES ('$user','pending','$total','$fname','$lname','$phone','$email','$addr','processing')";
+        $ordins="INSERT INTO order_tbl(user_id, order_status, order_amount,fname,lname,mobile,email, shipping_address, shipping_status) VALUES ('$user','pending','$total','$fname','$lname','$phone','$email','$addr','processing')";
         $orderres=$conn->query($ordins);
-        $ordsel="SELECT order_id FROM `order_tbl` WHERE user_id='$user' ORDER BY order_id DESC LIMIT 1";
+        $ordsel="SELECT order_id FROM order_tbl WHERE user_id='$user' ORDER BY order_id DESC LIMIT 1";
         $selres=$conn->query($ordsel);
         $row=$selres->fetch_assoc();
         $order_id=$row['order_id'];
@@ -96,25 +96,25 @@ if(isset($_GET['paymentmet'])){
             $col=$row['p_color'];
             $size=$row['p_size'];
             $dis=$row['p_discount'];
-            $sqljoi="SELECT price FROM `product` WHERE product_id='$pid'";
+            $sqljoi="SELECT price FROM product WHERE product_id='$pid'";
             $resjoi=$conn->query($sqljoi);
             $row=$resjoi->fetch_assoc();
             $price=$row['price'];
             $tot=($quan*$price)-$dis;
             $ins="INSERT INTO order_detail(order_id, product_id, size, color ,quantity, rate, discount, amount) VALUES ('$order_id','$pid','$size','$col','$quan','$price','$dis','$tot')";
             $rein=$conn->query($ins);
-            $sql="SELECT * FROM `product_desc` JOIN `color` ON color.cid=product_desc.cid JOIN `product` ON product.Product_id=color.product_id WHERE product.Product_id='$pid' AND product_desc.size='$size' AND color.color='$col' ";
+            $sql="SELECT * FROM product_desc JOIN color ON color.cid=product_desc.cid JOIN product ON product.Product_id=color.product_id WHERE product.Product_id='$pid' AND product_desc.size='$size' AND color.color='$col' ";
             $res=$conn->query($sql);
             $row=$res->fetch_assoc();
             $quanty=$row['quantity'];
             $prodescid=$row['prodesc_ID'];
             $orquant=$quanty-$quan;
-            $sql="UPDATE `product_desc` SET quantity='$orquant' WHERE prodesc_ID='$prodescid'";
+            $sql="UPDATE product_desc SET quantity='$orquant' WHERE prodesc_ID='$prodescid'";
             $res=$conn->query($sql);
             
         }
     }
-    $sql="DELETE FROM `cart_tbl` WHERE user_id='$user'";
+    $sql="DELETE FROM cart_tbl WHERE user_id='$user'";
     $result=$conn->query($sql);
     echo<<<_END
     <div class="alert">
