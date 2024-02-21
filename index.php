@@ -36,6 +36,9 @@ $result=$conn->query($sql);
  *{
     margin: 0;padding: 0;
 }
+body{
+    overflow-x:hidden;
+}
 footer{
     position: relative;
     width: 100%;

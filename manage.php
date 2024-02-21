@@ -1,3 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .alert{
+            position:absolute;
+            top:35px;
+            left:30vw;
+            line-height:30px;
+            height:auto;
+            border:1px solid teal;
+            border-radius:15px;
+            width:40vw;
+            background-color:rgba(0,0,0,0.8);
+            color:white;
+            display:flex;
+            flex-direction:row;
+            /* justify-content:center; */
+            align-items:center;
+            padding:10px 10px;
+            z-index:100;
+            /* opacity:0.5; */
+
+        }
+        /* .alert::before{
+            content:'';
+            position:relative;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            opacity:0.5;
+            background:black;
+        } */
+        .alerttext{
+            display:flex;
+            align-items:center;
+            height:100%;
+            width:100%;
+            padding:5px;
+            font-size:20px;
+            font-weight:600;
+        }
+        .crossed{
+            float:right;
+            font-size:20px;
+            font-weight:600;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    
+</body>
+</html>
 <?php
 include 'connection.php';
 if(!isset($_COOKIE['userID'])){
@@ -58,14 +116,22 @@ if(isset($_GET['paymentmet'])){
     }
     $sql="DELETE FROM `cart_tbl` WHERE user_id='$user'";
     $result=$conn->query($sql);
-    echo "Order Placed Successfully";
+    echo<<<_END
+    <div class="alert">
+        <div class="alerttext">Order Placed successfully!</div><span class="crossed" >✔</span>
+    </div>
+    _END;
     
     header("Refresh:2;url=index.php");
 
 }
 else
 {
-    echo "sfffffffffffffffffffffffffff";
+    echo<<<_END
+    <div class="alert">
+        <div class="alerttext">error occured</div><span class="crossed" >✔</span>
+    </div>
+    _END;
 }
 }
 else{

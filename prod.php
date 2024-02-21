@@ -100,10 +100,10 @@ class Product{
 		if((isset($_POST['category']) && $_POST['category']!="")) {
 			$category = $_POST['category'];
 			if((isset($_POST['grp']) && $_POST['grp']!="")){
-				$sql.=" AND category.category_id IN ('".implode("','",$category)."')";
+				$sql.=" AND category.Category_name IN ('".implode("','",$category)."')";
 			}
 			else{
-				$sql.=" WHERE category.category_id IN ('".implode("','",$category)."')";	
+				$sql.=" WHERE category.Category_name IN ('".implode("','",$category)."')";	
 			}
 		}
 		
@@ -123,10 +123,10 @@ class Product{
 		if(isset($_POST['category']) && $_POST['category']!="") {
 			$category = $_POST['category'];
 			if((isset($_POST['grp']) && $_POST['grp']!="")){
-				$sql.=" AND category.category_id IN ('".implode("','",$category)."')";
+				$sql.=" AND category.Category_name IN ('".implode("','",$category)."')";
 			}
 			else{
-				$sql.=" WHERE category.category_id IN ('".implode("','",$category)."')";	
+				$sql.=" WHERE category.Category_name IN ('".implode("','",$category)."')";	
 			}
 		}
 		
@@ -186,10 +186,10 @@ class Product{
 		if(isset($_POST['category']) && $_POST['category']!="") {
 			$category = $_POST['category'];
 			if((isset($_POST['grp']) && $_POST['grp']!="")){
-				$sql.=" AND category.category_id IN ('".implode("','",$category)."')";
+				$sql.=" AND category.Category_name IN ('".implode("','",$category)."')";
 			}
 			else{
-				$sql.=" WHERE category.category_id IN ('".implode("','",$category)."')";	
+				$sql.=" WHERE category.Category_name IN ('".implode("','",$category)."')";	
 			}
 		}
 		
@@ -227,10 +227,10 @@ class Product{
 		if(isset($_POST['category']) && $_POST['category']!="") {
 			$category = $_POST['category'];
 			if((isset($_POST['grp']) && $_POST['grp']!="")){
-				$sql.=" AND category.category_id IN ('".implode("','",$category)."')";
+				$sql.=" AND category.Category_name IN ('".implode("','",$category)."')";
 			}
 			else{
-				$sql.=" WHERE category.category_id IN ('".implode("','",$category)."')";	
+				$sql.=" WHERE category.Category_name IN ('".implode("','",$category)."')";	
 			}
 		}
 		
@@ -271,7 +271,7 @@ class Product{
 		}
 		if(isset($_POST['category']) && $_POST['category']!="") {
 			$category = $_POST['category'];
-			$sql.=" AND category.category_id IN ('".implode("','",$category)."')";
+			$sql.=" AND category.Category_name IN ('".implode("','",$category)."')";
 		}
 		if(isset($_POST['type']) && $_POST['type']!="") {
 			$type = $_POST['type'];
@@ -304,7 +304,7 @@ class Product{
 			$sql.=" AND product.grp IN ('".implode("','",$grp)."')";
 		}
 		if(isset($_POST['category']) && $_POST['category']!=""){			
-			$sql.=" AND category.category_id IN ('".implode("','",$_POST['category'])."')";
+			$sql.=" AND category.Category_name IN ('".implode("','",$_POST['category'])."')";
 		}
 		if(isset($_POST['type']) && $_POST['type']!="") {
 			$type = $_POST['type'];

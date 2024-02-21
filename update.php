@@ -70,6 +70,7 @@ else if(isset($_POST['product_id']))
         header("Location:adminpanel.php?page=1&flag=2");
     }
 }
+
 if(isset($_GET['header'])=='Product_id' && isset($_GET['value1'])){
     if(isset($_GET['pid']) && isset($_GET['value1']))
     {
@@ -148,7 +149,7 @@ if(isset($_GET['header'])=='offer_id'){
             $sql = "UPDATE `offer` SET `offer_status`='Enabled' WHERE `offer_id`='$pid'";
         }
         $result=$conn->query($sql);
-        header("location:adminpanel.php?page=11");
+        header("location:adminpanel.php?page=7");
     }
 }
 if(isset($_GET['header'])=='userID'){
@@ -164,7 +165,7 @@ if(isset($_GET['header'])=='userID'){
             $sql = "UPDATE `user` SET `usr_status`='Active' WHERE `userID`='$pid'";
         }
         $result=$conn->query($sql);
-        header("location:adminpanel.php?page=9");
+        header("location:adminpanel.php?page=5");
     }
 }
 // elseif()
