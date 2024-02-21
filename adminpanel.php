@@ -448,6 +448,11 @@ if(isset($_GET['flag'])){
     }
 
 </style>
+<style>
+    thead{
+        text-transform:capitalize;
+    }
+</style>
 </head>
 
 <body>
@@ -586,10 +591,10 @@ if(isset($_GET['flag'])){
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>category_id</th>
-                                    <th>Category_name</th>
-                                    <th>Category_desc</th>
-                                    <th>Category_status</th>
+                                    <th>Category ID</th>
+                                    <th>Category Name</th>
+                                    <th>Category Description</th>
+                                    <th>Category Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -661,14 +666,14 @@ if(isset($_GET['flag'])){
                         <table id="product" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Product_id</th>
-                                    <th>Category_ID</th>
-                                    <th>grp</th>
-                                    <th>product_name</th>
-                                    <th>product_details</th>
-                                    <th>price</th>
-                                    <th>actual_price</th>
-                                    <th>product_status</th>
+                                    <th>Product ID</th>
+                                    <th>Category ID</th>
+                                    <th>Group</th>
+                                    <th>Product Name</th>
+                                    <th>Product Details</th>
+                                    <th>Price</th>
+                                    <th>actual Price</th>
+                                    <th>product Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -683,8 +688,8 @@ if(isset($_GET['flag'])){
                                     <td>{$row['grp']}</td>
                                     <td>{$row['product_name']}</td>
                                     <td>{$row['product_details']}</td>
-                                    <td>{$row['price']}</td>
-                                    <td>{$row['actual_price']}</td>
+                                    <td>₹{$row['price']}</td>
+                                    <td>₹{$row['actual_price']}</td>
                                     <td>{$row['pro_status']}</td>
                                     <td><span class="buttedit edit">Edit</span><span class="button disable">Disabled</span></td>
                                 </tr>
@@ -759,11 +764,11 @@ if(isset($_GET['flag'])){
                         <table id="product" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>prodesc_ID</th>
-                                    <th>cid</th>
-                                    <th>product_type</th>
+                                    <th>Product description ID</th>
+                                    <th>Color ID</th>
+                                    <th>product Type</th>
                                     <th>size</th>
-                                    <th>Product_desc_status</th>
+                                    <th>Product Description status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -837,13 +842,13 @@ if(isset($_GET['flag'])){
                         <table id="product" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Image_ID</th>
-                                    <th>cid</th>
-                                    <th>Image_path1</th>
-                                    <th>Image_path2</th>
-                                    <th>Image_path3</th>
-                                    <th>Image_path4</th>
-                                    <th>Image_desc</th>
+                                    <th>Image ID</th>
+                                    <th>Color ID</th>
+                                    <th>Image Path1</th>
+                                    <th>Image Path2</th>
+                                    <th>Image Path3</th>
+                                    <th>Image Path4</th>
+                                    <th>Image Description</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -940,10 +945,10 @@ if(isset($_GET['flag'])){
                         <table id="product" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>cid</th>
-                                    <th>Product_id</th>
-                                    <th>color</th>
-                                    <th>color_status</th>
+                                    <th>Color ID</th>
+                                    <th>Product ID</th>
+                                    <th>Color</th>
+                                    <th>color Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -1011,13 +1016,13 @@ if(isset($_GET['flag'])){
                         <table id="order" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>order_id</th>
-                                    <th>user_id</th>
-                                    <th>order_date</th>
-                                    <th>order_status</th>
-                                    <th>order_amount</th>
-                                    <th>shipping_address</th>
-                                    <th>shipping_status</th>
+                                    <th>order id</th>
+                                    <th>user id</th>
+                                    <th>order date</th>
+                                    <th>order status</th>
+                                    <th>order amount</th>
+                                    <th>shipping address</th>
+                                    <th>shipping status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -1031,7 +1036,7 @@ if(isset($_GET['flag'])){
                                     <td>{$row['user_id']}</td>
                                     <td>{$row['order_date']}</td>
                                     <td>{$row['order_status']}</td>
-                                    <td>{$row['order_amount']}</td>
+                                    <td>₹{$row['order_amount']}</td>
                                     <td>{$row['shipping_address']}</td>
                                     <td>{$row['shipping_status']}</td>
                                     <td><span class="buttedit edit">Edit</span></td>
@@ -1093,7 +1098,7 @@ if(isset($_GET['flag'])){
             <div class="cmcontainer">
                     <div class="cmheader">
                         <div class="heading">Order detail</div>
-                        <div class="add">Add order</div>
+                        
                     </div>
                 <?php
                     $sql = "SELECT * FROM `order_detail`"; 
@@ -1104,9 +1109,9 @@ if(isset($_GET['flag'])){
                         <table id="order" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>orderdetail_id</th>
-                                    <th>order_id</th>
-                                    <th>product_id</th>
+                                    <th>order detail id</th>
+                                    <th>order id</th>
+                                    <th>product id</th>
                                     <th>quantity</th>
                                     <th>rate</th>
                                     <th>discount</th>
@@ -1125,9 +1130,9 @@ if(isset($_GET['flag'])){
                                     <td>{$row['order_id']}</td>
                                     <td>{$row['product_id']}</td>
                                     <td>{$row['quantity']}</td>
-                                    <td>{$row['rate']}</td>
+                                    <td>₹{$row['rate']}</td>
                                     <td>{$row['discount']}</td>
-                                    <td>{$row['amount']}</td>
+                                    <td>₹{$row['amount']}</td>
                                     <td><span class="buttedit edit">Edit</span></td>
                                 </tr>
                              _END;
@@ -1160,7 +1165,7 @@ if(isset($_GET['flag'])){
                         <input type="submit" class="cancel" value="Cancel">
                     </form>
                     </div>
-                    <div class="addcontainer">
+                    <!-- <div class="addcontainer">
                     <form class="addcont" action="insert.php" method="post">
                     <label for="" style="font-size:20px;font-weight:600">order</label>
                     <label for="odid" class="label">OrderDesc_id</label>
@@ -1180,7 +1185,7 @@ if(isset($_GET['flag'])){
                         <input type="submit" class="submita" value="submit" >
                         <input type="submit" class="cancela" value="Cancel">
                     </form>
-                </div>    
+                </div>     -->
             </div>
             </div>
             <div class="mainpage" id="feedpage">
@@ -1197,13 +1202,12 @@ if(isset($_GET['flag'])){
                         <table id="feedback" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>feedback_id</th>
-                                    <th>user_id</th>
-                                    <th>product_id</th>
-                                    <th>feedback_rating</th>
-                                    <th>feedback_desc</th>
-                                    <th>feedback_date</th>
-                                    <th>Action</th>
+                                    <th>feedback id</th>
+                                    <th>user id</th>
+                                    <th>product id</th>
+                                    <th>feedback rating</th>
+                                    <th>feedback description</th>
+                                    <th>feedback date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -1245,7 +1249,7 @@ if(isset($_GET['flag'])){
                         <table id="user" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>userID</th>
+                                    <th>user ID</th>
                                     <th>First name</th>
                                     <th>Last name</th>
                                     <th>email</th>
@@ -1254,8 +1258,8 @@ if(isset($_GET['flag'])){
                                     <th>Address</th>
                                     <th>PIN</th>
                                     <th>City</th>
-                                    <th>Registration_date</th>
-                                    <th>usr_status</th>
+                                    <th>Registration date</th>
+                                    <th>user status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -1306,13 +1310,13 @@ if(isset($_GET['flag'])){
                         <table id="refund" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>refund_id</th>
-                                    <th>order_id</th>
-                                    <th>request_date</th>
-                                    <th>refund_date</th>
-                                    <th>refund_reason</th>
-                                    <th>refund_amt</th>
-                                    <th>refund_status</th>
+                                    <th>refund id</th>
+                                    <th>order id</th>
+                                    <th>request date</th>
+                                    <th>refund date</th>
+                                    <th>refund reason</th>
+                                    <th>refund amount</th>
+                                    <th>refund status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -1327,7 +1331,7 @@ if(isset($_GET['flag'])){
                                     <td>{$row['request_date']}</td>
                                     <td>{$row['refund_date']}</td>
                                     <td>{$row['refund_reason']}</td>
-                                    <td>{$row['refund_amt']}</td>
+                                    <td>₹{$row['refund_amt']}</td>
                                     <td>{$row['refund_status']}</td>
                                     <td><span class="buttedit edit">Edit</span></td>
                                 </tr>
@@ -1380,12 +1384,12 @@ if(isset($_GET['flag'])){
                         <table id="offer" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>offer_id</th>
-                                    <th>offer_name</th>
-                                    <th>offer_details</th>
-                                    <th>offer_status</th>
-                                    <th>offer_start_date</th>
-                                    <th>offer_end_date</th>
+                                    <th>offer id</th>
+                                    <th>offer name</th>
+                                    <th>offer details</th>
+                                    <th>offer status</th>
+                                    <th>offer startdate</th>
+                                    <th>offer enddate</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -1463,11 +1467,11 @@ if(isset($_GET['flag'])){
                         <table id="offer" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>transaction_id</th>
-                                    <th>order_id</th>
-                                    <th>payment_mode</th>
-                                    <th>payment_date</th>
-                                    <th>payment_status</th>
+                                    <th>transaction id</th>
+                                    <th>order id</th>
+                                    <th>payment mode</th>
+                                    <th>payment date</th>
+                                    <th>payment status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -1641,7 +1645,7 @@ if(isset($_GET['flag'])){
             addcontainer[k].style.display="block";
              })
             submita[k].addEventListener("click",()=>{
-            addcontainer[k].style.display = "none";
+            // addcontainer[k].style.display = "none";
              })
             cancela[k].addEventListener("click", (event) => {
             event.preventDefault();

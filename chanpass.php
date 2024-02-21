@@ -93,6 +93,21 @@ input::-webkit-inner-spin-button {
     }
     .auto{
         margin:auto;
+    }
+    .validation-dropdown {
+        position: absolute;
+        margin-top: 5px;
+        background-color: #fff;
+        border: 1px solid skyblue;
+        border-radius: 4px;
+        max-height: 100px;
+        overflow-y: auto;
+        z-index: 1000;
+    }
+    .validation-message {
+        padding: 8px;
+        color:red;
+    }
 </style>
 <h1 class="text-center" style="font-family:'Palatino Linotype';">Change Password</h1>
 <form action="chanpass.php" method="post">
@@ -108,7 +123,8 @@ input::-webkit-inner-spin-button {
                 </div>
                 <div class="col-9 ps-2 auto">
                     <label>New Password : </label>
-                    <input type="password" name="newp" placeholder="enter your new password" class="form-control" required><br>
+                    <input type="password" name="newp" placeholder="enter your new password" class="form-control" oninput="validatePassword(this.value)" required>
+                    <div id="validationDropdown" class="validation-dropdown" style="display: none;"></div>
                 </div>
                
                 <div class="col-9 mt-3 auto">
@@ -116,7 +132,7 @@ input::-webkit-inner-spin-button {
                     <input type="password" name="confirmp" placeholder="reenter your new password" class="form-control" id="passwordInput" required>
                     
                 </div>
-                <div class="col-1 ic auto" style="position:absolute;top:66%;right:5%">
+                <div class="col-1 ic auto" style="position:absolute;top:66%;right:13%">
                         <a href="#" class="text-dark boricon" id="icon-click" onclick="togglePasswordVisibility()">
                         <i id="eyeIcon" class="fas fa-eye"></i>
                     </a>
@@ -145,7 +161,27 @@ function togglePasswordVisibility() {
           eyeIcon.classList.add('fa-eye');
         }
     }
-      
+    let isPasswordValid = false;
+    function validatePassword(password) {
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasNumber = /\d/.test(password);
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        let message = '';
+        
+        const validationDropdown = document.getElementById('validationDropdown');
+    
+        if (hasUpperCase && hasNumber && hasSpecialChar) {
+          validationDropdown.style.display = 'none';
+          isPasswordValid = true;
+        } else {
+            validationDropdown.innerHTML = `<div class="validation-message">Password must contain at least one uppercase letter, one number, and one special character</div>`;
+            validationDropdown.style.display = 'block';
+            isPasswordValid = false;
+        }
+      }
+      function validateForm() {
+        return isPasswordValid;
+      }
 
 </script>
 </body>

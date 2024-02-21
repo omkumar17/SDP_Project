@@ -12,9 +12,9 @@ else{
 // $currentDateTime = time();
 
 // Add 10 minutes to the current time
-$tenMinutesAhead = strtotime('+1 minutes', $currentDateTime);
-echo time();
-echo $tenMinutesAhead;
+$tenMinutesAhead = strtotime('+10 minutes', $currentDateTime);
+// echo time();
+// echo $tenMinutesAhead;
 $to_email = $email;
 $subject = "Unlock Your Account with a New Password";
 // $image_url="SDP_Project/public/img/ff logo.jpeg";
@@ -114,7 +114,7 @@ if(isset($_POST['n1']) && isset($_POST['n2']) && isset($_POST['n3']) && isset($_
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             _END;
-            header("Refresh:1;url=changepassclick.php");
+            header("Refresh:10;url=changepassclick.php");
         }
         else
         {
