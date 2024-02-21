@@ -24,13 +24,13 @@ if (!empty($ch)) {
 }
 for($i=0;$i<count($srch);$i++){
     if($srch[$i]=="mens" || $srch[$i]=="men" ){
-        $srch[$i]="m";
+        $srch[$i]="mens";
     }
     if($srch[$i]=="womens" || $srch[$i]=="women" ){
-        $srch[$i]="w";
+        $srch[$i]="womens";
     }
     if($srch[$i]=="kids" || $srch[$i]=="kid" ){
-        $srch[$i]="k";
+        $srch[$i]="kids";
     }
 }
 $categry=array();
@@ -85,7 +85,7 @@ foreach($srch as $item){
 // foreach($srch as $item){
 foreach($group as $grp){
     
-        if($item==$grp){
+        if($item===$grp){
             $grop=$item;
             echo $grop;
             $flag=true;
@@ -98,7 +98,7 @@ if($flag==true){
 // foreach($srch as $item){
 foreach($categry as $categ){
     
-        if($item==$categ){
+        if($item===$categ){
             $cat=$item;
             echo $cat;
             $flag=true;
@@ -111,7 +111,7 @@ foreach($categry as $categ){
 // foreach($srch as $item){
 foreach($proname as $prn){
     
-        if($item==$prn){
+        if($item===$prn){
             $brand=$item;
             echo $brand;
             $flag=true;
@@ -124,7 +124,7 @@ foreach($proname as $prn){
 // foreach($srch as $item){
 foreach($protype as $prt){
     
-        if($item==$prt){
+        if($item===$prt){
             $prtype=$item;
             echo $prtype;
             $flag=true;
@@ -137,7 +137,7 @@ foreach($protype as $prt){
 // foreach($srch as $item){
 foreach($color as $cl){
     
-        if($item==$cl){
+        if($item===$cl){
             $col=$item;
             echo $col;
             $flag=true;
@@ -154,10 +154,10 @@ foreach($color as $cl){
     <?php if($grop!=''){?>
     <input type="text" name="grp[]" value="<?php echo $grop;?>"><?php 
     }
-    if($categry!=''){
+    if($cat!=''){
         ?>
-        <input type="text" name="category[]" value="<?php echo $categry;?>"><?php
-        }
+    <input type="text" name="category[]" value="<?php echo $cat;?>"><?php
+    }
     if($prtype!=''){
         ?>
     <input type="text" name="type[]" value="<?php echo $prtype;?>"><?php

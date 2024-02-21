@@ -44,6 +44,9 @@ if(isset($_GET['flag'])){
     box-sizing: border-box;
     font-family:Arial, Helvetica, sans-serif;
 }
+.label, th{
+    text-transform:capitalize;
+}
 .adminnavbar{
     height:50px;
     width:100%;
@@ -284,7 +287,7 @@ if(isset($_GET['flag'])){
     left:auto;
     right:auto;
 }
-.formcontainer,.addcontainer{
+.formcontainer,.addcontainer,.sub-prod{
     display:none;
     position:absolute;
     /* top:0; */
@@ -301,7 +304,7 @@ if(isset($_GET['flag'])){
     justify-content: center;
     /* padding: 20px; */
 }
-.formcontainer,.addcontainer{
+.formcontainer,.addcontainer,.sub-prod{
     display:none;
     position:absolute;
     top:50px;
@@ -447,6 +450,19 @@ if(isset($_GET['flag'])){
         } 
     }
 
+.hide{
+    margin: 50px;
+    padding:10px;
+    color:white;
+    background:red;
+    float:right;
+    border-radius:15%;
+}
+
+.sub-prod{
+    padding: 20px;
+}
+
 </style>
 <style>
     thead{
@@ -484,17 +500,15 @@ if(isset($_GET['flag'])){
                 <li class="sideitem1 sideitem"><img src="public\img\layers-3.png" alt="" class="sideimg"><span class="itemdesc">Category
                         Management</span>
                 </li>
-                <li class="sideitem1" id="prod"><img src="public\img\shopping-bag.png" alt="" class="sideimg"><span class="itemdesc">Product Management</span>
+                <li class="sideitem1 sideitem" id="prod"><img src="public\img\shopping-bag.png" alt="" class="sideimg"><span class="itemdesc">Product Management</span>
                 </li>
-                <li class="sideitem1 sideitem subprod"><img src="public\img\shopping-cart.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Product</span></li>
+                <!-- <li class="sideitem1 sideitem subprod"><img src="public\img\shopping-cart.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Product</span></li>
                  <li class="sideitem1 sideitem subprod"><img src="public\img\book-text.png" alt="" class="sideimg" style="height:50%; width:20px;"><span class="itemdesc">Product description</span></li> 
                  <li class="sideitem1 sideitem subprod"><img src="public\img\crop.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Image</span></li> 
-                 <li class="sideitem1 sideitem subprod"><img src="public\img\palette.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Color</span></li>
+                 <li class="sideitem1 sideitem subprod"><img src="public\img\palette.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Color</span></li> -->
 
-                <li class="sideitem1 " id="prod1"><img src="public\img\book-check.png" alt="" class="sideimg"><span class="itemdesc">Order Management</span></li>
-                <li class="sideitem1 sideitem subprod"><img src="public\img\list-ordered.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Orders</span></li> 
-                 <li class="sideitem1 sideitem subprod"><img src="public\img\book-user.png" alt="" class="sideimg" style="height:50%;width:20px;"><span class="itemdesc">Order Details</span></li>
-
+                <li class="sideitem1 sideitem" id="prod1"><img src="public\img\book-check.png" alt="" class="sideimg"><span class="itemdesc">Order Management</span></li>
+                
                 <li class="sideitem1 sideitem"><img src="public\img\file-question.png" alt="" class="sideimg"><span class="itemdesc">Feedback</span></li>
                 <li class="sideitem1 sideitem"><img src="public\img\user-round-plus.png" alt="" class="sideimg"><span class="itemdesc">Customer
                         Management</span>
@@ -609,7 +623,7 @@ if(isset($_GET['flag'])){
                                     <td>{$row['Category_desc']}</td>
                                     <td>{$row['cat_status']}</td>
 
-                                    <td><span class="buttedit edit">edit</span><span class="button disable">disabled</span></td>
+                                    <td><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span><span class="button disable"><img src="public\img\shield-ban.png" alt="disable" ></span></td>
                                 </tr>
                     _END;
                         }
@@ -631,6 +645,7 @@ if(isset($_GET['flag'])){
                         <input type="text" id="cat-name" class="input" name="Category_name" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
                         <label for="cat-desc" class="label">Category desc</label>
                         <input type="text" id="cat-desc" class="input" name="Category_desc" required>
+                        <input type="hidden" id="cat-desc" class="input" name="hidden" required>
                         <input type="submit" class="submit" value="submit">
                         <input type="submit" class="cancel" value="Cancel">
                     </form>
@@ -644,6 +659,7 @@ if(isset($_GET['flag'])){
                         <input type="text" id="cat-name" class="input" name="Category_name" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
                         <label for="cat-desc" class="label">Category desc</label>
                         <input type="text" id="cat-desc" class="input" name="Category_desc" required>
+                        <input type="hidden" id="cat-desc" class="input" name="hidden" required>
                         <input type="submit" class="submita" value="submit">
                         <input type="submit" class="cancela" value="Cancel">
                     </form>
@@ -659,6 +675,7 @@ if(isset($_GET['flag'])){
                     </div>
                 <?php
                     $sql = "SELECT * FROM `product`"; 
+                    // $sql="SELECT * FROM `product` JOIN color ON color.product_id=product.Product_id JOIN product_desc ON product_desc.cid=color.cid JOIN image ON image.cid=color.cid";
                     $result = $conn->query($sql);
 
                     if ($result) {
@@ -666,15 +683,25 @@ if(isset($_GET['flag'])){
                         <table id="product" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Product ID</th>
-                                    <th>Category ID</th>
-                                    <th>Group</th>
-                                    <th>Product Name</th>
-                                    <th>Product Details</th>
-                                    <th>Price</th>
-                                    <th>actual Price</th>
-                                    <th>product Status</th>
-                                    <th>Action</th>
+                                    <th>Product_id</th>
+                                    <th>Category_ID</th>
+                                    <th>Offer Id</th>
+                                    <th>grp</th>
+                                    <th>product_name</th>
+                                    <th>product_details</th>
+                                    <th>price</th>
+                                    <th>actual_price</th>
+                                    <th>product_status</th>
+                                    <th>Type</th>
+                                    <th>Colors</th>
+                                    <th style="display:none">quantity</th>
+                                    <th style="display:none">Image 1</th>
+                                    <th style="display:none">Image 2</th>
+                                    <th style="display:none">Image 3</th>
+                                    <th style="display:none">Image 4</th>
+                                    <th>size</th>
+                                    <th style="display:none"></th>
+                                    <th style="min-width:150px;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -683,17 +710,111 @@ if(isset($_GET['flag'])){
                         while ($row = $result->fetch_assoc()) {
                             echo <<< _END
                                 <tr>
-                                    <td>{$row['Product_id']}</td>
-                                    <td>{$row['Category_ID']}</td>
-                                    <td>{$row['grp']}</td>
-                                    <td>{$row['product_name']}</td>
-                                    <td>{$row['product_details']}</td>
-                                    <td>₹{$row['price']}</td>
-                                    <td>₹{$row['actual_price']}</td>
-                                    <td>{$row['pro_status']}</td>
-                                    <td><span class="buttedit edit">Edit</span><span class="button disable">Disabled</span></td>
+                                <td>{$row['Product_id']}</td>
+                                <td>{$row['Category_ID']}</td>
+                                <td>{$row['offer_id']}</td>
+                                <td>{$row['grp']}</td>
+                                <td>{$row['product_name']}</td>
+                                <td>{$row['product_details']}</td>
+                                <td>{$row['price']}</td>
+                                <td>{$row['actual_price']}</td>
+                                <td>{$row['pro_status']}</td>
+                                <td>
+                                _END;
+                                    $spid=$row['Product_id'];
+                                    $sql1="SELECT product_desc.product_type FROM `product` JOIN color ON color.product_id=product.Product_id JOIN product_desc ON product_desc.cid=color.cid JOIN image ON image.cid=color.cid WHERE product.Product_id='$spid' GROUP BY product_desc.product_type;";
+                                    $result1=$conn->query($sql1);
+                                    while ($row1 = $result1->fetch_assoc()) {                                             
+                                        echo $row1['product_type']." ";                                     
+                                    }
+                                    echo<<<_END
+                                </td>
+                                <td>
+                                _END;
+                                    $spid=$row['Product_id'];
+                                    $sql1="SELECT color.color FROM `product` JOIN color ON color.product_id=product.Product_id JOIN product_desc ON product_desc.cid=color.cid JOIN image ON image.cid=color.cid WHERE product.Product_id='$spid' GROUP BY color.color;";
+                                    $result1=$conn->query($sql1);
+                                    while ($row1 = $result1->fetch_assoc()) {                                             
+                                        echo $row1['color']." ";                                     
+                                    }
+                                    echo<<<_END
+                                </td>
+                                <td style="display:none">
+                                _END;
+                                    $spid=$row['Product_id'];
+                                    $sql1="SELECT product_desc.quantity FROM `product` JOIN color ON color.product_id=product.Product_id JOIN product_desc ON product_desc.cid=color.cid JOIN image ON image.cid=color.cid WHERE product.Product_id='$spid' GROUP BY color.color;";
+                                    $result1=$conn->query($sql1);
+                                    while ($row1 = $result1->fetch_assoc()) {                                             
+                                        echo $row1['quantity']." ";                                     
+                                    }
+                                    echo<<<_END
+                                </td>
+                                <td style="display:none">
+                                _END;
+                                    $spid=$row['Product_id'];
+                                    $sql1="SELECT image.Image_path1 AS image1 FROM `product` JOIN color ON color.product_id=product.Product_id JOIN product_desc ON product_desc.cid=color.cid JOIN image ON image.cid=color.cid WHERE product.Product_id='$spid' GROUP BY color.color;";
+                                    $result1=$conn->query($sql1);
+                                    while ($row1 = $result1->fetch_assoc()) {                                             
+                                        echo $row1['image1']."\n";                                     
+                                    }
+                                    echo<<<_END
+                                </td>
+                                <td style="display:none">
+                                _END;
+                                    $spid=$row['Product_id'];
+                                    $sql1="SELECT image.Image_path2 AS image2 FROM `product` JOIN color ON color.product_id=product.Product_id JOIN product_desc ON product_desc.cid=color.cid JOIN image ON image.cid=color.cid WHERE product.Product_id='$spid' GROUP BY color.color;";
+                                    $result1=$conn->query($sql1);
+                                    while ($row1 = $result1->fetch_assoc()) {                                             
+                                        echo $row1['image2']."\n";                                     
+                                    }
+                                    echo<<<_END
+                                </td>
+                                <td style="display:none">
+                                _END;
+                                    $spid=$row['Product_id'];
+                                    $sql1="SELECT image.Image_path3 AS image3 FROM `product` JOIN color ON color.product_id=product.Product_id JOIN product_desc ON product_desc.cid=color.cid JOIN image ON image.cid=color.cid WHERE product.Product_id='$spid' GROUP BY color.color;";
+                                    $result1=$conn->query($sql1);
+                                    while ($row1 = $result1->fetch_assoc()) {                                             
+                                        echo $row1['image3']."\n";                                     
+                                    }
+                                    echo<<<_END
+                                </td>
+                                <td style="display:none">
+                                _END;
+                                    $spid=$row['Product_id'];
+                                    $sql1="SELECT image.Image_path4 AS image4 FROM `product` JOIN color ON color.product_id=product.Product_id JOIN product_desc ON product_desc.cid=color.cid JOIN image ON image.cid=color.cid WHERE product.Product_id='$spid' GROUP BY color.color;";
+                                    $result1=$conn->query($sql1);
+                                    while ($row1 = $result1->fetch_assoc()) {                                             
+                                        echo $row1['image4']."\n";                                     
+                                    }
+                                    echo<<<_END
+                                </td>
+                                <td>
+                                _END;
+                                    $spid=$row['Product_id'];
+                                    $sql1="SELECT product_desc.size FROM `product` JOIN color ON color.product_id=product.Product_id JOIN product_desc ON product_desc.cid=color.cid JOIN image ON image.cid=color.cid WHERE product.Product_id='$spid' GROUP BY product_desc.size;";
+                                    $result1=$conn->query($sql1);
+                                    while ($row1 = $result1->fetch_assoc()) {                                             
+                                        echo $row1['size']." | ";                                     
+                                    }
+                                    echo<<<_END
+                                </td>
+                                <td style="display:none">
+                                _END;
+                                    $spid=$row['Product_id'];
+                                    $sql1="SELECT product.product_name AS product_name,product.product_details AS product_detail,color.color AS color,product_desc.quantity AS quantity,image.Image_path1 AS image1,image.Image_path2 AS image2,image.Image_path3 AS image3,image.Image_path4 AS image4 FROM `product` JOIN color ON color.product_id=product.Product_id JOIN product_desc ON product_desc.cid=color.cid JOIN image ON image.cid=color.cid WHERE product.Product_id='$spid' GROUP BY color.color";
+                                    $result1=$conn->query($sql1);
+                                    while ($row1 = $result1->fetch_assoc()) {                                             
+                                        echo $row1['product_name']."_".$row1['product_detail']."_". $row1['color']."_".$row1['quantity']."_".$row1['image1']."_". $row1['image2']."_".$row1['image3']."_".$row1['image4']."@" ;                                     
+                                    }
+                                    echo<<<_END
+                                </td>
+                                <td style="min-width:150px"><span class="buttedit edit"><img src="public\img\pencil.png"></span><span class="buttedit other"><img src="public\img\chevron-right-circle.png"></span><span class="button disable"><img src="public\img\shield-ban.png"></span></td>
+                                
                                 </tr>
                              _END;
+
+                            
                         }
 
                         echo <<< _END
@@ -701,15 +822,20 @@ if(isset($_GET['flag'])){
                         </table>
                     _END;
                     }
-                    
+                                        
                     ?>
-                    <div class="formcontainer">
+                    
+
+                    <div class="formcontainer" id="productformupdate">
                     <form class="addcat" action="update.php" method="POST">
                        <label for="" style="font-size:20px;font-weight:600">Product Details</label>
                         <label for="prod-id" class="label" >Product Id</label>
                         <input type="text" id="prod-id" class="input" name="product_id" pattern="[0-9]" title="(Please enter only numbers)" required>
                         <label for="catg_id" class="label">Category Id</label>
                         <input type="text" id="catg_id" class="input" name="Category_id" pattern="[0-9]" title="(Please enter only numbers)" required>
+                        <label for="off_id" class="label">Offer Id</label>
+                        <input type="text" id="off_id" class="input" name="off_id"  required>
+                       
                         <label for="grp" class="label" >Group</label>
                         <input type="text" id="grp" class="input" name="grp" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
                         <label for="prod_name" class="label" >Product name</label>
@@ -720,6 +846,94 @@ if(isset($_GET['flag'])){
                         <input type="text" id="pprice" class="input" name="price" pattern="[0-9]" title="(Please enter only numbers)" required>
                         <label for="pactpri" class="label">Actual Price</label>
                         <input type="text" id="pactpri" class="input" name="actprice" pattern="[0-9]" title="(Please enter only numbers)" required>
+                        <label for="pprostat" class="label">Product Status</label>
+                        <input type="text" id="pprostat" class="input" name="pprostat" required>
+                        <label for="protype" class="label">Product type</label>
+                        <input type="text" id="protype" class="input" name="protype" required>
+                        
+                        <input type="text" id="procolor" class="input" name="procolor" hidden required >
+                        
+                        <input type="text" id="proquan" class="input" name="proquan" hidden required>
+                        <input type="text" id="proimage2" class="input" name="proimage2" hidden required>
+                        <input type="text" id="proimage3" class="input" name="proimage3" hidden required>
+                        <input type="text" id="proimage4" class="input" name="proimage4" hidden required>
+                        <input type="text" id="proimage1" class="input" name="proimage1" hidden required>
+
+                        
+                        <input type="text" id="prosize" class="input" name="prosize" hidden required >
+                        <div class="colopt"></div>
+                        <label for="prosize" class="label">select size</label>
+                        <div class="sizeopt"></div>
+                        <script>
+                        // Select the element you want to observe
+                        var targetElement = document.getElementById('productformupdate');
+
+                        // Create a new instance of MutationObserver
+                        var observer = new MutationObserver(function(mutationsList, observer) {
+                            for(var mutation of mutationsList) {
+                                if (mutation.attributeName === 'style') {
+                                    var displayStyle = targetElement.style.display;
+                                    if (displayStyle === 'block') {
+                                        console.log('Display is now set to block.');
+                                        // Call your function here
+                                        var procolor=document.querySelector("#procolor");
+                                        var colopt=document.querySelector(".colopt");
+                                        var proquan=document.querySelector("#proquan");
+                                        var proimage1=document.querySelector("#proimage1");
+                                        var proimage2=document.querySelector("#proimage2");
+                                        var proimage3=document.querySelector("#proimage3");
+                                        var proimage4=document.querySelector("#proimage4");
+                                        var quanval=proquan.value.trim().split(' ');
+                                        var imageval1=proimage1.value.trim().split('\n');
+                                        var imageval2=proimage2.value.trim().split('\n');
+                                        var imageval3=proimage3.value.trim().split('\n');
+                                        var imageval4=proimage4.value.trim().split('\n');
+                                        console.log(procolor);
+                                        var colorval=procolor.value.trim().split(' ');
+                                       
+                                        console.log("jsr"+colorval[0]);
+                                        // var colcontent = `<select id="selectcol" class="col" onchange="myFunction()" style="width:90%;margin:5px 10px; padding :5px;" name="selectcol" required >`;
+                                        // for (var i = 0; i < colorval.length; i++) {
+                                        //     colcontent += `<option value="${colorval[i]}">${colorval[i]}</option>`;
+
+                                        // }
+                                        // colcontent += "</select>";
+                                        // colopt.innerHTML = colcontent;
+                                        var colcontent="";
+                                        for (var i = 0; i < colorval.length; i++){
+                                            colcontent +=`<br><hr><br><label for="procolor" class="label">color</label><input type="text" id="color${colorval[i]}" class="input" value="${colorval[i]}" name="${colorval[i]}color"/> `
+                                            colcontent +=`<label for="proquan" class="label">Product Quantity</label><input type="text" id="color${colorval[i]}" class="input" value="${quanval[i]}" name="${colorval[i]}quantity"/> `
+                                            colcontent +=`<label for="proimage1" class="label">Product Image 1</label><input type="text" id="image1${colorval[i]}" class="input" value="${imageval1[i]}" name="${colorval[i]}image1"/> `
+                                            colcontent +=`<label for="proimage2" class="label">Product Image 2</label><input type="text" id="image2${colorval[i]}" class="input" value="${imageval2[i]}" name="${colorval[i]}image2"/> `
+                                            colcontent +=`<label for="proimage3" class="label">Product Image 3</label><input type="text" id="image3${colorval[i]}" class="input" value="${imageval3[i]}" name="${colorval[i]}image3"/> `
+                                            colcontent +=`<label for="proimage4" class="label">Product Image 4</label><input type="text" id="image4${colorval[i]}" class="input" value="${imageval4[i]}" name="${colorval[i]}image4"/><br><hr><br> `
+                                        }
+                                        colopt.innerHTML = colcontent;
+
+
+                                        var prosize=document.querySelector("#prosize");
+                                        var sizeopt=document.querySelector(".sizeopt");
+                                        console.log(prosize);
+                                        var sizeval=prosize.value.trim().split('|');
+                                        console.log("jsr"+sizeval[0]);
+                                        var sizecontent = `<select id="selectsize" class="size" style="width:90%;margin:5px 10px; padding: 5px;" name="selectsize" required >`;
+                                        sizecontent += `<option value="select">Select</option>`;
+                                        for (var i = 0; i < sizeval.length; i++) {
+                                            sizecontent += `<option value="${sizeval[i]}">${sizeval[i]}</option>`;
+                                        }
+                                        sizecontent += "</select>";
+                                        sizeopt.innerHTML = sizecontent;
+                                    }
+                                }
+                            }
+                        });
+
+                        // Start observing the target node for configured mutations
+                        observer.observe(targetElement, { attributes: true });
+                        </script>
+                               
+                        <!-- <label for="disabled" class="label">Product Status</label> -->
+                        <input type="text" id="disabled" class="input" name="disabled" hidden disabled>
                         <input type="submit" class="submit" value="submit" >
                         <input type="submit" class="cancel" value="Cancel">
                     </form>
@@ -731,6 +945,8 @@ if(isset($_GET['flag'])){
                         <input type="text" id="prod-id" class="input" name="product_id" pattern="[0-9]" title="(Please enter only numbers)" required>
                         <label for="catg_id" class="label">Category Id</label>
                         <input type="text" id="catg_id" class="input" name="Category_id" pattern="[0-9]" title="(Please enter only numbers)" required>
+                        <label for="off_id" class="label">Offer Id</label>
+                        <input type="text" id="off_id" class="input" name="off_id"  required>
                         <label for="grp" class="label">Group</label>
                         <input type="text" id="grp" class="input" name="grp" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
                         <label for="prod_name" class="label">Product name</label>
@@ -741,271 +957,78 @@ if(isset($_GET['flag'])){
                         <input type="text" id="pprice" class="input" name="price" pattern="[0-9]" title="(Please enter only numbers)" required>
                         <label for="pactpri" class="label">Actual Price</label>
                         <input type="text" id="pactpri" class="input" name="actprice" pattern="[0-9]" title="(Please enter only numbers)" required>
+                        <label for="pprostat" class="label">Product Status</label>
+                        <input type="text" id="pprostat" class="input" name="pprostat" required>
+                        <hr>
+                        <label for="pprocol" class="label">color</label>
+                        <input type="text" id="pprocol" class="input" name="pprocol" required>
+                        <label for="pproquan" class="label">Quantity</label>
+                        <input type="text" id="pproquan" class="input" name="pproquan" required>
+                        <label for="pprosize" class="label">sizes</label>
+                        <select id="pprosize" class="input" name="pprosize[]" required multiple>
+                            <option value="">Select Size</option>
+                            <!-- Options from 1 to 12 -->
+                            <?php for ($i = 1; $i <= 12; $i++): ?>
+                                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                            <?php endfor; ?>
+                            <!-- Options from 26 to 30 -->
+                            <?php for ($i = 26; $i <= 30; $i++): ?>
+                                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                            <?php endfor; ?>
+                            <!-- Options from 36 to 45 -->
+                            <?php for ($i = 36; $i <= 45; $i++): ?>
+                                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                            <?php endfor; ?>
+                        </select>
+
+                        <label for="pproimage1" class="label">Image1</label>
+                        <input type="file" id="pproimage1" class="input" name="pproimage1" required>
+                        <label for="pproimage2" class="label">Image2</label>
+                        <input type="file" id="pproimage2" class="input" name="pproimage2" required>
+                        <label for="pproimage3" class="label">Image3</label>
+                        <input type="file" id="pproimage3" class="input" name="pproimage3" required>
+                        <label for="pproimage4" class="label">Image4</label>
+                        <input type="file" id="pproimage4" class="input" name="pproimage4" required>
+                        <div class="addcontent0"></div><hr>
+                        <div class="addmore0" style="font-weight:800;color:teal;text-align:right;width:90%;cursor:pointer" onclick="addMore()">Add more</div>
+                        <!-- <label for="disabled" class="label">Product Status</label> -->
+                        <input type="text" id="disabled" class="input" name="disabled" hidden disable>
                         <input type="submit" class="submita" value="submit" >
                         <input type="submit" class="cancela" value="Cancel">
                     </form>
+                    </div>
+                    <div class="sub-prod">
+                        
+                           <h2>Product Details</h2><hr><br>
+                            <table id="descript" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>product name</th>
+                                        <th>product details</th>
+                                        <th>color</th>
+                                        <th>quantity</th>
+                                        <th>image1</th>
+                                        <th>image2</th>
+                                        <th>image3</th>
+                                        <th>image4</th>
+                                        <!-- <th>Action</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody">
+                                </tbody>
+                            </table>
+                        
+                        <input type="button" class="hide" value="Cancel">
                     </div>
                     
             </div>
             </div>
             
-            <div class="mainpage" id="pmpage">
-            <div class="cmcontainer">
-                    <div class="cmheader">
-                        <div class="heading">Product Description</div>
-                        <div class="add">Add product DESC</div>
-                    </div>
-                <?php
-                    $sql = "SELECT * FROM `product_desc`"; 
-                    $result = $conn->query($sql);
-
-                    if ($result) {
-                        echo <<< _END
-                        <table id="product" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Product description ID</th>
-                                    <th>Color ID</th>
-                                    <th>product Type</th>
-                                    <th>size</th>
-                                    <th>Product Description status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                        _END;
-
-                        while ($row = $result->fetch_assoc()) {
-                            echo <<< _END
-                                <tr>
-                                    <td>{$row['prodesc_ID']}</td>
-                                    <td>{$row['cid']}</td>
-                                    <td>{$row['product_type']}</td>
-                                    <td>{$row['size']}</td>
-                                    <td>{$row['prodesc_status']}</td>
-                                    <td><span class="buttedit edit">Edit</span><span class="button disable">Disabled</span></td>
-                                </tr>
-                             _END;
-                        }
-
-                        echo <<< _END
-                            </tbody>
-                        </table>
-                    _END;
-                    }
-                    ?>
-                    <div class="formcontainer">
-                    <form class="addcat" action="update.php" method="post">
-                        <label for="" style="font-size:20px;font-weight:600">Product Description</label>
-                        <label for="proddesc-id" class="label">	prodesc_ID </label>
-                        <input type="text" id="proddesc-id" class="input" name="prodesc_ID" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="color_id" class="label">	cid</label>
-                        <input type="text" id="color_id" class="input" name="cid" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="pro_type" class="label">product_type</label>
-                        <input type="text" id="pro_type" class="input" name="product_type" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
-                        <label for="size" class="label">size</label>
-                        <input type="text" id="size" class="input" name="size" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <input type="submit" class="submit" value="submit" >
-                        <input type="submit" class="cancel" value="Cancel">
-                    </form>
-                    </div>
-                    <div class="addcontainer">
-                    <form class="addcont" action="insert.php" method="post">
-                    <label for="" style="font-size:20px;font-weight:600">add Product Description</label>
-                    <label for="proddesc-id" class="label">	prodesc_ID </label>
-                        <input type="text" id="proddesc-id" class="input" name="prodesc_ID" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="color_id" class="label">	cid</label>
-                        <input type="text" id="color_id" class="input" name="cid" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="pro_type" class="label">product_type</label>
-                        <input type="text" id="pro_type" class="input" name="product_type" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
-                        <label for="size" class="label">size</label>
-                        <input type="text" id="size" class="input" name="size" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <input type="submit" class="submita" value="submit" >
-                        <input type="submit" class="cancela" value="Cancel">
-                    </form>
-                    </div>
-                    
-            </div>
-            </div>
-            <div class="mainpage" id="pmpage">
-            <div class="cmcontainer">
-                    <div class="cmheader">
-                        <div class="heading">image</div>
-                        <div class="add">Add Image</div>
-                    </div>
-                <?php
-                    $sql = "SELECT * FROM `image`"; 
-                    $result = $conn->query($sql);
-
-                    if ($result) {
-                        echo <<< _END
-                        <table id="product" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Image ID</th>
-                                    <th>Color ID</th>
-                                    <th>Image Path1</th>
-                                    <th>Image Path2</th>
-                                    <th>Image Path3</th>
-                                    <th>Image Path4</th>
-                                    <th>Image Description</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                        _END;
-
-                        while ($row = $result->fetch_assoc()) {
-                            echo <<< _END
-                                <tr>
-                                    <td>{$row['Image_ID']}</td>
-                                    <td>{$row['cid']}</td>
-                                    <td><img src="{$row['Image_path1']}" class="tblimg"><br>{$row['Image_path1']}</td>
-                                    <td><img src="{$row['Image_path2']}" class="tblimg"><br>{$row['Image_path2']}</td>
-                                    <td><img src="{$row['Image_path3']}" class="tblimg"><br>{$row['Image_path3']}</td>
-                                    <td><img src="{$row['Image_path4']}" class="tblimg"><br>{$row['Image_path4']}</td>
-                                    <td>{$row['Image_desc']}</td>
-                                    <td><span class="buttedit edit">Edit</span></td>
-                                </tr>
-                             _END;
-                        }
-
-                        echo <<< _END
-                            </tbody>
-                        </table>
-                    _END;
-                    }
-                    ?>
-                    <div class="formcontainer">
-                    <form class="addcat" action="update.php" method="post">
-                        <label for="" style="font-size:20px;font-weight:600">IMAGE</label>
-                        <label for="img_id" class="label">	Image_ID</label>
-                        <input type="text" id="img_id" class="input" name="Image_ID" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="col_id" class="label">cid</label>
-                        <input type="text" id="col_id" class="input" name="cid" pattern="[0-9]" title="(Please enter only numbers)" required>
-
-                        <label for="p1" class="label">Image_path1</label>
-                        <input type="text" class="input" name="Image_path1" disabled>
-                        
-                        <label for="p2" class="label">Image_path2</label>
-                        <input type="text" class="input" name="Image_path2" disabled>
-                        
-                        <label for="p3" class="label">Image_path3</label>
-                        <input type="text" class="input" name="Image_path3" disabled>
-                        
-                        <label for="p4" class="label">Image_path4</label>
-                        <input type="text" class="input" name="Image_path5" disabled>
-                        
-                        <label for="img_desc" class="label">Image_desc</label>
-                        <input type="text" id="img_desc" class="input" name="Image_desc" >
-                        <hr style="height:10px">
-                        Image_Path1 : <input type="file" id="p1" class="input" name="Image_path1">
-                        Image_Path2 : <input type="file" id="p2" class="input" name="Image_path2">
-                        Image_Path3 : <input type="file" id="p3" class="input" name="Image_path3" >
-                        Image_Path4 : <input type="file" id="p4" class="input" name="Image_path4" >
-                        <input type="submit" class="submit" value="submit" >
-                        <input type="submit" class="cancel" value="Cancel">
-                    </form>
-                    </div>
-                    <div class="addcontainer">
-                    <form class="addcont" action="insert.php" method="post">
-                    <label for="" style="font-size:20px;font-weight:600">ADD IMAGE</label>
-                        <label for="img_id" class="label">	Image_ID</label>
-                        <input type="text" id="img_id" class="input" name="Image_ID" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="col_id" class="label">cid</label>
-                        <input type="text" id="col_id" class="input" name="cid" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="p1" class="label">Image_path1</label>
-                        <input type="file" id="p1" class="input" name="Image_path1" >
-                        <label for="p2" class="label">Image_path2</label>
-                        <input type="file" id="p2" class="input" name="Image_path2" >
-                        <label for="p3" class="label">Image_path3</label>
-                        <input type="file" id="p3" class="input" name="Image_path3" >
-                        <label for="p4" class="label">Image_path4</label>
-                        <input type="file" id="p4" class="input" name="Image_path4" >
-                        <label for="img_desc" class="label">Image_desc</label>
-                        <input type="text" id="img_desc" class="input" name="Image_desc" >
-                        <input type="submit" class="submita" value="submit" >
-                        <input type="submit" class="cancela" value="Cancel">
-                    </form>
-                </div>    
-            </div>
-            </div>
-            <div class="mainpage" id="pmpage">
-            <div class="cmcontainer">
-                    <div class="cmheader">
-                        <div class="heading">color</div>
-                        <div class="add">Add color</div>
-                    </div>
-                <?php
-                    $sql = "SELECT * FROM `color`"; 
-                    $result = $conn->query($sql);
-
-                    if ($result) {
-                        echo <<< _END
-                        <table id="product" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Color ID</th>
-                                    <th>Product ID</th>
-                                    <th>Color</th>
-                                    <th>color Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                        _END;
-
-                        while ($row = $result->fetch_assoc()) {
-                            echo <<< _END
-                                <tr>
-                                    <td>{$row['cid']}</td>
-                                    <td>{$row['product_id']}</td>
-                                    <td>{$row['color']}</td>
-                                    <td>{$row['color_status']}</td>
-                                    <td><span class="buttedit edit">Edit</span><span class="button disable">Disable</span></td>
-                                </tr>
-                             _END;
-                        }
-
-                        echo <<< _END
-                            </tbody>
-                        </table>
-                    _END;
-                    }
-                    ?>
-                    <div class="formcontainer">
-                    <form class="addcat" action="update.php" method="post">
-                        <label for="" style="font-size:20px;font-weight:600">IMAGE</label>
-                        <label for="cid" class="label">	Color id</label>
-                        <input type="text" id="cid" class="input" name="color_id" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="product_id" class="label">Product id</label>
-                        <input type="text" id="product_id" class="input" name="pro_id" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="color" class="label">color</label>
-                        <input type="text" id="color" class="input" name="color" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
-                        <input type="submit" class="submit" value="submit" >
-                        <input type="submit" class="cancel" value="Cancel">
-                    </form>
-                    </div>
-                    <div class="addcontainer">
-                    <form class="addcont" action="insert.php" method="post">
-                    <!-- <label for="" style="font-size:20px;font-weight:600">ADD IMAGE</label> -->
-                    <label for="" style="font-size:20px;font-weight:600">ADD COLOR</label>
-                        <label for="cid" class="label">	Color id</label>
-                        <input type="text" id="cid" class="input" name="color_id" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="product_id" class="label">Product id</label>
-                        <input type="text" id="product_id" class="input" name="pro_id" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="color" class="label">color</label>
-                        <input type="text" id="color" class="input" name="color" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
-                        <input type="submit" class="submita" value="submit" >
-                        <input type="submit" class="cancela" value="Cancel">
-                    </form>
-                </div>    
-            </div>
-            </div>
             <div class="mainpage" id="ompage">
             <div class="cmcontainer">
                     <div class="cmheader">
                         <div class="heading">Order</div>
+                        <div class="add" style="display:none">Add color</div>
                     </div>
                 <?php
                     $sql = "SELECT * FROM `order_tbl`"; 
@@ -1022,8 +1045,9 @@ if(isset($_GET['flag'])){
                                     <th>order status</th>
                                     <th>order amount</th>
                                     <th>shipping address</th>
-                                    <th>shipping status</th>
-                                    <th>Action</th>
+                                    <th>Shipping Status</th>
+                                    <th style="display:none">shipping status</th>
+                                    <th style="width:100px">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -1039,7 +1063,18 @@ if(isset($_GET['flag'])){
                                     <td>₹{$row['order_amount']}</td>
                                     <td>{$row['shipping_address']}</td>
                                     <td>{$row['shipping_status']}</td>
-                                    <td><span class="buttedit edit">Edit</span></td>
+                                    <td style="display:none">
+                                _END;
+                                    $soid=$row['order_id'];
+                                    $sql1="SELECT order_detail.order_id,order_detail.product_id,order_detail.quantity,order_detail.rate,order_detail.size,order_detail.color,order_detail.discount,order_detail.amount FROM order_tbl Join order_detail ON order_tbl.order_id=order_detail.order_id WHERE order_tbl.order_id=$soid ";
+                                    $result1=$conn->query($sql1);
+                                    while ($row1 = $result1->fetch_assoc()) {                                             
+                                        echo $row1['order_id']."_".$row1['product_id']."_". $row1['quantity']."_".$row1['rate']."_".$row1['size']."_". $row1['color']."_".$row1['discount']."_".$row1['amount']."@" ;                                     
+                                    }
+                                    echo<<<_END
+                                </td style="width:100px">
+                                    <td><span class="buttedit edit"><img src="public\img\pencil.png"></span><span class="buttedit other"><img src="public\img\chevron-right-circle.png"></span></td>
+                                    
                                 </tr>
                              _END;
                         }
@@ -1071,7 +1106,7 @@ if(isset($_GET['flag'])){
                         <input type="submit" class="cancel" value="Cancel">
                     </form>
                     </div>
-                    <!-- <div class="addcontainer">
+                    <div class="addcontainer" style="display:none">
                     <form class="addcont" action="insert.php" method="post">
                     <label for="" style="font-size:20px;font-weight:600">order</label>
                         <label for="oid" class="label">	Order_id</label>
@@ -1082,6 +1117,7 @@ if(isset($_GET['flag'])){
                         <input type="text" id="od" class="input" name="order_date" >
                         <label for="os" class="label">order_status</label>
                         <input type="text" id="os" class="input" name="order_status" >
+                        
                         <label for="amt" class="label">order_amount</label>
                         <input type="text" id="amt" class="input" name="order_amount" >
                         <label for="sadd" class="label">shipping_address</label>
@@ -1091,103 +1127,33 @@ if(isset($_GET['flag'])){
                         <input type="submit" class="submita" value="submit" >
                         <input type="submit" class="cancela" value="Cancel">
                     </form>
-                </div>     -->
-            </div>
-            </div>
-            <div class="mainpage" id="ompage">
-            <div class="cmcontainer">
-                    <div class="cmheader">
-                        <div class="heading">Order detail</div>
+                </div>    
+                    <div class="sub-prod">
                         
+                    <h2>Order Details</h2><hr><br>
+                            <table id="descript" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Order id</th>
+                                        <th>product id</th>
+                                        <th>quantity</th>
+                                        <th>rate</th>
+                                        <th>size</th>
+                                        <th>color</th>
+                                        <th>discount</th>
+                                        <th>Amount</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody">
+                                </tbody>
+                            </table>
+                        
+                        <input type="button" class="hide" value="Cancel">
                     </div>
-                <?php
-                    $sql = "SELECT * FROM `order_detail`"; 
-                    $result = $conn->query($sql);
-
-                    if ($result) {
-                        echo <<< _END
-                        <table id="order" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>order detail id</th>
-                                    <th>order id</th>
-                                    <th>product id</th>
-                                    <th>quantity</th>
-                                    <th>rate</th>
-                                    <th>discount</th>
-                                    <th>amount</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                        _END;
-
-                        while ($row = $result->fetch_assoc()) {
-                            echo <<< _END
-                                <tr>
-                                    
-                                    <td>{$row['orderdetail_id']}</td>
-                                    <td>{$row['order_id']}</td>
-                                    <td>{$row['product_id']}</td>
-                                    <td>{$row['quantity']}</td>
-                                    <td>₹{$row['rate']}</td>
-                                    <td>{$row['discount']}</td>
-                                    <td>₹{$row['amount']}</td>
-                                    <td><span class="buttedit edit">Edit</span></td>
-                                </tr>
-                             _END;
-                        }
-
-                        echo <<< _END
-                            </tbody>
-                        </table>
-                    _END;
-                    }
-                    ?>
-                    <div class="formcontainer">
-                    <form class="addcat" action="update.php" method="post">
-                        <label for="" style="font-size:20px;font-weight:600">order</label>
-                        <label for="odid" class="label">OrderDesc_id</label>
-                        <input type="text" id="odid" class="input" name="orderdesc_id" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="oid" class="label">	Order_id</label>
-                        <input type="text" id="oid" class="input" name="order_id" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="product_id" class="label">product_id</label>
-                        <input type="text" id="product_id" class="input" name="product_id" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="quantity" class="label">quantity</label>
-                        <input type="text" id="quantity" class="input" name="quantity" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="rate" class="label">rate</label>
-                        <input type="text" id="rate" class="input" name="rate" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="discount" class="label">discount</label>
-                        <input type="text" id="discount" class="input" name="discount" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="amount" class="label">amount</label>
-                        <input type="text" id="amount" class="input" name="amount" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <input type="submit" class="submit" value="submit" >
-                        <input type="submit" class="cancel" value="Cancel">
-                    </form>
-                    </div>
-                    <!-- <div class="addcontainer">
-                    <form class="addcont" action="insert.php" method="post">
-                    <label for="" style="font-size:20px;font-weight:600">order</label>
-                    <label for="odid" class="label">OrderDesc_id</label>
-                        <input type="text" id="odid" class="input" name="orderdesc_id" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="oid" class="label">	Order_id</label>
-                        <input type="text" id="oid" class="input" name="order_id" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="product_id" class="label">product_id</label>
-                        <input type="text" id="product_id" class="input" name="product_id" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="quantity" class="label">quantity</label>
-                        <input type="text" id="quantity" class="input" name="quantity" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="rate" class="label">rate</label>
-                        <input type="text" id="rate" class="input" name="rate" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="discount" class="label">discount</label>
-                        <input type="text" id="discount" class="input" name="discount" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="amount" class="label">amount</label>
-                        <input type="text" id="amount" class="input" name="amount" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <input type="submit" class="submita" value="submit" >
-                        <input type="submit" class="cancela" value="Cancel">
-                    </form>
-                </div>     -->
             </div>
             </div>
+            
             <div class="mainpage" id="feedpage">
             <div class="cmcontainer">
                     <div class="cmheader">
@@ -1280,7 +1246,7 @@ if(isset($_GET['flag'])){
                                     <td>{$row['city']}</td>
                                     <td>{$row['registration_date']}</td>
                                     <td>{$row['usr_status']}</td>
-                                    <td><span class="button disable">Active</span></td>
+                                    <td><span class="button disable"><img src="public\img\shield-ban.png" alt="disable" ></span></td>
                                 </tr>
                              _END;
                         }
@@ -1333,7 +1299,7 @@ if(isset($_GET['flag'])){
                                     <td>{$row['refund_reason']}</td>
                                     <td>₹{$row['refund_amt']}</td>
                                     <td>{$row['refund_status']}</td>
-                                    <td><span class="buttedit edit">Edit</span></td>
+                                    <td><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span></td>
                                 </tr>
                              _END;
                         }
@@ -1384,13 +1350,14 @@ if(isset($_GET['flag'])){
                         <table id="offer" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>offer id</th>
-                                    <th>offer name</th>
-                                    <th>offer details</th>
-                                    <th>offer status</th>
-                                    <th>offer startdate</th>
-                                    <th>offer enddate</th>
-                                    <th>Action</th>
+                                    <th>offer_id</th>
+                                    <th>offer_name</th>
+                                    <th>offer_details</th>
+                                    <th>offer_status</th>
+                                    <th>offer_Percent</th>
+                                    <th>offer_start_date</th>
+                                    <th>offer_end_date</th>
+                                    <th style="min-width:150px">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -1403,9 +1370,10 @@ if(isset($_GET['flag'])){
                                     <td>{$row['offer_name']}</td>
                                     <td>{$row['offer_details']}</td>
                                     <td>{$row['offer_status']}</td>
+                                    <td>{$row['offer_percent']}</td>
                                     <td>{$row['offer_start_date']}</td>
                                     <td>{$row['offer_end_date']}</td>
-                                    <td><span class="buttedit  edit">Edit</span><span class="button disable">Disable</span></td>
+                                    <td style="min-width:150px"><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span><span class="button disable"><img src="public\img\shield-ban.png" alt="disable" ></span></td>
                                 </tr>
                              _END;
                         }
@@ -1486,7 +1454,7 @@ if(isset($_GET['flag'])){
                                     <td>{$row['payment_mode']}</td>
                                     <td>{$row['payment_date']}</td>
                                     <td>{$row['payment_status']}</td>
-                                    <td><span class="button edit">Edit</span></td>
+                                    <td><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span></td>
                                 </tr>
                              _END;
                         }
@@ -1525,8 +1493,7 @@ if(isset($_GET['flag'])){
         var subtitle = document.querySelectorAll(".mainpage");
         var menu = document.querySelector(".amenu");
         var sidebar = document.querySelector(".sidebar");
-        var prod=document.querySelector("#prod");
-        var prod1=document.querySelector("#prod1");
+        
 
     
         menu.addEventListener("click", () => {
@@ -1545,42 +1512,10 @@ if(isset($_GET['flag'])){
         title[0].style.background = "grey";
         <?php
         }
-        if($page==2 || $page==3 || $page==4 || $page==5){
-            ?>
-            title[2].style.display="block";
-            title[3].style.display="block";
-            title[4].style.display="block";
-            title[5].style.display="block";
-            
-            <?php
-        }
-        if($page==6 || $page==7){
-        ?>
-         title[6].style.display="block";
-            title[7].style.display="block";
-            <?php
-        }
         ?>
 
         for (let i = 0; i < title.length; i++) {
-            prod.addEventListener("click",()=>{
-                prod.style.margin="0px";
-            title[2].style.display="block";
-            title[3].style.display="block";
-            title[2].style.background="#0B5345";
-            title[4].style.display="block";
-            title[4].style.background="#0B5345 ";
-            title[3].style.background="#0B5345 ";
-            title[5].style.display="block";
-            title[5].style.background="#0B5345 ";
-        })
-        prod1.addEventListener("click",()=>{
-            prod1.style.margin="0px";
-            title[6].style.display="block";
-            title[7].style.display="block";
-            title[6].style.background="#0B5345 ";
-            title[7].style.background="#0B5345 ";
-        })
+            
             title[i].addEventListener("click", () => {
                 window.location.href = "adminpanel.php?page=" + i;
                 
@@ -1588,31 +1523,11 @@ if(isset($_GET['flag'])){
                     subtitle[j].style.display = "none";
                     title[j].style.background = "teal";
                 }
-                if(i==2 || i==3 || i==4 || i==5){
-                    title[2].style.background="#85C1E9";
-            title[3].style.background="#0B5345 ";
-            title[4].style.background="#0B5345 ";
-            title[5].style.background="#0B5345 ";
-                }
-                if(i==6 || i==7){
-                    title[6].style.background="#A3E4D7 ";
-            title[7].style.background="#0B5345";
-                }
+               
                 title[i].style.background = "grey";
                 subtitle[i].style.display = "block";
                 
-                if(i!=2 && i!=3 && i!=4 && i!=5){
-                    prod.style.margin="0px 0px 5px 0px";
-                    title[2].style.display="none";
-                    title[3].style.display="none";
-                    title[4].style.display="none";
-                    title[5].style.display="none";
-                }
-                if(i!=6 && i!=7){
-                    prod1.style.margin="0px 0px 5px 0px";
-                    title[6].style.display="none";
-                    title[7].style.display="none";
-                }
+                
             });
         }
         // new DataTable('#example');
@@ -1674,7 +1589,7 @@ if(isset($_GET['flag'])){
 
                 }
                 else if(header=='Product_id'){
-                    var value1=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[7].textContent;
+                    var value1=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[8].textContent;
                     window.location.href="update.php?pid="+prid+"&value1="+value1+"&header="+header;
                 }
                 else if(header=='prodesc_ID'){
@@ -1712,7 +1627,7 @@ if(isset($_GET['flag'])){
                 
                 
                 var box=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[j].parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-                console.log(box);
+                console.log("box"+box);
                 console.log(box.childNodes[5]);
                 box.childNodes[5].style.display="block";
                 for(var k=0;k<cancel.length;k++){
@@ -1729,10 +1644,81 @@ if(isset($_GET['flag'])){
                 arr[j]=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[j].textContent;
                 console.log(arr[j]);
                 box.querySelectorAll(".input")[j].value=arr[j];
+               
+                // console.log(colorval[0]);
+                // console.log(colorval[1]);
+                // console.log(colorval.length);
+                // console.log("jsr"+box.querySelectorAll(".input")[j].value);
             }
+            
 
-           })
+           });
         }
+        var other=document.querySelectorAll(".other");
+        var sub_prod=document.querySelectorAll(".sub-prod");
+        
+        var hide=document.querySelector(".hide");
+        
+        console.log("length"+other.length);
+        for(var i=0;i<other.length;i++){
+            other[i].addEventListener("click",(e)=>{
+                var len=e.currentTarget.parentNode.parentNode.getElementsByTagName('td').length;
+                console.log("len"+len);
+                var arr = new Array(len-1);
+                for(var j=0;j<len-1;j++){
+                
+                
+                
+                var box=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[j].parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+                
+                console.log(e.currentTarget.parentNode.parentNode);
+                // sub_prod.style.display="block";
+                // var box=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[j].parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+                console.log("vfx"+box);
+                console.log(box.childNodes[9]);
+                box.childNodes[9].style.display="block";
+                box.childNodes[9].querySelector(".hide").addEventListener("click",(a)=>{
+                    box.childNodes[9].style.display="none";
+            });
+                }
+                var val=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[len-2].textContent;
+                // console.log("parent " + e.currentTarget.parentNode.parentNode.parentNode.parentNode.getElementsByTagName('tr')[0].textContent);
+                var text=val.split('@');
+                // console.log(text);
+                var tbody=box.childNodes[9].querySelector('.tbody');
+                tbody.innerHTML='';
+                
+                for(var k=0;k<(text.length)-1;k++){
+                    console.log(tbody.parentNode.getElementsByTagName('tr')[0].getElementsByTagName('th')[0].textContent);
+                    var subtext=text[k].split('_');
+                    // console.log(subtext);
+                    var row = document.createElement('tr');
+                    var column="";
+                    for(var l=0;l<subtext.length;l++){
+                        if(l>=4 && l<=7 && (tbody.parentNode.getElementsByTagName('tr')[0].getElementsByTagName('th')[0].textContent)!=="Order id" ){
+                            column+=`<td><img src="${subtext[l]}" alt="image" style="height:100px;width:100px"><br>${subtext[l]}</td>`;
+                        }
+                        else{
+
+                            column+=`<td><br>${subtext[l]}</td>`;
+                        }
+                    }
+                    // column+=`<td><span class="buttedit edit">Edit</span></td>`;
+                    row.innerHTML=column;
+                    // console.log(row);
+                    tbody.appendChild(row);
+                    // console.log(tbody);
+                }
+                
+                
+            
+            });
+        
+        }
+        
+
+            
+
         const login=document.querySelector(".subtitle");
 const loginitem=document.querySelector(".logindrop");
 
@@ -1741,7 +1727,73 @@ login.onclick = function () {
     // console.log("Menu button clicked");
     // console.log("link-container class list:", menuitem.classList);
 };
+
     </script>
+     <script>
+        var procolor=document.querySelector("#procolor");
+        console.log(procolor);
+        console.log("hello "+procolor.value)
+    </script>
+    <script>
+        var buttedit=document.querySelectorAll(".buttedit");
+
+    </script>
+    <script>
+        function myFunction(){
+            var proquan=document.querySelector("#proquan");
+            var proimage1=document.querySelector("#proimage1");
+            var quanval=proquan.value.trim().split(' ');
+            var imageval1=proimage1.value.trim().split(' ');
+            var selectElement = document.getElementById("selectcol");
+            var selectedValue = selectElement.value;
+            console.log("Selected value: " + selectedValue);
+        }
+    </script>
+
+<script>
+    let count=1;
+    function addMore() {
+        document.querySelector(".addcontent"+(count-1)).innerHTML = `<hr>
+            <label for="pprocol${count}" class="label">Color</label>
+            <input type="text" id="pprocol${count}" class="input" name="pprocol${count}" required>
+            <label for="pproquan${count}" class="label">Quantity</label>
+            <input type="text" id="pproquan${count}" class="input" name="pproquan${count}" required>
+            <label for="pprosize${count}" class="label">Sizes</label>
+            <select id="pprosize${count}" class="input" name="pprosize${count}[]" required multiple>
+                <option value="">Select Size</option>
+                <!-- Options from 1 to 12 -->
+                <?php for ($i = 1; $i <= 12; $i++): ?>
+                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                <?php endfor; ?>
+                <!-- Options from 26 to 30 -->
+                <?php for ($i = 26; $i <= 30; $i++): ?>
+                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                <?php endfor; ?>
+                <!-- Options from 36 to 45 -->
+                <?php for ($i = 36; $i <= 45; $i++): ?>
+                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                <?php endfor; ?>
+            </select>
+
+            <label for="pproimage1${count}" class="label">Image1</label>
+            <input type="file" id="pproimage1${count}" class="input" name="pproimage1${count}" required>
+            <label for="pproimage2${count}" class="label">Image2</label>
+            <input type="file" id="pproimage2${count}" class="input" name="pproimage2${count}" required>
+            <label for="pproimage3${count}" class="label">Image3</label>
+            <input type="file" id="pproimage3${count}" class="input" name="pproimage3${count}" required>
+            <label for="pproimage4${count}" class="label">Image4</label>
+            <input type="file" id="pproimage4${count}" class="input" name="pproimage4${count}" required>
+            <div class="addcontent${count}"></div>
+            <hr>
+            <div class="addmore${count}" style="font-weight:800;color:teal;text-align:right;width:90%;cursor:pointer" onclick='addMore()'>Add more</div>
+        `;
+        document.querySelector(".addmore"+(count-1)).style.display="none"
+        count++;
+    }
+
+    
+</script>
+    
 </body>
 
 </html>

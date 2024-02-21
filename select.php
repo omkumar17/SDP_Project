@@ -9,7 +9,6 @@ $colors = $product->getcolor();
 $productSizes = $product->getProductSize();
 $totalRecords = $product->getTotalProducts();
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -278,7 +277,7 @@ $totalRecords = $product->getTotalProducts();
                         <?php 
                         foreach ($category as $key => $category) {
                             if(isset($_POST['category'])) {
-                                if(in_array($product->cleanString($category['category_id']),$_POST['category'])) {
+                                if(in_array($product->cleanString($category['Category_name']),$_POST['category'])) {
                                     $categoryCheck ='checked="checked"';
                                 } else {
                                     $categoryCheck="";
@@ -288,7 +287,7 @@ $totalRecords = $product->getTotalProducts();
                                     if(($_GET['categ']===$category['Category_name'])){
                                         ?>
                                         <li class="list-group-item">
-                                            <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($category['category_id']); ?>" checked="checked" name="category[]" class="sort_rang category"><span class="lab"><?php echo ucfirst($category['Category_name']); ?></span></label></div>
+                                            <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($category['Category_name']); ?>" checked="checked" name="category[]" class="sort_rang category"><span class="lab"><?php echo ucfirst($category['Category_name']); ?></span></label></div>
                                         </li>
                                     <?php
                                     }
@@ -298,7 +297,7 @@ $totalRecords = $product->getTotalProducts();
                                 else{
                                     ?>
                                     <li class="list-group-item">
-                                        <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($category['category_id']); ?>" <?php echo @$categoryCheck; ?> name="category[]" class="sort_rang category"><span class="lab"><?php echo ucfirst($category['Category_name']); ?></span></label></div>
+                                        <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($category['Category_name']); ?>" <?php echo @$categoryCheck; ?> name="category[]" class="sort_rang category"><span class="lab"><?php echo ucfirst($category['Category_name']); ?></span></label></div>
                                     </li>
                                     <?php
                                 }
@@ -410,7 +409,7 @@ $totalRecords = $product->getTotalProducts();
                 </div>
                 <div class="maincontent">
                 <?php 
-if(isset($_GET["poster"])){
+if(isset($_GET["page"])){
     ?>
     <div class="poster">
         <div class="imgcontainer">

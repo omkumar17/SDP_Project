@@ -64,7 +64,7 @@ if(isset($_COOKIE['userID']))
     setcookie("userID", "", time()-3600,'/');
     echo<<<_END
     <div class="alert">
-        <div class="alerttext">Logged out successfully!</div><span class="crossed" >✔</span>
+        <div class="alerttext">Logged out successfully!</div><span class="crossed">✔</span>
     </div>
     _END;
 }
