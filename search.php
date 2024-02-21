@@ -96,17 +96,17 @@ if($flag==true){
 }
 
 // foreach($srch as $item){
-// foreach($categry as $categ){
+foreach($categry as $categ){
     
-//         if($item==$categ){
-//             $cat=$item;
-//             echo $cat;
-//             $flag=true;
-//         }
-//     }
-//     if($flag==true){
-//         continue;
-//     }
+        if($item==$categ){
+            $cat=$item;
+            echo $cat;
+            $flag=true;
+        }
+    }
+    if($flag==true){
+        continue;
+    }
 
 // foreach($srch as $item){
 foreach($proname as $prn){
@@ -154,11 +154,15 @@ foreach($color as $cl){
     <?php if($grop!=''){?>
     <input type="text" name="grp[]" value="<?php echo $grop;?>"><?php 
     }
-    
+    if($categry!=''){
+        ?>
+        <input type="text" name="category[]" value="<?php echo $categry;?>"><?php
+        }
     if($prtype!=''){
         ?>
     <input type="text" name="type[]" value="<?php echo $prtype;?>"><?php
     }
+
     if($brand!=''){
     ?>
     <input type="text" name="brand[]" value="<?php echo $brand;?>"><?php

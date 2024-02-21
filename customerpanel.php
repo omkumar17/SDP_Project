@@ -26,7 +26,7 @@ $res=$conn->query($order);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
+    <title>Customer Page</title>
     <link rel="stylesheet" href="adminpanel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="icon" href="public/img/ff logo.jpeg" type="image/x-icon">
@@ -170,8 +170,8 @@ $res=$conn->query($order);
 }
 .orderbox{
     width:20%;
-    text-align:center;
-    padding:30px 30px 30px 30px;
+    text-align:left;
+    padding:30px 30px 30px 16px;
     font-size:38px;
     background:teal;
     color:white;
@@ -1314,6 +1314,85 @@ $res=$conn->query($order);
 }
 
 </style>
+<style>
+    .alert{
+            position:absolute;
+            top:35px;
+            left:30vw;
+            line-height:30px;
+            height:auto;
+            border:1px solid teal;
+            border-radius:15px;
+            width:40vw;
+            background-color:rgba(0,0,0,0.8);
+            color:white;
+            display:flex;
+            flex-direction:row;
+            /* justify-content:center; */
+            align-items:center;
+            padding:10px 10px;
+            z-index:100;
+            /* opacity:0.5; */
+
+        }
+        .alerttext{
+            display:flex;
+            align-items:center;
+            height:100%;
+            width:100%;
+            padding:5px;
+            font-size:20px;
+            font-weight:600;
+        }
+        .crossed{
+            float:right;
+            font-size:20px;
+            font-weight:600;
+            cursor:pointer;
+        }
+        .animated-button {
+            display: inline-block;
+            padding: 10px 20px;
+            padding-bottom:30px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            background-color: teal;
+            color: white;
+            border: none;
+            width:70px;
+            height:20px;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+           margin-left:8px;
+           margin-top:20px;
+        }
+
+        .animated-button:hover {
+            background-color: green; /* Darker teal color on hover */
+        }
+        .subtitle {
+            background-color: green; /* Button background color */
+            color: #fff; /* Button text color */
+            padding: 8px 16px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            height:70px;
+            width:80px;
+            text-transform:uppercase;
+        }
+
+        .subtitle:hover {
+            background-color: #2980b9; /* Darker background color on hover */
+        }
+        
+</style>
 </head>
 
 <body>
@@ -1405,14 +1484,14 @@ $res=$conn->query($order);
                                     <div class="fs-8"><?php echo $orderrow['order_date'];?></div>
                                     <div class="rating d-flex align-items-center pt-1">
                                         <img src="https://www.freepnglogos.com/uploads/like-png/like-png-hand-thumb-sign-vector-graphic-pixabay-39.png"
-                                            alt=""><span class="px-2">Rating:</span>
+                                            alt="" ><span class="px-2 pt-2 animated-button" style="color:white;font-weight:800;">Rate</span>
                                         <span class="fas fa-star gold-star"></span>
                                         <span class="fas fa-star"></span>
                                         <span class="fas fa-star"></span>
                                         <span class="fas fa-star"></span>
                                         <span class="far fa-star"></span>
                                     </div>
-                                    <button class="rate">Rate</button>
+                                    <!--<button class="rate">Rate</button>-->
                                 </div>
                             </div>
                             <div class="col-lg-8">
@@ -1678,7 +1757,7 @@ $res=$conn->query($order);
                             <div class="product-image">
                                 <span class="discount-tag">10% off</span>
                                 <img src="public\img\5002-3-bl.jpeg" class="product-thumb" alt="">
-                                <button class="card-btn">add to whislist</button>
+                                <!--<button class="card-btn">add to whislist</button>-->
                             </div>
                             <div class="product-info">
                                 <h2 class="product-brand">Walkaroo</h2>
@@ -1692,7 +1771,7 @@ $res=$conn->query($order);
                             <div class="product-image">
                                 <span class="discount-tag">10% off</span>
                                 <img src="public\img\5002-3-bl.jpeg" class="product-thumb" alt="">
-                                <button class="card-btn">add to whislist</button>
+                                <!--<button class="card-btn">add to whislist</button>-->
                             </div>
                             <div class="product-info">
                                 <h2 class="product-brand">Walkaroo</h2>
@@ -1704,6 +1783,9 @@ $res=$conn->query($order);
                 </div>
             </div>
             </div>
+            
+               
+            
             <div class="mainpage" id="ofpage">
             <div class="cmcontainer">
             <div class="cmheader">
@@ -1714,22 +1796,22 @@ $res=$conn->query($order);
                     </div>
                     <div class="offercontainer">
                         <?php
-                        // $off="SELECT * FROM `offer`";
-                        // $ofres=$conn->query($off);
-                        // while($offrow=$ofres->fetch_assoc()){
+                        $off="SELECT * FROM `offer`";
+                        $ofres=$conn->query($off);
+                        while($offrow=$ofres->fetch_assoc()){
                         ?>
                         <div class="offer">
                             <div class="offerleft">
-                                <div class="offerhead" style="color:teal">Get Extra 20% Off</div>
-                                <div class="offerdet">Get ready for summer with our stylish sandals. Discounts on selected styles.</div>
+                                <div class="offerhead" style="color:teal">Get Extra %<?php echo $offrow['offer_percent'] ?> Off</div>
+                                <div class="offerdet"><?php echo $offrow['offer_details'] ?></div>
                             </div>
                             <div class="offerright">
-                                <div class="validity">Valid till 31 jan, 2024</div>
+                                <div class="validity">Valid till <?php echo $offrow['offer_end_date'] ?></div>
                                 <div class="condition"><a href="term.php" style="text-decoration:none">View T&C</a></div>
                             </div>
                         </div>
                         <?php
-                        // }?>
+                        }?>
                     </div>
                     
             </div>
@@ -1746,9 +1828,9 @@ $res=$conn->query($order);
                             <div class="noteleft">note:</div>
                             <div class="noteright">For orders exceeding the value of 2,00,000 , PAN Card Details is mandatory.</div>
                         </div>
-                        <form action="">
+                        <form action="customerpanel.php" method="post">
                         <div class="textbox">
-                            <input type="text" placeholder="PAN Number" pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}" title="Please Enter correct PAN">
+                            <input type="text" placeholder="PAN Number" pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}" title="Please Enter correct PAN"  name="pan">
                         </div>
                         <div class="declare">
                             <input type="checkbox" name="declare" id="declare" required><span><label for="declare">I agree to the term mentioned in the declaration. <div class="blue">View Declaration</div></label></span>
@@ -1758,12 +1840,48 @@ $res=$conn->query($order);
                             <input type="submit" value="Confirm">
                         </div>
                         </form>
+                        
                     </div>
              </div>
             </div>
         </section>
     </section>
-    
+                        <?php
+                           $pan = "";
+
+                           if (isset($_POST['pan'])) {
+                               $pan = $_POST['pan'];
+                               $sql = "SELECT `PAN` FROM `user` WHERE `userID`='$user'";
+                               $result = $conn->query($sql);
+                               $row = $result->fetch_assoc();
+                           
+                               if ($row['PAN'] === NULL) { // Use strict equality check (===) for NULL
+                                   $sql = "UPDATE `user` SET `PAN`='$pan' WHERE `userID`='$user'";
+                                   $result = $conn->query($sql);
+                                   if($result)
+                                   {
+                                        // echo<<<_END
+                                        // <div class="alert" id="alerttime">
+                                        //     <div class="alerttext">updated successfully!</div><span class="crossed" >✔</span>
+                                        // </div>
+                                        // <script>showAlert();</script>
+                                        // _END;
+                                        
+                                   }
+                               } else {
+                                // echo<<<_END
+                                // <div class="alert" id="alerttime">
+                                //     <div class="alerttext">Already inserted!</div><span class="crossed" >✔</span>
+                                // </div>
+                                // <script>showAlert();</script>
+                                // _END;
+                               }
+                           }
+
+                            
+                           
+                            
+                        ?>
     <script src="adminpanel.js" type="text/javascript"></script>
     <script>
         var title = document.querySelectorAll(".sideitem");
@@ -1913,6 +2031,29 @@ $res=$conn->query($order);
 
 function redirect(){
     window.location.href="cart.php";
+}
+var crossedClicked = false;
+
+function showAlert() {
+    var alertDiv = document.getElementById('alerttime');
+    var crossedButton = document.querySelector('.crossed');
+
+    alertDiv.style.display = 'block';
+
+    if (!crossedClicked) {
+        crossedButton.addEventListener('click', function() {
+            // Hide the alert
+            alertDiv.style.display = 'none';
+
+            // Set the flag to true to indicate the button has been clicked
+            crossedClicked = true;
+        });
+    }
+
+    // Hide the alert after 10 seconds
+    setTimeout(function() {
+        alertDiv.style.display = 'none';
+    }, 10000); // 10 seconds in milliseconds
 }
     </script>
     

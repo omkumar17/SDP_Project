@@ -44,7 +44,7 @@ if(isset($_POST['newp']) && isset($_POST['confirmp']))
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 _END;
-                header("Refresh:2;url=login.php");
+                header("Refresh:10;url=login.php");
             }
             else
             {
