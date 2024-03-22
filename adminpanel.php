@@ -270,8 +270,8 @@ if(isset($_GET['flag'])){
     text-transform:uppercase;
 }
 .button:hover{
-    background-color:red;
-    color:white;
+    /* background-color:red; */
+    /* color:white; */
 }
 .buttedit:hover{
     background-color:green;
@@ -615,24 +615,35 @@ if(isset($_GET['flag'])){
                             <tbody>
                     _END;
                  
-                        while ($row = $result->fetch_assoc()) {
-                            echo <<< _END
-                                <tr>
-                                    <td>{$row['category_id']}</td>
-                                    <td>{$row['Category_name']}</td>
-                                    <td>{$row['Category_desc']}</td>
-                                    <td>{$row['cat_status']}</td>
-
-                                    <td><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span><span class="button disable"><img src="public\img\shield-ban.png" alt="disable" ></span></td>
-                                </tr>
-                    _END;
+                    while ($row = $result->fetch_assoc()) {
+                        ?>
+                            <tr>
+                                <td><?php echo $row['category_id'];?></td>
+                                <td><?php echo $row['Category_name'];?></td>
+                                <td><?php echo $row['Category_desc'];?></td>
+                                <td><?php echo $row['cat_status'];?></td>
+                        <?php
+                        if($row['cat_status']=='Enabled'){
+                        ?>
+                                <td><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span><span class="button disable"><img src="public\img/trash.png" alt="disable" ></span></td>
+                        <?php
                         }
+                        else{
+                            ?>
+                            
+                                <td><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span><span class="button disable" style="border:2px solid teal"><img src="public\img\plus.png" alt="disable" ></span></td>
+                            <?php
+                        }
+                         ?>
+                            </tr>
+                    <?php
+                    }                
 
-                        echo <<< _END
-                            </tbody>
-                        </table>
-                    _END;
-                    }
+                    echo <<< _END
+                        </tbody>
+                    </table>
+                _END;
+                }
                     // $result2=$conn->query("SELECT * FROM category WHERE category_id='"cat_id");
                     // $row2=$result2->fetch_assoc();
                     ?>
@@ -809,12 +820,29 @@ if(isset($_GET['flag'])){
                                     }
                                     echo<<<_END
                                 </td>
-                                <td style="min-width:150px"><span class="buttedit edit"><img src="public\img\pencil.png"></span><span class="buttedit other"><img src="public\img\chevron-right-circle.png"></span><span class="button disable"><img src="public\img\shield-ban.png"></span></td>
+                                <td style="min-width:150px">
+                                <span class="buttedit edit"><img src="public\img\pencil.png"></span>
+                                <span class="buttedit other"><img src="public\img\chevron-right-circle.png"></span>
+                                _END;
+                                if($row['pro_status']=='Enabled'){
+                                    ?>
+                                     <span class="button disable"><img src="public\img/trash.png"></span>
+                                    <?php
+                                }
+                                else
+                                {
+                                    ?>
+                                    <span class="button disable" style="border:2px solid teal"><img src="public\img\plus.png"></span>
+                                    <?php
+                                }
+                                
+                                ?>
+                                </td>
                                 
                                 </tr>
-                             _END;
+                             
 
-                            
+                           <?php 
                         }
 
                         echo <<< _END
@@ -903,10 +931,10 @@ if(isset($_GET['flag'])){
                                         for (var i = 0; i < colorval.length; i++){
                                             colcontent +=`<br><hr><br><label for="procolor" class="label">color</label><input type="text" id="color${colorval[i]}" class="input" value="${colorval[i]}" name="${colorval[i]}color"/> `
                                             colcontent +=`<label for="proquan" class="label">Product Quantity</label><input type="text" id="color${colorval[i]}" class="input" value="${quanval[i]}" name="${colorval[i]}quantity"/> `
-                                            colcontent +=`<label for="proimage1" class="label">Product Image 1</label><input type="text" id="image1${colorval[i]}" class="input" value="${imageval1[i]}" name="${colorval[i]}image1"/> `
-                                            colcontent +=`<label for="proimage2" class="label">Product Image 2</label><input type="text" id="image2${colorval[i]}" class="input" value="${imageval2[i]}" name="${colorval[i]}image2"/> `
-                                            colcontent +=`<label for="proimage3" class="label">Product Image 3</label><input type="text" id="image3${colorval[i]}" class="input" value="${imageval3[i]}" name="${colorval[i]}image3"/> `
-                                            colcontent +=`<label for="proimage4" class="label">Product Image 4</label><input type="text" id="image4${colorval[i]}" class="input" value="${imageval4[i]}" name="${colorval[i]}image4"/><br><hr><br> `
+                                            colcontent +=`<label for="proimage1" class="label">Product Image 1</label><input type="text" id="textimage1${colorval[i]}" class="input" value="${imageval1[i]}" name="${colorval[i]}image1text"/><input type="file" id="image1${colorval[i]}" class="input" value="${imageval1[i]}" name="${colorval[i]}image1"/> `
+                                            colcontent +=`<label for="proimage2" class="label">Product Image 2</label><input type="text" id="textimage2${colorval[i]}" class="input" value="${imageval1[i]}" name="${colorval[i]}image2text"/><input type="file" id="image2${colorval[i]}" class="input" value="${imageval2[i]}" name="${colorval[i]}image2"/> `
+                                            colcontent +=`<label for="proimage3" class="label">Product Image 3</label><input type="text" id="textimage3${colorval[i]}" class="input" value="${imageval1[i]}" name="${colorval[i]}image3text"/><input type="file" id="image3${colorval[i]}" class="input" value="${imageval3[i]}" name="${colorval[i]}image3"/> `
+                                            colcontent +=`<label for="proimage4" class="label">Product Image 4</label><input type="text" id="textimage4${colorval[i]}" class="input" value="${imageval1[i]}" name="${colorval[i]}image4text"/><input type="file" id="image4${colorval[i]}" class="input" value="${imageval4[i]}" name="${colorval[i]}image4"/><br><hr><br> `
                                         }
                                         colopt.innerHTML = colcontent;
 
@@ -1246,9 +1274,21 @@ if(isset($_GET['flag'])){
                                     <td>{$row['city']}</td>
                                     <td>{$row['registration_date']}</td>
                                     <td>{$row['usr_status']}</td>
-                                    <td><span class="button disable"><img src="public\img\shield-ban.png" alt="disable" ></span></td>
-                                </tr>
-                             _END;
+                                    
+                            _END;
+                            if($row['usr_status']=='Active'){
+                                ?>
+                                    <td><span class="button disable"><img src="public\img/trash.png" alt="disable" ></span></td>
+                                <?php
+                            }
+                            else{
+                                ?>
+                                    <td><span class="button disable" style="border:2px solid teal"><img src="public\img\plus.png" alt="disable" ></span></td>
+                                <?php
+                            }
+                        ?>
+                        </tr>
+                        <?php
                         }
 
                         echo <<< _END
@@ -1373,9 +1413,21 @@ if(isset($_GET['flag'])){
                                     <td>{$row['offer_percent']}</td>
                                     <td>{$row['offer_start_date']}</td>
                                     <td>{$row['offer_end_date']}</td>
-                                    <td style="min-width:150px"><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span><span class="button disable"><img src="public\img\shield-ban.png" alt="disable" ></span></td>
+                                    <td style="min-width:150px"><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span>
+                                _END;
+                                if($row['offer_status']=='Enabled'){
+                                    ?>
+                                    <span class="button disable"><img src="public\img/trash.png" alt="disable" ></span></td>
+                                    <?php
+                                }
+                                else{
+                                    ?>
+                                    <span class="button disable" style="border:2px solid teal"><img src="public\img\plus.png" alt="disable" ></span></td>
+                                    <?php
+                                }
+                                ?>
                                 </tr>
-                             _END;
+                             <?php
                         }
 
                         echo <<< _END
@@ -1581,10 +1633,11 @@ if(isset($_GET['flag'])){
                 var prid=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[0].textContent;
                 var header=e.currentTarget.parentNode.parentNode.parentNode.parentNode.getElementsByTagName('tr')[0].getElementsByTagName('th')[0].textContent;
                 console.log(header);
-                if(header=='category_id')
+                if(header=='Category ID')
                 {
 
                     var value=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[3].textContent;
+                    // console(value);
                     window.location.href="update.php?pid="+prid+"&value="+value+"&header="+header;
 
                 }
@@ -1604,7 +1657,7 @@ if(isset($_GET['flag'])){
                     var value4=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[3].textContent;
                     window.location.href="update.php?pid="+prid+"&value4="+value4+"&header="+header;
                 }
-                else if(header=='userID'){
+                else if(header=='user ID'){
                     var value5=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[10].textContent;
                     window.location.href="update.php?pid="+prid+"&value5="+value5+"&header="+header;
                 }

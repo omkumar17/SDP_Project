@@ -160,13 +160,32 @@ include 'connection.php';
     
 </head>
 <body>
-  <?php if(isset($_COOKIE['userID']) && $user!="" && isset($_GET['ui']))
+  <?php 
+  if(isset($_COOKIE['userID']) && $user!="" && isset($_POST['ui'])){
+   $sql="SELECT * FROM cart_tbl WHERE user_id='$user' AND p_quantity!=0";
+   $result=$conn->query($sql);
+  }
+  if(isset($_COOKIE['userID']) && $user!="" && isset($_POST['ui']) && $result->num_rows !=0)
   {
-    ?>
+    if(isset($_POST['discount']) && $_POST['discount']!=NULL){
+    $discount = intval($_POST['discount']);
+    // echo $discount;
+   }
+   else
+    $discount = 0;
+
+   if(isset($_POST['overdiscount']) && $_POST['overdiscount']!=NULL){
+    $pdisc=intval($_POST['overdiscount']);
+    // echo $pdisc;
+   }
+   else{
+    $pdisc=0;
+   }
+  
+  ?>
         <div class="container"><?php
-                           $sql="SELECT * FROM cart_tbl WHERE user_id='$user' AND p_quantity!=0";
-                           $result=$conn->query($sql);
-                           $total=0.0;
+                          
+                           $total=50.0;
                            ?>
                         
                 <div class="shopping-cart">
@@ -193,8 +212,9 @@ include 'connection.php';
                                     <span class="item-quantity">Quantity: <?php echo $crtquan;?></span>
                                 </li>
                             <?php
-                            $total=$total+($crtrow['price']*$crtquan)+50;
+                            $total=$total+($crtrow['price']*$crtquan);
                            }
+                           $total=$total-$discount-$pdisc;
                            ?>
                            <div class="shopping-cart-header">
                 <i class="fa fa-shopping-cart cart-icon"></i><span class="badge"><?php echo $result->num_rows;?></span>
@@ -247,6 +267,8 @@ include 'connection.php';
             <div class="col-md-3 mb-3">
               <label for="validationDefault05">Zip</label>
               <input type="text" class="form-control" id="validationDefault05" name="zip" placeholder="Zip" required>
+              <input type="hidden" value="<?php echo $pdisc;?>" name="pdisc">
+              <input type="hidden" value="<?php echo $discount;?>" name="discount">
               <input type="hidden" value="<?php echo $total;?>" name="total">
             </div>
           </div>
@@ -280,13 +302,13 @@ include 'connection.php';
               </label>
             </div>
         </div>
-        <input type="submit" class="btn btn-primary" value="Proceed" style="width:200px">
+        <input type="submit"  class="submit btn btn-primary" value="Proceed" style="width:200px">
       </form>
     </div>
     <?php
     }
     else{
-      header("location:login.php");
+      header("location:index.php");
     }
     ?>
     
@@ -295,6 +317,22 @@ include 'connection.php';
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+    // Function to reset the form after submission
+    function resetForm() {
+        var form = document.querySelector('.orderform');
+        form.reset(); // Reset the form
+    }
+
+    // Add event listener to the form submit event
+    document.querySelector('.orderform').addEventListener('submit', function() {
+        // Call the resetForm function after a brief delay to ensure the form submission is completed
+        setTimeout(resetForm, 100); // Adjust the delay time if needed
+    });
+</script>
+
+
 
 </body>
 </html>

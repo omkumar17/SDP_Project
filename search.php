@@ -24,13 +24,13 @@ if (!empty($ch)) {
 }
 for($i=0;$i<count($srch);$i++){
     if($srch[$i]=="mens" || $srch[$i]=="men" ){
-        $srch[$i]="mens";
+        $srch[$i]="Mens";
     }
     if($srch[$i]=="womens" || $srch[$i]=="women" ){
-        $srch[$i]="womens";
+        $srch[$i]="Womans";
     }
     if($srch[$i]=="kids" || $srch[$i]=="kid" ){
-        $srch[$i]="kids";
+        $srch[$i]="Kids";
     }
 }
 $categry=array();
@@ -87,7 +87,7 @@ foreach($group as $grp){
     
         if($item===$grp){
             $grop=$item;
-            echo $grop;
+            // echo $grop;
             $flag=true;
         }
     }
@@ -100,7 +100,7 @@ foreach($categry as $categ){
     
         if($item===$categ){
             $cat=$item;
-            echo $cat;
+            // echo $cat;
             $flag=true;
         }
     }
@@ -113,7 +113,7 @@ foreach($proname as $prn){
     
         if($item===$prn){
             $brand=$item;
-            echo $brand;
+            // echo $brand;
             $flag=true;
         }
     }
@@ -126,7 +126,7 @@ foreach($protype as $prt){
     
         if($item===$prt){
             $prtype=$item;
-            echo $prtype;
+            // echo $prtype;
             $flag=true;
         }
     }
@@ -139,7 +139,7 @@ foreach($color as $cl){
     
         if($item===$cl){
             $col=$item;
-            echo $col;
+            // echo $col;
             $flag=true;
         }
     }

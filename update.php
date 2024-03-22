@@ -88,7 +88,7 @@ if(isset($_GET['header'])=='Product_id' && isset($_GET['value1'])){
         header("location:adminpanel.php?page=2");
     }
 }
-if(isset($_GET['header'])=='category_id' ){
+if(isset($_GET['header'])=='Category ID' ){
     if(isset($_GET['pid']) && isset($_GET['value']))
     {
         $pid=$_GET['pid'];
@@ -152,7 +152,7 @@ if(isset($_GET['header'])=='offer_id'){
         header("location:adminpanel.php?page=7");
     }
 }
-if(isset($_GET['header'])=='userID'){
+if(isset($_GET['header'])=='user ID'){
     if(isset($_GET['pid']) && isset($_GET['value5']))
     {
         $pid=$_GET['pid'];

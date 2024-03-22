@@ -344,7 +344,6 @@ class Product{
 				$productHTML .= '<div class="product-image">';
 				$productHTML .= '<span class="discount-tag">50% off</span>';
 				$productHTML .= '<img src="'.$product['Image_path1'].'" class="product-thumb" alt="'.$product['product_name'].'">';
-				$productHTML .= '<button class="card-btn">add to wishlist</button>';
 				$productHTML .= '</div>';
 				$productHTML .= '<div class="product-info">';
 				$productHTML .= '<div class="product-brand">'.$product['product_name'].'</div>';
