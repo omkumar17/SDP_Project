@@ -151,9 +151,9 @@
     display:flex;
     flex-direction:row;
 }
-.active{
+.active1{
     background:#ddfff4;
-    /* border:1px solid black; */
+    /* border-top:4px solid teal; */
 }
 .visible{
        display:block;
@@ -194,9 +194,20 @@ if(isset($_COOKIE['userID']))
         <div class="notice-slider">
             <div class="notice-container">
                 <div class="notice-parent">
-                    <div class="notice-content"><p>Get 50% off on your first order</p></div>
+                    <div class="notice-content"><p>Get 20% off on your first order</p></div>
                     <div class="notice-content"><p>Shop great brands at an even better price</p></div>
-                    <div class="notice-content"><p>Receive a free gift with purchase</p></div>
+                    <div class="notice-content"><p>Get Flat 35% off on Walkaro Products</p></div>
+                    <?php
+                        $sql = "SELECT `Product_id`, `actual_price`, `price` FROM `product` WHERE `product_name` = 'Walkaro'";
+                        $result = $conn->query($sql);
+                        while ($row = $result->fetch_assoc()) {
+                            $disprice = round($row['actual_price'] - (0.35 * $row['actual_price']));
+                            $productId = $row['Product_id'];
+                            $dissql = "UPDATE `product` SET `price`='$disprice' WHERE `Product_id`='$productId';";
+                            $conn->query($dissql);
+                        }
+                    ?>
+
                     <div class="notice-content"><p>Great Freedom Festival | Live noe</p></div>
                 </div>
             </div>
@@ -297,16 +308,16 @@ if(isset($_COOKIE['userID']))
             </div>
         </div>
         <ul class="links-container" id="link-con">
-            <li class="link-item <?php if(!isset($_GET['page'])) echo 'active';?>"><a href="index.php" class="link">Home</a></li>
-            <li class="link-item <?php if(isset($_GET['page']) && $_GET['page']=='newarrivals') echo 'active';?>"><a href="select.php?page=newarrivals" class="link">New Arrivals</a></li>
-            <li class="link-item <?php if(isset($_GET['page']) && $_GET['page']=='women') echo 'active';?> women menu-opt"><a  class="link">Women  +</a>
+            <li class="link-item <?php if(!isset($_GET['page'])) echo 'active1';?>"><a href="index.php" class="link">Home</a></li>
+            <li class="link-item <?php if(isset($_GET['page']) && $_GET['page']=='newarrivals') echo 'active1';?>"><a href="select.php?page=newarrivals" class="link">New Arrivals</a></li>
+            <li class="link-item <?php if(isset($_GET['page']) && $_GET['page']=='women') echo 'active1';?> women menu-opt"><a  class="link">Women  +</a>
             <ul class="women-drop drop">
             <div class="drop-container">       
             <div class="drop-items">
             <ul class="header-category">
                 <li class="header-category-title">SHOES</li>
                 <li><a href="select.php?categ=shoes&type=casual&grp=women&page=women" class="header-link">Casual</a></li>
-                <li><a href="select.php?categ=shoes&type=sports&grp=women&page=women&page=women" class="header-link">Sports</a></li>
+                <li><a href="select.php?categ=shoes&type=sports&grp=women&page=women" class="header-link">Sports</a></li>
                 <li><a href="select.php?categ=shoes&type=loofers&grp=women&page=women" class="header-link">Loofers</a></li>
                 <li><a href="select.php?categ=shoes&type=sneakers&grp=women&page=women" class="header-link">Sneakers</a></li>
             </ul>
@@ -338,7 +349,7 @@ if(isset($_COOKIE['userID']))
             <div class="drop-img"><img src="public/img/womandrpimg.jpg" alt=""></div>
             </ul>
             </li>
-            <li class="link-item mens <?php if(isset($_GET['page']) && $_GET['page']=='men') echo 'active';?> menu-opt"><a class="link">Men  +</a>
+            <li class="link-item mens <?php if(isset($_GET['page']) && $_GET['page']=='men') echo 'active1';?> menu-opt"><a class="link">Men  +</a>
             <ul class="mens-drop drop">
             <div class="drop-container">
             <span class="cross">X</span>
@@ -374,7 +385,7 @@ if(isset($_COOKIE['userID']))
             <div class="drop-img"><img src="public/img/mendropimg.jpeg.jpg" alt=""></div>
             </ul>
             </li>
-            <li class="link-item <?php if(isset($_GET['page']) && $_GET['page']=='kids') echo 'active';?> kids menu-opt"><a  class="link">Kids  +</a>
+            <li class="link-item <?php if(isset($_GET['page']) && $_GET['page']=='kids') echo 'active1';?> kids menu-opt"><a  class="link">Kids  +</a>
             <ul class="kids-drop drop">
             <div class="drop-container">
             <span class="cross">X</span>
@@ -409,7 +420,7 @@ if(isset($_COOKIE['userID']))
             <div class="drop-img"><img src="public/img/kidsdropimg.jpg" alt=""></div>
             </ul>
             </li>
-            <li class="link-item <?php if(isset($_GET['page']) && $_GET['page']=='accessories') echo 'active';?> access menu-opt"><a class="link">Accessories  +</a>
+            <li class="link-item <?php if(isset($_GET['page']) && $_GET['page']=='accessories') echo 'active1';?> access menu-opt"><a class="link">Accessories  +</a>
             <ul class="access-drop drop">
             <div class="drop-container">
             <span class="cross">X</span>

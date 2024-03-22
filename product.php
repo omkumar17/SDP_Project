@@ -221,7 +221,8 @@ if(isset($_GET['upd'])){
             <p class="product-short-des"><?php echo $row['product_details']; ?></p>
             <span class="product-price"><?php echo "₹".$row['price']; ?></span>
             <span class="product-actual-price"><?php echo "₹".$row['actual_price']; ?></span>
-            <span class="product-discount">( 30% off )</span><br>
+            <span class="product-discount">(<?php echo round(($row['actual_price'] - $row['price']) / $row['actual_price'] * 100); ?> % off)</span>
+            <br>
             <?php
             $sum=0;
             $flag="IN STOCK";
@@ -287,14 +288,14 @@ if(isset($_GET['upd'])){
                          
                     ?>
                     </div>
-                        <span class="qty">Quantity: </span><br>
+                        <span class="qty">Quantity: </span><br> 
                         <input class="quantity" id="id_form-0-quantity" min="1" name="quantity" value="1" type="number">
                         <input type="hidden" value="<?php echo $col;?>" name="color">
                         <input type="hidden" value="<?php echo $id;?>" name="id">
 
             <br>
             <input type="submit" class="btn cart-btn cartbtn" value="Add to cart">
-            <button class="btn wish-btn" onclick="changeFormAction('wishlist.php')">Add to wishlist</button>
+            <!-- <button class="btn wish-btn" onclick="changeFormAction('wishlist.php')">Add to wishlist</button> -->
 
             </form>
             </div>
@@ -337,7 +338,7 @@ if(isset($_GET['upd'])){
                     <div class="product-image">
                         <span class="discount-tag">25% off</span>
                         <img src="public\img\1026-1-blu.jpeg" class="product-thumb" alt="">
-                        <button class="card-btn">add to whislist</button>
+                         
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Paragon</h2>
@@ -353,7 +354,7 @@ if(isset($_GET['upd'])){
                     <div class="product-image">
                         <span class="discount-tag">10% off</span>
                         <img src="public\img\5002-3-bl.jpeg" class="product-thumb" alt="">
-                        <button class="card-btn">add to whislist</button>
+                         
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Walkaroo</h2>
@@ -368,7 +369,7 @@ if(isset($_GET['upd'])){
                     <div class="product-image">
                         <span class="discount-tag">20% off</span>
                         <img src="public\img\4866-1-crbr.jpeg" class="product-thumb" alt="">
-                        <button class="card-btn">add to whislist</button>
+                         
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Walkaroo</h2>
@@ -383,7 +384,7 @@ if(isset($_GET['upd'])){
                     <div class="product-image">
                         <span class="discount-tag">25% off</span>
                         <img src="public\img\5100-1-bl.jpeg" class="product-thumb" alt="">
-                        <button class="card-btn">add to whislist</button>
+                         
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Lee Copper</h2>
@@ -398,7 +399,7 @@ if(isset($_GET['upd'])){
                     <div class="product-image">
                         <span class="discount-tag">30% off</span>
                         <img src="public\img\5109-1-gr.jpeg" class="product-thumb" alt="">
-                        <button class="card-btn">add to whislist</button>
+                         
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Lee Copper</h2>
@@ -413,7 +414,7 @@ if(isset($_GET['upd'])){
                     <div class="product-image">
                         <span class="discount-tag">10% off</span>
                         <img src="public\img\5687-4-bro.jpeg" class="product-thumb" alt="">
-                        <button class="card-btn">add to whislist</button>
+                         
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Walkaroo</h2>
@@ -428,7 +429,7 @@ if(isset($_GET['upd'])){
                     <div class="product-image">
                         <span class="discount-tag">25% off</span>
                         <img src="public\img\8004-4-blu.jpeg" class="product-thumb" alt="">
-                        <button class="card-btn">add to whislist</button>
+                         
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Paragon</h2>
@@ -443,7 +444,7 @@ if(isset($_GET['upd'])){
                     <div class="product-image">
                         <span class="discount-tag">10% off</span>
                         <img src="public\img\77075-1-mar.jpeg" class="product-thumb" alt="">
-                        <button class="card-btn">add to whislist</button>
+                         
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Paragon</h2>

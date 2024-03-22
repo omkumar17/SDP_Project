@@ -211,6 +211,7 @@ if(isset($_GET['crtquant'])){
                         $sql="SELECT * FROM cart_tbl WHERE user_id='$user' AND p_quantity!=0";
                         $result=$conn->query($sql);
                         $total=0.0;
+                        $applied=0.0;
                         if($result->num_rows !=0){
                         while($row=$result->fetch_assoc())
                         {
@@ -222,7 +223,7 @@ if(isset($_GET['crtquant'])){
                             $crtsql="SELECT * FROM product_desc INNER JOIN color ON color.cid=product_desc.cid  INNER JOIN image ON image.cid=color.cid INNER JOIN product ON product.Product_id=color.product_id  WHERE product.Product_id='$crtprid' AND product_desc.size='$crtsize' AND color.color='$crtcol'";
                             $crtresult=$conn->query($crtsql);
                             $crtrow=$crtresult->fetch_assoc();
-                            
+                            $disquan=0;
                             ?>
                             <div class="card p-4">
                             <h2 class="py-4 font-weight-bold">Cart</h2>
@@ -245,20 +246,20 @@ if(isset($_GET['crtquant'])){
                                             <ul class="pagination justify-content-end set_quantity">
                                                 <li class="page-item">
                                                     <button class="page-link "
-                                                        onclick="decreaseNumber('textbox<?php echo $crtsize.$crtcol;?>','itemval<?php echo $crtsize.$crtcol;?>','<?php echo $crtrow['price'];?>')">
+                                                        onclick="decreaseNumber('textbox<?php echo $crtprid.$crtsize.$crtcol;?>','itemval<?php echo $crtprid.$crtsize.$crtcol;?>','<?php echo $crtrow['price'];?>')">
                                                         <i class="fas fa-minus"></i> </button>
                                                 </li>
                                                 <li class="page-item">
                                                 <form action="cart.php" class="quanform" method="get">    
                                                     <input type="text" name="crtquant" class="page-link quant"
-                                                    value="<?php echo $crtquan; ?>" id="textbox<?php echo $crtsize.$crtcol;?>">
+                                                    value="<?php echo $crtquan; if($crtquan>=5){$disquan=true;}?>" id="textbox<?php echo $crtprid.$crtsize.$crtcol;?>">
                                                     <input type="hidden" name="crtid" value="<?php echo $crtid;?>">
                                                     <input type="submit" value="click to update" class="submit">
                                                 </form>
                                                 </li>
                                                 <li class="page-item">
                                                     <button class="page-link"
-                                                        onclick="increaseNumber('textbox<?php echo $crtsize.$crtcol;?>','itemval<?php echo $crtsize.$crtcol;?>','<?php echo $crtrow['price'];?>')"> <i
+                                                        onclick="increaseNumber('textbox<?php echo $crtprid.$crtsize.$crtcol;?>','itemval<?php echo $crtprid.$crtsize.$crtcol;?>','<?php echo $crtrow['price'];?>')"> <i
                                                             class="fas fa-plus"></i></button>
                                                 </li>
                                             </ul>
@@ -268,17 +269,22 @@ if(isset($_GET['crtquant'])){
                                     <div class="row">
                                         <div class="col-8 d-flex justify-content-between remove_wish">
                                             <p><i class="fas fa-trash-alt"></i> REMOVE ITEM</p>
-                                            <p><i class="fas fa-heart"></i>MOVE TO WISH LIST </p>
                                         </div>
                                         <div class="col-4 d-flex justify-content-end price_money">
-                                            <h3>&#8377;<span id="itemval<?php echo $crtsize.$crtcol;?>"><?php echo ($crtrow['price']*$crtquan); ?></span></h3>
+                                            <h3>&#8377;<span id="itemval<?php echo $crtprid.$crtsize.$crtcol;?>"><?php echo ($crtrow['price']*$crtquan); ?></span></h3>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <?php
+                        if($disquan==1){
+                                $total=$total+($crtrow['price']*$crtquan);
+                                $applied=$applied+(0.20*($crtrow['price']*$crtquan));
+                            }
+                            else{
                         $total=$total+($crtrow['price']*$crtquan);
+                            }
                         }
                     }
                     else{
@@ -302,15 +308,27 @@ if(isset($_GET['crtquant'])){
                                 <p>&#8377;<span id="product_total_amt"><?php echo $total;?> </span></p>
                             </div>
                             <div class="price_indiv d-flex justify-content-between">
+                                <p>discount</p>
+                                <p>&#8377;<span id="discount">0</span></p>
+                            </div>
+                             <div class="price_indiv d-flex justify-content-between">
+                                <p>whole sale discount</p>
+                                <p>&#8377;<span id="wsdiscount"><?php echo $applied;?></span></p>
+                            </div>
+                            <div class="price_indiv d-flex justify-content-between">
                                 <p>Shipping Charge</p>
                                 <p>&#8377;<span id="shipping_charge">50.0</span></p>
                             </div>
                             <hr />
                             <div class="total-amt d-flex justify-content-between font-weight-bold">
                                 <p>The total amount of (including VAT)</p>
-                                <p>&#8377;<span id="total_cart_amt"><?php echo ($total+50.0);?></span></p>
+                                <p>&#8377;<span id="total_cart_amt"><?php echo ($total+50.0)-$applied;?></span></p>
                             </div>
-                            <a href="order.php?ui=1"><button class="btn btn-primary text-uppercase" style="background:teal">Checkout</button></a>
+                            <form action="order.php" method="post">
+                                <input type="hidden" name="ui" id="ui" value="1">
+                                <input type="hidden" name="overdiscount" id="pdiscval" value="">
+                                <input type="hidden" name="discount" id="discval" value="<?php echo $applied?>">
+                                <input type="submit" class="btn btn-primary text-uppercase" style="background:teal" value="Checkout"></form>
                         </div>
                         <!-- discount code part -->
                         <div class="discount_code mt-3 shadow">
@@ -323,14 +341,30 @@ if(isset($_GET['crtquant'])){
                                     </a>
                                     <div class="collapse" id="collapseExample">
                                         <div class="mt-3">
-                                            <input type="text" name="" id="discount_code1"
+                                            <!-- <input type="text" name="" id="discount_code1"
                                                 class="form-control font-weight-bold"
-                                                placeholder="Enter the discount code">
-                                            <small id="error_trw" class="text-dark mt-3">code is foot15</small>
+                                                placeholder="Enter the discount code"> -->
+                                            <small id="error_trw" class="text-dark mt-3">Available offers</small>
                                         </div>
+                                        <select id="offer" style="min-width:100px;height:30px">
+                                            <option style="height:60px;" value="0">Select</option>
+                                    <?php
+                                        $coupon="SELECT `offer_id`, `offer_name`, `offer_percent` FROM `offer` WHERE `offer_start_date`<`offer_end_date` AND `offer_end_date`>=CURRENT_DATE AND `offer_status`='Enabled'";
+                                        $coupres=$conn->query($coupon);
+                                        while($courow=$coupres->fetch_assoc()){
+                                           ?>
+                                                <option style="height:60px;text-wrap:wrap;" value="<?php echo $courow['offer_percent'];?>"><h2><?php echo $courow['offer_name'];?>
+                                            </h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h4>Get <?php echo $courow['offer_percent'];?> off on your order </h4></option>
+                                           <?php
+                                        }
+                                    ?>
+                                     </select><br>
+                                        
                                         <button class="btn btn-primary btn-sm mt-3 " style="background:teal"
-                                            onclick="discount_code()">Apply</button>
+                                            onclick="discount_code(<?php echo ($total+50.0);?>)">Apply</button>
+                                            
                                     </div>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -365,6 +399,8 @@ if(isset($_GET['crtquant'])){
         var shipping_charge = document.getElementById('shipping_charge');
         var total_cart_amt = document.getElementById('total_cart_amt');
         var discountCode = document.getElementById('discount_code1');
+        var discount=document.querySelector("#discount");
+        var pdiscval=document.querySelector("#pdiscval");
         const decreaseNumber = (incdec, itemprice,pprice) => {
             var itemval = document.getElementById(incdec);
             var itemprice = document.getElementById(itemprice);
@@ -383,6 +419,7 @@ if(isset($_GET['crtquant'])){
             }
         }
         const increaseNumber = (incdec, itemprice,pprice) => {
+            console.log(incdec);
             var itemval = document.getElementById(incdec);
             var itemprice = document.getElementById(itemprice);
             // console.log(itemval.value);
@@ -398,18 +435,42 @@ if(isset($_GET['crtquant'])){
                 total_cart_amt.innerHTML = parseInt(product_total_amt.innerHTML) + parseInt(shipping_charge.innerHTML);
             // }
         }
+       
+        const discount_code = (price) => {
+            let offer=document.querySelector("#offer");
+            var selectedOption = offer.options[offer.selectedIndex];
 
-        const discount_code = () => {
-            let totalamtcurr = parseInt(total_cart_amt.innerHTML);
+            // Get the value and text of the selected option
+            var selectedValue = selectedOption.value;
+            var selectedText = selectedOption.text;
+
+            // Display the selected value and text
+            // alert("Selected value: " + selectedValue + "\nSelected text: " + selectedText);
+            // let select_offer = offer.textContent.trim(); // Trim whitespace
+            // console.log("Selected offer:", select_offer); // Log selected offer for debugging
+            let totalamtcurr = parseFloat(price);
             let error_trw = document.getElementById('error_trw');
-            if (discountCode.value === 'foot15') {
-                let newtotalamt = totalamtcurr - 15;
+
+            if (selectedText) {
+                let disc=selectedValue;
+                let newtotalamt = totalamtcurr - parseFloat(disc)-parseFloat(discval.value);
+                discount.innerHTML=disc;
+                
+                pdiscval.value=parseFloat(disc);
+                console.log(pdiscval.value);
                 total_cart_amt.innerHTML = newtotalamt;
-                error_trw.innerHTML = "Hurray! code is valid";
+                if(selectedText!=="Select")
+                error_trw.innerHTML = "Discount applied";
             } else {
                 error_trw.innerHTML = "Try Again! Valid code is thapa";
             }
         }
+
+        function discount(){
+            var wsdis= document.querySelector("#wsdiscount");
+            wsdis.innerHTML="applied";
+        }
+
 
     //     var crtfrm=document.querySelectorAll(".quanform");
     //     var inp=document.querySelectorAll(".quant");

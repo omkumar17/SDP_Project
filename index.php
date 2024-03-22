@@ -242,6 +242,39 @@ footer{
     margin-bottom: 10px;
     /* height:60vh; */
 }
+.whole-container{
+    position:fixed;
+    top:20%;
+    left:20%;
+    right:20%;
+
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:500px;
+    width:auto;
+    background:white;
+    /* border:1px solid black; */
+    box-shadow: 0 0 25px 1px black;
+    /* filter: blur(5px); */
+    border-radius:15px;
+    z-index: 1001;
+}
+.whole-poster,.whole-img{
+    height:100%;
+    width:100%;
+    border-radius:15px;
+    
+}
+.whole-cross{
+    position:absolute;
+    top: 2%;
+    right: 2%;
+    cursor:pointer;
+    z-index:1002;
+    color:white;
+}
 
     </style>
 </head>
@@ -272,18 +305,14 @@ footer{
         </div>
     </header>
 
-    <!-- <section class="notice">
-        <div class="notice-slider">
-            <div class="notice-container">
-                <div class="notice-parent">
-                    <div class="notice-content"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora fugiat veniam eaque?</p></div>
-                    <div class="notice-content"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora fugiat veniam eaque?</p></div>
-                    <div class="notice-content"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora fugiat veniam eaque?</p></div>
-                    <div class="notice-content"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora fugiat veniam eaque?</p></div>
-                </div>
+    
+        <div class="whole-container">
+            <div class="whole-cross">X</div>
+            <div class="whole-poster">
+                <img src="public\img\wholesale.jpg" alt="" class="whole-img">
             </div>
         </div>
-    </section> -->
+    
 
     <section class="product">
         <div class="product-category heading" style="color:teal;font-weight:800">BEST SELLING</div>
@@ -299,7 +328,7 @@ footer{
                     <div class="product-image">
                         <span class="discount-tag">25% off</span>
                         <img src="public\img\1026-1-blu.jpeg" class="product-thumb" alt="">
-                        <button class="card-btn">add to whislist</button>
+                         
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Paragon</h2>
@@ -313,9 +342,9 @@ footer{
             <a href="product.php?id=5002&color=blue" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
-                        <span class="discount-tag">10% off</span>
+                        <span class="discount-tag">35% off</span>
                         <img src="public\img\5002-3-bl.jpeg" class="product-thumb" alt="">
-                        <button class="card-btn">add to whislist</button>
+                         
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Walkaroo</h2>
@@ -328,9 +357,9 @@ footer{
             <a href="product.php?id=4866" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
-                        <span class="discount-tag">20% off</span>
+                        <span class="discount-tag">35% off</span>
                         <img src="public\img\4866-1-crbr.jpeg" class="product-thumb" alt="">
-                        <button class="card-btn">add to whislist</button>
+                         
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Walkaroo</h2>
@@ -345,7 +374,7 @@ footer{
                     <div class="product-image">
                         <span class="discount-tag">25% off</span>
                         <img src="public\img\5100-1-bl.jpeg" class="product-thumb" alt="">
-                        <button class="card-btn">add to whislist</button>
+                         
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Lee Copper</h2>
@@ -360,7 +389,7 @@ footer{
                     <div class="product-image">
                         <span class="discount-tag">30% off</span>
                         <img src="public\img\5109-1-gr.jpeg" class="product-thumb" alt="">
-                        <button class="card-btn">add to whislist</button>
+                         
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Lee Copper</h2>
@@ -373,9 +402,9 @@ footer{
             <a href="product.php?id=5687&color=brown" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
-                        <span class="discount-tag">10% off</span>
+                        <span class="discount-tag">35% off</span>
                         <img src="public\img\5687-4-bro.jpeg" class="product-thumb" alt="">
-                        <button class="card-btn">add to whislist</button>
+                         
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Walkaroo</h2>
@@ -390,7 +419,7 @@ footer{
                     <div class="product-image">
                         <span class="discount-tag">25% off</span>
                         <img src="public\img\8004-4-blu.jpeg" class="product-thumb" alt="">
-                        <button class="card-btn">add to whislist</button>
+                         
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Paragon</h2>
@@ -405,7 +434,7 @@ footer{
                     <div class="product-image">
                         <span class="discount-tag">10% off</span>
                         <img src="public\img\77075-1-mar.jpeg" class="product-thumb" alt="">
-                        <button class="card-btn">add to whislist</button>
+                         
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Paragon</h2>
@@ -455,9 +484,9 @@ footer{
                 <a href="select.php?categ=brands&type=walkaroo&grp=Mens" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
-                            <span class="discount-tag">20% off</span>
+                            <span class="discount-tag">35% off</span>
                             <img src="public\img\5687-1-bla.jpeg" class="product-thumb" alt="">
-                            <!-- <button class="card-btn">add to whislist</button> -->
+                            <!--   -->
                         </div>
                         <div class="product-info">
                             <h2 class="product-brand">Walkaroo</h2>
@@ -474,7 +503,7 @@ footer{
                         <div class="product-image">
                             <span class="discount-tag">10% off</span>
                             <img src="public\img\1026-2-wh.jpeg" class="product-thumb" alt="">
-                            <!-- <button class="card-btn">add to whislist</button> -->
+                            <!--   -->
                         </div>
                         <div class="product-info">
                             <h2 class="product-brand">Paragon</h2>
@@ -491,7 +520,7 @@ footer{
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
                             <img src="public\img\568-1-red.jpeg" class="product-thumb" alt="">
-                            <!-- <button class="card-btn">add to whislist</button> -->
+                            <!--   -->
                         </div>
                         <div class="product-info">
                             <h2 class="product-brand">Venus</h2>
@@ -508,7 +537,7 @@ footer{
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
                             <img src="public\img\258-1-ma.jpeg" class="product-thumb" alt="">
-                            <!-- <button class="card-btn">add to whislist</button> -->
+                            <!--   -->
                         </div>
                         <div class="product-info">
                             <div class="product-brand">Venus</div>
@@ -525,7 +554,7 @@ footer{
                         <div class="product-image">
                             <span class="discount-tag">30% off</span>
                             <img src="public\img\5002-2-bl.jpeg" class="product-thumb" alt="">
-                            <!-- <button class="card-btn">add to whislist</button> -->
+                            <!--   -->
                         </div>
                         <div class="product-info">
                             <h2 class="product-brand">Lee Copper</h2>
@@ -542,7 +571,7 @@ footer{
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
                             <img src="public\img\8004-1-blu.jpeg" class="product-thumb" alt="">
-                            <!-- <button class="card-btn">add to whislist</button> -->
+                            <!--   -->
                         </div>
                         <div class="product-info">
                             <div class="product-brand">Paragon</div>
@@ -559,7 +588,7 @@ footer{
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
                             <img src="public\img\2C-1-bl.jpeg" class="product-thumb" alt="">
-                            <!-- <button class="card-btn">add to whislist</button> -->
+                            <!--   -->
                         </div>
                         <div class="product-info">
                             <div class="product-brand">Campus</div>
@@ -574,9 +603,9 @@ footer{
                 <a href="select.php?categ=brands&type=walkaroo&grp=Womans" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
-                            <span class="discount-tag">50% off</span>
+                            <span class="discount-tag">35% off</span>
                             <img src="public\img\4866-1-crbr.jpeg" class="product-thumb" alt="">
-                            <!-- <button class="card-btn">add to whislist</button> -->
+                            <!--   -->
                         </div>
                         <div class="product-info">
                             <div class="product-brand">Walkaroo</div>
@@ -593,7 +622,7 @@ footer{
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
                             <img src="public\img\77075-2-pi.jpeg" class="product-thumb" alt="">
-                            <!-- <button class="card-btn">add to whislist</button> -->
+                            <!--   -->
                         </div>
                         <div class="product-info">
                             <div class="product-brand">Paragon</div>
@@ -610,7 +639,7 @@ footer{
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
                             <img src="public\img\897-1-wh.jpeg" class="product-thumb" alt="">
-                            <!-- <button class="card-btn">add to whislist</button> -->
+                            <!--   -->
                         </div>
                         <div class="product-info">
                             <div class="product-brand">Venus</div>
@@ -627,7 +656,7 @@ footer{
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
                             <img src="public\img\8004-4-blu.jpeg" class="product-thumb" alt="">
-                            <!-- <button class="card-btn">add to whislist</button> -->
+                            <!--   -->
                         </div>
                         <div class="product-info">
                             <div class="product-brand">Paragon</div>
@@ -644,7 +673,7 @@ footer{
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
                             <img src="public\img\cam.webp" class="product-thumb" alt="">
-                            <!-- <button class="card-btn">add to whislist</button> -->
+                            <!--   -->
                         </div>
                         <div class="product-info">
                             <h2 class="product-brand">Campus</h2>
@@ -664,9 +693,9 @@ footer{
             <a href="select.php?categ=brands&type=walkaroo" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
-                        <span class="discount-tag">50% off</span>
+                        <span class="discount-tag">35% off</span>
                         <img src="public\img\walbrand.jpg" class="product-thumb" alt="">
-                        <!-- <button class="card-btn">add to whislist</button> -->
+                        <!--   -->
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Walkaroo</h2>
@@ -680,7 +709,7 @@ footer{
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
                         <img src="public\img\parbrand.jpg" class="product-thumb" alt="">
-                        <!-- <button class="card-btn">add to whislist</button> -->
+                        <!--   -->
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Paragon</h2>
@@ -694,7 +723,7 @@ footer{
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
                         <img src="public\img\cambrand.jpeg" class="product-thumb" alt="">
-                        <!-- <button class="card-btn">add to whislist</button> -->
+                        <!--   -->
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Campus</h2>
@@ -708,7 +737,7 @@ footer{
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
                         <img src="public\img\leebrand.jpeg" class="product-thumb" alt="">
-                        <!-- <button class="card-btn">add to whislist</button> -->
+                        <!--   -->
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Lee Copper</h2>
@@ -722,7 +751,7 @@ footer{
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
                         <img src="public\img\lehbrand.jpeg" class="product-thumb" alt="">
-                        <!-- <button class="card-btn">add to whislist</button> -->
+                        <!--   -->
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Lehar</h2>
@@ -736,7 +765,7 @@ footer{
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
                         <img src="public\img\nikbrand.jpeg" class="product-thumb" alt="">
-                        <!-- <button class="card-btn">add to whislist</button> -->
+                        <!--   -->
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Nike</h2>
@@ -750,7 +779,7 @@ footer{
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
                         <img src="public\img\adibrand.jpeg" class="product-thumb" alt="">
-                        <!-- <button class="card-btn">add to whislist</button> -->
+                        <!--   -->
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Adidas</h2>
@@ -764,7 +793,7 @@ footer{
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
                         <img src="public/img/flitebrand.jpeg" class="product-thumb" alt="">
-                        <!-- <button class="card-btn">add to whislist</button> -->
+                        <!--   -->
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">Flite</h2>
@@ -878,10 +907,36 @@ footer{
 createFooter();
     </script>
     <script src="public\js\home.js"></script>
-    
     <script>
+       window.addEventListener("load", () => {
+        setTimeout(() => {
         
+        
+        const wholeContainer = document.querySelector('.whole-container');
+        const wholeCross = document.querySelector('.whole-cross');
+
+        
+        const elementsToBlur = document.querySelectorAll('body > *:not(.whole-container)');
+        elementsToBlur.forEach(element => {
+        element.style.filter = 'blur(2px)';
+        element.style.pointerEvents = 'none';
+        });
+        wholeContainer.style.display="flex";
+        wholeCross.addEventListener('click', function() {
+            
+            wholeContainer.style.display = 'none'; // Hide the container
+            const elementsToBlur = document.querySelectorAll('body > *:not(.whole-container)');
+            elementsToBlur.forEach(element => {
+            element.style.filter = 'none';
+            element.style.pointerEvents = 'auto';
+            });
+        });
+    }, 5000);
+    
+});
+
     </script>
+    
 </body>
 
 </html>

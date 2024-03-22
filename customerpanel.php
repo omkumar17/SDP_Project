@@ -277,12 +277,12 @@ $res=$conn->query($order);
 }
 
 #step-2::after {
-    content: 'Accepted';
+    content: 'packed';
     left: -10px;
 }
 
 #step-3::after {
-    content: 'Packed';
+    content: 'complete';
 }
 
 #step-4::after {
@@ -1501,14 +1501,14 @@ $res=$conn->query($order);
                                 </div>
                                 <div class="progressbar-track">
                                     <ul class="progressbar">
-                                        <li id="step-1" class="text-muted green">
+                                        <li id="step-1" class="text-muted green" <?php if($orderrow['order_status']=="placed" || $orderrow['order_status']=="packed" || $orderrow['order_status']=="complete"){echo 'style="background:#17ff00"';}?>>
                                             <span class="fas fa-gift"></span>
                                         </li>
-                                        <li id="step-2" class="text-muted green">
+                                        <li id="step-2" class="text-muted green" <?php if($orderrow['order_status']=="accepted" || $orderrow['order_status']=="complete"){echo 'style="background:#17ff00"';}?>>
                                             <span class="fas fa-check"></span>
                                         </li>
-                                        <li id="step-3" class="text-muted green">
-                                            <span class="fas fa-box"></span>
+                                        <li id="step-3" class="text-muted green" <?php if($orderrow['order_status']=="complete"){echo 'style="background:#17ff00"';}?>>
+                                            <span class="fas fa-box" ></span>
                                         </li>
                                     </ul>
                                     <div id="tracker"></div>
@@ -1802,7 +1802,7 @@ $res=$conn->query($order);
                         ?>
                         <div class="offer">
                             <div class="offerleft">
-                                <div class="offerhead" style="color:teal">Get Extra %<?php echo $offrow['offer_percent'] ?> Off</div>
+                                <div class="offerhead" style="color:teal">Get <?php echo $offrow['offer_percent'] ?>% Off</div>
                                 <div class="offerdet"><?php echo $offrow['offer_details'] ?></div>
                             </div>
                             <div class="offerright">
