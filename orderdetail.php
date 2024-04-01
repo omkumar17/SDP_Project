@@ -16,6 +16,9 @@ if(isset($_GET['crtquant'])){
 if(isset($_GET['oid'])){
     $orid=$_GET['oid'];
 }
+$amt=0;
+$status="";
+$ship="";
 ?>
 
 <head>
@@ -344,6 +347,9 @@ if(isset($_GET['oid'])){
                                                 <p class="mb-3">SIZE:
                                                     <?php echo $crtrow['size']; ?>
                                                 </p>
+                                                <p class="mb-3">QUANTITY:
+                                                    <?php echo $crtquan; ?>
+                                                </p>
                                                 </span>
                                             <span class="description col-7 card-title">
                                                 <?php echo ($crtrow['product_details']); ?>
@@ -392,9 +398,9 @@ if(isset($_GET['oid'])){
                             <div><div class="title">Email</div><div class="titledetail"><?php echo $detrow['email'];?></div></div>
                             <div><div class="title">Order date</div><div class="titledetail"><?php echo $detrow['order_date'];?></div></div>
                             <div><div class="title">shipping address</div><div class="titledetail"><?php echo $detrow['shipping_address'];?></div></div>
-                            <div><div class="title">order Status</div><div class="titledetail"><?php echo $detrow['order_status'];?></div></div>
-                            <div><div class="title">order Amount</div><div class="titledetail"><?php echo $detrow['order_amount'];?></div></div>
-                            <div><div class="title">shipping status</div><div class="titledetail"><?php echo $detrow['shipping_status'];?></div></div>
+                            <div><div class="title">order Status</div><div class="titledetail"><?php $status=$detrow['order_status']; echo $detrow['order_status'];?></div></div>
+                            <div><div class="title">order Amount</div><div class="titledetail"><?php $amt=$detrow['order_amount']; echo $detrow['order_amount'];?></div></div>
+                            <div><div class="title">shipping status</div><div class="titledetail"><?php $ship=$detrow['shipping_status']; echo $detrow['shipping_status'];?></div></div>
                             
                             <?php
                             }
@@ -408,33 +414,56 @@ if(isset($_GET['oid'])){
         </div>
         
     </div>
+    <?php
+    if($status!="cancel" && $status!="replace" && $status=="complete"){
+        ?>
     <div class="action">
-        <div class="buttons cancel" onclick=cancelorder()>Cancel Order</div>
+        <div class="buttons cancel" style="width:auto;padding-right:20px;padding-left:20px;margin-bottom:50px;" onclick=cancelorder()>Cancel / Replace Order</div>
         <!-- <div class="buttons"></div> -->
         
     </div>
+    <?php
+    }
+    else{
+        ?>
+    <div class="action">
+        <div class="buttons view" style="width:auto;padding-right:20px;padding-left:20px;margin-bottom:50px;" >view status</div>
+        <!-- <div class="buttons"></div> -->
+        
+    </div>
+    <?php
+    }
+    ?>
+    
     <div class="canceltext">
         <div class="cancelcontainer">
-            <form action="" method="post">
-                <input type="radio" name="cancel" value="" id="r1">
+            <form action="cancel.php" method="post">
+                <input type="hidden" class="hidden" name="oid" value="<?php echo $orid;?>" >
+                <input type="hidden" class="hidden" name="amt" value="<?php echo $amt;?>" >
+                <input type="radio" name="cancel" value="Dont want product" id="r1" required>
                 <label for="r1">Dont want product</label><br>
-                <input type="radio" name="cancel" value="" id="r2">
+                <input type="radio" name="cancel" value="Wrong product" id="r2" required>
                 <label for="r2">Wrong product</label><br>
-                <input type="radio" name="cancel" value="" id="r3">
+                <input type="radio" name="cancel" value="Defective product" id="r3" required>
                 <label for="r3">Defective product</label><br>
-                <input type="radio" name="cancel" value="" id="r4">
-                <label for="r4">Wrong Details provided</label><br>
+                <input type="radio" name="cancel" value="Wrong Details provided" id="r4" required>
+                <label for="r4">Wrong Details provided</label><br><hr>
+
+                <input type="radio" name="type" value="cancel" id="tp1" required>
+                <label for="tp1">Return</label><br>
+                <input type="radio" name="type" value="replace" id="tp2" required>
+                <label for="tp2">Replace</label><br>  
                 <!-- <input type="radio" name="cancel" value="">
                 <label for=""></label><br>
                 <input type="radio" name="cancel" value="">
                 <label for=""></label><br> -->
                 <br>
                 <div class="all" style="display:flex;flex-direction:row;justify-content:center">
-                <input type="submit" class="buttons " value="submit">
-                <button class="buttons reject" style="background:green" value="Initiate Return">Initiate Returns</button>
+                <input type="submit" class="buttons " value="Initiate">
+                
                 <button class="buttons reject" style="background:blue" value="Reject cancellation">Reject cancellation</button>
-                </div>
-            </form>
+            </div>
+        </form>
         </div>
     </div>
     
@@ -516,18 +545,34 @@ rejectButton.addEventListener("click", function(event) {
     document.querySelector(".cancel").style.display="flex";
     event.preventDefault(); // This prevents the default form submission behavior
 });
+
+
         function cancelorder(){
             
-            if(confirm("are you sure you want to cancel order ?")){
+            if(confirm("are you sure you want to cancel or return order ?")){
                 document.querySelector(".canceltext").style.display="flex";
                 document.querySelector(".cancel").style.display="none";
 
             }
-            else{
-                alert("bye");
-            }
         }
+        const cancelForm = document.getElementById('cancelForm');
+        const rejectButtons = document.querySelector('.reject');
+
+        
+        rejectButtons.addEventListener('click', function (event) {
+                // Temporarily disable required attribute before rejection action
+                const radioButtons = cancelForm.querySelectorAll('input[type="radio"]');
+                radioButtons.forEach(radio => {
+                    radio.removeAttribute('required');
+                });
+                // Proceed with rejection action
+                // You can add your code here to hide the radio buttons or perform any other action
+            });
+       
+       
     </script>
+
+    
 
 </body>
 

@@ -485,6 +485,7 @@ if(isset($_GET['flag'])){
                                 ?>
                                 <a href="chanpass.php"><li><img src="public\img\circle-user-round.png" alt="">&nbsp;&nbsp;Change Password</li></a>
                                 <a href="logout.php"><li><img src="public\img\log-out-profile.png" alt="">&nbsp;&nbsp; Logout</li></a>
+                                <a href="report.php"><li><img src="public\img\notebook-text.png" alt="">&nbsp;&nbsp; View Report</li></a>
                                 <?php
                             }
                             ?>
@@ -664,8 +665,8 @@ if(isset($_GET['flag'])){
                     <div class="addcontainer">
                     <form class="addcont" action="insert.php" method="POST">
                         <label for="" style="font-size:20px;font-weight:600">Add Category Details</label>
-                        <label for="cat-id" class="label">Category Id</label>
-                        <input type="text" id="cat-id" class="input" name="category_id" pattern="[0-9]" title="(Please enter only numbers)" required>
+                        <!-- <label for="cat-id" class="label">Category Id</label>
+                        <input type="text" id="cat-id" class="input" name="category_id" pattern="[0-9]" title="(Please enter only numbers)" required> -->
                         <label for="cat-name" class="label">Category Name</label>
                         <input type="text" id="cat-name" class="input" name="Category_name" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
                         <label for="cat-desc" class="label">Category desc</label>
@@ -1056,7 +1057,7 @@ if(isset($_GET['flag'])){
             <div class="cmcontainer">
                     <div class="cmheader">
                         <div class="heading">Order</div>
-                        <div class="add" style="display:none">Add color</div>
+                        <div class="add" style="display:none">Add order</div>
                     </div>
                 <?php
                     $sql = "SELECT * FROM `order_tbl`"; 
@@ -1117,7 +1118,8 @@ if(isset($_GET['flag'])){
                     <form class="addcat" action="update.php" method="post">
                         <label for="" style="font-size:20px;font-weight:600">order</label>
                         <label for="oid" class="label">	Order_id</label>
-                        <input type="text" id="odid" class="input" name="orderdesc_id" pattern="[0-9]" title="(Please enter only numbers)" required disabled>
+                        <input type="number" id="oid" class="input" name="order_id" pattern="[0-9]" title="(Please enter only numbers)" required >
+                        <label for="oid" class="label" id="oid_hid"></label>
                         <label for="uid" class="label">User_id</label>
                         <input type="text" id="uid" class="input" name="user_id" pattern="[0-9]" title="(Please enter only numbers)" required disabled>
                         <label for="od" class="label">Order_date</label>
@@ -1130,6 +1132,9 @@ if(isset($_GET['flag'])){
                         <input type="text" id="sadd" class="input" name="shipping_address" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required disabled>
                         <label for="sstat" class="label">shipping_status</label>
                         <input type="text" id="sstat" class="input" name="shipping_status" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+                        
+                        <!-- <input type="text" class="input" id= "oid_hid" name ="order_id1" value ="" > -->
+                        
                         <input type="submit" class="submit" value="submit" >
                         <input type="submit" class="cancel" value="Cancel">
                     </form>
@@ -1354,17 +1359,17 @@ if(isset($_GET['flag'])){
                     <form class="addcat" action="update.php" method="post">
                         <label for="" style="font-size:20px;font-weight:600">REFUND</label>
                         <label for="refund_id" class="label">refund_id</label>
-                        <input type="text" id="refund_id" class="input" name="refund_id" pattern="[0-9]" title="(Please enter only numbers)" required>
+                        <input type="number" id="refund_id" class="input" name="refund_id" pattern="[0-9]" title="(Please enter only numbers)" required>
                         <label for="order_id" class="label">order_id</label>
-                        <input type="text" id="order_id" class="input" name="order_id" pattern="[0-9]" title="(Please enter only numbers)" required>
+                        <input type="text" id="order_id" class="input" name="order_id" pattern="[0-9]" title="(Please enter only numbers)" required disabled>
                         <label for="request_date" class="label">request_date</label>
-                        <input type="date" id="request_date" class="input" name="request_date" >
+                        <input type="date" id="request_date" class="input" name="request_date" disabled>
                         <label for="refund_date" class="label">refund_date</label>
                         <input type="date" id="refund_date" class="input" name="refund_date" >
                         <label for="refund_reason" class="label">refund_reason</label>
-                        <input type="text" id="refund_reason" class="input" name="refund_reason" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+                        <input type="text" id="refund_reason" class="input" name="refund_reason" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required disabled>
                         <label for="refund_amt" class="label">refund_amt</label>
-                        <input type="text" id="refund_amt" class="input" name="refund_amt" pattern="[0-9]" title="(Please enter only numbers)" required>
+                        <input type="text" id="refund_amt" class="input" name="refund_amt" pattern="[0-9]" title="(Please enter only numbers)" required disabled>
                         <label for="refund_status" class="label">refund_status</label>
                         <input type="text" id="refund_status" class="input" name="refund_status" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
                         <input type="submit" class="submit" value="submit" >
@@ -1440,15 +1445,19 @@ if(isset($_GET['flag'])){
                     <form class="addcat" action="update.php" method="post">
                         <label for="" style="font-size:20px;font-weight:600">OFFER</label>
                         <label for="offer_id" class="label">offer_id</label>
-                        <input type="text" id="offer_id" class="input" name="offer_id" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="offer_nm" class="label">offer_name</label>
-                        <input type="text" id="offer_nm" class="input" name="offer_nm" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+                        <input type="number" id="offer_id" class="input" name="offer_id" pattern="[0-9]" title="(Please enter only numbers)" required>
+                        <label for="offer_name" class="label">offer_name</label>
+                        <input type="text" id="offer_name" class="input" name="offer_name" pattern="[A-Za-z0-9]+" title="(Please enter only alphabets)" required>
                         <label for="offer_details" class="label">offer_details</label>
-                        <input type="text" id="p2" class="input" name="offer_details" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+                        <input type="text" id="p2" class="input" name="offer_details" pattern="[A-Za-z0-9%., ]+" title="(Please enter only alphabets)" required>
+                        <label for="offer_status" class="label">offer_status</label>
+                        <input type="text" id="p3" class="input" name="offer_status" required>
+                        <label for="offer_percent" class="label">offer_percent</label>
+                        <input type="text" id="p4" class="input" name="offer_percent" required>
                         <label for="offer_start_date" class="label">offer_start_date</label>
-                        <input type="date" id="p3" class="input" name="offer_start_date" required>
+                        <input type="date" id="p5" class="input" name="offer_start_date" required>
                         <label for="offer_end_date" class="label">offer_end_date</label>
-                        <input type="date" id="p4" class="input" name="offer_end_date" required>
+                        <input type="date" id="p6" class="input" name="offer_end_date" required>
 
                         <input type="submit" class="submit" value="submit" >
                         <input type="submit" class="cancel" value="Cancel">
@@ -1457,12 +1466,16 @@ if(isset($_GET['flag'])){
                     <div class="addcontainer">
                     <form class="addcont" action="insert.php" method="post">
                     <label for="" style="font-size:20px;font-weight:600">OFFER</label>
-                        <label for="offer_id" class="label">offer_id</label>
-                        <input type="text" id="offer_id" class="input" name="offer_id" pattern="[0-9]" title="(Please enter only numbers)" required>
+                        <!-- <label for="offer_id" class="label">offer_id</label>
+                        <input type="text" id="offer_id" class="input" name="offer_id" pattern="[0-9]" title="(Please enter only numbers)" required> -->
                         <label for="offer_nm" class="label">offer_name</label>
-                        <input type="text" id="offer_nm" class="input" name="offer_nm" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+                        <input type="text" id="offer_nm" class="input" name="offer_name" pattern="[A-Za-z0-9]+" title="(Please enter only alphabets)" required>
                         <label for="offer_details" class="label">offer_details</label>
-                        <input type="text" id="p2" class="input" name="offer_details" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+                        <input type="text" id="p2" class="input" name="offer_details" pattern="[A-Za-z0-9.,% ]+" title="(Please enter only alphabets)" required>
+                        <label for="offer_status" class="label">offer_status</label>
+                        <input type="text" id="p3" class="input" name="offer_status" required>
+                        <label for="offer_percent" class="label">offer_percent</label>
+                        <input type="text" id="p4" class="input" name="offer_percent" required>
                         <label for="offer_start_date" class="label">offer_start_date</label>
                         <input type="date" id="p3" class="input" name="offer_start_date" required>
                         <label for="offer_end_date" class="label">offer_end_date</label>
@@ -1521,13 +1534,13 @@ if(isset($_GET['flag'])){
                     <form class="addcat" action="update.php" method="post">
                     <label for="" style="font-size:20px;font-weight:600">PAYMENT</label>
                         <label for="transaction_id" class="label">transaction_id</label>
-                        <input type="text" id="transaction_id" class="input" name="transaction_id" pattern="[0-9]" title="(Please enter only numbers)" required>
+                        <input type="number" id="transaction_id" class="input" name="transaction_id" pattern="[0-9]" title="(Please enter only numbers)" required>
                         <label for="order_id" class="label">order_id</label>
-                        <input type="text" id="order_id" class="input" name="order_id" pattern="[0-9]" title="(Please enter only numbers)" required>
+                        <input type="text" id="order_id" class="input" name="order_id" pattern="[0-9]" title="(Please enter only numbers)" required disabled>
                         <label for="payment_mode" class="label">payment_mode</label>
-                        <input type="text" id="payment_mode" class="input" name="payment_mode" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+                        <input type="text" id="payment_mode" class="input" name="payment_mode" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required disabled>
                         <label for="payment_date" class="label">payment_date</label>
-                        <input type="date" id="payment_date" class="input" name="payment_date" >
+                        <input type="date" id="payment_date" class="input" name="payment_date" disabled>
                         <label for="payment_status" class="label">payment_status</label>
                         <input type="text" id="payment_status" class="input" name="payment_status" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
                         <input type="submit" class="submit" value="submit" >
@@ -1846,7 +1859,18 @@ login.onclick = function () {
 
     
 </script>
-    
+<!-- <script>
+    // Get the #oid and #oid_hid elements
+    const oidInput = document.querySelector("#oid");
+    const oidHid = document.querySelector("#oid_hid");
+    oidHid.innerText = oidInput.value;
+    // Add an event listener to #oid for input events
+    oidInput.addEventListener("input", function() {
+        // Set the text of #oid_hid to the value of #oid
+        oidHid.innerText = oidInput.value;
+    });
+</script>
+     -->
 </body>
 
 </html>
