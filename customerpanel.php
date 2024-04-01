@@ -1315,7 +1315,7 @@ $res=$conn->query($order);
 
 </style>
 <style>
-    .alert{
+     .alert{
             position:absolute;
             top:35px;
             left:30vw;
@@ -1335,6 +1335,16 @@ $res=$conn->query($order);
             /* opacity:0.5; */
 
         }
+        /* .alert::before{
+            content:'';
+            position:relative;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            opacity:0.5;
+            background:black;
+        } */
         .alerttext{
             display:flex;
             align-items:center;
@@ -1866,7 +1876,11 @@ $res=$conn->query($order);
                                         // </div>
                                         // <script>showAlert();</script>
                                         // _END;
-                                        
+                                        echo<<<_END
+                                        <div class="alert">
+                                            <div class="alerttext">Your PAN Number is successfully Submitted!</div><span class="crossed" onclick="cross()">✔</span>
+                                        </div>
+                                        _END;
                                    }
                                } else {
                                 // echo<<<_END
@@ -1875,6 +1889,11 @@ $res=$conn->query($order);
                                 // </div>
                                 // <script>showAlert();</script>
                                 // _END;
+                                echo<<<_END
+                                        <div class="alert">
+                                            <div class="alerttext">Your PAN Number is already Submitted!</div><span class="crossed" onclick="cross()">✔</span>
+                                        </div>
+                                        _END;
                                }
                            }
 
@@ -2034,7 +2053,7 @@ function redirect(){
 }
 var crossedClicked = false;
 
-function showAlert() {
+/*function showAlert() {
     var alertDiv = document.getElementById('alerttime');
     var crossedButton = document.querySelector('.crossed');
 
@@ -2054,9 +2073,23 @@ function showAlert() {
     setTimeout(function() {
         alertDiv.style.display = 'none';
     }, 10000); // 10 seconds in milliseconds
-}
+}*/
     </script>
+
+    <script>
+    function cross(){
+        var alerttext=document.querySelector(".alerttext");
+        var alert=document.querySelector(".alert");
+        alerttext.textContent="";
+        alert.style.display="none";
+    }
+    var alert=document.querySelector(".alert");
+    setTimeout(function() {
+        alert.style.display="none";
+        }, 4000);
     
+</script>
+   
 </body>
 
 </html>

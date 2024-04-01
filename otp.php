@@ -75,7 +75,7 @@ $body = '
 
 $headers = "MIME-Version: 1.0" . "\r\n";
 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-$headers .= "From: <footfusion16@gmail.com>" . "\r\n";
+$headers .= "From: <harshwadhwani268@gmail.com>" . "\r\n";
 
 // Sending email
 // mail($to_email, $subject, $body, $headers);

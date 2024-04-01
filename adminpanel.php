@@ -264,7 +264,7 @@ if(isset($_GET['flag'])){
     /* width:50px; */
     padding: 5px;
     margin: 5px;
-    border:2px solid green;
+    border:2px solid teal;
     border-radius: 4px;
     cursor: pointer;
     text-transform:uppercase;
@@ -422,7 +422,7 @@ if(isset($_GET['flag'])){
     /* margin: 2px; */
     text-align:left;
     /* background-color:red; */
-    border:1px solid teal;
+    /* border:1px solid teal; */
     /* width:100px; */
     display:block;
     /* padding: 1px; */
@@ -468,6 +468,10 @@ if(isset($_GET['flag'])){
     thead{
         text-transform:capitalize;
     }
+    .adminbut:hover{
+        background-color:teal;
+        color:white;
+    }
 </style>
 </head>
 
@@ -477,14 +481,15 @@ if(isset($_GET['flag'])){
             <div class="navitems head">Admin Panel</div>
             <div class="navitems amenu"><img src="public/img/menu.png" alt="" class="menuimg"></div>
             <div class="navitems admin">
-                <div class="login" onclick="logfunction()"><img src="public/img/log-out.png" alt="" class="logimg"></div>
-                <div class="subtitle" style="cursor:pointer">Administrator</div>
-                <div class="logindrop" style="right:10px;width:180px">
+                <!-- <div class="login" onclick="logfunction()"><img src="public/img/log-out.png" alt="" class="logimg"></div> -->
+                <div class="subtitle" style="cursor:pointer;padding-top:10px;"><img src="public\img\adminprofle.png" height="35" width="35"/></div>
+                <div class="logindrop" style="right:10px;width:180px;padding-top:10px;">
                             <?php
                             if(isset($_COOKIE['userID'])){
                                 ?>
-                                <a href="chanpass.php"><li><img src="public\img\circle-user-round.png" alt="">&nbsp;&nbsp;Change Password</li></a>
-                                <a href="logout.php"><li><img src="public\img\log-out-profile.png" alt="">&nbsp;&nbsp; Logout</li></a>
+                                <div style="color:green;font-size:40;text-align:center;border-bottom:4px solid teal;font-weight:bold">Welcome, Admin!</div>
+                                <a href="chanpass.php" class="adminbut"><li><img src="public\img\circle-user-round.png" alt="">&nbsp;&nbsp;Change Password</li></a>
+                                <a href="logout.php" class="adminbut"><li><img src="public\img\log-out-profile.png" alt="">&nbsp;&nbsp; Logout</li></a>
                                 <?php
                             }
                             ?>
@@ -623,7 +628,7 @@ if(isset($_GET['flag'])){
                                     <td>{$row['Category_desc']}</td>
                                     <td>{$row['cat_status']}</td>
 
-                                    <td><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span><span class="button disable"><img src="public\img\shield-ban.png" alt="disable" ></span></td>
+                                    <td><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span><span class="button disable"><img src="public/img/trash-2.png" alt="disable" ></span></td>
                                 </tr>
                     _END;
                         }
@@ -809,7 +814,7 @@ if(isset($_GET['flag'])){
                                     }
                                     echo<<<_END
                                 </td>
-                                <td style="min-width:150px"><span class="buttedit edit"><img src="public\img\pencil.png"></span><span class="buttedit other"><img src="public\img\chevron-right-circle.png"></span><span class="button disable"><img src="public\img\shield-ban.png"></span></td>
+                                <td style="min-width:150px"><span class="buttedit edit"><img src="public\img\pencil.png"></span><span class="buttedit other"><img src="public\img\chevron-right-circle.png"></span><span class="button disable"><img src="public/img/trash-2.png"></span></td>
                                 
                                 </tr>
                              _END;
@@ -1073,7 +1078,7 @@ if(isset($_GET['flag'])){
                                     }
                                     echo<<<_END
                                 </td style="width:100px">
-                                    <td><span class="buttedit edit"><img src="public\img\pencil.png"></span><span class="buttedit other"><img src="public\img\chevron-right-circle.png"></span></td>
+                                    <td><span class="buttedit edit"><img src="public\img\pencil.png"></span><span class="button disable"><img src="public/img/trash-2.png"></span></td>
                                     
                                 </tr>
                              _END;
@@ -1246,7 +1251,7 @@ if(isset($_GET['flag'])){
                                     <td>{$row['city']}</td>
                                     <td>{$row['registration_date']}</td>
                                     <td>{$row['usr_status']}</td>
-                                    <td><span class="button disable"><img src="public\img\shield-ban.png" alt="disable" ></span></td>
+                                    <td><span class="button disable"><img src="public/img/trash-2.png" alt="disable" ></span></td>
                                 </tr>
                              _END;
                         }
@@ -1373,7 +1378,7 @@ if(isset($_GET['flag'])){
                                     <td>{$row['offer_percent']}</td>
                                     <td>{$row['offer_start_date']}</td>
                                     <td>{$row['offer_end_date']}</td>
-                                    <td style="min-width:150px"><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span><span class="button disable"><img src="public\img\shield-ban.png" alt="disable" ></span></td>
+                                    <td style="min-width:150px"><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span><span class="button disable"><img src="public/img/trash-2.png" alt="disable" ></span></td>
                                 </tr>
                              _END;
                         }
