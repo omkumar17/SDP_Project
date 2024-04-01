@@ -252,12 +252,12 @@ if(isset($_GET['upd'])){
             
             <form action="" class="form-container" style="top:5%;z-index:14;overflow-y:scroll">
                 <div class="imgchart" style="width:100%;height:400px"><img style="width:100%;height:100%;border:2px solid black" src="public\img\sizechart.jpg" alt=""></div>
-                <span>ENTER YOUR SIZE</span>
-                <input type="number" class="size-height box" placeholder="Enter your height in cm" name="height">
-                <input type="number" class="feet-height box" placeholder="Enter your feet length in cm" name="feet">
+                <span style="display:none">ENTER YOUR SIZE</span>
+                <input type="number" class="size-height box" placeholder="Enter your height in cm" name="height" style="display:none">
+                <input type="number" class="feet-height box" placeholder="Enter your feet length in cm" name="feet" style="display:none">
                 <div class="button">
+                    <input type="submit" class="submit box" name="submit" style="display:none">
                     <input type="submit" class="cancel box" name="cancel" value="cancel">
-                    <input type="submit" class="submit box" name="submit">
                 </div>
                 <span class="result box"></span>
 

@@ -17,7 +17,7 @@ $userorder="SELECT count(order_id) AS ordercount FROM `order_tbl` WHERE user_id=
 $res=$conn->query($userorder);
 $userorder=$res->fetch_assoc();
 
-$order="SELECT * FROM `order_tbl` WHERE user_id='$user'";
+$order="SELECT * FROM `order_tbl` WHERE user_id='$user' ORDER BY order_date desc";
 $res=$conn->query($order);
 
 
@@ -175,6 +175,7 @@ $res=$conn->query($order);
     font-size:38px;
     background:teal;
     color:white;
+    border-radius:0 10px 10px 0;
 }
 .order .order-summary {
     height: 100%;
@@ -1410,8 +1411,8 @@ $res=$conn->query($order);
     <section class="bodypage">
         <section class="sidebar">
             <ul class="sidecontainer">
-                <li class="sideitem1 sideitem"><img src="layout-dashboard.png" alt="" class="sideimg"><span class="itemdesc">Dashboard</span></li>
-                <li class="sideitem1 sideitem"><img src="layers-3.png" alt="" class="sideimg"><span class="itemdesc">Profile</span>
+                <li class="sideitem1 sideitem"><img src="public\img\layout-dashboard.png" alt="" class="sideimg"><span class="itemdesc">Dashboard</span></li>
+                <li class="sideitem1 sideitem"><img src="public\img\layers-3.png" alt="" class="sideimg"><span class="itemdesc">Profile</span>
                 </li>
                 <!-- <li class="sideitem1" id="prod"><img src="shopping-bag.png" alt="" class="sideimg"><span class="itemdesc">Product Management</span>
                 </li>
@@ -1419,12 +1420,12 @@ $res=$conn->query($order);
                  <li class="sideitem1 sideitem subprod"><img src="" alt="" class="sideimg"><span class="itemdesc">Product description</span></li> 
                  <li class="sideitem1 sideitem subprod"><img src="" alt="" class="sideimg"><span class="itemdesc">Image</span></li>  -->
 
-                <li class="sideitem1 sideitem"><img src="book-check.png" alt="" class="sideimg"><span class="itemdesc">Order</span>
+                <li class="sideitem1 sideitem"><img src="public\img\book-check.png" alt="" class="sideimg"><span class="itemdesc">Order</span>
                 </li>
                 <!-- <li class="sideitem1 sideitem"><img src="file-question.png" alt="" class="sideimg"><span class="itemdesc">manage Address</span></li> -->
-                <li class="sideitem1 sideitem"><img src="thumbs-up.png" alt="" class="sideimg"><span class="itemdesc">wishlist</span></li>
-                <li class="sideitem1 sideitem"><img src="badge-percent.png" alt="" class="sideimg"><span class="itemdesc">Offer</span></li>
-                <li class="sideitem1 sideitem"><img src="paym.png" alt="" class="sideimg"><span class="itemdesc">Pan Card</span></li>
+                <li class="sideitem1 sideitem"><img src="public\img\list-ordered.png" alt="" class="sideimg"><span class="itemdesc">wishlist</span></li>
+                <li class="sideitem1 sideitem"><img src="public\img\badge-percent.png" alt="" class="sideimg"><span class="itemdesc">Offer</span></li>
+                <li class="sideitem1 sideitem"><img src="public\img\credit-card.png" alt="" class="sideimg"><span class="itemdesc">Pan Card</span></li>
                 <!-- <li class="sideitem1 sideitem"><img src="" alt="" class="sideimg"><span class="itemdesc"></span></li>
             <li class="sideitem1 sideitem"><img src="" alt="" class="sideimg"><span class="itemdesc"></span></li>
             <li class="sideitem1 sideitem"><img src="" alt="" class="sideimg"><span class="itemdesc"></span></li> -->
@@ -1504,7 +1505,7 @@ $res=$conn->query($order);
                                         <li id="step-1" class="text-muted green" <?php if($orderrow['order_status']=="placed" || $orderrow['order_status']=="packed" || $orderrow['order_status']=="complete"){echo 'style="background:#17ff00"';}?>>
                                             <span class="fas fa-gift"></span>
                                         </li>
-                                        <li id="step-2" class="text-muted green" <?php if($orderrow['order_status']=="accepted" || $orderrow['order_status']=="complete"){echo 'style="background:#17ff00"';}?>>
+                                        <li id="step-2" class="text-muted green" <?php if($orderrow['order_status']=="packed" || $orderrow['order_status']=="complete"){echo 'style="background:#17ff00"';}?>>
                                             <span class="fas fa-check"></span>
                                         </li>
                                         <li id="step-3" class="text-muted green" <?php if($orderrow['order_status']=="complete"){echo 'style="background:#17ff00"';}?>>
@@ -1696,6 +1697,7 @@ $res=$conn->query($order);
                     $res1=$conn->query($order);
                     while($orderrow=$res1->fetch_assoc()){
                         $oid=$orderrow['order_id'];
+                        $ost=$orderrow['order_status'];
                         ?> 
                     <a href="orderdetail.php?oid=<?php echo $oid;?>" style="color:black;text-decoration:none;margin:auto"><div class="ordercard">
                         <div class="cardcontainer">
@@ -1703,7 +1705,7 @@ $res=$conn->query($order);
                             <div class="orderid">Order Date: <?php echo $orderrow['order_date'];?></div>
                             <div class="orderamount">Order Amount: <?php echo $orderrow['order_amount'];?></div>
                         </div>
-                        <div class="orderbox">
+                        <div class="orderbox" style="<?php if($ost=='cancel') echo 'background:red'; else if($ost=='replace') echo 'background:blue';?>">
                             >
                         </div>
                     </div>

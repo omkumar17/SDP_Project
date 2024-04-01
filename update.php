@@ -71,6 +71,143 @@ else if(isset($_POST['product_id']))
     }
 }
 
+else if(isset($_POST['order_id'])){
+    if(isset($_POST['order_status']) && isset($_POST['shipping_status']) )
+    {
+        $order_id=$_POST['order_id'];
+        $order_status=$_POST['order_status'];
+        $shipping_status=$_POST['shipping_status'];
+        
+    }
+    $sql = "UPDATE `order_tbl` SET `order_status`='$order_status', `shipping_status`='$shipping_status' WHERE `order_id`=$order_id";
+    $result=$conn->query($sql);
+    
+    if($result)
+    {
+        echo<<<_END
+        <div class="alert alert-success" role="alert">
+           Updated
+        </div>
+        _END;
+        header("Location:adminpanel.php?page=3&flag=1");
+    }
+    else
+    {
+        echo<<<_END
+        <div class="alert alert-success" role="alert">
+           NOT Updated
+        </div>
+        _END;
+        header("Location:adminpanel.php?page=1&flag=2");
+    }
+
+
+}
+
+else if(isset($_POST['refund_id'])){
+    if(isset($_POST['refund_date']) && isset($_POST['refund_status']) )
+    {
+        $refund_id=$_POST['refund_id'];
+        $refund_date=$_POST['refund_date'];
+        $refund_status=$_POST['refund_status'];
+        
+    }
+    $sql = "UPDATE `refund` SET `refund_date`='$refund_date', `refund_status`='$refund_status' WHERE `refund_id`=$refund_id";
+    $result=$conn->query($sql);
+    
+    if($result)
+    {
+        echo<<<_END
+        <div class="alert alert-success" role="alert">
+           Updated
+        </div>
+        _END;
+        header("Location:adminpanel.php?page=6&flag=1");
+    }
+    else
+    {
+        echo<<<_END
+        <div class="alert alert-success" role="alert">
+           NOT Updated
+        </div>
+        _END;
+        header("Location:adminpanel.php?page=1&flag=2");
+    }
+
+
+}
+else if(isset($_POST['offer_id'])){
+    if(isset($_POST['offer_name']) && isset($_POST['offer_details']) && isset($_POST['offer_status'])&& isset($_POST['offer_percent']) && isset($_POST['offer_start_date']) && isset($_POST['offer_end_date']) )
+    {
+        $offer_id=$_POST['offer_id'];
+        $offer_name=$_POST['offer_name'];
+        $offer_details=$_POST['offer_details'];
+        $offer_status=$_POST['offer_status'];
+        $offer_percent=$_POST['offer_percent'];
+        $offer_start_date=$_POST['offer_start_date'];
+        $offer_end_date=$_POST['offer_end_date'];
+    }
+    
+    $sql = "UPDATE `offer` SET `offer_name`='$offer_name', `offer_status`='$offer_status', `offer_percent`='$offer_percent' , `offer_start_date`='$offer_start_date' , `offer_end_date`='$offer_end_date'  WHERE `offer_id`='$offer_id'";
+    $result=$conn->query($sql);
+    
+    if($result)
+    {
+        echo<<<_END
+        <div class="alert alert-success" role="alert">
+           Updated
+        </div>
+        _END;
+        header("Location:adminpanel.php?page=7&flag=1");
+    }
+    else
+    {
+        echo<<<_END
+        <div class="alert alert-success" role="alert">
+           NOT Updated
+        </div>
+        _END;
+        header("Location:adminpanel.php?page=1&flag=2");
+    }
+}
+
+else if(isset($_POST['transaction_id'])){
+    if(isset($_POST['payment_status']) )
+    {
+        $transaction_id=$_POST['transaction_id'];
+        $payment_status=$_POST['payment_status'];
+       
+        
+    }
+    $sql = "UPDATE `payment` SET `payment_status`='$payment_status' WHERE `transaction_id`=$transaction_id";
+    $result=$conn->query($sql);
+    
+    if($result)
+    {
+        echo<<<_END
+        <div class="alert alert-success" role="alert">
+           Updated
+        </div>
+        _END;
+        header("Location:adminpanel.php?page=8&flag=1");
+    }
+    else
+    {
+        echo<<<_END
+        <div class="alert alert-success" role="alert">
+           NOT Updated
+        </div>
+        _END;
+        header("Location:adminpanel.php?page=1&flag=2");
+    }
+
+
+}
+
+
+// enable disable update
+//-------------------------------------------------------------------------------------------------------------------------
+
 if(isset($_GET['header'])=='Product_id' && isset($_GET['value1'])){
     if(isset($_GET['pid']) && isset($_GET['value1']))
     {
