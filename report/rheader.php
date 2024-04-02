@@ -171,6 +171,7 @@ ew.vars = <?php echo JsonEncode($CLIENT_VAR) ?>;
 		</ul>
 		<!-- Right navbar links -->
 		<ul id="ew-navbar-right" class="navbar-nav ml-auto"></ul>
+		<a href="../adminpanel.php"><button style="cursor:pointer;border-radius:15px;padding-top:3px;margin-right:10px;"><span class="brand-text"><h5>Return to Panel</h5></span></button></a>
 	</nav>
 	<!-- /.navbar -->
 	<!-- Main Sidebar Container -->
@@ -179,6 +180,7 @@ ew.vars = <?php echo JsonEncode($CLIENT_VAR) ?>;
 		<a href="#" class="brand-link bg-gray-light">
 			<span class="brand-text">Foot Fusion</span>
 		</a>
+		
 		<!-- Sidebar -->
 		<div class="sidebar">
 			<!-- Sidebar Menu -->
