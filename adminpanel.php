@@ -485,7 +485,7 @@ if(isset($_GET['flag'])){
                                 ?>
                                 <a href="chanpass.php"><li><img src="public\img\circle-user-round.png" alt="">&nbsp;&nbsp;Change Password</li></a>
                                 <a href="logout.php"><li><img src="public\img\log-out-profile.png" alt="">&nbsp;&nbsp; Logout</li></a>
-                                <a href="report.php"><li><img src="public\img\notebook-text.png" alt="">&nbsp;&nbsp; View Report</li></a>
+                                <a href="PHP-report/index.php"><li><img src="public\img\notebook-text.png" alt="">&nbsp;&nbsp; View Report</li></a>
                                 <?php
                             }
                             ?>
