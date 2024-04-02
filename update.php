@@ -222,7 +222,10 @@ if(isset($_GET['header'])=='Product_id' && isset($_GET['value1'])){
             $sql = "UPDATE `product` SET `pro_status`='Enabled' WHERE `product_id`='$pid'";
         }
         $result=$conn->query($sql);
-        header("location:adminpanel.php?page=2");
+        if($result)
+        header("location:adminpanel.php?page=2&flag=1");
+        else
+        header("location:adminpanel.php?page=2&flag=2");
     }
 }
 if(isset($_GET['header'])=='Category ID' ){
@@ -238,7 +241,10 @@ if(isset($_GET['header'])=='Category ID' ){
             $sql = "UPDATE `category` SET `cat_status`='Enabled' WHERE `category_id`='$pid'";
         }
         $result=$conn->query($sql);
-        header("location:adminpanel.php?page=1");
+        if($result)
+        header("location:adminpanel.php?page=1&flag=1");
+        else
+        header("location:adminpanel.php?page=1&flag=2");
     }
 }
 if(isset($_GET['header'])=='prodesc_ID'){
@@ -254,7 +260,10 @@ if(isset($_GET['header'])=='prodesc_ID'){
             $sql = "UPDATE `product_desc` SET `prodesc_status`='Enabled' WHERE `prodesc_ID`='$pid'";
         }
         $result=$conn->query($sql);
-        header("location:adminpanel.php?page=3");
+        if($result)
+        header("location:adminpanel.php?page=3&flag=1");
+        else
+        header("location:adminpanel.php?page=3&flag=2");
     }
 }
 if(isset($_GET['header'])=='cid'){
@@ -270,7 +279,10 @@ if(isset($_GET['header'])=='cid'){
             $sql = "UPDATE `product_desc` SET `prodesc_status`='Enabled' WHERE `prodesc_ID`='$pid'";
         }
         $result=$conn->query($sql);
-        header("location:adminpanel.php?page=3");
+        if($result)
+        header("location:adminpanel.php?page=3&flag=1");
+        else
+        header("location:adminpanel.php?page=3&flag=2");
     }
 }
 if(isset($_GET['header'])=='offer_id'){
@@ -286,7 +298,10 @@ if(isset($_GET['header'])=='offer_id'){
             $sql = "UPDATE `offer` SET `offer_status`='Enabled' WHERE `offer_id`='$pid'";
         }
         $result=$conn->query($sql);
-        header("location:adminpanel.php?page=7");
+        if($result)
+        header("location:adminpanel.php?page=7&flag=1");
+        else
+        header("location:adminpanel.php?page=7&flag=2");
     }
 }
 if(isset($_GET['header'])=='user ID'){
@@ -302,7 +317,10 @@ if(isset($_GET['header'])=='user ID'){
             $sql = "UPDATE `user` SET `usr_status`='Active' WHERE `userID`='$pid'";
         }
         $result=$conn->query($sql);
-        header("location:adminpanel.php?page=5");
+        if($result)
+        header("location:adminpanel.php?page=5&flag=1");
+        else
+        header("location:adminpanel.php?page=5&flag=2");
     }
 }
 // elseif()

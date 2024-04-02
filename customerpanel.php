@@ -1423,7 +1423,7 @@ $res=$conn->query($order);
                 <li class="sideitem1 sideitem"><img src="public\img\book-check.png" alt="" class="sideimg"><span class="itemdesc">Order</span>
                 </li>
                 <!-- <li class="sideitem1 sideitem"><img src="file-question.png" alt="" class="sideimg"><span class="itemdesc">manage Address</span></li> -->
-                <li class="sideitem1 sideitem"><img src="public\img\list-ordered.png" alt="" class="sideimg"><span class="itemdesc">wishlist</span></li>
+                <!-- <li class="sideitem1 sideitem"><img src="public\img\list-ordered.png" alt="" class="sideimg"><span class="itemdesc">wishlist</span></li> -->
                 <li class="sideitem1 sideitem"><img src="public\img\badge-percent.png" alt="" class="sideimg"><span class="itemdesc">Offer</span></li>
                 <li class="sideitem1 sideitem"><img src="public\img\credit-card.png" alt="" class="sideimg"><span class="itemdesc">Pan Card</span></li>
                 <!-- <li class="sideitem1 sideitem"><img src="" alt="" class="sideimg"><span class="itemdesc"></span></li>
@@ -1458,14 +1458,14 @@ $res=$conn->query($order);
                                 <div class="ms-auto number"><?php echo $usercart['cartcount'];?></div>
                             </div>
                         </div>
-                        <div class="box me-4 my-1 bg-light">
+                        <!-- <div class="box me-4 my-1 bg-light">
                             <img src="https://www.freepnglogos.com/uploads/love-png/love-png-heart-symbol-wikipedia-11.png"
                                 alt="">
                             <div class="d-flex align-items-center mt-2">
                                 <div class="tag">Wishlist</div>
                                 <div class="ms-auto number">10</div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="text-uppercase">My recent orders</div>
                     <?php
@@ -1703,7 +1703,7 @@ $res=$conn->query($order);
                         <div class="cardcontainer">
                             <div class="date">Order id: #<?php echo $orderrow['order_id'];?></div>
                             <div class="orderid">Order Date: <?php echo $orderrow['order_date'];?></div>
-                            <div class="orderamount">Order Amount: <?php echo $orderrow['order_amount'];?></div>
+                            <div class="orderamount">Order Amount: &#8377;<?php echo $orderrow['order_amount'];?></div>
                         </div>
                         <div class="orderbox" style="<?php if($ost=='cancel') echo 'background:red'; else if($ost=='replace') echo 'background:blue';?>">
                             >
@@ -1746,12 +1746,12 @@ $res=$conn->query($order);
             </div>
             </div> -->
             
-            
+<!--             
             <div class="mainpage" id="subpage">
             <div class="cmcontainer">
             <div class="cmheader">
                         <div class="heading">Wishlist</div>
-                        <!-- <div class="add"></div> -->
+                        <div class="add"></div>
                     </div>
                     <div class="wishcontainer">
                     <a href="product.php?id=5002&color=blue" class="product-link">
@@ -1759,7 +1759,7 @@ $res=$conn->query($order);
                             <div class="product-image">
                                 <span class="discount-tag">10% off</span>
                                 <img src="public\img\5002-3-bl.jpeg" class="product-thumb" alt="">
-                                <!--<button class="card-btn">add to whislist</button>-->
+                                <button class="card-btn">add to whislist</button>
                             </div>
                             <div class="product-info">
                                 <h2 class="product-brand">Walkaroo</h2>
@@ -1773,7 +1773,7 @@ $res=$conn->query($order);
                             <div class="product-image">
                                 <span class="discount-tag">10% off</span>
                                 <img src="public\img\5002-3-bl.jpeg" class="product-thumb" alt="">
-                                <!--<button class="card-btn">add to whislist</button>-->
+                                <button class="card-btn">add to whislist</button>
                             </div>
                             <div class="product-info">
                                 <h2 class="product-brand">Walkaroo</h2>
@@ -1784,7 +1784,7 @@ $res=$conn->query($order);
                     </a>
                 </div>
             </div>
-            </div>
+            </div> -->
             
                
             

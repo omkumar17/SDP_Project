@@ -328,7 +328,7 @@ if(isset($_GET['crtquant'])){
                                 <input type="hidden" name="ui" id="ui" value="1">
                                 <input type="hidden" name="overdiscount" id="pdiscval" value="">
                                 <input type="hidden" name="discount" id="discval" value="<?php echo $applied?>">
-                                <input type="submit" class="btn btn-primary text-uppercase" style="background:teal" onclick="alert('Once Order is, it placed cannot be cancelled (You can initiate cancellation or returned only after it is delivered)!!')"; value="Checkout"></form>
+                                <input type="submit" class="btn btn-primary text-uppercase" style="background:teal" onclick="alert('Once Order is placed, it cannot be cancelled (You can initiate cancellation or returned only after it is delivered)!!')"; value="Checkout"></form>
                         </div>
                         <!-- discount code part -->
                         <div class="discount_code mt-3 shadow">
