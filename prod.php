@@ -218,51 +218,51 @@ class Product{
 		$sql GROUP BY color.color";
         return  $this->getData($sqlQuery);
 	}
-	public function getProductSize () {
-		$sql = '';
-		if((isset($_POST['grp']) && $_POST['grp']!="")){
-			$grp=$_POST['grp'];
-			$sql.=" WHERE product.grp IN ('".implode("','",$grp)."')";
-		}
-		if(isset($_POST['category']) && $_POST['category']!="") {
-			$category = $_POST['category'];
-			if((isset($_POST['grp']) && $_POST['grp']!="")){
-				$sql.=" AND category.Category_name IN ('".implode("','",$category)."')";
-			}
-			else{
-				$sql.=" WHERE category.Category_name IN ('".implode("','",$category)."')";	
-			}
-		}
+	// public function getProductSize () {
+	// 	$sql = '';
+	// 	if((isset($_POST['grp']) && $_POST['grp']!="")){
+	// 		$grp=$_POST['grp'];
+	// 		$sql.=" WHERE product.grp IN ('".implode("','",$grp)."')";
+	// 	}
+	// 	if(isset($_POST['category']) && $_POST['category']!="") {
+	// 		$category = $_POST['category'];
+	// 		if((isset($_POST['grp']) && $_POST['grp']!="")){
+	// 			$sql.=" AND category.Category_name IN ('".implode("','",$category)."')";
+	// 		}
+	// 		else{
+	// 			$sql.=" WHERE category.Category_name IN ('".implode("','",$category)."')";	
+	// 		}
+	// 	}
 		
 		
 
-		if (isset($_POST['type']) && $_POST['type'] != "") {
-			$type = $_POST['type'];
+	// 	if (isset($_POST['type']) && $_POST['type'] != "") {
+	// 		$type = $_POST['type'];
 			
-			if(isset($_POST['category']) && $_POST['category']!=""){
-				$sql .= " AND product_desc.product_type IN ('" . implode("','", $type) . "')";
-			}
-			else{
-				$sql .= " AND product_desc.product_type IN ('" . implode("','", $type) . "')";
-			}
-		}
-		if(isset($_POST['brand']) && $_POST['brand']!="") {
-				$brand = $_POST['brand'];
-				$sql .= " AND product.product_name IN ('" . implode("','", $brand) . "')";
-		}
+	// 		if(isset($_POST['category']) && $_POST['category']!=""){
+	// 			$sql .= " AND product_desc.product_type IN ('" . implode("','", $type) . "')";
+	// 		}
+	// 		else{
+	// 			$sql .= " AND product_desc.product_type IN ('" . implode("','", $type) . "')";
+	// 		}
+	// 	}
+	// 	if(isset($_POST['brand']) && $_POST['brand']!="") {
+	// 			$brand = $_POST['brand'];
+	// 			$sql .= " AND product.product_name IN ('" . implode("','", $brand) . "')";
+	// 	}
 
-		if(isset($_POST['color']) && $_POST['color']!="") {
-			$color = $_POST['color'];
-			$sql .= " AND color.color IN ('" . implode("','", $color) . "')";
-	}
-		$sqlQuery="SELECT DISTINCT product_desc.size FROM product_desc 
-		INNER JOIN color ON product_desc.cid = color.cid 
-		INNER JOIN product ON color.product_id = product.product_id 
-		INNER JOIN category ON product.Category_ID = category.category_id
-		$sql GROUP BY product_desc.size";
-        return  $this->getData($sqlQuery);
+	// 	if(isset($_POST['color']) && $_POST['color']!="") {
+	// 		$color = $_POST['color'];
+	// 		$sql .= " AND color.color IN ('" . implode("','", $color) . "')";
+	// }
+	// 	$sqlQuery="SELECT DISTINCT product_desc.size FROM product_desc 
+	// 	INNER JOIN color ON product_desc.cid = color.cid 
+	// 	INNER JOIN product ON color.product_id = product.product_id 
+	// 	INNER JOIN category ON product.Category_ID = category.category_id
+	// 	$sql GROUP BY product_desc.size";
+    //     return  $this->getData($sqlQuery);
 		
-	}
+	// }
 	public function getTotalProducts () {
 		$sql= "SELECT * FROM `category` INNER JOIN `product` ON product.Category_ID=category.category_id INNER JOIN `color` ON color.product_id=product.Product_id INNER JOIN `product_desc` ON product_desc.cid=color.cid INNER JOIN image ON image.cid=color.cid WHERE product_desc.quantity != 0";
 		if(isset($_POST['grp']) && $_POST['grp']!="") {
@@ -285,10 +285,10 @@ class Product{
 			$color = $_POST['color'];
 			$sql.=" AND color.color IN ('".implode("','",$color)."')";
 		}
-		if(isset($_POST['size']) && $_POST['size']!="") {
-			$size = $_POST['size'];
-			$sql.=" AND product_desc.size IN (".implode(',',$size).")";
-		}		
+		// if(isset($_POST['size']) && $_POST['size']!="") {
+		// 	$size = $_POST['size'];
+		// 	$sql.=" AND product_desc.size IN (".implode(',',$size).")";
+		// }		
 		$productPerPage = 9;		
 		$rowCount = $this->getNumRows($sql);
 		$totalData = ceil($rowCount / $productPerPage);
@@ -316,9 +316,11 @@ class Product{
 		if(isset($_POST['color']) && $_POST['color']!="") {			
 			$sql.=" AND color.color IN ('".implode("','",$_POST['color'])."')";
 		}		
-		if(isset($_POST['size']) && $_POST['size']!="") {			
-			$sql.=" AND product_desc.size IN (".implode(',',$_POST['size']).")";
-		}
+		// if(isset($_POST['size']) && $_POST['size']!="") {			
+		// 	$sql.=" AND product_desc.size IN (".implode(',',$_POST['size']).")";
+		// }
+		$sql.=" AND product.pro_status = 'Enabled'";
+		$sql.=" GROUP BY color.cid";
 		
 		if(isset($_POST['sorting']) && $_POST['sorting']!="") {
 			$sorting = implode("','",$_POST['sorting']);			
@@ -332,6 +334,7 @@ class Product{
 		} else {
 			$sql.=" ORDER BY product.product_id DESC";
 		}		
+		
 		// $sql.=" LIMIT $start, $productPerPage";		
 		$products = $this->getData($sql);
 		// echo count($products);

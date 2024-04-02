@@ -280,13 +280,13 @@ include 'connection.php';
           <h4>Select Payment method</h4><br>
 
           <div class="form-check" style="margin-bottom:15px">
-            <input class="form-check-input" value="c" type="radio" name="paymentmet" id="flexRadioDefault1">
+            <input class="form-check-input" value="COD" type="radio" name="paymentmet" id="flexRadioDefault1">
             <label class="form-check-label" for="flexRadioDefault1">
               COD(Charges Applicable)
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" value="o" type="radio" name="paymentmet" id="flexRadioDefault2" checked>
+            <input class="form-check-input" value="online" type="radio" name="paymentmet" id="flexRadioDefault2" checked>
             <label class="form-check-label" for="flexRadioDefault2">
               Online Payments
             </label>

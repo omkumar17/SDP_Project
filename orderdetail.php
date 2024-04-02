@@ -16,6 +16,21 @@ if(isset($_GET['crtquant'])){
 if(isset($_GET['oid'])){
     $orid=$_GET['oid'];
 }
+$check="SELECT  `order_id` FROM `order_tbl` WHERE `user_id`='$user'";
+$chres=$conn->query($check);
+$chflag=1;
+
+while($chrow=$chres->fetch_assoc()){
+    if($orid==$chrow['order_id']){
+        $chflag=0;
+        break;
+    }
+}
+
+if($chflag==1){
+    header("location:index.php");
+}
+
 $amt=0;
 $status="";
 $ship="";

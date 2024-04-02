@@ -6,7 +6,7 @@ $category = $product->getCategories();
 $type = $product->getType();
 $brands = $product->getBrand();
 $colors = $product->getcolor();
-$productSizes = $product->getProductSize();
+// $productSizes = $product->getProductSize();
 $totalRecords = $product->getTotalProducts();
 
 ?>
@@ -388,37 +388,20 @@ $totalRecords = $product->getTotalProducts();
                         } 
                         ?>
                         </ul>
-                        <div class="head">SIZE</div>
-                        <ul class="list-group">
-                            <?php foreach ($productSizes as $key => $productSize) {
-                                if(isset($_POST['size'])){
-                                    if(in_array($productSize['size'],$_POST['size'])) {
-                                        $sizeCheck='checked="checked"';
-                                    } else {
-                                        $sizeCheck="";
-                                    }
-                                }
-                            ?>
-                            <li class="list-group-item">
-                                <div class="checkbox"><label><input type="checkbox" value="<?php echo $productSize['size']; ?>" <?php echo @$sizeCheck; ?>  name="size[]" class="sort_rang size"><span class="lab"><?php echo $productSize['size']; ?></span></label></div>
-                            </li>
-                            <?php } ?>
-                        </ul>
-                        </div>
-                    
+                    </div>  
                 </div>
                 <div class="maincontent">
                 <?php 
-if(isset($_GET["page"])){
-    ?>
-    <div class="poster">
-        <div class="imgcontainer">
-            <img src="public\img\images (2) (5).jpeg" alt="">
-        </div>
-    </div>
-    <?php
-}
-?>
+                if(isset($_GET["page"])){
+                    ?>
+                    <div class="poster">
+                        <div class="imgcontainer">
+                            <img src="public\img\images (2) (5).jpeg" alt="">
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
                 <div id="results">
                 
                 </div>
@@ -448,7 +431,7 @@ if(isset($_GET["page"])){
 	var type = getCheckboxValues('type');
     var brand = getCheckboxValues('brand');
     var color = getCheckboxValues('color');
-    var size = getCheckboxValues('size');
+    // var size = getCheckboxValues('size');
     var grp = getCheckboxValues('grp');
     var totalData = $("#totalRecords").val();
 	var sorting = getCheckboxValues('sorting');
@@ -459,7 +442,7 @@ if(isset($_GET["page"])){
 		type: 'POST',
 		url : "load_products.php",
 		dataType: "json",			
-		data:{totalRecord:totalRecord, grp:grp, type:type, brand:brand, color:color, size:size, category:category, sorting:sorting},
+		data:{totalRecord:totalRecord, grp:grp, type:type, brand:brand, color:color, category:category, sorting:sorting},
 		success: function (data, textStatus, jqXHR) {
 			console.log("Success Response:", data);
 						console.log("Text Status:", textStatus);
@@ -491,8 +474,8 @@ if(isset($_GET["page"])){
                         grp: grp,
                         type: type,
                         brand: brand,
-                        color: color,
-                        size: size
+                        color: color
+                        // size: size
                     },
                     success: function(data, textStatus, jqXHR) {
                         console.log("Success Response:", data);

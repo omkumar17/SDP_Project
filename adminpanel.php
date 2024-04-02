@@ -10,11 +10,36 @@ $page = 0;
 $flag = 0;
 $proquery="SELECT COUNT(Product_id) FROM `product`";
 $prores=$conn->query($proquery);
-$row=$prores->fetch_assoc();
+$prodrow=$prores->fetch_assoc();
+
+$comordquery="SELECT COUNT(order_id) FROM `order_tbl` WHERE order_status='complete'";
+$comordres=$conn->query($comordquery);
+$comordrow=$comordres->fetch_assoc();
 
 $catquery="SELECT COUNT(category_id) FROM `category`";
 $catres=$conn->query($catquery);
-$row1=$catres->fetch_assoc();
+$catrow=$catres->fetch_assoc();
+
+$penordquery="SELECT COUNT(order_id) FROM `order_tbl` WHERE order_status!='complete'";
+$penordres=$conn->query($penordquery);
+$penordrow=$penordres->fetch_assoc();
+
+$shipquery="SELECT COUNT(order_id) FROM `order_tbl` WHERE shipping_status='shipped'";
+$shipres=$conn->query($shipquery);
+$shiprow=$shipres->fetch_assoc();
+
+$penshipquery="SELECT COUNT(order_id) FROM `order_tbl` WHERE shipping_status!='shipped'";
+$penshipres=$conn->query($penshipquery);
+$penshiprow=$penshipres->fetch_assoc();
+
+$custquery="SELECT COUNT(userID) FROM `user` WHERE usr_status='Active'";
+$custres=$conn->query($custquery);
+$custrow=$custres->fetch_assoc();
+
+$penrefquery="SELECT COUNT(refund_id) FROM `refund` WHERE refund_status!='approved'";
+$penrefres=$conn->query($penrefquery);
+$penrefrow=$penrefres->fetch_assoc();
+
 if(isset($_GET['page'])){
     $page=$_GET['page'];    
 }
@@ -469,9 +494,73 @@ if(isset($_GET['flag'])){
         text-transform:capitalize;
     }
 </style>
+<style>
+        .alert{
+            position:absolute;
+            top:35px;
+            left:30vw;
+            line-height:30px;
+            height:auto;
+            border:1px solid teal;
+            border-radius:15px;
+            width:40vw;
+            background-color:rgba(0,0,0,0.8);
+            color:white;
+            display:flex;
+            flex-direction:row;
+            /* justify-content:center; */
+            align-items:center;
+            padding:10px 10px;
+            z-index:100;
+            /* opacity:0.5; */
+
+        }
+        /* .alert::before{
+            content:'';
+            position:relative;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            opacity:0.5;
+            background:black;
+        } */
+        .alerttext{
+            display:flex;
+            align-items:center;
+            height:100%;
+            width:100%;
+            padding:5px;
+            font-size:20px;
+            font-weight:600;
+        }
+        .crossed{
+            float:right;
+            font-size:20px;
+            font-weight:600;
+            cursor:pointer;
+        }
+    </style>
 </head>
 
 <body>
+    <?php
+    if($flag=='1'){
+        ?>
+        <div class="alert">
+        <div class="alerttext">Updates successfully made !!</div><span class="crossed" onclick="cross()">✔</span>
+    </div>
+        <?php
+    }
+    if($flag=='2'){
+        ?>
+        <div class="alert">
+        <div class="alerttext">Error occured while updating. Try again !</div><span class="crossed" onclick="cross()">✔</span>
+    </div>
+        <?php
+    }
+    
+?>
     <section class="adminnavbar">
         <div class="navcontainer">
             <div class="navitems head">Admin Panel</div>
@@ -485,7 +574,7 @@ if(isset($_GET['flag'])){
                                 ?>
                                 <a href="chanpass.php"><li><img src="public\img\circle-user-round.png" alt="">&nbsp;&nbsp;Change Password</li></a>
                                 <a href="logout.php"><li><img src="public\img\log-out-profile.png" alt="">&nbsp;&nbsp; Logout</li></a>
-                                <a href="PHP-report/index.php"><li><img src="public\img\notebook-text.png" alt="">&nbsp;&nbsp; View Report</li></a>
+                                <a href="Php-report"><li><img src="public\img\notebook-text.png" alt="">&nbsp;&nbsp; View Report</li></a>
                                 <?php
                             }
                             ?>
@@ -528,56 +617,56 @@ if(isset($_GET['flag'])){
                 <div class="mainitemcont">
                     <div class="maincontent" style="background:rgb(88, 88, 255)">
                         <div class="subcontent">
-                            <div class="count"><?php echo $row['COUNT(Product_id)']; ?></div>
+                            <div class="count"><?php echo $prodrow['COUNT(Product_id)']; ?></div>
                             <div class="counttitle">Products</div>
                         </div>
                         <div class="contimg"></div>
                     </div>
                     <div class="maincontent" style="background:rgb(115, 198, 182 )">
                         <div class="subcontent">
-                            <div class="count">0</div>
+                            <div class="count"><?php echo $penordrow['COUNT(order_id)']; ?></div>
                             <div class="counttitle">Pending Orders</div>
                         </div>
                         <div class="contimg"></div>
                     </div>
                     <div class="maincontent" style="background:rgb(245, 203, 167)">
                         <div class="subcontent">
-                            <div class="count">4</div>
+                            <div class="count"><?php echo $comordrow['COUNT(order_id)']; ?></div>
                             <div class="counttitle">Completed Orders</div>
                         </div>
                         <div class="contimg"></div>
                     </div>
                     <div class="maincontent" style="background:rgb(174, 214, 241 )">
                         <div class="subcontent">
-                            <div class="count">3</div>
-                            <div class="counttitle">Completed Shipping</div>
-                        </div>
-                        <div class="contimg"></div>
-                    </div>
-                    <div class="maincontent" style="background:rgb(128, 139, 150">
-                        <div class="subcontent">
-                            <div class="count">1</div>
+                            <div class="count"><?php echo $penshiprow['COUNT(order_id)']; ?></div>
                             <div class="counttitle">Pending Shipping</div>
                         </div>
                         <div class="contimg"></div>
                     </div>
-                    <div class="maincontent" style="background:rgb(215, 189, 226)">
+                    <div class="maincontent" style="background:rgb(128, 139, 150 )">
                         <div class="subcontent">
-                            <div class="count">10</div>
-                            <div class="counttitle">Active Customers</div>
+                            <div class="count"><?php echo $shiprow['COUNT(order_id)']; ?></div>
+                            <div class="counttitle">Completed Shipping</div>
                         </div>
                         <div class="contimg"></div>
                     </div>
                     <div class="maincontent" style="background:rgb(93, 173, 226)">
                         <div class="subcontent">
-                            <div class="count">4</div>
-                            <div class="counttitle">Total Shippings</div>
+                            <div class="count"><?php echo $penrefrow['COUNT(refund_id)']; ?></div>
+                            <div class="counttitle">Pending Refund</div>
+                        </div>
+                        <div class="contimg"></div>
+                    </div>
+                    <div class="maincontent" style="background:rgb(215, 189, 226)">
+                        <div class="subcontent">
+                            <div class="count"><?php echo $custrow['COUNT(userID)']; ?></div>
+                            <div class="counttitle">Active Customers</div>
                         </div>
                         <div class="contimg"></div>
                     </div>
                     <div class="maincontent" style="background:rgb(243, 156, 18 )">
                         <div class="subcontent">
-                            <div class="count"><?php echo $row1['COUNT(category_id)']; ?></div>
+                            <div class="count"><?php echo $catrow['COUNT(category_id)']; ?></div>
                             <div class="counttitle">Categories</div>
                         </div>
                         <div class="contimg"></div>
@@ -626,7 +715,7 @@ if(isset($_GET['flag'])){
                         <?php
                         if($row['cat_status']=='Enabled'){
                         ?>
-                                <td><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span><span class="button disable"><img src="public\img/trash.png" alt="disable" ></span></td>
+                                <td><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span><span class="button disable"><img src="public\img\trash.png" alt="disable" ></span></td>
                         <?php
                         }
                         else{
@@ -747,7 +836,7 @@ if(isset($_GET['flag'])){
                                     $sql1="SELECT color.color FROM `product` JOIN color ON color.product_id=product.Product_id JOIN product_desc ON product_desc.cid=color.cid JOIN image ON image.cid=color.cid WHERE product.Product_id='$spid' GROUP BY color.color;";
                                     $result1=$conn->query($sql1);
                                     while ($row1 = $result1->fetch_assoc()) {                                             
-                                        echo $row1['color']." ";                                     
+                                        echo "[".$row1['color']."]";                                     
                                     }
                                     echo<<<_END
                                 </td>
@@ -827,7 +916,7 @@ if(isset($_GET['flag'])){
                                 _END;
                                 if($row['pro_status']=='Enabled'){
                                     ?>
-                                     <span class="button disable"><img src="public\img/trash.png"></span>
+                                     <span class="button disable"><img src="public\img\trash.png"></span>
                                     <?php
                                 }
                                 else
@@ -1283,7 +1372,7 @@ if(isset($_GET['flag'])){
                             _END;
                             if($row['usr_status']=='Active'){
                                 ?>
-                                    <td><span class="button disable"><img src="public\img/trash.png" alt="disable" ></span></td>
+                                    <td><span class="button disable"><img src="public\img\trash.png" alt="disable" ></span></td>
                                 <?php
                             }
                             else{
@@ -1422,7 +1511,7 @@ if(isset($_GET['flag'])){
                                 _END;
                                 if($row['offer_status']=='Enabled'){
                                     ?>
-                                    <span class="button disable"><img src="public\img/trash.png" alt="disable" ></span></td>
+                                    <span class="button disable"><img src="public\img\trash.png" alt="disable" ></span></td>
                                     <?php
                                 }
                                 else{
@@ -1871,6 +1960,19 @@ login.onclick = function () {
     });
 </script>
      -->
+     <script>
+    function cross(){
+        var alerttext=document.querySelector(".alerttext");
+        var alert=document.querySelector(".alert");
+        alerttext.textContent="";
+        alert.style.display="none";
+    }
+    var alert=document.querySelector(".alert");
+    setTimeout(function() {
+        alert.style.display="none";
+        }, 4000);
+    
+</script>
 </body>
 
 </html>
