@@ -19,7 +19,6 @@ if(isset($_GET['oid'])){
 $check="SELECT  `order_id` FROM `order_tbl` WHERE `user_id`='$user'";
 $chres=$conn->query($check);
 $chflag=1;
-w
 while($chrow=$chres->fetch_assoc()){
     if($orid==$chrow['order_id']){
         $chflag=0;
