@@ -115,7 +115,7 @@ $result=$conn->query($sql);
 if(isset($_GET['paymentmet'])){
     $paymet=$_GET['paymentmet'];
     $orderstatus="pending";
-    if($paymet=='o'){
+    if($paymet=='online'){
        echo<<<_END
         <div class="loading-container">
 
@@ -123,7 +123,7 @@ if(isset($_GET['paymentmet'])){
         </div>
     _END;
     }
-    if($paymet=='c'){
+    if($paymet=='COD'){
         $orderstatus="placed";
     }
     $totdis=$disc+$pdisc;
@@ -163,7 +163,7 @@ if(isset($_GET['paymentmet'])){
             $sql="UPDATE product_desc SET quantity='$orquant' WHERE prodesc_ID='$prodescid'";
             $res=$conn->query($sql);
         }
-            if($paymet=='c'){        
+            if($paymet=='COD'){        
             // Generate a timestamp component (or use a database timestamp if available)
             $timestamp = time() % 10000000000; // Current Unix timestamp
 
@@ -183,7 +183,7 @@ if(isset($_GET['paymentmet'])){
     
     $sql="DELETE FROM cart_tbl WHERE user_id='$user'";
     $result=$conn->query($sql);
-    if($paymet=='c'){
+    if($paymet=='COD'){
         $date=date('y-m-d');
     echo<<<_END
     <div class="alert">
