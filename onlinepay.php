@@ -327,7 +327,7 @@ if(isset($_GET['orderid'])){
     $orderResult = $conn->query($orderSql);
 
     // Attempt to update payment status
-    $paymentSql="INSERT INTO `payment`(`transaction_id`, `order_id`, `payment_mode`, `payment_status`) VALUES ('$number','$order','o','$paystatus')";
+    $paymentSql="INSERT INTO `payment`(`transaction_id`, `order_id`, `payment_mode`, `payment_status`) VALUES ('$number','$order','online','$paystatus')";
     $paymentResult=$conn->query($paymentSql);
     
 
