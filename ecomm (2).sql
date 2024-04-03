@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2024 at 06:29 PM
+-- Generation Time: Apr 03, 2024 at 11:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -140,7 +140,7 @@ CREATE TABLE `feedback` (
   `product_id` int(3) NOT NULL,
   `feedback_rating` int(1) NOT NULL,
   `feedback_desc` text NOT NULL,
-  `feedback_date` date NOT NULL
+  `feedback_date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -149,7 +149,11 @@ CREATE TABLE `feedback` (
 
 INSERT INTO `feedback` (`feedback_id`, `user_id`, `product_id`, `feedback_rating`, `feedback_desc`, `feedback_date`) VALUES
 (1, 30, 5109, 4, 'The footwear is stylish and comfortable, providing excellent support throughout the day. The quality of materials used is impressive, and the design reflects both durability and fashion. However, there is room for improvement in the sizing accuracy, as the fit was slightly different than expected. Overall, a great product with potential for even greater customer satisfaction with minor adjustments.', '2024-01-18'),
-(2, 27, 8004, 5, 'This kids\' footwear product is fantastic! The vibrant colors and playful designs immediately caught my child\'s attention. The durability and quality of materials used are commendable, ensuring these shoes can withstand the active lifestyle of kids. The Velcro closures make it easy for little ones to put on and take off independently. My only suggestion would be to include additional arch support for enhanced comfort during extended wear. Overall, a delightful and well-crafted product that brings joy to both parents and kids alike', '2023-12-16');
+(2, 27, 8004, 5, 'This kids\' footwear product is fantastic! The vibrant colors and playful designs immediately caught my child\'s attention. The durability and quality of materials used are commendable, ensuring these shoes can withstand the active lifestyle of kids. The Velcro closures make it easy for little ones to put on and take off independently. My only suggestion would be to include additional arch support for enhanced comfort during extended wear. Overall, a delightful and well-crafted product that brings joy to both parents and kids alike', '2023-12-16'),
+(3, 27, 1026, 5, 'loved the product . good build quality and style', '2024-04-04'),
+(4, 36, 1026, 4, 'highly durable and efficient style', '2024-04-04'),
+(5, 36, 5002, 5, 'good product and reasonable price', '2024-04-04'),
+(6, 36, 1026, 5, 'price is good. styling is also great', '2024-04-04');
 
 -- --------------------------------------------------------
 
@@ -313,7 +317,20 @@ CREATE TABLE `order_detail` (
 --
 
 INSERT INTO `order_detail` (`orderdetail_id`, `order_id`, `product_id`, `quantity`, `rate`, `size`, `color`, `discount`, `amount`) VALUES
-(39, 76, 1026, 6, 999, 8, 'blue', 1199, 4795);
+(39, 76, 1026, 6, 999, 8, 'blue', 1199, 4795),
+(40, 77, 1026, 1, 999, 7, 'blue', 0, 999),
+(41, 77, 5002, 1, 227, 7, 'blue', 0, 227),
+(42, 78, 1026, 20, 999, 6, 'blue', 3996, 15984),
+(43, 79, 5002, 1, 227, 8, 'blue', 0, 227),
+(44, 80, 1026, 1, 999, 8, 'blue', 0, 999),
+(45, 81, 1026, 1, 999, 9, 'blue', 0, 999),
+(46, 81, 5002, 1, 227, 9, 'blue', 0, 227),
+(47, 82, 5002, 21, 227, 9, 'blue', 953, 3814),
+(48, 82, 1026, 20, 999, 9, 'blue', 3996, 15984),
+(49, 83, 5002, 1, 227, 6, 'blue', 0, 227),
+(50, 84, 1026, 1, 999, 10, 'blue', 0, 999),
+(51, 85, 1026, 1, 999, 9, 'blue', 0, 999),
+(52, 85, 5002, 1, 227, 9, 'blue', 0, 227);
 
 -- --------------------------------------------------------
 
@@ -341,7 +358,16 @@ CREATE TABLE `order_tbl` (
 --
 
 INSERT INTO `order_tbl` (`order_id`, `user_id`, `order_date`, `order_status`, `order_amount`, `discount`, `fname`, `lname`, `mobile`, `email`, `shipping_address`, `shipping_status`) VALUES
-(76, 27, '2024-04-02', 'placed', 4846, 1198, 'harsh', 'wadhwani', 8799553324, 'harshwadhwani268@gmail.com', '2,shilpa society, india colony, ahmedabad', 'processing');
+(76, 27, '2024-04-02', 'complete', 4846, 1198, 'harsh', 'wadhwani', 8799553324, 'harshwadhwani268@gmail.com', '2,shilpa society, india colony, ahmedabad', 'shipped'),
+(77, 27, '2024-04-04', 'packed', 1123, 153, 'Harsh', 'Wadhwani', 8401409849, 'harshwadhwani268@gmail.com', '18 parth society bapunagar', 'processing'),
+(78, 32, '2024-04-04', 'packed', 13631, 6399, 'om', 'kumar', 9693808798, 'omk738774@gmail.com', 'b11 sharad apartment', 'processing'),
+(79, 34, '2024-04-04', 'complete', 244, 33, 'jatin', 'kanzariya', 8525652312, 'jatink123@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 ', 'shipped'),
+(80, 33, '2024-04-04', 'placed', 1049, 0, 'kruparth', 'kanzariya', 7874773789, 'kruparth1610@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 ', 'processing'),
+(81, 38, '2024-04-04', 'packed', 1123, 153, 'rocky', 'bhai', 8580250157, 'rocky12@gmail.com', 'green pg navrangpura', 'processing'),
+(82, 33, '2024-04-04', 'placed', 16873, 7924, 'kruparth', 'kanzariya', 8580250157, 'kruparth1610@gmail.com', 'samras boys hostel', 'processing'),
+(83, 32, '2024-04-04', 'placed', 244, 33, 'om', 'kumar', 9693808798, 'omk738774@gmail.com', 'hn 49 shivpuri colony', 'processing'),
+(84, 35, '2024-04-04', 'placed', 924, 125, 'rohan', 'rathod', 9944663322, 'rohanrathod@gmail.com', 'sharad apartment navranpura', 'processing'),
+(85, 36, '2024-04-04', 'complete', 1276, 0, 'Saurabh', 'garg', 8585220013, 'saurabh@gmail.com', 'b11 pratistha 20 ', 'shipped');
 
 -- --------------------------------------------------------
 
@@ -362,7 +388,16 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`transaction_id`, `order_id`, `payment_mode`, `payment_date`, `payment_status`) VALUES
-(1712075335585563845, 76, 'online', '2024-04-02', 'paid');
+(1712075335585563845, 76, 'online', '2024-04-02', 'paid'),
+(1712175732584617718, 77, 'online', '2024-04-04', 'paid'),
+(1712176273531346560, 78, 'COD', '2024-04-04', 'pending'),
+(1712176499370572019, 79, 'COD', '2024-04-04', 'paid'),
+(1712176683680713465, 80, 'online', '2024-04-04', 'paid'),
+(1712176881285650990, 81, 'COD', '2024-04-04', 'pending'),
+(1712177158761875198, 82, 'COD', '2024-04-04', 'pending'),
+(1712177427689482992, 83, 'online', '2024-04-04', 'paid'),
+(1712177543746614541, 84, 'online', '2024-04-04', 'paid'),
+(1712177659503712739, 85, 'COD', '2024-04-04', 'paid');
 
 -- --------------------------------------------------------
 
@@ -569,141 +604,141 @@ CREATE TABLE `product_desc` (
 --
 
 INSERT INTO `product_desc` (`prodesc_ID`, `cid`, `product_type`, `size`, `quantity`, `prodesc_status`) VALUES
-(1, 1, 'Daily casual', 6, 20, 'Enabled'),
-(2, 1, 'Daily casual', 7, 20, 'Enabled'),
-(3, 1, 'Daily casual', 8, 20, 'Enabled'),
-(4, 1, 'Daily casual', 9, 20, 'Enabled'),
-(5, 1, 'Daily casual', 10, 20, 'Enabled'),
-(6, 2, 'Daily casual', 6, 20, 'Enabled'),
-(7, 2, 'Daily casual', 7, 20, 'Enabled'),
-(8, 2, 'Daily casual', 8, 20, 'Enabled'),
-(9, 2, 'Daily casual', 9, 20, 'Enabled'),
-(10, 2, 'Daily casual', 10, 20, 'Enabled'),
-(11, 3, 'Clogs', 6, 20, 'Enabled'),
-(12, 3, 'Clogs', 7, 20, 'Enabled'),
-(13, 3, 'Clogs', 8, 20, 'Enabled'),
-(14, 4, 'Sports Sandals', 40, 20, 'Enabled'),
-(15, 4, 'Sports Sandals', 41, 20, 'Enabled'),
-(16, 4, 'Sports Sandals', 42, 20, 'Enabled'),
-(17, 4, 'Sports Sandals', 43, 20, 'Enabled'),
-(18, 4, 'Sports Sandals', 44, 20, 'Enabled'),
-(19, 4, 'Sports Sandals', 45, 20, 'Enabled'),
-(20, 5, 'Sports Sandals', 40, 20, 'Enabled'),
-(21, 5, 'Sports Sandals', 41, 20, 'Enabled'),
-(22, 5, 'Sports Sandals', 42, 20, 'Enabled'),
-(23, 5, 'Sports Sandals', 43, 20, 'Enabled'),
-(24, 5, 'Sports Sandals', 44, 20, 'Enabled'),
-(25, 6, 'PU Sandals', 4, 20, 'Enabled'),
-(26, 6, 'PU Sandals', 5, 20, 'Enabled'),
-(27, 6, 'PU Sandals', 6, 20, 'Enabled'),
-(28, 6, 'PU Sandals', 7, 20, 'Enabled'),
-(29, 6, 'PU Sandals', 8, 20, 'Enabled'),
-(30, 7, 'PU Sandals', 4, 20, 'Enabled'),
-(31, 7, 'PU Sandals', 5, 20, 'Enabled'),
-(32, 7, 'PU Sandals', 6, 20, 'Enabled'),
-(33, 7, 'PU Sandals', 7, 20, 'Enabled'),
-(34, 7, 'PU Sandals', 8, 20, 'Enabled'),
-(35, 8, 'Sports Sandals', 40, 20, 'Enabled'),
-(36, 8, 'Sports Sandals', 41, 20, 'Enabled'),
-(37, 8, 'Sports Sandals', 42, 20, 'Enabled'),
-(38, 8, 'Sports Sandals', 43, 20, 'Enabled'),
-(39, 8, 'Sports Sandals', 44, 20, 'Enabled'),
-(40, 8, 'Sports Sandals', 45, 20, 'Enabled'),
-(41, 10, 'rubber slipper', 5, 20, 'Enabled'),
-(42, 10, 'rubber slipper', 6, 20, 'Enabled'),
-(43, 10, 'rubber slipper', 7, 20, 'Enabled'),
-(44, 10, 'rubber slipper', 8, 20, 'Enabled'),
-(45, 11, 'solid slipper', 6, 20, 'Enabled'),
-(46, 11, 'solid slipper', 7, 20, 'Enabled'),
-(47, 11, 'solid slipper', 8, 4, 'Enabled'),
-(48, 11, 'solid slipper', 9, 8, 'Enabled'),
-(49, 11, 'solid slipper', 10, 20, 'Enabled'),
-(50, 11, 'solid slipper', 11, 20, 'Enabled'),
-(51, 11, 'solid slipper', 12, 20, 'Enabled'),
-(52, 12, 'solid slipper', 6, 20, 'Enabled'),
-(53, 12, 'solid slipper', 7, 20, 'Enabled'),
-(54, 12, 'solid slipper', 8, 20, 'Enabled'),
-(55, 12, 'solid slipper', 9, 20, 'Enabled'),
-(56, 12, 'solid slipper', 10, 20, 'Enabled'),
-(57, 12, 'solid slipper', 11, 20, 'Enabled'),
-(58, 12, 'solid slipper', 12, 20, 'Enabled'),
-(59, 13, 'sneakers', 6, 20, 'Enabled'),
-(60, 13, 'sneakers', 7, 1, 'Enabled'),
-(61, 13, 'sneakers', 8, 9, 'Enabled'),
-(62, 13, 'sneakers', 9, 20, 'Enabled'),
-(63, 13, 'sneakers', 10, 20, 'Enabled'),
-(64, 14, 'sneakers', 6, 20, 'Enabled'),
-(65, 14, 'sneakers', 7, 20, 'Enabled'),
-(66, 14, 'sneakers', 8, 20, 'Enabled'),
-(67, 14, 'sneakers', 9, 20, 'Enabled'),
-(68, 14, 'sneakers', 10, 20, 'Enabled'),
-(69, 15, 'Fancy slipper', 6, 20, 'Enabled'),
-(70, 15, 'Fancy slipper', 7, 20, 'Enabled'),
-(71, 15, 'Fancy slipper', 8, 20, 'Enabled'),
-(72, 15, 'Fancy slipper', 9, 20, 'Enabled'),
-(73, 15, 'Fancy slipper', 10, 20, 'Enabled'),
-(74, 16, 'Normal slipper', 6, 20, 'Enabled'),
-(75, 16, 'Normal slipper', 7, 20, 'Enabled'),
-(76, 16, 'Normal slipper', 8, 20, 'Enabled'),
-(77, 16, 'Normal slipper', 9, 20, 'Enabled'),
-(78, 16, 'Normal slipper', 10, 20, 'Enabled'),
-(79, 17, 'Running Shoes', 6, 20, 'Enabled'),
-(80, 17, 'Running Shoes', 7, 20, 'Enabled'),
-(81, 17, 'Running Shoes', 8, 20, 'Enabled'),
-(82, 17, 'Running Shoes', 9, 20, 'Enabled'),
-(83, 17, 'Running Shoes', 10, 20, 'Enabled'),
-(84, 18, 'Sports sandals', 2, 20, 'Enabled'),
-(85, 18, 'Sports sandals', 3, 20, 'Enabled'),
-(86, 18, 'Sports sandals', 4, 20, 'Enabled'),
-(87, 18, 'Sports sandals', 5, 20, 'Enabled'),
-(88, 19, 'Running Slipper', 2, 20, 'Enabled'),
-(89, 19, 'Running Slipper', 3, 20, 'Enabled'),
-(90, 19, 'Running Slipper', 4, 20, 'Enabled'),
-(91, 19, 'Running Slipper', 5, 20, 'Enabled'),
-(92, 20, 'sneakers', 3, 20, 'Enabled'),
-(93, 20, 'sneakers', 4, 20, 'Enabled'),
-(94, 20, 'sneakers', 5, 20, 'Enabled'),
-(95, 20, 'sneakers', 6, 20, 'Enabled'),
-(96, 21, 'slipper', 5, 20, 'Enabled'),
-(97, 21, 'slipper', 6, 20, 'Enabled'),
-(98, 21, 'slipper', 7, 20, 'Enabled'),
-(99, 21, 'slipper', 8, 20, 'Enabled'),
-(100, 22, 'casual Slipper', 5, 20, 'Enabled'),
-(101, 22, 'casual Slipper', 6, 20, 'Enabled'),
-(102, 22, 'casual Slipper', 7, 20, 'Enabled'),
-(103, 22, 'casual Slipper', 8, 20, 'Enabled'),
-(104, 25, 'Insoles', 6, 20, 'Enabled'),
-(105, 25, 'Insoles', 7, 20, 'Enabled'),
-(106, 25, 'Insoles', 8, 20, 'Enabled'),
-(107, 25, 'Insoles', 9, 20, 'Enabled'),
-(108, 27, 'cushion', 6, 20, 'Enabled'),
-(109, 27, 'cushion', 7, 20, 'Enabled'),
-(110, 27, 'cushion', 8, 20, 'Enabled'),
-(111, 27, 'cushion', 9, 20, 'Enabled'),
-(112, 23, 'cushion', 6, 20, 'Enabled'),
-(113, 23, 'cushion', 7, 20, 'Enabled'),
-(114, 23, 'cushion', 8, 20, 'Enabled'),
-(115, 23, 'cushion', 9, 20, 'Enabled'),
-(116, 24, 'Insoles', 6, 20, 'Enabled'),
-(117, 24, 'Insoles', 7, 20, 'Enabled'),
-(118, 24, 'Insoles', 8, 20, 'Enabled'),
-(119, 24, 'Insoles', 9, 20, 'Enabled'),
-(120, 28, 'casual', 6, 20, 'Enabled'),
-(121, 28, 'casual', 7, 20, 'Enabled'),
-(122, 28, 'casual', 8, 20, 'Enabled'),
-(123, 28, 'casual', 9, 20, 'Enabled'),
-(124, 29, 'casual', 6, 20, 'Enabled'),
-(125, 29, 'casual', 7, 20, 'Enabled'),
-(126, 29, 'casual', 8, 20, 'Enabled'),
-(127, 29, 'casual', 9, 20, 'Enabled'),
-(128, 30, 'Sports Shoes', 6, 20, 'Enabled'),
-(129, 30, 'Sports Shoes', 7, 20, 'Enabled'),
-(130, 30, 'Sports Shoes', 8, 20, 'Enabled'),
-(131, 30, 'Sports Shoes', 9, 20, 'Enabled'),
-(132, 31, 'sneakers', 6, 20, 'Enabled'),
-(133, 31, 'sneakers', 7, 20, 'Enabled'),
-(134, 31, 'sneakers', 8, 20, 'Enabled'),
-(135, 31, 'sneakers', 9, 20, 'Enabled');
+(1, 1, 'Daily casual', 6, 100, 'Enabled'),
+(2, 1, 'Daily casual', 7, 100, 'Enabled'),
+(3, 1, 'Daily casual', 8, 100, 'Enabled'),
+(4, 1, 'Daily casual', 9, 100, 'Enabled'),
+(5, 1, 'Daily casual', 10, 100, 'Enabled'),
+(6, 2, 'Daily casual', 6, 100, 'Enabled'),
+(7, 2, 'Daily casual', 7, 100, 'Enabled'),
+(8, 2, 'Daily casual', 8, 100, 'Enabled'),
+(9, 2, 'Daily casual', 9, 100, 'Enabled'),
+(10, 2, 'Daily casual', 10, 100, 'Enabled'),
+(11, 3, 'Clogs', 6, 100, 'Enabled'),
+(12, 3, 'Clogs', 7, 100, 'Enabled'),
+(13, 3, 'Clogs', 8, 100, 'Enabled'),
+(14, 4, 'Sports Sandals', 40, 100, 'Enabled'),
+(15, 4, 'Sports Sandals', 41, 100, 'Enabled'),
+(16, 4, 'Sports Sandals', 42, 100, 'Enabled'),
+(17, 4, 'Sports Sandals', 43, 100, 'Enabled'),
+(18, 4, 'Sports Sandals', 44, 100, 'Enabled'),
+(19, 4, 'Sports Sandals', 45, 100, 'Enabled'),
+(20, 5, 'Sports Sandals', 40, 100, 'Enabled'),
+(21, 5, 'Sports Sandals', 41, 100, 'Enabled'),
+(22, 5, 'Sports Sandals', 42, 100, 'Enabled'),
+(23, 5, 'Sports Sandals', 43, 100, 'Enabled'),
+(24, 5, 'Sports Sandals', 44, 100, 'Enabled'),
+(25, 6, 'PU Sandals', 4, 100, 'Enabled'),
+(26, 6, 'PU Sandals', 5, 100, 'Enabled'),
+(27, 6, 'PU Sandals', 6, 100, 'Enabled'),
+(28, 6, 'PU Sandals', 7, 100, 'Enabled'),
+(29, 6, 'PU Sandals', 8, 100, 'Enabled'),
+(30, 7, 'PU Sandals', 4, 100, 'Enabled'),
+(31, 7, 'PU Sandals', 5, 100, 'Enabled'),
+(32, 7, 'PU Sandals', 6, 100, 'Enabled'),
+(33, 7, 'PU Sandals', 7, 100, 'Enabled'),
+(34, 7, 'PU Sandals', 8, 100, 'Enabled'),
+(35, 8, 'Sports Sandals', 40, 100, 'Enabled'),
+(36, 8, 'Sports Sandals', 41, 100, 'Enabled'),
+(37, 8, 'Sports Sandals', 42, 100, 'Enabled'),
+(38, 8, 'Sports Sandals', 43, 100, 'Enabled'),
+(39, 8, 'Sports Sandals', 44, 100, 'Enabled'),
+(40, 8, 'Sports Sandals', 45, 100, 'Enabled'),
+(41, 10, 'rubber slipper', 5, 100, 'Enabled'),
+(42, 10, 'rubber slipper', 6, 100, 'Enabled'),
+(43, 10, 'rubber slipper', 7, 100, 'Enabled'),
+(44, 10, 'rubber slipper', 8, 100, 'Enabled'),
+(45, 11, 'solid slipper', 6, 99, 'Enabled'),
+(46, 11, 'solid slipper', 7, 99, 'Enabled'),
+(47, 11, 'solid slipper', 8, 99, 'Enabled'),
+(48, 11, 'solid slipper', 9, 77, 'Enabled'),
+(49, 11, 'solid slipper', 10, 100, 'Enabled'),
+(50, 11, 'solid slipper', 11, 100, 'Enabled'),
+(51, 11, 'solid slipper', 12, 100, 'Enabled'),
+(52, 12, 'solid slipper', 6, 100, 'Enabled'),
+(53, 12, 'solid slipper', 7, 100, 'Enabled'),
+(54, 12, 'solid slipper', 8, 100, 'Enabled'),
+(55, 12, 'solid slipper', 9, 100, 'Enabled'),
+(56, 12, 'solid slipper', 10, 100, 'Enabled'),
+(57, 12, 'solid slipper', 11, 100, 'Enabled'),
+(58, 12, 'solid slipper', 12, 100, 'Enabled'),
+(59, 13, 'sneakers', 6, 80, 'Enabled'),
+(60, 13, 'sneakers', 7, 99, 'Enabled'),
+(61, 13, 'sneakers', 8, 99, 'Enabled'),
+(62, 13, 'sneakers', 9, 78, 'Enabled'),
+(63, 13, 'sneakers', 10, 99, 'Enabled'),
+(64, 14, 'sneakers', 6, 100, 'Enabled'),
+(65, 14, 'sneakers', 7, 100, 'Enabled'),
+(66, 14, 'sneakers', 8, 100, 'Enabled'),
+(67, 14, 'sneakers', 9, 100, 'Enabled'),
+(68, 14, 'sneakers', 10, 100, 'Enabled'),
+(69, 15, 'Fancy slipper', 6, 100, 'Enabled'),
+(70, 15, 'Fancy slipper', 7, 100, 'Enabled'),
+(71, 15, 'Fancy slipper', 8, 100, 'Enabled'),
+(72, 15, 'Fancy slipper', 9, 100, 'Enabled'),
+(73, 15, 'Fancy slipper', 10, 100, 'Enabled'),
+(74, 16, 'Normal slipper', 6, 100, 'Enabled'),
+(75, 16, 'Normal slipper', 7, 100, 'Enabled'),
+(76, 16, 'Normal slipper', 8, 100, 'Enabled'),
+(77, 16, 'Normal slipper', 9, 100, 'Enabled'),
+(78, 16, 'Normal slipper', 10, 100, 'Enabled'),
+(79, 17, 'Running Shoes', 6, 100, 'Enabled'),
+(80, 17, 'Running Shoes', 7, 100, 'Enabled'),
+(81, 17, 'Running Shoes', 8, 100, 'Enabled'),
+(82, 17, 'Running Shoes', 9, 100, 'Enabled'),
+(83, 17, 'Running Shoes', 10, 100, 'Enabled'),
+(84, 18, 'Sports sandals', 2, 100, 'Enabled'),
+(85, 18, 'Sports sandals', 3, 100, 'Enabled'),
+(86, 18, 'Sports sandals', 4, 100, 'Enabled'),
+(87, 18, 'Sports sandals', 5, 100, 'Enabled'),
+(88, 19, 'Running Slipper', 2, 100, 'Enabled'),
+(89, 19, 'Running Slipper', 3, 100, 'Enabled'),
+(90, 19, 'Running Slipper', 4, 100, 'Enabled'),
+(91, 19, 'Running Slipper', 5, 100, 'Enabled'),
+(92, 20, 'sneakers', 3, 100, 'Enabled'),
+(93, 20, 'sneakers', 4, 100, 'Enabled'),
+(94, 20, 'sneakers', 5, 100, 'Enabled'),
+(95, 20, 'sneakers', 6, 100, 'Enabled'),
+(96, 21, 'slipper', 5, 100, 'Enabled'),
+(97, 21, 'slipper', 6, 100, 'Enabled'),
+(98, 21, 'slipper', 7, 100, 'Enabled'),
+(99, 21, 'slipper', 8, 100, 'Enabled'),
+(100, 22, 'casual Slipper', 5, 100, 'Enabled'),
+(101, 22, 'casual Slipper', 6, 100, 'Enabled'),
+(102, 22, 'casual Slipper', 7, 100, 'Enabled'),
+(103, 22, 'casual Slipper', 8, 100, 'Enabled'),
+(104, 25, 'Insoles', 6, 100, 'Enabled'),
+(105, 25, 'Insoles', 7, 100, 'Enabled'),
+(106, 25, 'Insoles', 8, 100, 'Enabled'),
+(107, 25, 'Insoles', 9, 100, 'Enabled'),
+(108, 27, 'cushion', 6, 100, 'Enabled'),
+(109, 27, 'cushion', 7, 100, 'Enabled'),
+(110, 27, 'cushion', 8, 100, 'Enabled'),
+(111, 27, 'cushion', 9, 100, 'Enabled'),
+(112, 23, 'cushion', 6, 100, 'Enabled'),
+(113, 23, 'cushion', 7, 100, 'Enabled'),
+(114, 23, 'cushion', 8, 100, 'Enabled'),
+(115, 23, 'cushion', 9, 100, 'Enabled'),
+(116, 24, 'Insoles', 6, 100, 'Enabled'),
+(117, 24, 'Insoles', 7, 100, 'Enabled'),
+(118, 24, 'Insoles', 8, 100, 'Enabled'),
+(119, 24, 'Insoles', 9, 100, 'Enabled'),
+(120, 28, 'casual', 6, 100, 'Enabled'),
+(121, 28, 'casual', 7, 100, 'Enabled'),
+(122, 28, 'casual', 8, 100, 'Enabled'),
+(123, 28, 'casual', 9, 100, 'Enabled'),
+(124, 29, 'casual', 6, 100, 'Enabled'),
+(125, 29, 'casual', 7, 100, 'Enabled'),
+(126, 29, 'casual', 8, 100, 'Enabled'),
+(127, 29, 'casual', 9, 100, 'Enabled'),
+(128, 30, 'Sports Shoes', 6, 100, 'Enabled'),
+(129, 30, 'Sports Shoes', 7, 100, 'Enabled'),
+(130, 30, 'Sports Shoes', 8, 100, 'Enabled'),
+(131, 30, 'Sports Shoes', 9, 100, 'Enabled'),
+(132, 31, 'sneakers', 6, 100, 'Enabled'),
+(133, 31, 'sneakers', 7, 100, 'Enabled'),
+(134, 31, 'sneakers', 8, 100, 'Enabled'),
+(135, 31, 'sneakers', 9, 100, 'Enabled');
 
 -- --------------------------------------------------------
 
@@ -720,14 +755,6 @@ CREATE TABLE `refund` (
   `refund_amt` int(5) NOT NULL,
   `refund_status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `refund`
---
-
-INSERT INTO `refund` (`refund_id`, `order_id`, `request_date`, `refund_date`, `refund_reason`, `refund_amt`, `refund_status`) VALUES
-(1, 68, '0000-00-00', '0000-00-00', 'Wrong product', 6541, 'pending'),
-(11, 64, '2024-01-31', '2024-02-05', 'wrong size', 1998, 'pending');
 
 -- --------------------------------------------------------
 
@@ -758,9 +785,14 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`userID`, `fname`, `lname`, `email`, `phone`, `PAN`, `gender`, `pass`, `address`, `pin`, `city`, `registration_date`, `usr_status`) VALUES
 (1, 'Admin', 'admin', 'admin890@gmail.com', 8799553322, NULL, 'm', '$2y$10$yzXoNvFu8nO6Rac7EotuUebOpSAFyQ2aouH3ejGPy7Y5q6A4H7.Iy', '18,Parth Society,Bapunagar,Baroda', 385960, 'Ahmedabad', '2024-01-26', 'Active'),
 (27, 'Harsh', 'wadhwani', 'harshwadhwani268@gmail.com', 8799553324, '', 'm', '$2y$10$P1Mw2q5LkisxRtGrDf/OA.YxeJrbWgOc13aw5E3gIPd1suiObyAOC', '18,Parth Society,Bapunagar,Baroda', 382350, 'Ahmedabad', '2024-01-26', 'Active'),
-(29, 'om', 'kumar', 'omk738774@gmail.com', 9693808798, NULL, 'm', 'Om@123', 'sdafadsf', 385960, 'Ahmedabad', '2024-01-26', 'Active'),
 (30, 'bhavesh', 'parwani', 'bhaveshparwani1373@gmail.com', 7405567768, NULL, 'm', '$2y$10$LOEr6WmNfWG/Te1l3sB4TeteDpKd6a4E.FEekq//egDatO2Gl1khS', '18,Parth Society,Bapunagar,Baroda', 382350, 'Ahmedabad', '2024-01-26', 'Active'),
-(31, 'kruparth', 'kanzariya', 'kruparth1610@gmail.com', 7888889999, NULL, 'm', 'Kruparth@#$12', 'B-3,Sai Heights,Navrangpura,Ahmedabad', 233333, 'Ahmedabad', '2024-01-31', 'Active');
+(32, 'Om', 'Kumar', 'omk738774@gmail.com', 9693808798, NULL, 'm', '$2y$10$1NwvbzoGId6g46wH6tcyiepkmfKCLlPDP8aGv8M.2PjlXTuDWDcPu', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 380009, 'ahmedabad', '2024-04-03', 'Active'),
+(33, 'Kruparth', 'Kanzariya', 'kruparth1610@gmail.com', 7874773789, NULL, 'm', '$2y$10$Qm7yo6a4zX8yBOLQ2.ClCe2Icmf.0HU1vaLsVwddxj0TvZRKdufsm', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 380009, 'ahmedabad', '2024-04-03', 'Active'),
+(34, 'Jatin', 'Kanzariya', 'jatink123@gmail.com', 8525652312, NULL, 'm', '$2y$10$50wEMuKk5IWWJtC2SVAGV.e7ylQx7z.Kd97ksdxXWl5pEcVcLMyuC', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 380009, 'ahmedabad', '2024-04-03', 'Active'),
+(35, 'Rohan', 'Rathod', 'rohanrathod@gmail.com', 8465993321, NULL, 'm', '$2y$10$zgaAos.mGvn3dfOuZfCkBuUWF2o0dUs6B.S7ciYNzlttH8Xnysb/m', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 380009, 'ahmedabad', '2024-04-03', 'Active'),
+(36, 'Saurabh', 'Garg', 'saurabh@gmail.com', 9098653311, NULL, 'm', '$2y$10$j1SUWfY8ZHd7syqMDsaILenDLxlCUR8tQout3smpvtIyTQq/6Z39e', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 380009, 'ahmedabad', '2024-04-03', 'Active'),
+(37, 'Rashmika', 'Mandana', 'rashmi.m@gmail.com', 8092792055, NULL, 'f', '$2y$10$2z1F2Ic4wcFCi89xywMwxukEKJPeIxTidirWIvQbqA0FnC8y/c/cm', 'HN-49, Shivpuri colony, Bistupur', 831001, 'Jamshedpur', '2024-04-03', 'Active'),
+(38, 'Rocky', 'Bhai', 'rocky12@gmail.com', 7788994455, NULL, 'm', '$2y$10$UZJ5CtWPLRNl8IRNWlGvHel1ISxjMPZ45Q9llKho0SIp8uLFrprg6', 'Kolar Gold Field', 542210, 'rejiansi', '2024-04-03', 'Active');
 
 -- --------------------------------------------------------
 
@@ -982,7 +1014,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart_tbl`
 --
 ALTER TABLE `cart_tbl`
-  MODIFY `cartID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `cartID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -1000,7 +1032,7 @@ ALTER TABLE `color`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `feedback_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `feedback_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `image`
@@ -1018,13 +1050,13 @@ ALTER TABLE `offer`
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `orderdetail_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `orderdetail_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `order_tbl`
 --
 ALTER TABLE `order_tbl`
-  MODIFY `order_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `order_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `product_desc`
@@ -1042,7 +1074,7 @@ ALTER TABLE `refund`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `userID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Constraints for dumped tables

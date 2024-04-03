@@ -252,7 +252,7 @@ if(isset($_GET['crtquant'])){
                                                 <li class="page-item">
                                                 <form action="cart.php" class="quanform" method="get">    
                                                     <input type="text" name="crtquant" class="page-link quant"
-                                                    value="<?php echo $crtquan; if($crtquan>=5){$disquan=true;}?>" id="textbox<?php echo $crtprid.$crtsize.$crtcol;?>">
+                                                    value="<?php echo $crtquan; if($crtquan>=20){$disquan=true;}?>" id="textbox<?php echo $crtprid.$crtsize.$crtcol;?>">
                                                     <input type="hidden" name="crtid" value="<?php echo $crtid;?>">
                                                     <input type="submit" value="click to update" class="submit">
                                                 </form>
@@ -452,13 +452,13 @@ if(isset($_GET['crtquant'])){
             let error_trw = document.getElementById('error_trw');
 
             if (selectedText) {
-                let disc=selectedValue;
-                let newtotalamt = totalamtcurr - parseFloat(disc)-parseFloat(discval.value);
+                let disc=(totalamtcurr*selectedValue)/100;
+                let newtotalamt = (totalamtcurr - parseFloat(disc)-parseFloat(discval.value));
                 discount.innerHTML=disc;
                 
                 pdiscval.value=parseFloat(disc);
                 console.log(pdiscval.value);
-                total_cart_amt.innerHTML = newtotalamt;
+                total_cart_amt.innerHTML = parseInt(newtotalamt);
                 if(selectedText!=="Select")
                 error_trw.innerHTML = "Discount applied";
             } else {

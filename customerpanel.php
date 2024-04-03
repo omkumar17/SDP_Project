@@ -13,7 +13,7 @@ $usercart="SELECT count(cartID) AS cartcount FROM `cart_tbl` WHERE user_id='$use
 $res=$conn->query($usercart);
 $usercart=$res->fetch_assoc();
 
-$userorder="SELECT count(order_id) AS ordercount FROM `order_tbl` WHERE user_id='$user' AND order_status!='complete'";
+$userorder="SELECT count(order_id) AS ordercount FROM `order_tbl` WHERE user_id='$user' ";
 $res=$conn->query($userorder);
 $userorder=$res->fetch_assoc();
 
