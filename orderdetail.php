@@ -29,6 +29,10 @@ while($chrow=$chres->fetch_assoc()){
 if($chflag==1){
     header("location:index.php");
 }
+$flag=0;
+if(isset($_GET['flag'])){
+    $flag=$_GET['flag'];   
+}
 
 $amt=0;
 $status="";
@@ -234,7 +238,7 @@ $ship="";
         }
         .action{
             display:flex;
-            justify-content:space-around;
+            justify-content:center;
             align-items:center;
             margin-top:60px;
         }
@@ -251,6 +255,9 @@ $ship="";
             font-size:18px;
             font-weight:800;
             cursor:pointer;
+        }
+        .feedback{
+            background:green;
         }
         .canceltext{
             
@@ -310,10 +317,106 @@ $ship="";
         .rej{
             margin-left:200px;
         }
+        .boxradio{
+        display: inline-block;
+    min-width: 70px;
+    height: 40px;
+    text-align: center;
+    font-size: 20px;
+    border: 1px solid #383838;
+    /* border-radius: 50%; */
+    /* margin: 10px; */
+    margin-left: 0;
+    line-height: 40px;
+    text-transform: uppercase;
+    color: #383838;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.boxradio.check {
+    background: teal;
+    color: #fff;
+}
+.hidden-radio {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+    </style>
+    <style>
+        .alert{
+            position:absolute;
+            top:35px;
+            left:30vw;
+            line-height:30px;
+            height:auto;
+            border:1px solid teal;
+            border-radius:15px;
+            width:40vw;
+            background-color:rgba(0,0,0,0.8);
+            color:white;
+            display:flex;
+            flex-direction:row;
+            /* justify-content:center; */
+            align-items:center;
+            padding:10px 10px;
+            z-index:100;
+            /* opacity:0.5; */
+
+        }
+        /* .alert::before{
+            content:'';
+            position:relative;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            opacity:0.5;
+            background:black;
+        } */
+        .alerttext{
+            display:flex;
+            align-items:center;
+            height:100%;
+            width:100%;
+            padding:5px;
+            font-size:20px;
+            font-weight:600;
+        }
+        .crossed{
+            float:right;
+            font-size:20px;
+            font-weight:600;
+            cursor:pointer;
+        }
     </style>
     <title>cart</title>
 </head>
-
+<?php
+    if($flag=='1'){
+        ?>
+        <div class="alert">
+        <div class="alerttext">Thank You for your feedback !!</div><span class="crossed" onclick="cross()">✔</span>
+    </div>
+        <?php
+    }
+    if($flag=='2'){
+        ?>
+        <div class="alert">
+        <div class="alerttext">Error occured while submitting. Try again !</div><span class="crossed" onclick="cross()">✔</span>
+    </div>
+        <?php
+    }
+    
+?>
 <body>
     <div class="bg-light">
         <div class="container-fluid">
@@ -378,10 +481,53 @@ $ship="";
                                                         <?php echo ($crtrow['price']*$crtquan); ?>
                                                     </span></h3>
                                             </div>
+                                            <div class="description col-8 d-flex justify-content-end price_money" style="justify-content:flex-end!important">
+                                                <div class="buttons view" style="width:auto;height:40px;padding-right:20px;padding-left:20px;background:green"  >Give Feedback</div>
+                                                <!-- <div class="buttons"></div> -->
+                                                
+                                            </div>
                                         </div>
                                     </div>
                                     
+                                    
                                 </div>
+                               
+                                <div class="container" style="flex-direction:column;display:none">
+                                <hr>
+                        <form action="feedback.php" class="feedbackform" method="post">
+                            <input type="hidden" class="form-control" name="oid" id="exampleFormControlInput1<?php echo $crtprid;?>" value="<?php echo $orid; ?>">
+                           
+                            <div class="mb-3">
+                            <input type="hidden" class="form-control" name="uid" id="exampleFormControlInput1<?php echo $crtprid;?>" value="<?php echo $user; ?>">
+                            </div>
+                            <div class="mb-3">
+                            <input type="hidden" class="form-control" name="pid" id="exampleFormControlInput1<?php echo $crtprid;?>" value="<?php echo $crtprid; ?>">
+                            </div>
+                            <div class="mb-3">
+                            <div class="rate-text">Rate the product from 1-5</div>
+                            
+                            <input type="radio"  name="rate" id="exampleFormControlInput2<?php echo $crtprid;?>" class="hidden-radio" value="1"  required>
+                            <label for="exampleFormControlInput2<?php echo $crtprid;?>" class="boxradio">1</label>
+                            <input type="radio"  name="rate" id="exampleFormControlInput3<?php echo $crtprid;?>" class="hidden-radio" value="2"  required>
+                            <label for="exampleFormControlInput3<?php echo $crtprid;?>" class="boxradio">2</label>
+                            <input type="radio"  name="rate" id="exampleFormControlInput4<?php echo $crtprid;?>"  class="hidden-radio" value="3"  required>
+                            <label for="exampleFormControlInput4<?php echo $crtprid;?>" class="boxradio">3</label>
+                            <input type="radio"  name="rate" id="exampleFormControlInput5<?php echo $crtprid;?>" class="hidden-radio" value="4"  required>
+                            <label for="exampleFormControlInput5<?php echo $crtprid;?>" class="boxradio">4</label>
+                            <input type="radio"  name="rate" id="exampleFormControlInput6<?php echo $crtprid;?>" class="hidden-radio" value="5"  required>
+                            <label for="exampleFormControlInput6<?php echo $crtprid;?>" class="boxradio">5</label>
+                            
+                            </div>
+                            <div class="mb-3">
+                            <label for="exampleFormControlTextarea1<?php echo $crtprid;?>" class="form-label">Give your feedback for the product</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1<?php echo $crtprid;?>" name="feedtext" rows="3"></textarea>
+                            </div>
+                            <input type="submit" class="feedbacksubmit buttons" style="background:green;width:80px;height:50px;" value="Submit" ><br>
+                            <button class="cancelform buttons" style="background:blue;width:80px;height:50px;" >Back</button>
+                        </form>
+                        <hr>
+                        </div>
+                       
                             </div>
                             <?php
                         $total=$total+($crtrow['price']*$crtquan);
@@ -435,9 +581,13 @@ $ship="";
         <div class="buttons cancel" style="width:auto;padding-right:20px;padding-left:20px;margin-bottom:50px;" onclick=cancelorder()>Cancel / Replace Order</div>
         <!-- <div class="buttons"></div> -->
         
+            <!-- <div class="buttons"></div> -->
+            
+        </div>
     </div>
     <?php
     }
+   
     else{
         ?>
     <div class="action">
@@ -585,7 +735,81 @@ rejectButton.addEventListener("click", function(event) {
        
        
     </script>
+<script>
+    const sizeBtns = document.querySelectorAll('.boxradio'); // selecting size buttons
+let checkedBtn = 0; // current selected button
 
+sizeBtns.forEach((item, i) => { // looping through each button
+    item.addEventListener('click', () => { // adding click event to each 
+        sizeBtns[checkedBtn].classList.remove('check'); // removing check class from the current button
+        item.classList.add('check'); // adding check class to clicked button
+        checkedBtn = i; // upading the variable
+    })
+})
+let container=document.querySelectorAll(".container");
+let feedbtn=document.querySelectorAll(".view");
+var form = document.querySelectorAll(".feedbackform");
+var rejectButton = document.querySelectorAll(".cancelform");
+for(let i=0;i<feedbtn.length;i++){
+    feedbtn[i].addEventListener("click",()=>{
+
+        container[i].style.display="flex";
+    })
+
+    rejectButton[i].addEventListener("click", function(event) {
+    container[i].style.display = "none";
+    event.preventDefault();
+    }); 
+
+    form[i].addEventListener("submit", function(event) {
+    if (!validateForm(form[i])) {
+        event.preventDefault(); // Prevent form submission if validation fails
+    }
+    });
+
+    function validateForm(form) {
+        var radios = form.querySelectorAll('input[name="rate"]');
+        var formValid = false;
+
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                formValid = true;
+                break;
+            }
+        }
+
+        if (!formValid) {
+            alert("Please select a rating.");
+            return false; // Form validation failed
+        }
+
+        return true; // Form validation succeeded
+    }
+}
+
+
+
+
+
+
+
+
+
+
+</script>
+<script>
+    function cross(){
+        var alerttext=document.querySelector(".alerttext");
+        var alert=document.querySelector(".alert");
+        alerttext.textContent="";
+        alert.style.display="none";
+    }
+    var alert=document.querySelector(".alert");
+    setTimeout(function() {
+        alert.style.display="none";
+        }, 4000);
+    
+</script>
     
 
 </body>

@@ -356,6 +356,13 @@ if(isset($_GET['flag'])){
        padding: 5px;
        width:90%;
    }
+   .input2{
+    display:block;
+       margin: 5px 10px;
+       padding: 5px;
+       width:90%;
+
+   }
    .submit,.submita{
        display:inline-block;
        width:80px;
@@ -784,15 +791,15 @@ if(isset($_GET['flag'])){
                         <table id="product" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Product_id</th>
-                                    <th>Category_ID</th>
+                                    <th>Product id</th>
+                                    <th>Category ID</th>
                                     <th>Offer Id</th>
-                                    <th>grp</th>
-                                    <th>product_name</th>
-                                    <th>product_details</th>
-                                    <th>price</th>
-                                    <th>actual_price</th>
-                                    <th>product_status</th>
+                                    <th>group</th>
+                                    <th>product Name</th>
+                                    <th>product Details</th>
+                                    <th>price ( &#8377;)</th>
+                                    <th>actual Price ( &#8377;)</th>
+                                    <th>product Status</th>
                                     <th>Type</th>
                                     <th>Colors</th>
                                     <th style="display:none">quantity</th>
@@ -1161,7 +1168,7 @@ if(isset($_GET['flag'])){
                                     <th>user id</th>
                                     <th>order date</th>
                                     <th>order status</th>
-                                    <th>order amount</th>
+                                    <th>order amount (₹)</th>
                                     <th>shipping address</th>
                                     <th>Shipping Status</th>
                                     <th style="display:none">shipping status</th>
@@ -1178,7 +1185,7 @@ if(isset($_GET['flag'])){
                                     <td>{$row['user_id']}</td>
                                     <td>{$row['order_date']}</td>
                                     <td>{$row['order_status']}</td>
-                                    <td>₹{$row['order_amount']}</td>
+                                    <td>{$row['order_amount']}</td>
                                     <td>{$row['shipping_address']}</td>
                                     <td>{$row['shipping_status']}</td>
                                     <td style="display:none">
@@ -1214,13 +1221,28 @@ if(isset($_GET['flag'])){
                         <label for="od" class="label">Order_date</label>
                         <input type="date" id="od" class="input" name="order_date" required disabled>
                         <label for="os" class="label">order_status</label>
-                        <input type="text" id="os" class="input" name="order_status" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+                        <input type="hidden" id="os" class="input" name="order_status" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+                        <select id="os2" class="input2" name="order_status2" >
+                            <option value="Select" disabled selected>Select options </option>
+                            <option value="placed">Placed</option>
+                            <option value="packed">Packed</option>
+                            <option value="complete">Complete</option>
+                            
+                        </select>
                         <label for="amt" class="label">order_amount</label>
                         <input type="text" id="amt" class="input" name="order_amount" pattern="[0-9]" title="(Please enter only numbers)" required disabled>
                         <label for="sadd" class="label">shipping_address</label>
                         <input type="text" id="sadd" class="input" name="shipping_address" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required disabled>
                         <label for="sstat" class="label">shipping_status</label>
-                        <input type="text" id="sstat" class="input" name="shipping_status" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+                        <input type="hidden" id="sstat" class="input" name="shipping_status" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+
+                        <select id="os3" class="input2" name="shipping_status2" >
+                            <option value="Select" disabled selected>Select options </option>
+                            <option value="processing">Processing</option>
+                            <option value="shipped">Shipped</option>
+                            
+                            
+                        </select>
                         
                         <!-- <input type="text" class="input" id= "oid_hid" name ="order_id1" value ="" > -->
                         
@@ -1415,7 +1437,7 @@ if(isset($_GET['flag'])){
                                     <th>request date</th>
                                     <th>refund date</th>
                                     <th>refund reason</th>
-                                    <th>refund amount</th>
+                                    <th>refund amount (₹)</th>
                                     <th>refund status</th>
                                     <th>Action</th>
                                 </tr>
@@ -1431,7 +1453,7 @@ if(isset($_GET['flag'])){
                                     <td>{$row['request_date']}</td>
                                     <td>{$row['refund_date']}</td>
                                     <td>{$row['refund_reason']}</td>
-                                    <td>₹{$row['refund_amt']}</td>
+                                    <td>{$row['refund_amt']}</td>
                                     <td>{$row['refund_status']}</td>
                                     <td><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span></td>
                                 </tr>
@@ -1460,7 +1482,15 @@ if(isset($_GET['flag'])){
                         <label for="refund_amt" class="label">refund_amt</label>
                         <input type="text" id="refund_amt" class="input" name="refund_amt" pattern="[0-9]" title="(Please enter only numbers)" required disabled>
                         <label for="refund_status" class="label">refund_status</label>
-                        <input type="text" id="refund_status" class="input" name="refund_status" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+                        <input type="hidden" id="refund_status" class="input" name="refund_status" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+
+                        <select id="os4" class="input2" name="refund_status2" >
+                            <option value="Select" disabled selected>Select options </option>
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approved</option>
+                            
+                            
+                        </select>
                         <input type="submit" class="submit" value="submit" >
                         <input type="submit" class="cancel" value="Cancel">
                     </form>
@@ -1484,13 +1514,13 @@ if(isset($_GET['flag'])){
                         <table id="offer" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>offer_id</th>
-                                    <th>offer_name</th>
-                                    <th>offer_details</th>
-                                    <th>offer_status</th>
-                                    <th>offer_Percent</th>
-                                    <th>offer_start_date</th>
-                                    <th>offer_end_date</th>
+                                    <th>offer Id</th>
+                                    <th>offer name</th>
+                                    <th>offer details</th>
+                                    <th>offer status</th>
+                                    <th>offer Percent</th>
+                                    <th>offer start date</th>
+                                    <th>offer end date</th>
                                     <th style="min-width:150px">Action</th>
                                 </tr>
                             </thead>
@@ -1631,7 +1661,15 @@ if(isset($_GET['flag'])){
                         <label for="payment_date" class="label">payment_date</label>
                         <input type="date" id="payment_date" class="input" name="payment_date" disabled>
                         <label for="payment_status" class="label">payment_status</label>
-                        <input type="text" id="payment_status" class="input" name="payment_status" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+                        <input type="hidden" id="payment_status" class="input" name="payment_status" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+
+                        <select id="os5" class="input2" name="payment_status2" >
+                            <option value="Select" disabled selected>Select options </option>
+                            <option value="pending">Pending</option>
+                            <option value="paid">Paid</option>
+                            
+                            
+                        </select>
                         <input type="submit" class="submit" value="submit" >
                         <input type="submit" class="cancel" value="Cancel">
                     </form>

@@ -77,6 +77,17 @@ else if(isset($_POST['order_id'])){
         $order_id=$_POST['order_id'];
         $order_status=$_POST['order_status'];
         $shipping_status=$_POST['shipping_status'];
+        if(isset($_POST['order_status2']))
+        $order_status=$_POST['order_status2'];
+        if(isset($_POST['shipping_status2']))
+        $shipping_status=$_POST['shipping_status2'];
+
+        if($shipping_status=="shipped"){
+            $order_status="complete";
+        }
+        if($order_status=="complete"){
+            $shipping_status="shipped";
+        }
         
     }
     $sql = "UPDATE `order_tbl` SET `order_status`='$order_status', `shipping_status`='$shipping_status' WHERE `order_id`=$order_id";
@@ -110,6 +121,8 @@ else if(isset($_POST['refund_id'])){
         $refund_id=$_POST['refund_id'];
         $refund_date=$_POST['refund_date'];
         $refund_status=$_POST['refund_status'];
+        if(isset($_POST['refund_status2']))
+        $refund_status=$_POST['refund_status2'];
         
     }
     $sql = "UPDATE `refund` SET `refund_date`='$refund_date', `refund_status`='$refund_status' WHERE `refund_id`=$refund_id";
@@ -176,6 +189,8 @@ else if(isset($_POST['transaction_id'])){
     {
         $transaction_id=$_POST['transaction_id'];
         $payment_status=$_POST['payment_status'];
+        if(isset($_POST['payment_status2']))
+        $payment_status=$_POST['payment_status2'];
        
         
     }

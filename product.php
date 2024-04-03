@@ -301,7 +301,32 @@ if(isset($_GET['upd'])){
             </div>
         </div>
     </section>
+    <?php
+    
+
+    ?>
     <section class="faq-container faq">
+    <div class="qa-container">
+            <div class="question" onclick="toggleAnswer('q0')">Feedbacks and review<span style="float:right;font-size:20px;font-weight:800;">+</span></div>
+            <div class="answer" id="q0">
+            <?php
+            // echo $id;
+            $feedbackquery="SELECT * FROM `feedback` WHERE `product_id`='$id' ORDER BY `feedback_date` DESC";
+            $feedresult=$conn->query($feedbackquery);
+            while($row=$feedresult->fetch_assoc()){
+                ?>
+                <hr>
+                <br>
+                  <!-- <p><strong>Material:</strong> High-quality leather</p> -->
+                    <p><strong>Date:</strong> <?php echo $row['feedback_date'];?></p>
+                    <p><strong>rating :</strong> <?php echo $row['feedback_rating'];?>/5</p>
+                    <p><strong>Feedback:</strong> <?php echo $row['feedback_desc'];?></p>
+                <br>
+                <?php
+            }
+            ?>
+            </div>
+            </div>
     <div class="qa-container">
             <div class="question" onclick="toggleAnswer('q1')">More Information<span style="float:right;font-size:20px;font-weight:800;">+</span></div>
             <div class="answer" id="q1">   
