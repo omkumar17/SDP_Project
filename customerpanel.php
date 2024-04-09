@@ -17,7 +17,7 @@ $userorder="SELECT count(order_id) AS ordercount FROM `order_tbl` WHERE user_id=
 $res=$conn->query($userorder);
 $userorder=$res->fetch_assoc();
 
-$order="SELECT * FROM `order_tbl` WHERE user_id='$user' ORDER BY order_date desc";
+$order="SELECT * FROM `order_tbl` WHERE user_id='$user' ORDER BY order_id desc";
 $res=$conn->query($order);
 
 
@@ -152,11 +152,11 @@ $res=$conn->query($order);
 }
 .ordercard{
     height:auto;
-    width:300px;
+     width:100%;
     border:2px solid black;
-    margin:20px;
+    margin:20px 0;
     
-    background:whitesmoke;
+    background:white;
     border-radius:10px;
     display:flex;
     flex-direction:row;
@@ -165,11 +165,11 @@ $res=$conn->query($order);
 
 }
 .ordercard .cardcontainer{
-    width:80%;
+    width:40%;
     padding:20px;
 }
 .orderbox{
-    width:20%;
+    width:10%;
     text-align:left;
     padding:30px 30px 30px 16px;
     font-size:38px;
@@ -1179,17 +1179,17 @@ $res=$conn->query($order);
     flex-direction:column;
     /* align-items:center; */
     justify-content:space-between;
-    width:80%;
+    width:70%;
     padding: 5px 20px;
 }
 .offerright{
-    /* width:30%; */
+    width:30%;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:space-between;
-    width:180px;
-    padding: 5px 20px;
+    /* width:180px; */
+    padding: 5px 0px;
 }
 .offerhead{
     font-weight:600;
@@ -1482,7 +1482,15 @@ $res=$conn->query($order);
                                         <div class="blue-label ms-auto text-uppercase">paid</div>
                                     </div>
                                     <div class="fs-8">Products #03</div>
-                                    <div class="fs-8"><?php echo $orderrow['order_date'];?></div>
+                                    <div class="fs-8"><?php 
+                                     $currentDate = $orderrow['order_date'] ; 
+
+                                     $timestamp2 = strtotime($currentDate); 
+         
+                                     $formattedDate2 = date("d F, Y", $timestamp2);
+                                    echo $formattedDate2;
+                                    
+                                    ?></div>
                                     <div class="rating d-flex align-items-center pt-1">
                                         <img src="https://www.freepnglogos.com/uploads/like-png/like-png-hand-thumb-sign-vector-graphic-pixabay-39.png"
                                             alt="" ><span class="px-2 pt-2 animated-button" style="color:white;font-weight:800;">Rate</span>
@@ -1641,7 +1649,7 @@ $res=$conn->query($order);
                         </div>
                         <div class="subcustdetails">
                         <p class="subdetail">
-                            <h5 class="detailheading">Gender(m/f)</h5>
+                            <h5 class="detailheading">Gender</h5>
                             <h6 class="detailcontent">{$row['gender']}</h6>
                         </p>
                         <p class="subdetail">
@@ -1698,23 +1706,48 @@ $res=$conn->query($order);
                     while($orderrow=$res1->fetch_assoc()){
                         $oid=$orderrow['order_id'];
                         $ost=$orderrow['order_status'];
+                        $imgqry="SELECT image FROM ( SELECT image.Image_path1 AS image, color.color AS color1, order_detail.color AS color2 FROM `product` INNER JOIN `color` ON color.product_id = product.Product_id INNER JOIN `product_desc` ON product_desc.cid = color.cid INNER JOIN `image` ON image.cid = color.cid INNER JOIN `order_detail` ON order_detail.product_id = product.Product_id INNER JOIN order_tbl ON order_tbl.order_id = order_detail.order_id WHERE order_tbl.order_id = $oid GROUP BY image.Image_path1 ) AS subquery_alias WHERE color1 = color2";
+                        $iqres=$conn->query($imgqry);
                         ?> 
-                    <a href="orderdetail.php?oid=<?php echo $oid;?>" style="color:black;text-decoration:none;margin:auto"><div class="ordercard">
+                    <a href="orderdetail.php?oid=<?php echo $oid;?>" style="color:black;text-decoration:none;width:100%"><div class="ordercard">
+                    <div class="orderimg" style="max-height:120px;width:30%;box-sizing:content-box;overflow:hidden;display:flex;flex-direction:row;flex-wrap:wrap;align-item:center;overflow:hidden;border-right:2px solid black">
+                            <?php
+                            while($iqrow=$iqres->fetch_assoc()){
+                            ?>
+                            <img src="<?php echo $iqrow['image'];?>" alt="" class="img1" style="height:80px;width:80px;box-sizing:content-box;border-radius:15px;">
+                            <?php
+                            }
+                            ?>
+                    </div>
                         <div class="cardcontainer">
                             <div class="date">Order id: #<?php echo $orderrow['order_id'];?></div>
-                            <div class="orderid">Order Date: <?php echo $orderrow['order_date'];?></div>
+                            <div class="orderid">Order Date: <?php 
+                            $currentDate = $orderrow['order_date']; 
+
+                            $timestamp2 = strtotime($currentDate); 
+
+                            $formattedDate2 = date("d F, Y", $timestamp2);
+                           echo $formattedDate2;
+                            ?></div>
                             <div class="orderamount">Order Amount: &#8377;<?php echo $orderrow['order_amount'];?></div>
                         </div>
-                        <div class="orderbox" style="<?php if($ost=='cancel') echo 'background:red'; else if($ost=='replace') echo 'background:blue';?>">
+                        <div class="orderdetailed" style="height:auto;width:20%;display:flex;align-items:center;justify-content:center">
+                            <div ><h6>Order status<br><b><?php echo $orderrow['order_status'];?></b></h6></div>
+                        </div>
+                        <div class="orderbox" style="<?php if($ost=='cancelled') echo 'background:red'; else if($ost=='replace') echo 'background:blue';?>">
                             >
                         </div>
+
+                       
                     </div>
-                    <div class="orderdetailed" style="height:auto;width:100%">
                     
-                    </div></a>
+                    </a>
+                    
                     <?php
+                    
                     }
                     ?>
+                    
                    </div> 
             </div>
             </div>
@@ -1808,7 +1841,14 @@ $res=$conn->query($order);
                                 <div class="offerdet"><?php echo $offrow['offer_details'] ?></div>
                             </div>
                             <div class="offerright">
-                                <div class="validity">Valid till <?php echo $offrow['offer_end_date'] ?></div>
+                                <div class="validity">Valid till <?php
+                                $currentDate = $offrow['offer_end_date'] ; 
+
+                                $timestamp2 = strtotime($currentDate); 
+    
+                                $formattedDate2 = date("d F, Y", $timestamp2);
+                               echo $formattedDate2;
+                                ?></div>
                                 <div class="condition"><a href="term.php" style="text-decoration:none">View T&C</a></div>
                             </div>
                         </div>

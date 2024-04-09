@@ -21,7 +21,7 @@ $totalRecords = $product->getTotalProducts();
     <link rel="icon" href="public\img\ff logo.jpeg" type="image/x-icon">
     <link rel="stylesheet" href="public\css\nav.css">
     <link rel="stylesheet" href="public\css\home.css">
-    <title>Document</title>
+    <title>Products</title>
     <style>
          .filtermenu{
         display:none;
@@ -316,7 +316,7 @@ $totalRecords = $product->getTotalProducts();
                                     $typeChecked ="";
                                 }
                             }
-                        if(isset($_GET['categ']) && $_GET['type']){
+                        if(isset($_GET['type'])){
                             if( ($_GET['type']===$type['product_type']) ){
                                 ?>
                                 <li class="list-group-item">
@@ -349,11 +349,24 @@ $totalRecords = $product->getTotalProducts();
                                     $brandChecked="";
                                 }
                             }
+
+                            if( isset($_GET['brand'])){
+                                if ($_GET['brand']===$brand['product_name'] ){
+                                    ?>
+                                    <li class="list-group-item">
+                                        <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($brand['product_name']); ?>" checked="checked" name="brand[]" class="sort_rang brand" id="brandcheck"><span class="lab"><?php echo ucfirst($brand['product_name']);?></span></label></div>
+                                    </li>
+                                    <?php 
+                                    
+                                }
+                            }
+                            else{   
                         ?>
                         <li class="list-group-item">
                             <div class="checkbox"><label><input type="checkbox" value="<?php echo $product->cleanString($brand['product_name']); ?>" <?php echo @$brandChecked; ?> name="brand[]" class="sort_rang brand"><span class="lab"><?php echo ucfirst($brand['product_name']); ?></span></label></div>
                         </li>
                         <?php 
+                            }
                     } ?>
                         
                         </ul>
@@ -393,6 +406,7 @@ $totalRecords = $product->getTotalProducts();
                 <div class="maincontent">
                 <?php 
                 if(isset($_GET["page"])){
+                    if($_GET['page']=="newarrivals"){
                     ?>
                     <div class="poster">
                         <div class="imgcontainer">
@@ -400,6 +414,43 @@ $totalRecords = $product->getTotalProducts();
                         </div>
                     </div>
                     <?php
+                    }
+                    else if($_GET['page']=="women"){
+                        ?>
+                        <div class="poster">
+                            <div class="imgcontainer">
+                                <img src="public\img\womenposter.png" alt="">
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    else if($_GET['page']=="men"){
+                        ?>
+                        <div class="poster">
+                            <div class="imgcontainer">
+                                <img src="public\img\mensposter.png" alt="">
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    else if($_GET['page']=="kids"){
+                        ?>
+                        <div class="poster">
+                            <div class="imgcontainer">
+                                <img src="public\img\kidsposter.png" alt="">
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    else if($_GET['page']=="accessories"){
+                        ?>
+                        <div class="poster">
+                            <div class="imgcontainer">
+                                <img src="public\img\accessposter.png" alt="">
+                            </div>
+                        </div>
+                        <?php
+                    }
                 }
                 ?>
                 <div id="results">

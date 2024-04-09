@@ -5,6 +5,10 @@ if(isset($_GET['id']))
     $id=$_GET['id'];
     $col=$_GET['color'];
 }
+else{
+    header("Location:index.php");
+}
+$moresug="";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -194,9 +198,10 @@ if(isset($_GET['upd'])){
     <nav class="navbar"><?php include_once 'nav.php'; ?></nav>
     <section class="product-details">
     <?php
-        $imgsql="SELECT * FROM `product` JOIN color ON product.Product_id = color.product_id JOIN image ON color.cid = image.cid WHERE product.Product_id=$id";
+        $imgsql="SELECT * FROM `product` JOIN color ON product.Product_id = color.product_id JOIN image ON color.cid = image.cid WHERE product.Product_id=$id AND color.color='$col'";
         $imgres=$conn->query($imgsql);
         $imgrow=$imgres->fetch_assoc();
+        $moresug=$imgrow['grp'];
     ?>
         <div class="image-slider" style="background-image:url('http://localhost/SDP_Project/<?php echo $imgrow['Image_path1']; ?>')">
             <div class="product-images">
@@ -318,7 +323,14 @@ if(isset($_GET['upd'])){
                 <hr>
                 <br>
                   <!-- <p><strong>Material:</strong> High-quality leather</p> -->
-                    <p><strong>Date:</strong> <?php echo $row['feedback_date'];?></p>
+                    <p><strong>Date:</strong> <?php
+                    $currentDate = $row['feedback_date']; 
+
+                    $timestamp2 = strtotime($currentDate); 
+
+                    $formattedDate2 = date("d F, Y", $timestamp2);
+                   echo $formattedDate2;
+                    ?></p>
                     <p><strong>rating :</strong> <?php echo $row['feedback_rating'];?>/5</p>
                     <p><strong>Feedback:</strong> <?php echo $row['feedback_desc'];?></p>
                 <br>
@@ -358,126 +370,31 @@ if(isset($_GET['upd'])){
         <?php
             $row=$result->fetch_assoc();
         ?>
-            <a href="product.php?id=1026&color=blue" class="product-link">
+
+        <?php
+        $moreqry= "SELECT * FROM `category` INNER JOIN `product` ON product.Category_ID=category.category_id INNER JOIN `color` ON color.product_id=product.Product_id INNER JOIN `product_desc` ON product_desc.cid=color.cid INNER JOIN `image` ON image.cid=color.cid WHERE product_desc.quantity != 0 AND product.grp='$moresug' GROUP BY color.cid";	
+		$moreres=$conn->query($moreqry);
+        while($morerow=$moreres->fetch_assoc()){
+          ?>
+          <a href="product.php?id=<?php echo $morerow['product_id'];?>&color=<?php echo $morerow['color'];?>" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
-                        <span class="discount-tag">25% off</span>
-                        <img src="public\img\1026-1-blu.jpeg" class="product-thumb" alt="">
+                        <span class="discount-tag"><?php echo round(($morerow['actual_price']-$morerow['price'])/$morerow['actual_price']*100);?> % off</span>
+                        <img src="<?php echo $morerow['Image_path1'];?>" class="product-thumb" alt="">
                          
                     </div>
                     <div class="product-info">
-                        <h2 class="product-brand">Paragon</h2>
-                        <p class="product-short-des">Paragon K1026G Men Walking Shoes | Athletic Shoes with Comfortable Cushioned Sole for Daily Outdoor Use</p>
-                        <span class="price">₹ 999</span><span class="actual-price">₹ 1599</span>
+                        <h2 class="product-brand"><?php echo $morerow['product_name'];?></h2>
+                        <p class="product-short-des"><?php echo $morerow['product_details'];?></p>
+                        <span class="price">₹ <?php echo $morerow['price'];?></span><span class="actual-price">₹ <?php echo $morerow['actual_price'];?></span>
                     </div>
                 </div>
             </a>
-
-
-            <a href="product.php?id=5002&color=blue" class="product-link">
-                <div class="product-card">
-                    <div class="product-image">
-                        <span class="discount-tag">10% off</span>
-                        <img src="public\img\5002-3-bl.jpeg" class="product-thumb" alt="">
-                         
-                    </div>
-                    <div class="product-info">
-                        <h2 class="product-brand">Walkaroo</h2>
-                        <p class="product-short-des">WALKAROO MEN SOLID THONG SANDALS ART WG5002</p>
-                        <span class="price">₹ 299</span><span class="actual-price">₹ 329</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="product.php?id=4866" class="product-link">
-                <div class="product-card">
-                    <div class="product-image">
-                        <span class="discount-tag">20% off</span>
-                        <img src="public\img\4866-1-crbr.jpeg" class="product-thumb" alt="">
-                         
-                    </div>
-                    <div class="product-info">
-                        <h2 class="product-brand">Walkaroo</h2>
-                        <p class="product-short-des">WALKAROO WOMEN FLIP FLOP WC4866</p>
-                        <span class="price">₹ 269</span><span class="actual-price">₹ 299</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="product.php?id=5100" class="product-link">
-                <div class="product-card">
-                    <div class="product-image">
-                        <span class="discount-tag">25% off</span>
-                        <img src="public\img\5100-1-bl.jpeg" class="product-thumb" alt="">
-                         
-                    </div>
-                    <div class="product-info">
-                        <h2 class="product-brand">Lee Copper</h2>
-                        <p class="product-short-des">Polyurethane Slipon Men's Sport Sandals</p>
-                        <span class="price">₹ 1499</span><span class="actual-price">₹ 1999</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="product.php?id=5109" class="product-link">
-                <div class="product-card">
-                    <div class="product-image">
-                        <span class="discount-tag">30% off</span>
-                        <img src="public\img\5109-1-gr.jpeg" class="product-thumb" alt="">
-                         
-                    </div>
-                    <div class="product-info">
-                        <h2 class="product-brand">Lee Copper</h2>
-                        <p class="product-short-des">Polyurethane Slipon Men's Sport Sandals</p>
-                        <span class="price">₹ 1699</span><span class="actual-price">₹ 2199</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="product.php?id=5687&color=brown" class="product-link">
-                <div class="product-card">
-                    <div class="product-image">
-                        <span class="discount-tag">10% off</span>
-                        <img src="public\img\5687-4-bro.jpeg" class="product-thumb" alt="">
-                         
-                    </div>
-                    <div class="product-info">
-                        <h2 class="product-brand">Walkaroo</h2>
-                        <p class="product-short-des">Walkaroo Men Cross strap Slide Sandals - W5687</p>
-                        <span class="price">₹ 319</span><span class="actual-price">₹ 354</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="product.php?id=8004" class="product-link">
-                <div class="product-card">
-                    <div class="product-image">
-                        <span class="discount-tag">25% off</span>
-                        <img src="public\img\8004-4-blu.jpeg" class="product-thumb" alt="">
-                         
-                    </div>
-                    <div class="product-info">
-                        <h2 class="product-brand">Paragon</h2>
-                        <p class="product-short-des">Paragon EVK8004C Unisex Clogs For Kids | Outdoor and Indoor Casual, Durable Clogs</p>
-                        <span class="price">₹ 749</span><span class="actual-price">₹ 999</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="product.php?id=77075" class="product-link">
-                <div class="product-card">
-                    <div class="product-image">
-                        <span class="discount-tag">10% off</span>
-                        <img src="public\img\77075-1-mar.jpeg" class="product-thumb" alt="">
-                         
-                    </div>
-                    <div class="product-info">
-                        <h2 class="product-brand">Paragon</h2>
-                        <p class="product-short-des">Women's Solea Maroon Sandal</p>
-                        <span class="price">₹ 349</span><span class="actual-price">₹ 399</span>
-                    </div>
-                </div>
-            </a>
+          <?php  
+        }
+        
+        ?>
+           
 
         </div>
     </section>

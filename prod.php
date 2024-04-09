@@ -342,10 +342,10 @@ class Product{
 		$productHTML = '';
 		if(isset($products) && count($products)) {			
             foreach ($products as $key => $product) {				
-                $productHTML .= '<a class="product-link" style="margin-top:40px">';
+                $productHTML .= '<a class="product-link" href="product.php?id='.$product['product_id'].'&color='.$product['color'].'" style="margin-top:40px">';
 				$productHTML .= '<div class="product-card">';
 				$productHTML .= '<div class="product-image">';
-				$productHTML .= '<span class="discount-tag">50% off</span>';
+				$productHTML .= '<span class="discount-tag">'.round(($product['actual_price']-$product['price'])/$product['actual_price']*100).'% off</span>';
 				$productHTML .= '<img src="'.$product['Image_path1'].'" class="product-thumb" alt="'.$product['product_name'].'">';
 				$productHTML .= '</div>';
 				$productHTML .= '<div class="product-info">';

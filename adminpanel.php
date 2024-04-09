@@ -782,8 +782,8 @@ if(isset($_GET['flag'])){
                         <div class="add">Add product</div>
                     </div>
                 <?php
-                    $sql = "SELECT * FROM `product`"; 
-                    // $sql="SELECT * FROM `product` JOIN color ON color.product_id=product.Product_id JOIN product_desc ON product_desc.cid=color.cid JOIN image ON image.cid=color.cid";
+                    $sql = "SELECT * FROM `product` JOIN category ON product.Category_id=category.category_id"; 
+                    // $sql="SELECT * FROM `product` JOIN category ON product.category_id=category.category_id JOIN product_desc ON product_desc.cid=color.cid JOIN image ON image.cid=color.cid";
                     $result = $conn->query($sql);
 
                     if ($result) {
@@ -792,7 +792,8 @@ if(isset($_GET['flag'])){
                             <thead>
                                 <tr>
                                     <th>Product id</th>
-                                    <th>Category ID</th>
+                                    <th style="display:none">Category ID</th>
+                                    <th>Category Name</th>
                                     <th>Offer Id</th>
                                     <th>group</th>
                                     <th>product Name</th>
@@ -819,8 +820,19 @@ if(isset($_GET['flag'])){
                             echo <<< _END
                                 <tr>
                                 <td>{$row['Product_id']}</td>
-                                <td>{$row['Category_ID']}</td>
-                                <td>{$row['offer_id']}</td>
+                                <td style="display:none">{$row['Category_ID']}</td>
+                                <td>{$row['Category_name']}</td>
+                                <td>
+                             _END;
+                                $offer= $row['offer_id'];
+                                if($offer=-1)
+                                echo "(not set currently)";
+                                else
+                                echo $offer;
+                            echo<<<_END
+                                
+                                
+                                </td>
                                 <td>{$row['grp']}</td>
                                 <td>{$row['product_name']}</td>
                                 <td>{$row['product_details']}</td>
@@ -843,7 +855,7 @@ if(isset($_GET['flag'])){
                                     $sql1="SELECT color.color FROM `product` JOIN color ON color.product_id=product.Product_id JOIN product_desc ON product_desc.cid=color.cid JOIN image ON image.cid=color.cid WHERE product.Product_id='$spid' GROUP BY color.color;";
                                     $result1=$conn->query($sql1);
                                     while ($row1 = $result1->fetch_assoc()) {                                             
-                                        echo "[".$row1['color']."]";                                     
+                                        echo $row1['color']."\n";                                     
                                     }
                                     echo<<<_END
                                 </td>
@@ -954,15 +966,52 @@ if(isset($_GET['flag'])){
                     <div class="formcontainer" id="productformupdate">
                     <form class="addcat" action="update.php" method="POST">
                        <label for="" style="font-size:20px;font-weight:600">Product Details</label>
-                        <label for="prod-id" class="label" >Product Id</label>
-                        <input type="text" id="prod-id" class="input" name="product_id" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="catg_id" class="label">Category Id</label>
-                        <input type="text" id="catg_id" class="input" name="Category_id" pattern="[0-9]" title="(Please enter only numbers)" required>
+                        <!-- <label for="prod-id" class="label" >Product Id</label> -->
+                        <input type="hidden" id="prod-id" class="input" name="product_id" pattern="[0-9]" title="(Please enter only numbers)" required>
+                        <!-- <label for="catg_id" class="label" >Category Id</label> -->
+                        <input type="hidden" id="catg_id" class="input" name="Category" pattern="[0-9]" title="(Please enter only numbers)" required disabled>
+                        <label for="catg_id" class="label">Category</label>
+                        <input type="hidden" id="catg_id" class="input" name="Category_id" pattern="[0-9]" title="(Please enter only numbers)" required>
+                        <?php
+                        $query="SELECT * FROM `category`";
+                        $restemp=$conn->query($query);
+                        ?>
+                        <select class="input2" id="catg_id2" name="Category_id2">
+                            <option value="" selected disabled>SELECT</option>
+                            <?php
+                            while($temprow=$restemp->fetch_assoc()){
+                            ?>
+                            <option value="<?php echo $temprow['category_id'];?>"><?php echo $temprow['Category_name'];?></option>
+                            <?php
+                            }
+                        ?>
+                        </select>
                         <label for="off_id" class="label">Offer Id</label>
-                        <input type="text" id="off_id" class="input" name="off_id"  required>
+                        <?php
+                        $query="SELECT * FROM `offer`";
+                        $restemp=$conn->query($query);
+                        ?>
+                        <select class="input2" id="off_id2" name="off_id2">
+                            <option value="" selected disabled>SELECT</option>
+                            <?php
+                            while($temprow=$restemp->fetch_assoc()){
+                            ?>
+                            <option value="<?php echo $temprow['offer_id'];?>"><?php echo $temprow['offer_name'];?></option>
+                            <?php
+                            }
+                        ?>
+                        </select>
+                        <input type="hidden" id="off_id" class="input" name="off_id"  required>
                        
                         <label for="grp" class="label" >Group</label>
-                        <input type="text" id="grp" class="input" name="grp" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+                        <select id="grp2" class="input2" name="grp2">
+                            <option value="" selected disabled>SELECT</option>
+                            <option value="mens">Mens</option>
+                            <option value="women">Women</option>
+                            <option value="kids">Kids</option>
+                            <option value="accessories">Accessories</option>
+                        </select>
+                        <input type="hidden" id="grp" class="input" name="grp" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
                         <label for="prod_name" class="label" >Product name</label>
                         <input type="text" id="prod_name" class="input" name="product_name" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
                         <label for="prod_det" class="label" >Product Detail</label>
@@ -971,8 +1020,8 @@ if(isset($_GET['flag'])){
                         <input type="text" id="pprice" class="input" name="price" pattern="[0-9]" title="(Please enter only numbers)" required>
                         <label for="pactpri" class="label">Actual Price</label>
                         <input type="text" id="pactpri" class="input" name="actprice" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="pprostat" class="label">Product Status</label>
-                        <input type="text" id="pprostat" class="input" name="pprostat" required>
+                        <!-- <label for="pprostat" class="label">Product Status</label> -->
+                        <input type="hidden" id="pprostat" class="input" name="pprostat" required>
                         <label for="protype" class="label">Product type</label>
                         <input type="text" id="protype" class="input" name="protype" required>
                         
@@ -1066,14 +1115,51 @@ if(isset($_GET['flag'])){
                     <div class="addcontainer">
                     <form class="addcont" action="insert.php" method="POST">
                         <label for="" style="font-size:20px;font-weight:600">ADD Product Details</label>
-                        <label for="prod-id" class="label">Product Id</label>
-                        <input type="text" id="prod-id" class="input" name="product_id" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="catg_id" class="label">Category Id</label>
-                        <input type="text" id="catg_id" class="input" name="Category_id" pattern="[0-9]" title="(Please enter only numbers)" required>
-                        <label for="off_id" class="label">Offer Id</label>
-                        <input type="text" id="off_id" class="input" name="off_id"  required>
+                        <!-- <label for="prod-id" class="label">Product Id</label>
+                        <input type="text" id="prod-id" class="input" name="product_id" pattern="[0-9]" title="(Please enter only numbers)" required> -->
+                        <label for="catg_id" class="label">Category</label>
+                        <!-- <input type="text" id="catg_id" class="input" name="Category_id" pattern="[0-9]" title="(Please enter only numbers)" required> -->
+                        <?php
+                        $query="SELECT * FROM `category`";
+                        $restemp=$conn->query($query);
+                        ?>
+                        <select class="input2" id="catg_id2" name="Category_id">
+                            <option value="" selected disabled>SELECT</option>
+                            <?php
+                            while($temprow=$restemp->fetch_assoc()){
+                            ?>
+                            <option value="<?php echo $temprow['category_id'];?>"><?php echo $temprow['Category_name'];?></option>
+                            <?php
+                            }
+                        ?>
+                        </select>
+                        <label for="off_id" class="label">Offer</label>
+                        <!-- <input type="text" id="off_id" class="input" name="off_id"  required> -->
+                        <?php
+                        $query="SELECT * FROM `offer`";
+                        $restemp=$conn->query($query);
+                        ?>
+                        <select class="input2" id="off_id2" name="off_id">
+                            <option value="" selected disabled>SELECT</option>
+                            <?php
+                            while($temprow=$restemp->fetch_assoc()){
+                            ?>
+                            <option value="<?php echo $temprow['offer_id'];?>"><?php echo $temprow['offer_name'];?></option>
+                            <?php
+                            }
+                        ?>
+                        </select>
+
                         <label for="grp" class="label">Group</label>
-                        <input type="text" id="grp" class="input" name="grp" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
+                        <!-- <input type="text" id="grp" class="input" name="grp" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required> -->
+                        <select id="grp2" class="input2" name="grp">
+                            <option value="" selected disabled>SELECT</option>
+                            <option value="mens">Mens</option>
+                            <option value="women">Women</option>
+                            <option value="kids">Kids</option>
+                            <option value="accessories">Accessories</option>
+                        </select>
+                        
                         <label for="prod_name" class="label">Product name</label>
                         <input type="text" id="prod_name" class="input" name="product_name" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
                         <label for="prod_det" class="label">Product Detail</label>
@@ -1125,7 +1211,7 @@ if(isset($_GET['flag'])){
                     <div class="sub-prod">
                         
                            <h2>Product Details</h2><hr><br>
-                            <table id="descript" class="table table-striped table-bordered" style="width:100%">
+                            <table id="descript" class="table2 table-striped table-bordered" style="width:100%;background:white">
                                 <thead>
                                     <tr>
                                         <th>product name</th>
@@ -1156,7 +1242,7 @@ if(isset($_GET['flag'])){
                         <div class="add" style="display:none">Add order</div>
                     </div>
                 <?php
-                    $sql = "SELECT * FROM `order_tbl`"; 
+                    $sql = "SELECT * FROM `order_tbl` ORDER BY 'order_id' DESC"; 
                     $result = $conn->query($sql);
 
                     if ($result) {
@@ -1164,13 +1250,13 @@ if(isset($_GET['flag'])){
                         <table id="order" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>order id</th>
-                                    <th>user id</th>
-                                    <th>order date</th>
-                                    <th>order status</th>
-                                    <th>order amount (₹)</th>
-                                    <th>shipping address</th>
-                                    <th>Shipping Status</th>
+                                    <th style="width:60px">order id</th>
+                                    <th style="width:60px">user id</th>
+                                    <th style="width:100px">order date</th>
+                                    <th style="width:100px">order status</th>
+                                    <th style="width:110px">order amount (₹)</th>
+                                    <th >shipping address</th>
+                                    <th style="width:140px">Shipping Status</th>
                                     <th style="display:none">shipping status</th>
                                     <th style="width:100px">Action</th>
                                 </tr>
@@ -1183,18 +1269,29 @@ if(isset($_GET['flag'])){
                                 <tr>
                                     <td>{$row['order_id']}</td>
                                     <td>{$row['user_id']}</td>
-                                    <td>{$row['order_date']}</td>
+                            
+                            
+                                    <td>
+                            _END;
+                                    $currentDate = $row['order_date']; 
+
+                                    $timestamp2 = strtotime($currentDate); 
+
+                                    $formattedDate2 = date("d F, Y", $timestamp2);
+                                    echo $formattedDate2;
+                            echo<<<_END
+                                    </td>
                                     <td>{$row['order_status']}</td>
                                     <td>{$row['order_amount']}</td>
                                     <td>{$row['shipping_address']}</td>
                                     <td>{$row['shipping_status']}</td>
                                     <td style="display:none">
-                                _END;
+                            _END;
                                     $soid=$row['order_id'];
                                     $sql1="SELECT order_detail.order_id,order_detail.product_id,order_detail.quantity,order_detail.rate,order_detail.size,order_detail.color,order_detail.discount,order_detail.amount FROM order_tbl Join order_detail ON order_tbl.order_id=order_detail.order_id WHERE order_tbl.order_id=$soid ";
                                     $result1=$conn->query($sql1);
                                     while ($row1 = $result1->fetch_assoc()) {                                             
-                                        echo $row1['order_id']."_".$row1['product_id']."_". $row1['quantity']."_".$row1['rate']."_".$row1['size']."_". $row1['color']."_".$row1['discount']."_".$row1['amount']."@" ;                                     
+                                        echo $row1['product_id']."_". $row1['quantity']."_".$row1['rate']."_".$row1['size']."_". $row1['color']."_".$row1['discount']."_".$row1['amount']."@" ;                                     
                                     }
                                     echo<<<_END
                                 </td style="width:100px">
@@ -1219,7 +1316,7 @@ if(isset($_GET['flag'])){
                         <label for="uid" class="label">User_id</label>
                         <input type="text" id="uid" class="input" name="user_id" pattern="[0-9]" title="(Please enter only numbers)" required disabled>
                         <label for="od" class="label">Order_date</label>
-                        <input type="date" id="od" class="input" name="order_date" required disabled>
+                        <input type="text" id="od" class="input" name="order_date" required disabled>
                         <label for="os" class="label">order_status</label>
                         <input type="hidden" id="os" class="input" name="order_status" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
                         <select id="os2" class="input2" name="order_status2" >
@@ -1275,17 +1372,17 @@ if(isset($_GET['flag'])){
                     <div class="sub-prod">
                         
                     <h2>Order Details</h2><hr><br>
-                            <table id="descript" class="table table-striped table-bordered" style="width:100%">
+                            <table id="descript" class="table2 table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Order id</th>
-                                        <th>product id</th>
-                                        <th>quantity</th>
-                                        <th>rate</th>
-                                        <th>size</th>
-                                        <th>color</th>
-                                        <th>discount</th>
-                                        <th>Amount</th>
+                                        <th style="height:50px;width:100px;text-align:center;display:none">Order id</th>
+                                        <th style="height:50px;width:100px;text-align:center;">product id</th>
+                                        <th style="height:50px;width:100px;text-align:center;">quantity</th>
+                                        <th style="height:50px;width:100px;text-align:center;">rate (&#8377;)</th>
+                                        <th style="height:50px;width:100px;text-align:center;">size</th>
+                                        <th style="height:50px;width:100px;text-align:center;">color</th>
+                                        <th style="height:50px;width:100px;text-align:center;">discount (&#8377;)</th>
+                                        <th style="height:50px;width:100px;text-align:center;">Amount (&#8377;)</th>
                                         
                                     </tr>
                                 </thead>
@@ -1309,7 +1406,7 @@ if(isset($_GET['flag'])){
 
                     if ($result) {
                         echo <<< _END
-                        <table id="feedback" class="table table-striped table-bordered" style="width:100%">
+                        <table id="feedback" class="table table-striped table-bordered" style="width:auto">
                             <thead>
                                 <tr>
                                     <th>feedback id</th>
@@ -1331,7 +1428,16 @@ if(isset($_GET['flag'])){
                                     <td>{$row['product_id']}</td>
                                     <td>{$row['feedback_rating']}</td>
                                     <td>{$row['feedback_desc']}</td>
-                                    <td>{$row['feedback_date']}</td>
+                                    <td>
+                             _END;
+                                    $currentDate = $row['feedback_date']; 
+
+                                    $timestamp2 = strtotime($currentDate); 
+
+                                    $formattedDate2 = date("d F, Y", $timestamp2);
+                                    echo $formattedDate2;
+                            echo<<<_END
+                                    </td>
                                 </tr>
                              _END;
                         }
@@ -1388,7 +1494,16 @@ if(isset($_GET['flag'])){
                                     <td>{$row['address']}</td>
                                     <td>{$row['pin']}</td>
                                     <td>{$row['city']}</td>
-                                    <td>{$row['registration_date']}</td>
+                                    <td>
+                             _END;
+                                    $currentDate = $row['registration_date']; 
+
+                                    $timestamp2 = strtotime($currentDate); 
+
+                                    $formattedDate2 = date("d F, Y", $timestamp2);
+                                    echo $formattedDate2;
+                            echo<<<_END
+                                    </td>
                                     <td>{$row['usr_status']}</td>
                                     
                             _END;
@@ -1450,8 +1565,29 @@ if(isset($_GET['flag'])){
                                 <tr>
                                     <td>{$row['refund_id']}</td>
                                     <td>{$row['order_id']}</td>
-                                    <td>{$row['request_date']}</td>
-                                    <td>{$row['refund_date']}</td>
+                                    <td>
+                             _END;
+                                    $currentDate = $row['request_date']; 
+
+                                    $timestamp2 = strtotime($currentDate); 
+
+                                    $formattedDate2 = date("d F, Y", $timestamp2);
+                                    echo $formattedDate2;
+                            echo<<<_END
+                                    </td>
+                                    <td>
+                             _END;
+                                    $currentDate = $row['refund_date']; 
+
+                                    $timestamp2 = strtotime($currentDate); 
+
+                                    $formattedDate2 = date("d F, Y", $timestamp2);
+                                    if($formattedDate2=="30 November, -0001" || $formattedDate2=="01 January, 1970" )
+                                    $formattedDate2="Not Set";
+                                    echo $formattedDate2;
+                            echo<<<_END
+                                    </td>
+                                    
                                     <td>{$row['refund_reason']}</td>
                                     <td>{$row['refund_amt']}</td>
                                     <td>{$row['refund_status']}</td>
@@ -1469,14 +1605,14 @@ if(isset($_GET['flag'])){
                     <div class="formcontainer">
                     <form class="addcat" action="update.php" method="post">
                         <label for="" style="font-size:20px;font-weight:600">REFUND</label>
-                        <label for="refund_id" class="label">refund_id</label>
-                        <input type="number" id="refund_id" class="input" name="refund_id" pattern="[0-9]" title="(Please enter only numbers)" required>
+                        <!-- <label for="refund_id" class="label">refund_id</label> -->
+                        <input type="hidden" id="refund_id" class="input" name="refund_id" pattern="[0-9]" title="(Please enter only numbers)" required>
                         <label for="order_id" class="label">order_id</label>
                         <input type="text" id="order_id" class="input" name="order_id" pattern="[0-9]" title="(Please enter only numbers)" required disabled>
                         <label for="request_date" class="label">request_date</label>
-                        <input type="date" id="request_date" class="input" name="request_date" disabled>
+                        <input type="text" id="request_date" class="input" name="request_date" disabled>
                         <label for="refund_date" class="label">refund_date</label>
-                        <input type="date" id="refund_date" class="input" name="refund_date" >
+                        <input type="text" id="refund_date" class="input" name="refund_date" disabled>
                         <label for="refund_reason" class="label">refund_reason</label>
                         <input type="text" id="refund_reason" class="input" name="refund_reason" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required disabled>
                         <label for="refund_amt" class="label">refund_amt</label>
@@ -1488,6 +1624,7 @@ if(isset($_GET['flag'])){
                             <option value="Select" disabled selected>Select options </option>
                             <option value="pending">Pending</option>
                             <option value="approved">Approved</option>
+                            <option value="done">Done</option>
                             
                             
                         </select>
@@ -1535,8 +1672,30 @@ if(isset($_GET['flag'])){
                                     <td>{$row['offer_details']}</td>
                                     <td>{$row['offer_status']}</td>
                                     <td>{$row['offer_percent']}</td>
-                                    <td>{$row['offer_start_date']}</td>
-                                    <td>{$row['offer_end_date']}</td>
+                                    <td>
+                             _END;
+                                    $currentDate = $row['offer_start_date']; 
+
+                                    $timestamp2 = strtotime($currentDate); 
+
+                                    $formattedDate2 = date("d F, Y", $timestamp2);
+                                    if($formattedDate2=="30 November, -0001" || $formattedDate2=="01 January, 1970" )
+                                    $formattedDate2="Not Set";
+                                    echo $formattedDate2;
+                            echo<<<_END
+                                    </td>
+                                    <td>
+                             _END;
+                                    $currentDate = $row['offer_end_date']; 
+
+                                    $timestamp2 = strtotime($currentDate); 
+
+                                    $formattedDate2 = date("d F, Y", $timestamp2);
+                                     
+                                    echo $formattedDate2;
+                            echo<<<_END
+                                    </td>
+                                    
                                     <td style="min-width:150px"><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span>
                                 _END;
                                 if($row['offer_status']=='Enabled'){
@@ -1636,7 +1795,16 @@ if(isset($_GET['flag'])){
                                     <td>{$row['transaction_id']}</td>
                                     <td>{$row['order_id']}</td>
                                     <td>{$row['payment_mode']}</td>
-                                    <td>{$row['payment_date']}</td>
+                                    <td>
+                            _END;
+                                    $currentDate = $row['payment_date']; 
+
+                                    $timestamp2 = strtotime($currentDate); 
+
+                                    $formattedDate2 = date("d F, Y", $timestamp2);
+                                    echo $formattedDate2;
+                            echo<<<_END
+                                    </td>
                                     <td>{$row['payment_status']}</td>
                                     <td><span class="buttedit edit"><img src="public\img\pencil.png" alt="edit" ></span></td>
                                 </tr>
@@ -1662,7 +1830,7 @@ if(isset($_GET['flag'])){
                         <input type="date" id="payment_date" class="input" name="payment_date" disabled>
                         <label for="payment_status" class="label">payment_status</label>
                         <input type="hidden" id="payment_status" class="input" name="payment_status" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
-
+                        
                         <select id="os5" class="input2" name="payment_status2" >
                             <option value="Select" disabled selected>Select options </option>
                             <option value="pending">Pending</option>
@@ -1765,7 +1933,7 @@ if(isset($_GET['flag'])){
                     if(con=='Enabled'){
                         disable[i].innerHTML='bkabh';
                     }
-                    console.log(disable[i])
+                    console.log("hi"+disable[i])
             disable[i].addEventListener("click",(e)=>{
                 // e.preventDefault();
                 
@@ -1781,8 +1949,9 @@ if(isset($_GET['flag'])){
                     window.location.href="update.php?pid="+prid+"&value="+value+"&header="+header;
 
                 }
-                else if(header=='Product_id'){
-                    var value1=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[8].textContent;
+                else if(header=='Product id'){
+                    var value1=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[9].textContent;
+                    console.log(value1);
                     window.location.href="update.php?pid="+prid+"&value1="+value1+"&header="+header;
                 }
                 else if(header=='prodesc_ID'){
@@ -1793,7 +1962,7 @@ if(isset($_GET['flag'])){
                     var value3=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[3].textContent;
                     window.location.href="update.php?pid="+prid+"&value3="+value3+"&header="+header;
                 }
-                else if(header=='offer_id'){
+                else if(header=='offer Id'){
                     var value4=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[3].textContent;
                     window.location.href="update.php?pid="+prid+"&value4="+value4+"&header="+header;
                 }
@@ -1853,8 +2022,10 @@ if(isset($_GET['flag'])){
         var hide=document.querySelector(".hide");
         
         console.log("length"+other.length);
+        
         for(var i=0;i<other.length;i++){
             other[i].addEventListener("click",(e)=>{
+            
                 var len=e.currentTarget.parentNode.parentNode.getElementsByTagName('td').length;
                 console.log("len"+len);
                 var arr = new Array(len-1);
@@ -1889,11 +2060,11 @@ if(isset($_GET['flag'])){
                     var column="";
                     for(var l=0;l<subtext.length;l++){
                         if(l>=4 && l<=7 && (tbody.parentNode.getElementsByTagName('tr')[0].getElementsByTagName('th')[0].textContent)!=="Order id" ){
-                            column+=`<td><img src="${subtext[l]}" alt="image" style="height:100px;width:100px"><br>${subtext[l]}</td>`;
+                            column+=`<td style="background:white;text-align:center;"><img src="${subtext[l]}" alt="image" style="height:100px;width:100px;background:white;text-align:center;"><br>${subtext[l]}</td>`;
                         }
                         else{
 
-                            column+=`<td><br>${subtext[l]}</td>`;
+                            column+=`<td style="background:white;text-align:center;"><br>${subtext[l]}</td>`;
                         }
                     }
                     // column+=`<td><span class="buttedit edit">Edit</span></td>`;
@@ -1901,12 +2072,15 @@ if(isset($_GET['flag'])){
                     // console.log(row);
                     tbody.appendChild(row);
                     // console.log(tbody);
+                    // tbody.parentNode.classList.add("table");
+                    // console.log();
+               
                 }
                 
                 
-            
+                
             });
-        
+            
         }
         
 

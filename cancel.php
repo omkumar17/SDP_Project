@@ -62,16 +62,41 @@ $amt=$_POST['amt'];
 
 $sql="UPDATE `order_tbl` SET `order_status`='$type' WHERE `order_id`=$oid";
 $result=$conn->query($sql);
-if($type=="cancel"){
-$sql="INSERT INTO `refund`( `order_id`, `refund_date`, `refund_reason`, `refund_amt`, `refund_status`) VALUES ('$oid','','$cancel',$amt,'pending')";
-$result=$conn->query($sql);
+if($type=="cancelled"){
+$sql2="INSERT INTO `refund`( `order_id`, `refund_reason`, `refund_amt`, `refund_status`) VALUES ('$oid','$cancel',$amt,'pending')";
+$result2=$conn->query($sql2);
+
+$sql1="SELECT * FROM `order_detail` WHERE `order_id`=$oid";
+$result1=$conn->query($sql1);
+
+while($row1=$result1->fetch_assoc()){
+    $pid=$row1['product_id'];
+    $size=$row1['size'];
+    $color=$row1['color'];
+    $quan=$row1['quantity'];
+    $ins="UPDATE product_desc 
+    SET quantity = quantity+'$quan' 
+    WHERE prodesc_ID = (
+        SELECT product_desc.prodesc_ID
+        FROM category 
+        INNER JOIN product ON product.Category_ID = category.category_id 
+        INNER JOIN color ON color.product_id = product.Product_id 
+        INNER JOIN product_desc ON product_desc.cid = color.cid 
+        INNER JOIN image ON image.cid = color.cid 
+        WHERE product.Product_id = '$pid' 
+        AND product_desc.size = '$size' 
+        AND color.color = '$color'
+    )";
+    $inres=$conn->query($ins);
+    
+}
 }
 
 echo<<<_END
         <div class="alert">
-        <div class="alerttext">Initiated {$type} request for your order </div><span class="cross" onclick="cross()">✔</span>
+        <div class="alerttext">Initiated {$type} request for your order .Further updates will be shared on E-mail. Stay Updated</div><span class="cross" onclick="cross()">✔</span>
         </div>
 _END;
-header("refresh:3;url=customerpanel.php");
+header("refresh:6;url=customerpanel.php");
 
 ?>

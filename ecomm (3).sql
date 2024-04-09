@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2024 at 11:33 PM
+-- Generation Time: Apr 05, 2024 at 10:25 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -37,6 +37,14 @@ CREATE TABLE `cart_tbl` (
   `p_discount` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `cart_tbl`
+--
+
+INSERT INTO `cart_tbl` (`cartID`, `user_id`, `product_id`, `p_quantity`, `p_color`, `p_size`, `p_discount`) VALUES
+(61, 39, 5687, 1, 'brown', 6, 0),
+(66, 27, 5002, 1, 'blue', 6, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -63,7 +71,8 @@ INSERT INTO `category` (`category_id`, `Category_name`, `Category_desc`, `cat_st
 (6, 'Insoles', 'shoes Insoles', 'Enabled'),
 (7, 'Socks', 'shoes socks', 'Enabled'),
 (8, 'Polish', 'shoes polish', 'Enabled'),
-(9, 'laces', 'shoes laces', 'Enabled');
+(9, 'laces', 'shoes laces', 'Enabled'),
+(10, 'sneakers', 'it comprises of men, woman and kids shoes', 'Enabled');
 
 -- --------------------------------------------------------
 
@@ -153,7 +162,9 @@ INSERT INTO `feedback` (`feedback_id`, `user_id`, `product_id`, `feedback_rating
 (3, 27, 1026, 5, 'loved the product . good build quality and style', '2024-04-04'),
 (4, 36, 1026, 4, 'highly durable and efficient style', '2024-04-04'),
 (5, 36, 5002, 5, 'good product and reasonable price', '2024-04-04'),
-(6, 36, 1026, 5, 'price is good. styling is also great', '2024-04-04');
+(6, 36, 1026, 5, 'price is good. styling is also great', '2024-04-04'),
+(7, 39, 1026, 5, 'Great Product !', '2024-04-04'),
+(8, 39, 1026, 4, 'good Product', '2024-04-04');
 
 -- --------------------------------------------------------
 
@@ -330,7 +341,14 @@ INSERT INTO `order_detail` (`orderdetail_id`, `order_id`, `product_id`, `quantit
 (49, 83, 5002, 1, 227, 6, 'blue', 0, 227),
 (50, 84, 1026, 1, 999, 10, 'blue', 0, 999),
 (51, 85, 1026, 1, 999, 9, 'blue', 0, 999),
-(52, 85, 5002, 1, 227, 9, 'blue', 0, 227);
+(52, 85, 5002, 1, 227, 9, 'blue', 0, 227),
+(53, 86, 1026, 1, 999, 6, 'blue', 0, 999),
+(54, 87, 5687, 1, 227, 8, 'brown', 0, 227),
+(55, 87, 1026, 1, 999, 8, 'blue', 0, 999),
+(56, 88, 1026, 20, 999, 6, 'blue', 3996, 15984),
+(57, 88, 5002, 1, 227, 6, 'blue', 0, 227),
+(58, 89, 1026, 1, 999, 6, 'blue', 0, 999),
+(59, 89, 5002, 1, 227, 6, 'blue', 0, 227);
 
 -- --------------------------------------------------------
 
@@ -362,12 +380,16 @@ INSERT INTO `order_tbl` (`order_id`, `user_id`, `order_date`, `order_status`, `o
 (77, 27, '2024-04-04', 'packed', 1123, 153, 'Harsh', 'Wadhwani', 8401409849, 'harshwadhwani268@gmail.com', '18 parth society bapunagar', 'processing'),
 (78, 32, '2024-04-04', 'packed', 13631, 6399, 'om', 'kumar', 9693808798, 'omk738774@gmail.com', 'b11 sharad apartment', 'processing'),
 (79, 34, '2024-04-04', 'complete', 244, 33, 'jatin', 'kanzariya', 8525652312, 'jatink123@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 ', 'shipped'),
-(80, 33, '2024-04-04', 'placed', 1049, 0, 'kruparth', 'kanzariya', 7874773789, 'kruparth1610@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 ', 'processing'),
+(80, 33, '2024-04-04', 'cancel', 1049, 0, 'kruparth', 'kanzariya', 7874773789, 'kruparth1610@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 ', 'shipped'),
 (81, 38, '2024-04-04', 'packed', 1123, 153, 'rocky', 'bhai', 8580250157, 'rocky12@gmail.com', 'green pg navrangpura', 'processing'),
-(82, 33, '2024-04-04', 'placed', 16873, 7924, 'kruparth', 'kanzariya', 8580250157, 'kruparth1610@gmail.com', 'samras boys hostel', 'processing'),
+(82, 33, '2024-04-04', 'complete', 16873, 7924, 'kruparth', 'kanzariya', 8580250157, 'kruparth1610@gmail.com', 'samras boys hostel', 'shipped'),
 (83, 32, '2024-04-04', 'placed', 244, 33, 'om', 'kumar', 9693808798, 'omk738774@gmail.com', 'hn 49 shivpuri colony', 'processing'),
 (84, 35, '2024-04-04', 'placed', 924, 125, 'rohan', 'rathod', 9944663322, 'rohanrathod@gmail.com', 'sharad apartment navranpura', 'processing'),
-(85, 36, '2024-04-04', 'complete', 1276, 0, 'Saurabh', 'garg', 8585220013, 'saurabh@gmail.com', 'b11 pratistha 20 ', 'shipped');
+(85, 36, '2024-04-04', 'complete', 1276, 0, 'Saurabh', 'garg', 8585220013, 'saurabh@gmail.com', 'b11 pratistha 20 ', 'shipped'),
+(86, 39, '2024-04-04', 'cancel', 924, 125, 'kashyap', 'kanzariya', 9546541254, 'kruparth2000@gmail.com', 'nava Amrapar Halvad', 'shipped'),
+(87, 39, '2024-04-04', 'placed', 277, 0, 'kashyap', 'kannzariya', 9546541254, 'kruparth2000@gmail.com', 'Isanpur, halvad', 'processing'),
+(88, 33, '2024-04-04', 'placed', 13831, 6426, 'Kruparth', 'Kanzariya', 7874773789, 'kruparth1610@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
+(89, 27, '2024-04-06', 'placed', 1123, 153, 'Om', 'Kumar', 9693808798, 'omkumar1870@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing');
 
 -- --------------------------------------------------------
 
@@ -394,10 +416,14 @@ INSERT INTO `payment` (`transaction_id`, `order_id`, `payment_mode`, `payment_da
 (1712176499370572019, 79, 'COD', '2024-04-04', 'paid'),
 (1712176683680713465, 80, 'online', '2024-04-04', 'paid'),
 (1712176881285650990, 81, 'COD', '2024-04-04', 'pending'),
-(1712177158761875198, 82, 'COD', '2024-04-04', 'pending'),
+(1712177158761875198, 82, 'COD', '2024-04-04', 'paid'),
 (1712177427689482992, 83, 'online', '2024-04-04', 'paid'),
 (1712177543746614541, 84, 'online', '2024-04-04', 'paid'),
-(1712177659503712739, 85, 'COD', '2024-04-04', 'paid');
+(1712177659503712739, 85, 'COD', '2024-04-04', 'paid'),
+(1712202169158318824, 86, 'COD', '2024-04-04', 'paid'),
+(1712204939863586094, 87, 'COD', '2024-04-04', 'pending'),
+(1712237976761126362, 88, 'online', '2024-04-04', 'paid'),
+(1712342378316141978, 89, 'COD', '2024-04-06', 'pending');
 
 -- --------------------------------------------------------
 
@@ -439,7 +465,7 @@ CREATE TABLE `payment mode wise` (
 CREATE TABLE `product` (
   `Product_id` int(6) NOT NULL,
   `Category_ID` int(2) NOT NULL,
-  `offer_id` int(2) DEFAULT NULL,
+  `offer_id` int(2) DEFAULT -1,
   `grp` varchar(20) NOT NULL,
   `product_name` varchar(30) NOT NULL,
   `product_details` text NOT NULL,
@@ -606,7 +632,7 @@ CREATE TABLE `product_desc` (
 INSERT INTO `product_desc` (`prodesc_ID`, `cid`, `product_type`, `size`, `quantity`, `prodesc_status`) VALUES
 (1, 1, 'Daily casual', 6, 100, 'Enabled'),
 (2, 1, 'Daily casual', 7, 100, 'Enabled'),
-(3, 1, 'Daily casual', 8, 100, 'Enabled'),
+(3, 1, 'Daily casual', 8, 99, 'Enabled'),
 (4, 1, 'Daily casual', 9, 100, 'Enabled'),
 (5, 1, 'Daily casual', 10, 100, 'Enabled'),
 (6, 2, 'Daily casual', 6, 100, 'Enabled'),
@@ -648,7 +674,7 @@ INSERT INTO `product_desc` (`prodesc_ID`, `cid`, `product_type`, `size`, `quanti
 (42, 10, 'rubber slipper', 6, 100, 'Enabled'),
 (43, 10, 'rubber slipper', 7, 100, 'Enabled'),
 (44, 10, 'rubber slipper', 8, 100, 'Enabled'),
-(45, 11, 'solid slipper', 6, 99, 'Enabled'),
+(45, 11, 'solid slipper', 6, 97, 'Enabled'),
 (46, 11, 'solid slipper', 7, 99, 'Enabled'),
 (47, 11, 'solid slipper', 8, 99, 'Enabled'),
 (48, 11, 'solid slipper', 9, 77, 'Enabled'),
@@ -662,9 +688,9 @@ INSERT INTO `product_desc` (`prodesc_ID`, `cid`, `product_type`, `size`, `quanti
 (56, 12, 'solid slipper', 10, 100, 'Enabled'),
 (57, 12, 'solid slipper', 11, 100, 'Enabled'),
 (58, 12, 'solid slipper', 12, 100, 'Enabled'),
-(59, 13, 'sneakers', 6, 80, 'Enabled'),
+(59, 13, 'sneakers', 6, 58, 'Enabled'),
 (60, 13, 'sneakers', 7, 99, 'Enabled'),
-(61, 13, 'sneakers', 8, 99, 'Enabled'),
+(61, 13, 'sneakers', 8, 98, 'Enabled'),
 (62, 13, 'sneakers', 9, 78, 'Enabled'),
 (63, 13, 'sneakers', 10, 99, 'Enabled'),
 (64, 14, 'sneakers', 6, 100, 'Enabled'),
@@ -750,11 +776,23 @@ CREATE TABLE `refund` (
   `refund_id` int(5) NOT NULL,
   `order_id` int(3) NOT NULL,
   `request_date` date NOT NULL DEFAULT current_timestamp(),
-  `refund_date` date NOT NULL,
+  `refund_date` date DEFAULT NULL,
   `refund_reason` text NOT NULL,
   `refund_amt` int(5) NOT NULL,
   `refund_status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `refund`
+--
+
+INSERT INTO `refund` (`refund_id`, `order_id`, `request_date`, `refund_date`, `refund_reason`, `refund_amt`, `refund_status`) VALUES
+(2, 76, '2024-04-01', '0000-00-00', 'wrong color', 520, 'pending'),
+(3, 79, '2024-03-29', '2024-04-05', 'Wrong product', 369, 'done'),
+(4, 82, '2024-04-02', '0000-00-00', 'defected product', 620, 'pending'),
+(5, 85, '2024-04-03', '2024-04-05', 'Wrong size', 580, 'done'),
+(12, 86, '2024-04-04', '2024-04-05', 'Wrong product', 924, 'done'),
+(13, 80, '2024-04-04', '2024-04-05', 'Wrong product', 1049, 'done');
 
 -- --------------------------------------------------------
 
@@ -783,16 +821,17 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userID`, `fname`, `lname`, `email`, `phone`, `PAN`, `gender`, `pass`, `address`, `pin`, `city`, `registration_date`, `usr_status`) VALUES
-(1, 'Admin', 'admin', 'admin890@gmail.com', 8799553322, NULL, 'm', '$2y$10$yzXoNvFu8nO6Rac7EotuUebOpSAFyQ2aouH3ejGPy7Y5q6A4H7.Iy', '18,Parth Society,Bapunagar,Baroda', 385960, 'Ahmedabad', '2024-01-26', 'Active'),
-(27, 'Harsh', 'wadhwani', 'harshwadhwani268@gmail.com', 8799553324, '', 'm', '$2y$10$P1Mw2q5LkisxRtGrDf/OA.YxeJrbWgOc13aw5E3gIPd1suiObyAOC', '18,Parth Society,Bapunagar,Baroda', 382350, 'Ahmedabad', '2024-01-26', 'Active'),
-(30, 'bhavesh', 'parwani', 'bhaveshparwani1373@gmail.com', 7405567768, NULL, 'm', '$2y$10$LOEr6WmNfWG/Te1l3sB4TeteDpKd6a4E.FEekq//egDatO2Gl1khS', '18,Parth Society,Bapunagar,Baroda', 382350, 'Ahmedabad', '2024-01-26', 'Active'),
-(32, 'Om', 'Kumar', 'omk738774@gmail.com', 9693808798, NULL, 'm', '$2y$10$1NwvbzoGId6g46wH6tcyiepkmfKCLlPDP8aGv8M.2PjlXTuDWDcPu', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 380009, 'ahmedabad', '2024-04-03', 'Active'),
-(33, 'Kruparth', 'Kanzariya', 'kruparth1610@gmail.com', 7874773789, NULL, 'm', '$2y$10$Qm7yo6a4zX8yBOLQ2.ClCe2Icmf.0HU1vaLsVwddxj0TvZRKdufsm', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 380009, 'ahmedabad', '2024-04-03', 'Active'),
-(34, 'Jatin', 'Kanzariya', 'jatink123@gmail.com', 8525652312, NULL, 'm', '$2y$10$50wEMuKk5IWWJtC2SVAGV.e7ylQx7z.Kd97ksdxXWl5pEcVcLMyuC', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 380009, 'ahmedabad', '2024-04-03', 'Active'),
-(35, 'Rohan', 'Rathod', 'rohanrathod@gmail.com', 8465993321, NULL, 'm', '$2y$10$zgaAos.mGvn3dfOuZfCkBuUWF2o0dUs6B.S7ciYNzlttH8Xnysb/m', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 380009, 'ahmedabad', '2024-04-03', 'Active'),
-(36, 'Saurabh', 'Garg', 'saurabh@gmail.com', 9098653311, NULL, 'm', '$2y$10$j1SUWfY8ZHd7syqMDsaILenDLxlCUR8tQout3smpvtIyTQq/6Z39e', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 380009, 'ahmedabad', '2024-04-03', 'Active'),
-(37, 'Rashmika', 'Mandana', 'rashmi.m@gmail.com', 8092792055, NULL, 'f', '$2y$10$2z1F2Ic4wcFCi89xywMwxukEKJPeIxTidirWIvQbqA0FnC8y/c/cm', 'HN-49, Shivpuri colony, Bistupur', 831001, 'Jamshedpur', '2024-04-03', 'Active'),
-(38, 'Rocky', 'Bhai', 'rocky12@gmail.com', 7788994455, NULL, 'm', '$2y$10$UZJ5CtWPLRNl8IRNWlGvHel1ISxjMPZ45Q9llKho0SIp8uLFrprg6', 'Kolar Gold Field', 542210, 'rejiansi', '2024-04-03', 'Active');
+(1, 'Admin', 'admin', 'admin890@gmail.com', 8799553322, NULL, 'male', '$2y$10$yzXoNvFu8nO6Rac7EotuUebOpSAFyQ2aouH3ejGPy7Y5q6A4H7.Iy', '18,Parth Society,Bapunagar,Baroda', 385960, 'Ahmedabad', '2024-01-26', 'Active'),
+(27, 'Harsh', 'wadhwani', 'harshwadhwani268@gmail.com', 8799553324, '', 'male', '$2y$10$P1Mw2q5LkisxRtGrDf/OA.YxeJrbWgOc13aw5E3gIPd1suiObyAOC', '18,Parth Society,Bapunagar,Baroda', 382350, 'Ahmedabad', '2024-01-26', 'Active'),
+(30, 'bhavesh', 'parwani', 'bhaveshparwani1373@gmail.com', 7405567768, NULL, 'male', '$2y$10$LOEr6WmNfWG/Te1l3sB4TeteDpKd6a4E.FEekq//egDatO2Gl1khS', '18,Parth Society,Bapunagar,Baroda', 382350, 'Ahmedabad', '2024-01-26', 'Active'),
+(32, 'Om', 'Kumar', 'omk738774@gmail.com', 9693808798, NULL, 'male', '$2y$10$1NwvbzoGId6g46wH6tcyiepkmfKCLlPDP8aGv8M.2PjlXTuDWDcPu', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 380009, 'ahmedabad', '2024-04-03', 'Active'),
+(33, 'Kruparth', 'Kanzariya', 'kruparth1610@gmail.com', 7874773789, NULL, 'male', '$2y$10$Qm7yo6a4zX8yBOLQ2.ClCe2Icmf.0HU1vaLsVwddxj0TvZRKdufsm', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 380009, 'ahmedabad', '2024-04-03', 'Active'),
+(34, 'Jatin', 'Kanzariya', 'jatink123@gmail.com', 8525652312, NULL, 'male', '$2y$10$50wEMuKk5IWWJtC2SVAGV.e7ylQx7z.Kd97ksdxXWl5pEcVcLMyuC', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 380009, 'ahmedabad', '2024-04-03', 'Active'),
+(35, 'Rohan', 'Rathod', 'rohanrathod@gmail.com', 8465993321, NULL, 'male', '$2y$10$zgaAos.mGvn3dfOuZfCkBuUWF2o0dUs6B.S7ciYNzlttH8Xnysb/m', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 380009, 'ahmedabad', '2024-04-03', 'Active'),
+(36, 'Saurabh', 'Garg', 'saurabh@gmail.com', 9098653311, NULL, 'male', '$2y$10$j1SUWfY8ZHd7syqMDsaILenDLxlCUR8tQout3smpvtIyTQq/6Z39e', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 380009, 'ahmedabad', '2024-04-03', 'Active'),
+(37, 'Rashmika', 'Mandana', 'rashmi.m@gmail.com', 8092792055, NULL, 'female', '$2y$10$2z1F2Ic4wcFCi89xywMwxukEKJPeIxTidirWIvQbqA0FnC8y/c/cm', 'HN-49, Shivpuri colony, Bistupur', 831001, 'Jamshedpur', '2024-04-03', 'Active'),
+(38, 'Rocky', 'Bhai', 'rocky12@gmail.com', 7788994455, NULL, 'male', '$2y$10$UZJ5CtWPLRNl8IRNWlGvHel1ISxjMPZ45Q9llKho0SIp8uLFrprg6', 'Kolar Gold Field', 542210, 'rejiansi', '2024-04-03', 'Active'),
+(39, 'Kashyap', 'kanzariya', 'kruparth2000@gmail.com', 9546541254, NULL, 'male', '$2y$10$8v4Co7b0x04oyL/9UBFWUuX/F4Qadgbn.NIOxjVvK2Y5lSrRt9qcK', 'nava amrapar Halvad', 380009, 'Ahmedabad', '2024-04-04', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1014,13 +1053,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart_tbl`
 --
 ALTER TABLE `cart_tbl`
-  MODIFY `cartID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `cartID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `category_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `color`
@@ -1032,7 +1071,7 @@ ALTER TABLE `color`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `feedback_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `feedback_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `image`
@@ -1050,13 +1089,13 @@ ALTER TABLE `offer`
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `orderdetail_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `orderdetail_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `order_tbl`
 --
 ALTER TABLE `order_tbl`
-  MODIFY `order_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `order_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `product_desc`
@@ -1068,13 +1107,13 @@ ALTER TABLE `product_desc`
 -- AUTO_INCREMENT for table `refund`
 --
 ALTER TABLE `refund`
-  MODIFY `refund_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `refund_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `userID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Constraints for dumped tables
