@@ -324,11 +324,11 @@ if(isset($_GET['crtquant'])){
                                 <p>The total amount of (including VAT)</p>
                                 <p>&#8377;<span id="total_cart_amt"><?php echo ($total+50.0)-$applied;?></span></p>
                             </div>
-                            <form action="order.php" method="post">
+                            <form class="checkform" action="order.php" method="post">
                                 <input type="hidden" name="ui" id="ui" value="1">
                                 <input type="hidden" name="overdiscount" id="pdiscval" value="">
                                 <input type="hidden" name="discount" id="discval" value="<?php echo $applied?>">
-                                <input type="submit" class="btn btn-primary text-uppercase" style="background:teal" onclick="alert('Once Order is placed, it cannot be cancelled (You can initiate cancellation or returned only after it is delivered)!!')"; value="Checkout"></form>
+                                <input type="submit" class="btn btn-primary text-uppercase" style="background:teal" onclick="check(event)" value="Checkout"></form>
                         </div>
                         <!-- discount code part -->
                         <div class="discount_code mt-3 shadow">
@@ -375,7 +375,24 @@ if(isset($_GET['crtquant'])){
                         <div class="mt-3 shadow p-3 bg-white">
                             <div class="pt-4">
                                 <h5 class="mb-4">Expected delivery date</h5>
-                                <p>July 27th 2020 - July 29th 2020</p>
+                                <p><?php
+                                $currentDate = date("Y-m-d"); 
+
+                                $futureDate = date("Y-m-d", strtotime($currentDate . " +4 days")); 
+                                
+                                $timestamp = strtotime($futureDate); 
+
+                                $formattedDate = date("d F, Y", $timestamp);
+
+                                $currentDate = date("Y-m-d"); 
+
+                                $futureDate = date("Y-m-d", strtotime($currentDate . " +5 days")); 
+
+                                $timestamp2 = strtotime($futureDate); 
+
+                                $formattedDate2 = date("d F, Y", $timestamp2);
+                                echo $formattedDate ."-". $formattedDate2;
+                                ?></p>
                             </div>
                         </div>
                     </div>
@@ -448,15 +465,15 @@ if(isset($_GET['crtquant'])){
             // alert("Selected value: " + selectedValue + "\nSelected text: " + selectedText);
             // let select_offer = offer.textContent.trim(); // Trim whitespace
             // console.log("Selected offer:", select_offer); // Log selected offer for debugging
-            let totalamtcurr = parseFloat(price);
+            let totalamtcurr = parseInt(price);
             let error_trw = document.getElementById('error_trw');
 
             if (selectedText) {
-                let disc=(totalamtcurr*selectedValue)/100;
-                let newtotalamt = (totalamtcurr - parseFloat(disc)-parseFloat(discval.value));
+                let disc=parseInt((totalamtcurr*selectedValue)/100);
+                let newtotalamt = (totalamtcurr - parseInt(disc)-parseInt(discval.value));
                 discount.innerHTML=disc;
                 
-                pdiscval.value=parseFloat(disc);
+                pdiscval.value=parseInt(disc);
                 console.log(pdiscval.value);
                 total_cart_amt.innerHTML = parseInt(newtotalamt);
                 if(selectedText!=="Select")
@@ -481,6 +498,16 @@ if(isset($_GET['crtquant'])){
     //             crtfrm[i].submit();
     //         })
     // }
+
+    function check(event){
+        event.preventDefault();
+        if(confirm('Once Order is placed, it cannot be cancelled (You can initiate cancellation or returned only after it is delivered)!!')){
+            document.querySelector(".checkform").submit();
+        }
+        else{
+
+        }
+    }
     </script>
     
 </body>

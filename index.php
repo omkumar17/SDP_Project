@@ -354,7 +354,7 @@ footer{
                 </div>
             </a>
 
-            <a href="product.php?id=4866" class="product-link">
+            <a href="product.php?id=4866&color=creambrown" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">35% off</span>
@@ -369,7 +369,7 @@ footer{
                 </div>
             </a>
 
-            <a href="product.php?id=5100" class="product-link">
+            <a href="product.php?id=5100&color=blue" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">25% off</span>
@@ -384,7 +384,7 @@ footer{
                 </div>
             </a>
 
-            <a href="product.php?id=5109" class="product-link">
+            <a href="product.php?id=5109&color=green" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">30% off</span>
@@ -414,7 +414,7 @@ footer{
                 </div>
             </a>
 
-            <a href="product.php?id=8004" class="product-link">
+            <a href="product.php?id=8004&color=blue" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">25% off</span>
@@ -429,7 +429,7 @@ footer{
                 </div>
             </a>
 
-            <a href="product.php?id=77075" class="product-link">
+            <a href="product.php?id=77075&color=    maroon" class="product-link">
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">10% off</span>
@@ -481,7 +481,7 @@ footer{
         <div class="productcontainer brands">
             <div class="filterDiv mens">
 
-                <a href="select.php?categ=brands&type=walkaroo&grp=Mens" class="product-link" >
+                <a href="select.php?brand=walkaro&grp=Mens" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">35% off</span>
@@ -498,7 +498,7 @@ footer{
             </div>
             <div class="filterDiv mens" >
 
-                <a href="select.php?categ=brands&type=paragon&grp=Mens" class="product-link" >
+                <a href="select.php?brand=paragon&grp=Mens" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">10% off</span>
@@ -515,7 +515,7 @@ footer{
             </div>
             <div class="filterDiv kids" >
 
-                <a href="select.php?categ=brands&type=venus&grp=Kids" class="product-link" >
+                <a href="select.php?brand=venus&grp=Kids" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -532,7 +532,7 @@ footer{
             </div>
             <div class="filterDiv aurat" >
 
-                <a href="select.php?categ=brands&type=venus&grp=Womans" class="product-link" >
+                <a href="select.php?brand=venus&grp=Womans" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -549,7 +549,7 @@ footer{
             </div>
             <div class="filterDiv mens" >
 
-                <a href="select.php?categ=brands&type=lee-copper&grp=Mens" class="product-link" >
+                <a href="select.php?brand=lee-cooper&grp=Mens" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">30% off</span>
@@ -557,7 +557,7 @@ footer{
                             <!--   -->
                         </div>
                         <div class="product-info">
-                            <h2 class="product-brand">Lee Copper</h2>
+                            <h2 class="product-brand">Lee Cooper</h2>
                             <!-- <p class="product-short-des">a short line about the cloth..</p>
                              <span class="price">$20</span><span class="actual-price">$40</span> -->
                         </div>
@@ -566,7 +566,7 @@ footer{
             </div>
             <div class="filterDiv aurat" >
 
-                <a href="select.php?categ=brands&type=paragon&grp=Womans" class="product-link" >
+                <a href="select.php?brand=paragon&grp=Womans" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -583,7 +583,7 @@ footer{
             </div>
             <div class="filterDiv kids" >
 
-                <a href="select.php?categ=brands&type=campus&grp=Kids" class="product-link" >
+                <a href="select.php?brand=campus&grp=Kids" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -600,7 +600,7 @@ footer{
             </div>
             <div class="filterDiv aurat" >
 
-                <a href="select.php?categ=brands&type=walkaroo&grp=Womans" class="product-link" >
+                <a href="select.php?brand=walkaro&grp=Womans" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">35% off</span>
@@ -617,7 +617,7 @@ footer{
             </div>
             <div class="filterDiv aurat" >
 
-                <a href="select.php?categ=brands&type=paragon&grp=Womans" class="product-link" >
+                <a href="select.php?brand=paragon&grp=Womans" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -634,7 +634,7 @@ footer{
             </div>
             <div class="filterDiv kids" >
 
-                <a href="select.php?categ=brands&type=venus&grp=Kids" class="product-link" >
+                <a href="select.php?brand=venus&grp=Kids" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -651,7 +651,7 @@ footer{
             </div>
             <div class="filterDiv kids" >
 
-                <a href="select.php?categ=brands&type=paragon&grp=Kids" class="product-link" >
+                <a href="select.php?brand=paragon&grp=Kids" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -668,7 +668,7 @@ footer{
             </div>
             <div class="filterDiv mens" >
 
-                <a href="select.php?categ=brands&type=campus&grp=Mens" class="product-link" >
+                <a href="select.php?brand=campus&grp=Mens" class="product-link" >
                     <div class="product-card">
                         <div class="product-image">
                             <span class="discount-tag">50% off</span>
@@ -690,7 +690,7 @@ footer{
     <section id="brand-sec">
         <h2 class="heading" style="color:teal;font-weight:bold">BRANDS</h2>
         <div class="brands">
-            <a href="select.php?categ=brands&type=walkaroo" class="product-link" >
+            <a href="select.php?brand=walkaro" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">35% off</span>
@@ -704,7 +704,7 @@ footer{
                     </div>
                 </div>
             </a>
-            <a href="select.php?categ=brands&type=paragon" class="product-link" >
+            <a href="select.php?brand=paragon" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
@@ -718,7 +718,7 @@ footer{
                     </div>
                 </div>
             </a>
-            <a href="select.php?categ=brands&type=campus" class="product-link" >
+            <a href="select.php?brand=campus" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
@@ -732,7 +732,7 @@ footer{
                     </div>
                 </div>
             </a>
-            <a href="select.php?categ=brands&type=lee-copper" class="product-link" >
+            <a href="select.php?brand=lee-copper" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
@@ -746,7 +746,7 @@ footer{
                     </div>
                 </div>
             </a>
-            <a href="select.php?categ=brands&type=lehar" class="product-link" >
+            <a href="select.php?brand=lehar" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
@@ -760,7 +760,7 @@ footer{
                     </div>
                 </div>
             </a>
-            <a href="select.php?categ=brands&type=nike" class="product-link" >
+            <a href="select.php?brand=nike" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
@@ -774,7 +774,7 @@ footer{
                     </div>
                 </div>
             </a>
-            <a href="select.php?categ=brands&type=adidas" class="product-link" >
+            <a href="select.php?brand=adidas" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
@@ -788,7 +788,7 @@ footer{
                     </div>
                 </div>
             </a>
-            <a href="select.php?categ=brands&type=flite" class="product-link" >
+            <a href="select.php?brand=flite" class="product-link" >
                 <div class="product-card">
                     <div class="product-image">
                         <span class="discount-tag">50% off</span>
@@ -879,11 +879,11 @@ footer{
             </ul>
             <ul class="footer-category">
                 <li class="category-title">ONLINE SHOPPING</li>
-                <li><a href="select.php" class="footer-link">New Arrival</a></li>
-                <li><a href="select.php?categ=brands&grp=Mens" class="footer-link">Men</a></li>
-                <li><a href="select.php?categ=brands&grp=Womans" class="footer-link">Women</a></li>
-                <li><a href="select.php?categ=brands&grp=Kids" class="footer-link">Kids</a></li>
-                <li><a href="select.php?categ=brands" class="footer-link">Brands</a></li>
+                <li><a href="select.php?page=newarrivals" class="footer-link">New Arrival</a></li>
+                <li><a href="select.php?grp=Mens" class="footer-link">Men</a></li>
+                <li><a href="select.php?grp=Womans" class="footer-link">Women</a></li>
+                <li><a href="select.php?&grp=Kids" class="footer-link">Kids</a></li>
+                <li><a href="index.php?brands" class="footer-link">Brands</a></li>
             </ul>
             <ul class="footer-category">
                 <li class="category-title">POLICIES</li>

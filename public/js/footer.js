@@ -42,11 +42,11 @@ const createFooter = () => {
             </ul>
             <ul class="footer-category">
                 <li class="category-title">ONLINE SHOPPING</li>
-                <li><a href="select.php" class="footer-link">New Arrival</a></li>
-                <li><a href="select.php?categ=brands&grp=m" class="footer-link">Men</a></li>
-                <li><a href="select.php?categ=brands&grp=w" class="footer-link">Women</a></li>
-                <li><a href="select.php?categ=brands&grp=k" class="footer-link">Kids</a></li>
-                <li><a href="select.php?categ=brands" class="footer-link">Brands</a></li>
+                <li><a href="select.php?page=newarrivals" class="footer-link">New Arrival</a></li>
+                <li><a href="select.php?grp=Mens" class="footer-link">Men</a></li>
+                <li><a href="select.php?grp=Womens" class="footer-link">Women</a></li>
+                <li><a href="select.php?grp=Kids" class="footer-link">Kids</a></li>
+                <li><a href="index.php" class="footer-link">Brands</a></li>
             </ul>
             <ul class="footer-category">
                 <li class="category-title">POLICIES</li>

@@ -351,7 +351,16 @@ if(isset($_GET['orderid'])){
         </tr>
         <tr>
             <th style="border: 1px solid black;padding:4px;">Date of Payment</th>
-            <td style="border: 1px solid black;padding:4px;">$date</td>
+            <td style="border: 1px solid black;padding:4px;">
+        _END;
+            $currentDate = $date ; 
+
+            $timestamp2 = strtotime($currentDate); 
+
+            $formattedDate2 = date("d F, Y", $timestamp2);
+           echo $formattedDate2;
+        echo<<<_END
+            </td>
         </tr>
         <tr>
             <th style="border: 1px solid black;padding:4px;">Payment Mode</th>

@@ -116,14 +116,15 @@ else if(isset($_POST['order_id'])){
 }
 
 else if(isset($_POST['refund_id'])){
-    if(isset($_POST['refund_date']) && isset($_POST['refund_status']) )
+    if(isset($_POST['refund_status']) )
     {
         $refund_id=$_POST['refund_id'];
-        $refund_date=$_POST['refund_date'];
         $refund_status=$_POST['refund_status'];
         if(isset($_POST['refund_status2']))
         $refund_status=$_POST['refund_status2'];
-        
+        if($refund_status=="done")
+        $refund_date=date("y-m-d");
+
     }
     $sql = "UPDATE `refund` SET `refund_date`='$refund_date', `refund_status`='$refund_status' WHERE `refund_id`=$refund_id";
     $result=$conn->query($sql);

@@ -316,33 +316,33 @@ if(isset($_COOKIE['userID']))
             <div class="drop-items">
             <ul class="header-category">
                 <li class="header-category-title">SHOES</li>
-                <li><a href="select.php?categ=shoes&type=casual&grp=women&page=women" class="header-link">Casual</a></li>
-                <li><a href="select.php?categ=shoes&type=sports&grp=women&page=women" class="header-link">Sports</a></li>
-                <li><a href="select.php?categ=shoes&type=loofers&grp=women&page=women" class="header-link">Loofers</a></li>
-                <li><a href="select.php?categ=shoes&type=sneakers&grp=women&page=women" class="header-link">Sneakers</a></li>
+                <li><a href="select.php?categ=shoes&type=casual&grp=Womans&page=women" class="header-link">Casual</a></li>
+                <li><a href="select.php?categ=shoes&type=sports&grp=Womans&page=women" class="header-link">Sports</a></li>
+                <li><a href="select.php?categ=shoes&type=loofers&grp=Womans&page=women" class="header-link">Loofers</a></li>
+                <li><a href="select.php?categ=shoes&type=sneakers&grp=Womans&page=women" class="header-link">Sneakers</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">SANDAL & CLOGS</li>
-                <li><a href="select.php?categ=sandals&type=sports&grp=women&page=women" class="header-link">Sports</a></li>
-                <li><a href="select.php?categ=sandals&type=sandals&grp=women&page=women" class="header-link">Sandal</a></li>
-                <li><a href="select.php?categ=sandals&type=clog&grp=women&page=women" class="header-link">Clog</a></li>
+                <li><a href="select.php?categ=sandal&type=sports&grp=Womans&page=women" class="header-link">Sports</a></li>
+                <li><a href="select.php?categ=sandal&type=sandals&grp=Womans&page=women" class="header-link">Sandal</a></li>
+                <li><a href="select.php?categ=sandal&type=clog&grp=Womans&page=women" class="header-link">Clog</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">FLIP-FLOP</li>
-                <li><a href="select.php?categ=flip-flop&type=rubber&grp=women&page=women" class="header-link">Rubber</a></li>
-                <li><a href="select.php?categ=flip-flop&type=slipers&grp=women&page=women" class="header-link">Sliders</a></li>
+                <li><a href="select.php?categ=flip-flop&type=rubber&grp=Womans&page=women" class="header-link">Rubber</a></li>
+                <li><a href="select.php?categ=flip-flop&type=slipers&grp=Womans&page=women" class="header-link">Sliders</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">FESTIVE & HANDMADE</li>
-                <li><a href="select.php?categ=festival&type=heels&grp=women&page=women" class="header-link">Heels</a></li>
-                <li><a href="select.php?categ=festival&type=flats&grp=women&page=women" class="header-link">Flats</a></li>
+                <li><a href="select.php?categ=festival&type=heels&grp=Womans&page=women" class="header-link">Heels</a></li>
+                <li><a href="select.php?categ=festival&type=flats&grp=Womans&page=women" class="header-link">Flats</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">BRANDS</li>
-                <li><a href="select.php?categ=brands&type=walkaroo&grp=women&page=women" class="header-link">Walkaroo</a></li>
-                <li><a href="select.php?categ=brands&type=paragon&grp=women&page=women" class="header-link">Paragon</a></li>
-                <li><a href="select.php?categ=brands&type=lehar&grp=women&page=women" class="header-link">Lehar</a></li>
-                <li><a href="select.php?categ=brands&type=campus&grp=women&page=women" class="header-link">Campus</a></li>
+                <li><a href="select.php?brand=walkaro&grp=Womans&page=women" class="header-link">Walkaroo</a></li>
+                <li><a href="select.php?brand=paragon&grp=Womans&page=women" class="header-link">Paragon</a></li>
+                <li><a href="select.php?brand=lehar&grp=Womans&page=women" class="header-link">Lehar</a></li>
+                <li><a href="select.php?brand=campus&grp=Womans&page=women" class="header-link">Campus</a></li>
             </ul>
             </div>
             </div>
@@ -356,29 +356,29 @@ if(isset($_COOKIE['userID']))
             <div class="drop-items">
             <ul class="header-category">
                 <li class="header-category-title">SHOES</li>
-                <li><a href="select.php?categ=shoes&type=casual&grp=mens&page=men" class="header-link">Casual</a></li>
-                <li><a href="select.php?categ=shoes&type=sports&grp=mens&page=men" class="header-link">Sports</a></li>
-                <li><a href="select.php?categ=shoes&typeformals=&grp=mens&page=men" class="header-link">Formals</a></li>
-                <li><a href="select.php?categ=shoes&type=loofers&grp=mens&page=men" class="header-link">Loofers</a></li>
-                <li><a href="select.php?categ=shoes&type=sneakers&grp=mens&page=men" class="header-link">Sneakers</a></li>
+                <li><a href="select.php?categ=shoes&type=casual&grp=Mens&page=men" class="header-link">Casual</a></li>
+                <li><a href="select.php?categ=shoes&type=sports&grp=Mens&page=men" class="header-link">Sports</a></li>
+                <li><a href="select.php?categ=shoes&typeformals=&grp=Mens&page=men" class="header-link">Formals</a></li>
+                <li><a href="select.php?categ=shoes&type=loofers&grp=Mens&page=men" class="header-link">Loofers</a></li>
+                <li><a href="select.php?categ=shoes&type=sneakers&grp=Mens&page=men" class="header-link">Sneakers</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">SANDAL & CLOGS</li>
-                <li><a href="select.php?categ=sandals&type=sports&grp=mens&page=men" class="header-link">Sports</a></li>
-                <li><a href="select.php?categ=sandals&type=sandals&grp=mens&page=men" class="header-link">Sandals</a></li>
-                <li><a href="select.php?categ=sandals&type=clog&grp=mens&page=men" class="header-link">Clog</a></li>
+                <li><a href="select.php?categ=sandal&type=sports&grp=Mens&page=men" class="header-link">Sports</a></li>
+                <li><a href="select.php?categ=sandal&type=sandals&grp=Mens&page=men" class="header-link">Sandals</a></li>
+                <li><a href="select.php?categ=sandal&type=clog&grp=Mens&page=men" class="header-link">Clog</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">FLIP-FLOP</li>
-                <li><a href="select.php?categ=flip-flop&type=hawai&grp=mens&page=men" class="header-link">Hawai</a></li>
-                <li><a href="select.php?categ=flip-flop&type=sliders&grp=mens&page=men" class="header-link">Sliders</a></li>
+                <li><a href="select.php?categ=flip-flop&type=hawai&grp=Mens&page=men" class="header-link">Hawai</a></li>
+                <li><a href="select.php?categ=flip-flop&type=sliders&grp=Mens&page=men" class="header-link">Sliders</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">BRANDS</li>
-                <li><a href="select.php?categ=brands&type=walkaroo&grp=mens&page=men" class="header-link">Walkaroo</a></li>
-                <li><a href="select.php?categ=brands&type=paragon&grp=mens&page=men" class="header-link">Paragon</a></li>
-                <li><a href="select.php?categ=brands&type=campus&grp=mens&page=men" class="header-link">Campus</a></li>
-                <li><a href="select.php?categ=brands&type=nike&grp=mens&page=men" class="header-link">Nike</a></li>
+                <li><a href="select.php?brand=walkaro&grp=Mens&page=men" class="header-link">Walkaroo</a></li>
+                <li><a href="select.php?brand=paragon&grp=Mens&page=men" class="header-link">Paragon</a></li>
+                <li><a href="select.php?brand=campus&grp=Mens&page=men" class="header-link">Campus</a></li>
+                <li><a href="select.php?brand=nike&grp=Mens&page=men" class="header-link">Nike</a></li>
             </ul>
             </div>
             </div>
@@ -392,28 +392,28 @@ if(isset($_COOKIE['userID']))
             <div class="drop-items">
             <ul class="header-category">
                 <li class="header-category-title">SHOES</li>
-                <li><a href="select.php?categ=shoes&type=kids&grp=kids&page=kids" class="header-link">Kids</a></li>
-                <li><a href="select.php?categ=shoes&type=boys&grp=kids&page=kids" class="header-link">Boys</a></li>
-                <li><a href="select.php?categ=shoes&type=girls&grp=kids&page=kids" class="header-link">Girls</a></li>
+                <li><a href="select.php?categ=shoes&type=kids&grp=Kids&page=kids" class="header-link">Kids</a></li>
+                <li><a href="select.php?categ=shoes&type=boys&grp=Kids&page=kids" class="header-link">Boys</a></li>
+                <li><a href="select.php?categ=shoes&type=girls&grp=Kids&page=kids" class="header-link">Girls</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">SANDAL & CLOGS</li>
-                <li><a href="select.php?categ=sandals&type=kids&grp=kids&page=kids" class="header-link">Kids</a></li>
-                <li><a href="select.php?categ=sandals&type=boys&grp=kids&page=kids" class="header-link">Boys</a></li>
-                <li><a href="select.php?categ=sandals&type=girls&grp=kids&page=kids" class="header-link">Girls</a></li>
+                <li><a href="select.php?categ=sandal&type=kids&grp=Kids&page=kids" class="header-link">Kids</a></li>
+                <li><a href="select.php?categ=sandal&type=boys&grp=Kids&page=kids" class="header-link">Boys</a></li>
+                <li><a href="select.php?categ=sandal&type=girls&grp=Kids&page=kids" class="header-link">Girls</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">SCHOOL SHOES</li>
-                <li><a href="select.php?categ=school&type=kids&grp=kids&page=kids" class="header-link">Kids</a></li>
-                <li><a href="select.php?categ=school&type=boys&grp=kids&page=kids" class="header-link">Boys</a></li>
-                <li><a href="select.php?categ=school&type=girls&grp=kids&page=kids" class="header-link">Girls</a></li>
+                <li><a href="select.php?categ=school&type=kids&grp=Kids&page=kids" class="header-link">Kids</a></li>
+                <li><a href="select.php?categ=school&type=boys&grp=Kids&page=kids" class="header-link">Boys</a></li>
+                <li><a href="select.php?categ=school&type=girls&grp=Kids&page=kids" class="header-link">Girls</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">BRANDS</li>
-                <li><a href="select.php?categ=brands&type=walkaroo&grp=kids&page=kids" class="header-link">Walkaroo</a></li>
-                <li><a href="select.php?categ=brands&type=paragon&grp=kids&page=kids" class="header-link">Paragon</a></li>
-                <li><a href="select.php?categ=brands&type=campus&grp=kids&page=kids" class="header-link">Campus</a></li>
-                <li><a href="select.php?categ=brands&type=venus&grp=kids&page=kids" class="header-link">Venus</a></li>
+                <li><a href="select.php?brand=walkaro&grp=Kids&page=kids" class="header-link">Walkaroo</a></li>
+                <li><a href="select.php?brand=paragon&grp=Kids&page=kids" class="header-link">Paragon</a></li>
+                <li><a href="select.php?brand=campus&grp=Kids&page=kids" class="header-link">Campus</a></li>
+                <li><a href="select.php?brand=venus&grp=Kids&page=kids" class="header-link">Venus</a></li>
             </ul>
             </div>
             </div>
@@ -427,27 +427,27 @@ if(isset($_COOKIE['userID']))
             <div class="drop-items">
             <ul class="header-category">
                 <li class="header-category-title">INSOLES</li>
-                <li><a href="select.php?categ=insoles&type=cushion&grp=accessories&page=accessories" class="header-link">Cushion</a></li>
-                <li><a href="select.php?categ=insoles&type=normal&grp=accessories&page=accessories" class="header-link">Normal</a></li>
+                <li><a href="select.php?categ=insoles&type=cushion&grp=Accessories&page=accessories" class="header-link">Cushion</a></li>
+                <li><a href="select.php?categ=insoles&type=normal&grp=Accessories&page=accessories" class="header-link">Normal</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">SOCKS</li>
-                <li><a href="select.php?categ=socks&type=sports&grp=accessories&page=accessories" class="header-link">Sports</a></li>
-                <li><a href="select.php?categ=socks&type=long&grp=accessories&page=accessories" class="header-link">Long</a></li>
-                <li><a href="select.php?categ=socks&type=school&grp=accessories&page=accessories" class="header-link">School</a></li>
-                <li><a href="select.php?categ=socks&type=cut&grp=accessories&page=accessories" class="header-link">Cut Socks</a></li>
+                <li><a href="select.php?categ=socks&type=sports&grp=Accessories&page=accessories" class="header-link">Sports</a></li>
+                <li><a href="select.php?categ=socks&type=long&grp=Accessories&page=accessories" class="header-link">Long</a></li>
+                <li><a href="select.php?categ=socks&type=school&grp=Accessories&page=accessories" class="header-link">School</a></li>
+                <li><a href="select.php?categ=socks&type=cut&grp=Accessories&page=accessories" class="header-link">Cut Socks</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">LACES</li>
-                <li><a href="select.php?categ=laces&type=sports&grp=accessories&page=accessories" class="header-link">Sports</a></li>
-                <li><a href="select.php?categ=laces&type=school&grp=accessories&page=accessories" class="header-link">School</a></li>
-                <li><a href="select.php?categ=laces&type=formals&grp=accessories&page=accessories" class="header-link">Formals</a></li>
+                <li><a href="select.php?categ=laces&type=sports&grp=Accessories&page=accessories" class="header-link">Sports</a></li>
+                <li><a href="select.php?categ=laces&type=school&grp=Accessories&page=accessories" class="header-link">School</a></li>
+                <li><a href="select.php?categ=laces&type=formals&grp=Accessories&page=accessories" class="header-link">Formals</a></li>
             </ul>
             <ul class="header-category">
                 <li class="header-category-title">POLISH</li>
-                <li><a href="select.php?categ=polish&type=black&grp=accessories&page=accessories" class="header-link">Black</a></li>
-                <li><a href="select.php?categ=polish&type=brown&grp=accessories&page=accessories" class="header-link">Brown</a></li>
-                <li><a href="select.php?categ=polish&type=white&grp=accessories&page=accessories" class="header-link">White</a></li>
+                <li><a href="select.php?categ=polish&type=black&grp=Accessories&page=accessories" class="header-link">Black</a></li>
+                <li><a href="select.php?categ=polish&type=brown&grp=Accessories&page=accessories" class="header-link">Brown</a></li>
+                <li><a href="select.php?categ=polish&type=white&grp=Accessories&page=accessories" class="header-link">White</a></li>
             </ul>
             </div>
             </div>

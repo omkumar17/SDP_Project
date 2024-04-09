@@ -13,6 +13,7 @@ if(isset($_GET['crtquant'])){
     $sql="UPDATE cart_tbl SET p_quantity='$quan' WHERE cartID= '$crtid'";
     $res=$conn->query($sql);
 }
+$orid=0;
 if(isset($_GET['oid'])){
     $orid=$_GET['oid'];
 }
@@ -556,10 +557,16 @@ $ship="";
                             <div><div class="title">Name</div><div class="titledetail"><?php echo $detrow['fname'].' '.$detrow['lname'];?></div></div>
                             <div><div class="title">Mobile no.</div><div class="titledetail"><?php echo $detrow['mobile'];?></div></div>
                             <div><div class="title">Email</div><div class="titledetail"><?php echo $detrow['email'];?></div></div>
-                            <div><div class="title">Order date</div><div class="titledetail"><?php echo $detrow['order_date'];?></div></div>
+                            <div><div class="title">Order date</div><div class="titledetail"><?php 
+                             $currentDate = $detrow['order_date']; 
+
+                             $timestamp2 = strtotime($currentDate); 
+
+                             $formattedDate2 = date("d F, Y", $timestamp2);
+                            echo $formattedDate2;?></div></div>
                             <div><div class="title">shipping address</div><div class="titledetail"><?php echo $detrow['shipping_address'];?></div></div>
                             <div><div class="title">order Status</div><div class="titledetail"><?php $status=$detrow['order_status']; echo $detrow['order_status'];?></div></div>
-                            <div><div class="title">order Amount</div><div class="titledetail"><?php $amt=$detrow['order_amount']; echo $detrow['order_amount'];?></div></div>
+                            <div><div class="title">order Amount</div><div class="titledetail">&#8377; <?php $amt=$detrow['order_amount']; echo $detrow['order_amount'];?></div></div>
                             <div><div class="title">shipping status</div><div class="titledetail"><?php $ship=$detrow['shipping_status']; echo $detrow['shipping_status'];?></div></div>
                             
                             <?php
@@ -575,7 +582,7 @@ $ship="";
         
     </div>
     <?php
-    if($status!="cancel" && $status!="replace" && $status=="complete"){
+    if($status!="cancelled" && $status!="replace" && $status=="complete"){
         ?>
     <div class="action">
         <div class="buttons cancel" style="width:auto;padding-right:20px;padding-left:20px;margin-bottom:50px;" onclick=cancelorder()>Cancel / Replace Order</div>
@@ -591,7 +598,7 @@ $ship="";
     else{
         ?>
     <div class="action">
-        <div class="buttons view" style="width:auto;padding-right:20px;padding-left:20px;margin-bottom:50px;" >view status</div>
+        <div class="buttons view" style="cursor:default;background:white;color:black;border:2px solid black;width:auto;padding-right:20px;padding-left:20px;margin-bottom:50px;" >Updates will be shared</div>
         <!-- <div class="buttons"></div> -->
         
     </div>
@@ -601,19 +608,22 @@ $ship="";
     
     <div class="canceltext">
         <div class="cancelcontainer">
+
+        <h5 style="color:red"><b>Note: Order cancelled cannot be reversed . You have to order again . <br>If you have more than one products , you have to order all items again.</b><br></h5><br>
             <form action="cancel.php" method="post">
+                <label for=""><h5><b>Select reasons</b> </h5></label><br>
                 <input type="hidden" class="hidden" name="oid" value="<?php echo $orid;?>" >
                 <input type="hidden" class="hidden" name="amt" value="<?php echo $amt;?>" >
-                <input type="radio" name="cancel" value="Dont want product" id="r1" required>
+                <input type="radio" name="cancel" value="dont want product" id="r1" required>
                 <label for="r1">Dont want product</label><br>
-                <input type="radio" name="cancel" value="Wrong product" id="r2" required>
+                <input type="radio" name="cancel" value="wrong product" id="r2" required>
                 <label for="r2">Wrong product</label><br>
-                <input type="radio" name="cancel" value="Defective product" id="r3" required>
+                <input type="radio" name="cancel" value="defective product" id="r3" required>
                 <label for="r3">Defective product</label><br>
-                <input type="radio" name="cancel" value="Wrong Details provided" id="r4" required>
+                <input type="radio" name="cancel" value="wrong Details provided" id="r4" required>
                 <label for="r4">Wrong Details provided</label><br><hr>
 
-                <input type="radio" name="type" value="cancel" id="tp1" required>
+                <input type="radio" name="type" value="cancelled" id="tp1" required>
                 <label for="tp1">Return</label><br>
                 <input type="radio" name="type" value="replace" id="tp2" required>
                 <label for="tp2">Replace</label><br>  
@@ -713,7 +723,7 @@ rejectButton.addEventListener("click", function(event) {
 
         function cancelorder(){
             
-            if(confirm("are you sure you want to cancel or return order ?")){
+            if(confirm("are you sure you want to cancel or Replace order ?")){
                 document.querySelector(".canceltext").style.display="flex";
                 document.querySelector(".cancel").style.display="none";
 
