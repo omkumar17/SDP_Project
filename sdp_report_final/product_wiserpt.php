@@ -494,19 +494,19 @@ while ($Page->Recordset && !$Page->Recordset->EOF && $Page->GroupCount <= $Page-
 <?php } ?>
 <?php if ($Page->Image_path1->Visible) { ?>
 		<td data-field="Image_path1"<?php echo $Page->Image_path1->cellAttributes() ?>>
-<span<?php echo $Page->Image_path1->viewAttributes() ?>><?php echo $Page->Image_path1->getViewValue() ?></span></td>
+<span<?php echo $Page->Image_path1->viewAttributes() ?>><img style="height:80px;width:80px" src="../<?php echo $Page->Image_path1->getViewValue() ?>"></span></td>
 <?php } ?>
 <?php if ($Page->Image_path2->Visible) { ?>
 		<td data-field="Image_path2"<?php echo $Page->Image_path2->cellAttributes() ?>>
-<span<?php echo $Page->Image_path2->viewAttributes() ?>><?php echo $Page->Image_path2->getViewValue() ?></span></td>
+<span<?php echo $Page->Image_path2->viewAttributes() ?>><img style="height:80px;width:80px" src="../<?php echo $Page->Image_path2->getViewValue() ?>"></span></td>
 <?php } ?>
 <?php if ($Page->Image_path3->Visible) { ?>
 		<td data-field="Image_path3"<?php echo $Page->Image_path3->cellAttributes() ?>>
-<span<?php echo $Page->Image_path3->viewAttributes() ?>><?php echo $Page->Image_path3->getViewValue() ?></span></td>
+<span<?php echo $Page->Image_path3->viewAttributes() ?>><img style="height:80px;width:80px" src="../<?php echo $Page->Image_path3->getViewValue() ?>"></span></td>
 <?php } ?>
 <?php if ($Page->Image_path4->Visible) { ?>
 		<td data-field="Image_path4"<?php echo $Page->Image_path4->cellAttributes() ?>>
-<span<?php echo $Page->Image_path4->viewAttributes() ?>><?php echo $Page->Image_path4->getViewValue() ?></span></td>
+<span<?php echo $Page->Image_path4->viewAttributes() ?>><img style="height:80px;width:80px" src="../<?php echo $Page->Image_path4->getViewValue() ?>"></span></td>
 <?php } ?>
 	</tr>
 <?php

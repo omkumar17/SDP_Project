@@ -17,7 +17,7 @@ $userorder="SELECT count(order_id) AS ordercount FROM `order_tbl` WHERE user_id=
 $res=$conn->query($userorder);
 $userorder=$res->fetch_assoc();
 
-$order="SELECT * FROM `order_tbl` WHERE user_id='$user' ORDER BY order_id desc";
+$order="SELECT * FROM `order_tbl` WHERE user_id='$user' AND order_status != 'pending' ORDER BY order_id desc";
 $res=$conn->query($order);
 
 

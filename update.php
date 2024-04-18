@@ -192,10 +192,12 @@ else if(isset($_POST['transaction_id'])){
         $payment_status=$_POST['payment_status'];
         if(isset($_POST['payment_status2']))
         $payment_status=$_POST['payment_status2'];
+        if($payment_status=="paid")
+        $payment_date=date("y-m-d");
        
         
     }
-    $sql = "UPDATE `payment` SET `payment_status`='$payment_status' WHERE `transaction_id`=$transaction_id";
+    $sql = "UPDATE `payment` SET `payment_status`='$payment_status',`payment_date`='$payment_date' WHERE `transaction_id`=$transaction_id";
     $result=$conn->query($sql);
     
     if($result)
