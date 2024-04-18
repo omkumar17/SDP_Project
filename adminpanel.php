@@ -1583,7 +1583,7 @@ if(isset($_GET['flag'])){
 
                                     $formattedDate2 = date("d F, Y", $timestamp2);
                                     if($formattedDate2=="30 November, -0001" || $formattedDate2=="01 January, 1970" )
-                                    $formattedDate2="Not Set";
+                                    $formattedDate2="null";
                                     echo $formattedDate2;
                             echo<<<_END
                                     </td>
@@ -1680,7 +1680,7 @@ if(isset($_GET['flag'])){
 
                                     $formattedDate2 = date("d F, Y", $timestamp2);
                                     if($formattedDate2=="30 November, -0001" || $formattedDate2=="01 January, 1970" )
-                                    $formattedDate2="Not Set";
+                                    $formattedDate2="null";
                                     echo $formattedDate2;
                             echo<<<_END
                                     </td>
@@ -1802,6 +1802,8 @@ if(isset($_GET['flag'])){
                                     $timestamp2 = strtotime($currentDate); 
 
                                     $formattedDate2 = date("d F, Y", $timestamp2);
+                                    if($formattedDate2=="30 November, -0001" || $formattedDate2=="01 January, 1970" )
+                                    $formattedDate2="null";
                                     echo $formattedDate2;
                             echo<<<_END
                                     </td>
@@ -1894,6 +1896,7 @@ if(isset($_GET['flag'])){
         // new DataTable('#product');
         // new DataTable('#order');
         new DataTable('.table');
+        var table=document.querySelectorAll(".table")
         var formcontainer=document.querySelectorAll(".formcontainer");
         var addcontainer=document.querySelectorAll(".addcontainer");
         var edit=document.querySelectorAll(".edit");
@@ -1904,6 +1907,23 @@ if(isset($_GET['flag'])){
         var cancela=document.querySelectorAll(".cancela");
         var submita=document.querySelectorAll(".submita")
         var add=document.querySelectorAll(".add");
+
+
+
+        // Get the tbody element of the table with id "MyTableId"
+// var tbody = document.querySelectorAll('.table tbody');
+
+// // Add a click event listener to the tbody element
+// for(car i =0; i<tbody.length;i++){
+// tbody[i].addEventListener('click', function(event) {
+//     // Check if the clicked element has the class "My_Button_id"
+//     if (event.target.classList.contains('edit')) {
+//         // Alert "you activate the event"
+//         alert("you activate the event");
+//     }
+// });
+// }
+
 
         
         function logfunction() {
@@ -1928,12 +1948,18 @@ if(isset($_GET['flag'])){
             addcontainer[k].style.display="none";
             });
          }
+
+
+   
+	// your code here
+
+
          for(let i=0;i<disable.length;i++){
             var con=disable[i].textContent;
-                    if(con=='Enabled'){
-                        disable[i].innerHTML='bkabh';
-                    }
-                    console.log("hi"+disable[i])
+            if(con=='Enabled'){
+                disable[i].innerHTML='bkabh';
+            }
+            console.log("hi"+disable[i])
             disable[i].addEventListener("click",(e)=>{
                 // e.preventDefault();
                 
@@ -1974,9 +2000,9 @@ if(isset($_GET['flag'])){
             //    console.log(value);
                 // console.log(prid)
             
-        })
+            })
             
-        }
+         }
         for(let i=0;i<edit.length;i++){
             edit[i].addEventListener("click",(e)=>{
                 // e.preventDefault();
@@ -2033,17 +2059,17 @@ if(isset($_GET['flag'])){
                 
                 
                 
-                var box=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[j].parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-                
-                console.log(e.currentTarget.parentNode.parentNode);
-                // sub_prod.style.display="block";
-                // var box=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[j].parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-                console.log("vfx"+box);
-                console.log(box.childNodes[9]);
-                box.childNodes[9].style.display="block";
-                box.childNodes[9].querySelector(".hide").addEventListener("click",(a)=>{
-                    box.childNodes[9].style.display="none";
-            });
+                    var box=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[j].parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+                    
+                    console.log(e.currentTarget.parentNode.parentNode);
+                    // sub_prod.style.display="block";
+                    // var box=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[j].parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+                    console.log("vfx"+box);
+                    console.log(box.childNodes[9]);
+                    box.childNodes[9].style.display="block";
+                    box.childNodes[9].querySelector(".hide").addEventListener("click",(a)=>{
+                        box.childNodes[9].style.display="none";
+                    });
                 }
                 var val=e.currentTarget.parentNode.parentNode.getElementsByTagName('td')[len-2].textContent;
                 // console.log("parent " + e.currentTarget.parentNode.parentNode.parentNode.parentNode.getElementsByTagName('tr')[0].textContent);
@@ -2082,6 +2108,7 @@ if(isset($_GET['flag'])){
             });
             
         }
+   
         
 
             

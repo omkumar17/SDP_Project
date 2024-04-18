@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2024 at 10:25 PM
+-- Generation Time: Apr 18, 2024 at 06:20 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,18 +32,10 @@ CREATE TABLE `cart_tbl` (
   `user_id` int(5) NOT NULL,
   `product_id` int(6) NOT NULL,
   `p_quantity` int(2) NOT NULL,
-  `p_color` varchar(8) NOT NULL,
+  `p_color` varchar(20) NOT NULL,
   `p_size` int(2) NOT NULL,
   `p_discount` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `cart_tbl`
---
-
-INSERT INTO `cart_tbl` (`cartID`, `user_id`, `product_id`, `p_quantity`, `p_color`, `p_size`, `p_discount`) VALUES
-(61, 39, 5687, 1, 'brown', 6, 0),
-(66, 27, 5002, 1, 'blue', 6, 0);
 
 -- --------------------------------------------------------
 
@@ -68,9 +60,9 @@ INSERT INTO `category` (`category_id`, `Category_name`, `Category_desc`, `cat_st
 (3, 'sliders', 'it comprises of men, woman and kids sliders', 'Enabled'),
 (4, 'slippers', 'it comprises of men, woman and kids slippers', 'Enabled'),
 (5, 'crocs', 'it comprises of men, woman and kids crocs', 'Enabled'),
-(6, 'Insoles', 'shoes Insoles', 'Enabled'),
-(7, 'Socks', 'shoes socks', 'Enabled'),
-(8, 'Polish', 'shoes polish', 'Enabled'),
+(6, 'insoles', 'shoes Insoles', 'Enabled'),
+(7, 'socks', 'shoes socks', 'Enabled'),
+(8, 'polish', 'shoes polish', 'Enabled'),
 (9, 'laces', 'shoes laces', 'Enabled'),
 (10, 'sneakers', 'it comprises of men, woman and kids shoes', 'Enabled');
 
@@ -96,7 +88,7 @@ CREATE TABLE `category wise` (
 
 CREATE TABLE `color` (
   `cid` int(3) NOT NULL,
-  `product_id` int(3) NOT NULL,
+  `product_id` int(6) NOT NULL,
   `color` varchar(20) NOT NULL,
   `color_status` varchar(20) NOT NULL DEFAULT 'Enabled'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -114,7 +106,7 @@ INSERT INTO `color` (`cid`, `product_id`, `color`, `color_status`) VALUES
 (6, 77075, 'maroon', 'Enabled'),
 (7, 77075, 'pink', 'Enabled'),
 (8, 5100, 'blue', 'Enabled'),
-(10, 4866, 'cream brown', 'Enabled'),
+(10, 4866, 'creambrown', 'Enabled'),
 (11, 5002, 'blue', 'Enabled'),
 (12, 5002, 'brown', 'Enabled'),
 (13, 1026, 'blue', 'Enabled'),
@@ -146,7 +138,7 @@ INSERT INTO `color` (`cid`, `product_id`, `color`, `color_status`) VALUES
 CREATE TABLE `feedback` (
   `feedback_id` int(5) NOT NULL,
   `user_id` int(5) NOT NULL,
-  `product_id` int(3) NOT NULL,
+  `product_id` int(6) NOT NULL,
   `feedback_rating` int(1) NOT NULL,
   `feedback_desc` text NOT NULL,
   `feedback_date` date NOT NULL DEFAULT current_timestamp()
@@ -164,7 +156,9 @@ INSERT INTO `feedback` (`feedback_id`, `user_id`, `product_id`, `feedback_rating
 (5, 36, 5002, 5, 'good product and reasonable price', '2024-04-04'),
 (6, 36, 1026, 5, 'price is good. styling is also great', '2024-04-04'),
 (7, 39, 1026, 5, 'Great Product !', '2024-04-04'),
-(8, 39, 1026, 4, 'good Product', '2024-04-04');
+(8, 39, 1026, 4, 'good Product', '2024-04-04'),
+(9, 32, 5100, 4, 'comfortable cusion and proper grip.\r\nprice is little bit high\r\nbut great product', '2024-04-09'),
+(10, 33, 1026, 4, 'good product with wholesale pricing', '2024-04-13');
 
 -- --------------------------------------------------------
 
@@ -239,7 +233,7 @@ CREATE TABLE `offer` (
 
 INSERT INTO `offer` (`offer_id`, `offer_name`, `offer_details`, `offer_status`, `offer_percent`, `offer_start_date`, `offer_end_date`) VALUES
 (9, 'walkaro783', 'Get Upto 35% Offer on any purchase of your order.', 'Enabled', 12, '2024-01-17', '2024-04-24'),
-(10, 'foot15', 'Get Flat 15% off on your first Order. Enjoy Free Shipping ', 'Disabled', 15, '2024-01-31', '2024-02-29'),
+(10, 'foot15', 'Get Flat 15% off on your first Order. Enjoy Free Shipping ', 'Enabled', 15, '2024-01-31', '2024-02-29'),
 (11, 'welcome12', 'Apply offer 12% OFF', 'Enabled', 12, '2024-03-13', '2024-05-23');
 
 -- --------------------------------------------------------
@@ -314,7 +308,7 @@ CREATE TABLE `order sales` (
 CREATE TABLE `order_detail` (
   `orderdetail_id` int(5) NOT NULL,
   `order_id` int(3) NOT NULL,
-  `product_id` int(3) NOT NULL,
+  `product_id` int(6) NOT NULL,
   `quantity` int(3) NOT NULL,
   `rate` int(5) NOT NULL,
   `size` int(3) NOT NULL,
@@ -348,7 +342,20 @@ INSERT INTO `order_detail` (`orderdetail_id`, `order_id`, `product_id`, `quantit
 (56, 88, 1026, 20, 999, 6, 'blue', 3996, 15984),
 (57, 88, 5002, 1, 227, 6, 'blue', 0, 227),
 (58, 89, 1026, 1, 999, 6, 'blue', 0, 999),
-(59, 89, 5002, 1, 227, 6, 'blue', 0, 227);
+(59, 89, 5002, 1, 227, 6, 'blue', 0, 227),
+(60, 90, 5100, 1, 1499, 40, 'blue', 0, 1499),
+(61, 91, 1026, 1, 999, 6, 'white', 0, 999),
+(62, 92, 1026, 20, 999, 6, 'blue', 3996, 15984),
+(63, 92, 5002, 1, 227, 6, 'blue', 0, 227),
+(64, 93, 1026, 20, 999, 6, 'blue', 3996, 15984),
+(65, 93, 5002, 1, 227, 6, 'blue', 0, 227),
+(66, 94, 4866, 1, 194, 5, 'creambro', 0, 194),
+(67, 95, 4866, 1, 194, 5, 'creambro', 0, 194),
+(68, 96, 4866, 1, 194, 5, 'creambro', 0, 194),
+(69, 97, 4866, 1, 194, 5, 'creambro', 0, 194),
+(70, 97, 5002, 1, 227, 6, 'blue', 0, 227),
+(71, 98, 5100, 1, 1499, 40, 'blue', 0, 1499),
+(72, 99, 5100, 1, 1499, 40, 'blue', 0, 1499);
 
 -- --------------------------------------------------------
 
@@ -376,20 +383,30 @@ CREATE TABLE `order_tbl` (
 --
 
 INSERT INTO `order_tbl` (`order_id`, `user_id`, `order_date`, `order_status`, `order_amount`, `discount`, `fname`, `lname`, `mobile`, `email`, `shipping_address`, `shipping_status`) VALUES
-(76, 27, '2024-04-02', 'complete', 4846, 1198, 'harsh', 'wadhwani', 8799553324, 'harshwadhwani268@gmail.com', '2,shilpa society, india colony, ahmedabad', 'shipped'),
-(77, 27, '2024-04-04', 'packed', 1123, 153, 'Harsh', 'Wadhwani', 8401409849, 'harshwadhwani268@gmail.com', '18 parth society bapunagar', 'processing'),
+(76, 27, '2024-02-29', 'complete', 4846, 1198, 'harsh', 'wadhwani', 8799553324, 'harshwadhwani268@gmail.com', '2,shilpa society, india colony, ahmedabad', 'shipped'),
+(77, 27, '2024-03-06', 'packed', 1123, 153, 'Harsh', 'Wadhwani', 8401409849, 'harshwadhwani268@gmail.com', '18 parth society bapunagar', 'processing'),
 (78, 32, '2024-04-04', 'packed', 13631, 6399, 'om', 'kumar', 9693808798, 'omk738774@gmail.com', 'b11 sharad apartment', 'processing'),
-(79, 34, '2024-04-04', 'complete', 244, 33, 'jatin', 'kanzariya', 8525652312, 'jatink123@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 ', 'shipped'),
-(80, 33, '2024-04-04', 'cancel', 1049, 0, 'kruparth', 'kanzariya', 7874773789, 'kruparth1610@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 ', 'shipped'),
+(79, 34, '2024-01-19', 'complete', 244, 33, 'jatin', 'kanzariya', 8525652312, 'jatink123@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 ', 'shipped'),
+(80, 33, '2024-04-04', 'cancelled', 1049, 0, 'kruparth', 'kanzariya', 7874773789, 'kruparth1610@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 ', 'shipped'),
 (81, 38, '2024-04-04', 'packed', 1123, 153, 'rocky', 'bhai', 8580250157, 'rocky12@gmail.com', 'green pg navrangpura', 'processing'),
-(82, 33, '2024-04-04', 'complete', 16873, 7924, 'kruparth', 'kanzariya', 8580250157, 'kruparth1610@gmail.com', 'samras boys hostel', 'shipped'),
+(82, 33, '2023-11-17', 'cancelled', 16873, 7924, 'kruparth', 'kanzariya', 8580250157, 'kruparth1610@gmail.com', 'samras boys hostel', 'shipped'),
 (83, 32, '2024-04-04', 'placed', 244, 33, 'om', 'kumar', 9693808798, 'omk738774@gmail.com', 'hn 49 shivpuri colony', 'processing'),
 (84, 35, '2024-04-04', 'placed', 924, 125, 'rohan', 'rathod', 9944663322, 'rohanrathod@gmail.com', 'sharad apartment navranpura', 'processing'),
 (85, 36, '2024-04-04', 'complete', 1276, 0, 'Saurabh', 'garg', 8585220013, 'saurabh@gmail.com', 'b11 pratistha 20 ', 'shipped'),
-(86, 39, '2024-04-04', 'cancel', 924, 125, 'kashyap', 'kanzariya', 9546541254, 'kruparth2000@gmail.com', 'nava Amrapar Halvad', 'shipped'),
+(86, 39, '2024-04-04', 'cancelled', 924, 125, 'kashyap', 'kanzariya', 9546541254, 'kruparth2000@gmail.com', 'nava Amrapar Halvad', 'shipped'),
 (87, 39, '2024-04-04', 'placed', 277, 0, 'kashyap', 'kannzariya', 9546541254, 'kruparth2000@gmail.com', 'Isanpur, halvad', 'processing'),
-(88, 33, '2024-04-04', 'placed', 13831, 6426, 'Kruparth', 'Kanzariya', 7874773789, 'kruparth1610@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
-(89, 27, '2024-04-06', 'placed', 1123, 153, 'Om', 'Kumar', 9693808798, 'omkumar1870@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing');
+(88, 33, '2024-04-04', 'packed', 13831, 6426, 'Kruparth', 'Kanzariya', 7874773789, 'kruparth1610@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
+(89, 27, '2024-04-06', 'placed', 1123, 153, 'Om', 'Kumar', 9693808798, 'omkumar1870@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
+(90, 32, '2024-04-09', 'placed', 1364, 185, 'Om', 'Kumar', 9693808798, 'omk738774@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
+(91, 32, '2024-04-09', 'placed', 1049, 0, 'Om', 'Kumar', 9693808798, 'omkumar1870@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
+(92, 33, '2024-04-13', 'placed', 13831, 6426, 'Om', 'Kumar', 9693808798, 'omk738774@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
+(93, 33, '2024-04-13', 'pending', 13831, 6426, 'Om', 'Kumar', 9693808798, 'omkumar1870@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
+(94, 27, '2024-04-15', 'placed', 244, 0, 'Om', 'Kumar', 9693808798, 'omkumar1870@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
+(95, 27, '2024-04-15', 'placed', 244, 0, 'Om', 'Kumar', 9693808798, 'omkumar1870@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
+(96, 27, '2024-04-15', 'placed', 244, 0, 'Om', 'Kumar', 9693808798, 'omkumar1870@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
+(97, 27, '2024-04-18', 'placed', 471, 0, 'Om', 'Kumar', 9693808798, 'omkumar1870@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
+(98, 27, '2024-04-18', 'placed', 1549, 0, 'Om', 'Kumar', 9693808798, 'omk738774@gmail.com', 'HN-49, Shivpuri colony, Bistupur', 'processing'),
+(99, 27, '2024-04-18', 'placed', 1549, 0, 'Om', 'Kumar', 9693808798, 'omk738774@gmail.com', 'HN-49, Shivpuri colony, Bistupur', 'processing');
 
 -- --------------------------------------------------------
 
@@ -401,7 +418,7 @@ CREATE TABLE `payment` (
   `transaction_id` bigint(25) NOT NULL,
   `order_id` int(3) NOT NULL,
   `payment_mode` varchar(7) NOT NULL,
-  `payment_date` date NOT NULL DEFAULT current_timestamp(),
+  `payment_date` date DEFAULT NULL,
   `payment_status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -411,19 +428,24 @@ CREATE TABLE `payment` (
 
 INSERT INTO `payment` (`transaction_id`, `order_id`, `payment_mode`, `payment_date`, `payment_status`) VALUES
 (1712075335585563845, 76, 'online', '2024-04-02', 'paid'),
-(1712175732584617718, 77, 'online', '2024-04-04', 'paid'),
-(1712176273531346560, 78, 'COD', '2024-04-04', 'pending'),
+(1712175732584617718, 77, 'online', '2024-01-24', 'paid'),
+(1712176273531346560, 78, 'COD', '0000-00-00', 'pending'),
 (1712176499370572019, 79, 'COD', '2024-04-04', 'paid'),
-(1712176683680713465, 80, 'online', '2024-04-04', 'paid'),
-(1712176881285650990, 81, 'COD', '2024-04-04', 'pending'),
-(1712177158761875198, 82, 'COD', '2024-04-04', 'paid'),
-(1712177427689482992, 83, 'online', '2024-04-04', 'paid'),
+(1712176683680713465, 80, 'online', '2024-01-09', 'paid'),
+(1712176881285650990, 81, 'COD', '2024-04-13', 'paid'),
+(1712177158761875198, 82, 'COD', '2023-12-05', 'paid'),
+(1712177427689482992, 83, 'online', '2024-01-16', 'paid'),
 (1712177543746614541, 84, 'online', '2024-04-04', 'paid'),
 (1712177659503712739, 85, 'COD', '2024-04-04', 'paid'),
 (1712202169158318824, 86, 'COD', '2024-04-04', 'paid'),
-(1712204939863586094, 87, 'COD', '2024-04-04', 'pending'),
+(1712204939863586094, 87, 'COD', '0000-00-00', 'pending'),
 (1712237976761126362, 88, 'online', '2024-04-04', 'paid'),
-(1712342378316141978, 89, 'COD', '2024-04-06', 'pending');
+(1712342378316141978, 89, 'COD', '0000-00-00', 'pending'),
+(1712683469868531538, 90, 'online', '2024-04-09', 'paid'),
+(1712683797382608089, 91, 'online', '2024-04-09', 'paid'),
+(1713003119994259741, 92, 'COD', '0000-00-00', 'pending'),
+(1713456433465357430, 97, 'online', '2024-04-18', 'paid'),
+(1713456526155372585, 99, 'COD', NULL, 'pending');
 
 -- --------------------------------------------------------
 
@@ -497,11 +519,11 @@ INSERT INTO `product` (`Product_id`, `Category_ID`, `offer_id`, `grp`, `product_
 (3342, 1, NULL, 'Womans', 'walkaro', 'WALKAROO BOYS CASUAL SHOES - WY3342', 584, 899, 'Enabled'),
 (3365, 1, NULL, 'Womans', 'walkaro', 'WALKAROO WOMEN CASUAL SHOES - WY3365', 519, 799, 'Enabled'),
 (3369, 1, NULL, 'Womans', 'walkaro', 'WALKAROO WOMEN CASUAL SHOE - WY3369', 649, 999, 'Enabled'),
-(4866, 4, NULL, 'Womans', 'Walkaro', 'WALKAROO WOMEN FLIP FLOP WC4866', 194, 299, 'Enabled'),
-(5002, 4, NULL, 'Mens', 'Walkaro', 'WALKAROO MEN SOLID THONG SANDALS ART WG5002', 227, 349, 'Disabled'),
-(5100, 2, NULL, 'Mens', 'Lee cooper', 'Polyurethane Slipon Men\'s Sport Sandals', 1499, 1999, 'Enabled'),
-(5109, 2, NULL, 'Mens', 'Lee cooper', 'Polyurethane Slipon Men\'s Sport Sandals', 1699, 2199, 'Enabled'),
-(5687, 4, NULL, 'Mens', 'Walkaro', 'Walkaroo Men Cross strap Slide Sandals - W5687', 227, 349, 'Enabled'),
+(4866, 4, NULL, 'Womans', 'walkaro', 'WALKAROO WOMEN FLIP FLOP WC4866', 194, 299, 'Enabled'),
+(5002, 4, NULL, 'Mens', 'walkaro', 'WALKAROO MEN SOLID THONG SANDALS ART WG5002', 227, 349, 'Disabled'),
+(5100, 2, NULL, 'Mens', 'lee-cooper', 'Polyurethane Slipon Men\'s Sport Sandals', 1499, 1999, 'Enabled'),
+(5109, 2, NULL, 'Mens', 'lee-cooper', 'Polyurethane Slipon Men\'s Sport Sandals', 1699, 2199, 'Enabled'),
+(5687, 4, NULL, 'Mens', 'walkaro', 'Walkaroo Men Cross strap Slide Sandals - W5687', 227, 349, 'Enabled'),
 (8004, 5, NULL, 'Kids', 'paragon', 'Paragon EVK8004C Unisex Clogs For Kids | Outdoor and Indoor Casual, Durable Clogs', 749, 999, 'Enabled'),
 (77075, 2, NULL, 'Womans', 'paragon', 'Women\'s Solea Maroon Sandal', 349, 499, 'Enabled');
 
@@ -542,7 +564,7 @@ CREATE TABLE `product namewise report` (
 -- (See below for the actual view)
 --
 CREATE TABLE `product order wise` (
-`product_id` int(3)
+`product_id` int(6)
 ,`product_name` varchar(30)
 ,`price` int(4)
 ,`count` bigint(21)
@@ -630,97 +652,97 @@ CREATE TABLE `product_desc` (
 --
 
 INSERT INTO `product_desc` (`prodesc_ID`, `cid`, `product_type`, `size`, `quantity`, `prodesc_status`) VALUES
-(1, 1, 'Daily casual', 6, 100, 'Enabled'),
-(2, 1, 'Daily casual', 7, 100, 'Enabled'),
-(3, 1, 'Daily casual', 8, 99, 'Enabled'),
-(4, 1, 'Daily casual', 9, 100, 'Enabled'),
-(5, 1, 'Daily casual', 10, 100, 'Enabled'),
-(6, 2, 'Daily casual', 6, 100, 'Enabled'),
-(7, 2, 'Daily casual', 7, 100, 'Enabled'),
-(8, 2, 'Daily casual', 8, 100, 'Enabled'),
-(9, 2, 'Daily casual', 9, 100, 'Enabled'),
-(10, 2, 'Daily casual', 10, 100, 'Enabled'),
-(11, 3, 'Clogs', 6, 100, 'Enabled'),
-(12, 3, 'Clogs', 7, 100, 'Enabled'),
-(13, 3, 'Clogs', 8, 100, 'Enabled'),
-(14, 4, 'Sports Sandals', 40, 100, 'Enabled'),
-(15, 4, 'Sports Sandals', 41, 100, 'Enabled'),
-(16, 4, 'Sports Sandals', 42, 100, 'Enabled'),
-(17, 4, 'Sports Sandals', 43, 100, 'Enabled'),
-(18, 4, 'Sports Sandals', 44, 100, 'Enabled'),
-(19, 4, 'Sports Sandals', 45, 100, 'Enabled'),
-(20, 5, 'Sports Sandals', 40, 100, 'Enabled'),
-(21, 5, 'Sports Sandals', 41, 100, 'Enabled'),
-(22, 5, 'Sports Sandals', 42, 100, 'Enabled'),
-(23, 5, 'Sports Sandals', 43, 100, 'Enabled'),
-(24, 5, 'Sports Sandals', 44, 100, 'Enabled'),
-(25, 6, 'PU Sandals', 4, 100, 'Enabled'),
-(26, 6, 'PU Sandals', 5, 100, 'Enabled'),
-(27, 6, 'PU Sandals', 6, 100, 'Enabled'),
-(28, 6, 'PU Sandals', 7, 100, 'Enabled'),
-(29, 6, 'PU Sandals', 8, 100, 'Enabled'),
-(30, 7, 'PU Sandals', 4, 100, 'Enabled'),
-(31, 7, 'PU Sandals', 5, 100, 'Enabled'),
-(32, 7, 'PU Sandals', 6, 100, 'Enabled'),
-(33, 7, 'PU Sandals', 7, 100, 'Enabled'),
-(34, 7, 'PU Sandals', 8, 100, 'Enabled'),
-(35, 8, 'Sports Sandals', 40, 100, 'Enabled'),
-(36, 8, 'Sports Sandals', 41, 100, 'Enabled'),
-(37, 8, 'Sports Sandals', 42, 100, 'Enabled'),
-(38, 8, 'Sports Sandals', 43, 100, 'Enabled'),
-(39, 8, 'Sports Sandals', 44, 100, 'Enabled'),
-(40, 8, 'Sports Sandals', 45, 100, 'Enabled'),
-(41, 10, 'rubber slipper', 5, 100, 'Enabled'),
-(42, 10, 'rubber slipper', 6, 100, 'Enabled'),
-(43, 10, 'rubber slipper', 7, 100, 'Enabled'),
-(44, 10, 'rubber slipper', 8, 100, 'Enabled'),
-(45, 11, 'solid slipper', 6, 97, 'Enabled'),
-(46, 11, 'solid slipper', 7, 99, 'Enabled'),
-(47, 11, 'solid slipper', 8, 99, 'Enabled'),
-(48, 11, 'solid slipper', 9, 77, 'Enabled'),
-(49, 11, 'solid slipper', 10, 100, 'Enabled'),
-(50, 11, 'solid slipper', 11, 100, 'Enabled'),
-(51, 11, 'solid slipper', 12, 100, 'Enabled'),
-(52, 12, 'solid slipper', 6, 100, 'Enabled'),
-(53, 12, 'solid slipper', 7, 100, 'Enabled'),
-(54, 12, 'solid slipper', 8, 100, 'Enabled'),
-(55, 12, 'solid slipper', 9, 100, 'Enabled'),
-(56, 12, 'solid slipper', 10, 100, 'Enabled'),
-(57, 12, 'solid slipper', 11, 100, 'Enabled'),
-(58, 12, 'solid slipper', 12, 100, 'Enabled'),
-(59, 13, 'sneakers', 6, 58, 'Enabled'),
+(1, 1, 'daily-casual', 6, 100, 'Enabled'),
+(2, 1, 'daily-casual', 7, 100, 'Enabled'),
+(3, 1, 'daily-casual', 8, 99, 'Enabled'),
+(4, 1, 'daily-casual', 9, 100, 'Enabled'),
+(5, 1, 'daily-casual', 10, 100, 'Enabled'),
+(6, 2, 'daily-casual', 6, 100, 'Enabled'),
+(7, 2, 'daily-casual', 7, 100, 'Enabled'),
+(8, 2, 'daily-casual', 8, 100, 'Enabled'),
+(9, 2, 'daily-casual', 9, 100, 'Enabled'),
+(10, 2, 'daily-casual', 10, 100, 'Enabled'),
+(11, 3, 'clogs', 6, 100, 'Enabled'),
+(12, 3, 'clogs', 7, 100, 'Enabled'),
+(13, 3, 'clogs', 8, 100, 'Enabled'),
+(14, 4, 'sports-sandal', 40, 100, 'Enabled'),
+(15, 4, 'sports-sandal', 41, 100, 'Enabled'),
+(16, 4, 'sports-sandal', 42, 100, 'Enabled'),
+(17, 4, 'sports-sandal', 43, 100, 'Enabled'),
+(18, 4, 'sports-sandal', 44, 100, 'Enabled'),
+(19, 4, 'sports-sandal', 45, 100, 'Enabled'),
+(20, 5, 'sports-sandal', 40, 100, 'Enabled'),
+(21, 5, 'sports-sandal', 41, 100, 'Enabled'),
+(22, 5, 'sports-sandal', 42, 100, 'Enabled'),
+(23, 5, 'sports-sandal', 43, 100, 'Enabled'),
+(24, 5, 'sports-sandal', 44, 100, 'Enabled'),
+(25, 6, 'PU-sandal', 4, 100, 'Enabled'),
+(26, 6, 'PU-sandal', 5, 100, 'Enabled'),
+(27, 6, 'PU-sandal', 6, 100, 'Enabled'),
+(28, 6, 'PU-sandal', 7, 100, 'Enabled'),
+(29, 6, 'PU-sandal', 8, 100, 'Enabled'),
+(30, 7, 'PU-sandal', 4, 100, 'Enabled'),
+(31, 7, 'PU-sandal', 5, 100, 'Enabled'),
+(32, 7, 'PU-sandal', 6, 100, 'Enabled'),
+(33, 7, 'PU-sandal', 7, 100, 'Enabled'),
+(34, 7, 'PU-sandal', 8, 100, 'Enabled'),
+(35, 8, 'sports-sandal', 40, 97, 'Enabled'),
+(36, 8, 'sports-sandal', 41, 100, 'Enabled'),
+(37, 8, 'sports-sandal', 42, 100, 'Enabled'),
+(38, 8, 'sports-sandal', 43, 100, 'Enabled'),
+(39, 8, 'sports-sandal', 44, 100, 'Enabled'),
+(40, 8, 'sports-sandal', 45, 100, 'Enabled'),
+(41, 10, 'rubber-slipper', 5, 96, 'Enabled'),
+(42, 10, 'rubber-slipper', 6, 100, 'Enabled'),
+(43, 10, 'rubber-slipper', 7, 100, 'Enabled'),
+(44, 10, 'rubber-slipper', 8, 100, 'Enabled'),
+(45, 11, 'solid-slipper', 6, 94, 'Enabled'),
+(46, 11, 'solid-slipper', 7, 99, 'Enabled'),
+(47, 11, 'solid-slipper', 8, 99, 'Enabled'),
+(48, 11, 'solid-slipper', 9, 98, 'Enabled'),
+(49, 11, 'solid-slipper', 10, 100, 'Enabled'),
+(50, 11, 'solid-slipper', 11, 100, 'Enabled'),
+(51, 11, 'solid-slipper', 12, 100, 'Enabled'),
+(52, 12, 'solid-slipper', 6, 100, 'Enabled'),
+(53, 12, 'solid-slipper', 7, 100, 'Enabled'),
+(54, 12, 'solid-slipper', 8, 100, 'Enabled'),
+(55, 12, 'solid-slipper', 9, 100, 'Enabled'),
+(56, 12, 'solid-slipper', 10, 100, 'Enabled'),
+(57, 12, 'solid-slipper', 11, 100, 'Enabled'),
+(58, 12, 'solid-slipper', 12, 100, 'Enabled'),
+(59, 13, 'sneakers', 6, 18, 'Enabled'),
 (60, 13, 'sneakers', 7, 99, 'Enabled'),
 (61, 13, 'sneakers', 8, 98, 'Enabled'),
-(62, 13, 'sneakers', 9, 78, 'Enabled'),
+(62, 13, 'sneakers', 9, 98, 'Enabled'),
 (63, 13, 'sneakers', 10, 99, 'Enabled'),
-(64, 14, 'sneakers', 6, 100, 'Enabled'),
+(64, 14, 'sneakers', 6, 99, 'Enabled'),
 (65, 14, 'sneakers', 7, 100, 'Enabled'),
 (66, 14, 'sneakers', 8, 100, 'Enabled'),
 (67, 14, 'sneakers', 9, 100, 'Enabled'),
 (68, 14, 'sneakers', 10, 100, 'Enabled'),
-(69, 15, 'Fancy slipper', 6, 100, 'Enabled'),
-(70, 15, 'Fancy slipper', 7, 100, 'Enabled'),
-(71, 15, 'Fancy slipper', 8, 100, 'Enabled'),
-(72, 15, 'Fancy slipper', 9, 100, 'Enabled'),
-(73, 15, 'Fancy slipper', 10, 100, 'Enabled'),
-(74, 16, 'Normal slipper', 6, 100, 'Enabled'),
-(75, 16, 'Normal slipper', 7, 100, 'Enabled'),
-(76, 16, 'Normal slipper', 8, 100, 'Enabled'),
-(77, 16, 'Normal slipper', 9, 100, 'Enabled'),
-(78, 16, 'Normal slipper', 10, 100, 'Enabled'),
-(79, 17, 'Running Shoes', 6, 100, 'Enabled'),
-(80, 17, 'Running Shoes', 7, 100, 'Enabled'),
-(81, 17, 'Running Shoes', 8, 100, 'Enabled'),
-(82, 17, 'Running Shoes', 9, 100, 'Enabled'),
-(83, 17, 'Running Shoes', 10, 100, 'Enabled'),
-(84, 18, 'Sports sandals', 2, 100, 'Enabled'),
-(85, 18, 'Sports sandals', 3, 100, 'Enabled'),
-(86, 18, 'Sports sandals', 4, 100, 'Enabled'),
-(87, 18, 'Sports sandals', 5, 100, 'Enabled'),
-(88, 19, 'Running Slipper', 2, 100, 'Enabled'),
-(89, 19, 'Running Slipper', 3, 100, 'Enabled'),
-(90, 19, 'Running Slipper', 4, 100, 'Enabled'),
-(91, 19, 'Running Slipper', 5, 100, 'Enabled'),
+(69, 15, 'fancy-slipper', 6, 100, 'Enabled'),
+(70, 15, 'fancy-slipper', 7, 100, 'Enabled'),
+(71, 15, 'fancy-slipper', 8, 100, 'Enabled'),
+(72, 15, 'fancy-slipper', 9, 100, 'Enabled'),
+(73, 15, 'fancy-slipper', 10, 100, 'Enabled'),
+(74, 16, 'normal-slipper', 6, 100, 'Enabled'),
+(75, 16, 'normal-slipper', 7, 100, 'Enabled'),
+(76, 16, 'normal-slipper', 8, 100, 'Enabled'),
+(77, 16, 'normal-slipper', 9, 100, 'Enabled'),
+(78, 16, 'normal-slipper', 10, 100, 'Enabled'),
+(79, 17, 'running-shoe', 6, 100, 'Enabled'),
+(80, 17, 'running-shoe', 7, 100, 'Enabled'),
+(81, 17, 'running-shoe', 8, 100, 'Enabled'),
+(82, 17, 'running-shoe', 9, 100, 'Enabled'),
+(83, 17, 'running-shoe', 10, 100, 'Enabled'),
+(84, 18, 'sports-sandal', 2, 100, 'Enabled'),
+(85, 18, 'sports-sandal', 3, 100, 'Enabled'),
+(86, 18, 'sports-sandal', 4, 100, 'Enabled'),
+(87, 18, 'sports-sandal', 5, 100, 'Enabled'),
+(88, 19, 'running-slipper', 2, 100, 'Enabled'),
+(89, 19, 'running-slipper', 3, 100, 'Enabled'),
+(90, 19, 'running-slipper', 4, 100, 'Enabled'),
+(91, 19, 'running-slipper', 5, 100, 'Enabled'),
 (92, 20, 'sneakers', 3, 100, 'Enabled'),
 (93, 20, 'sneakers', 4, 100, 'Enabled'),
 (94, 20, 'sneakers', 5, 100, 'Enabled'),
@@ -729,14 +751,14 @@ INSERT INTO `product_desc` (`prodesc_ID`, `cid`, `product_type`, `size`, `quanti
 (97, 21, 'slipper', 6, 100, 'Enabled'),
 (98, 21, 'slipper', 7, 100, 'Enabled'),
 (99, 21, 'slipper', 8, 100, 'Enabled'),
-(100, 22, 'casual Slipper', 5, 100, 'Enabled'),
-(101, 22, 'casual Slipper', 6, 100, 'Enabled'),
-(102, 22, 'casual Slipper', 7, 100, 'Enabled'),
-(103, 22, 'casual Slipper', 8, 100, 'Enabled'),
-(104, 25, 'Insoles', 6, 100, 'Enabled'),
-(105, 25, 'Insoles', 7, 100, 'Enabled'),
-(106, 25, 'Insoles', 8, 100, 'Enabled'),
-(107, 25, 'Insoles', 9, 100, 'Enabled'),
+(100, 22, 'casual-slipper', 5, 100, 'Enabled'),
+(101, 22, 'casual-slipper', 6, 100, 'Enabled'),
+(102, 22, 'casual-slipper', 7, 100, 'Enabled'),
+(103, 22, 'casual-slipper', 8, 100, 'Enabled'),
+(104, 25, 'insoles', 6, 100, 'Enabled'),
+(105, 25, 'insoles', 7, 100, 'Enabled'),
+(106, 25, 'insoles', 8, 100, 'Enabled'),
+(107, 25, 'insoles', 9, 100, 'Enabled'),
 (108, 27, 'cushion', 6, 100, 'Enabled'),
 (109, 27, 'cushion', 7, 100, 'Enabled'),
 (110, 27, 'cushion', 8, 100, 'Enabled'),
@@ -745,10 +767,10 @@ INSERT INTO `product_desc` (`prodesc_ID`, `cid`, `product_type`, `size`, `quanti
 (113, 23, 'cushion', 7, 100, 'Enabled'),
 (114, 23, 'cushion', 8, 100, 'Enabled'),
 (115, 23, 'cushion', 9, 100, 'Enabled'),
-(116, 24, 'Insoles', 6, 100, 'Enabled'),
-(117, 24, 'Insoles', 7, 100, 'Enabled'),
-(118, 24, 'Insoles', 8, 100, 'Enabled'),
-(119, 24, 'Insoles', 9, 100, 'Enabled'),
+(116, 24, 'insoles', 6, 100, 'Enabled'),
+(117, 24, 'insoles', 7, 100, 'Enabled'),
+(118, 24, 'insoles', 8, 100, 'Enabled'),
+(119, 24, 'insoles', 9, 100, 'Enabled'),
 (120, 28, 'casual', 6, 100, 'Enabled'),
 (121, 28, 'casual', 7, 100, 'Enabled'),
 (122, 28, 'casual', 8, 100, 'Enabled'),
@@ -757,10 +779,10 @@ INSERT INTO `product_desc` (`prodesc_ID`, `cid`, `product_type`, `size`, `quanti
 (125, 29, 'casual', 7, 100, 'Enabled'),
 (126, 29, 'casual', 8, 100, 'Enabled'),
 (127, 29, 'casual', 9, 100, 'Enabled'),
-(128, 30, 'Sports Shoes', 6, 100, 'Enabled'),
-(129, 30, 'Sports Shoes', 7, 100, 'Enabled'),
-(130, 30, 'Sports Shoes', 8, 100, 'Enabled'),
-(131, 30, 'Sports Shoes', 9, 100, 'Enabled'),
+(128, 30, 'sports-shoe', 6, 100, 'Enabled'),
+(129, 30, 'sports-shoe', 7, 100, 'Enabled'),
+(130, 30, 'sports-shoe', 8, 100, 'Enabled'),
+(131, 30, 'sports-shoe', 9, 100, 'Enabled'),
 (132, 31, 'sneakers', 6, 100, 'Enabled'),
 (133, 31, 'sneakers', 7, 100, 'Enabled'),
 (134, 31, 'sneakers', 8, 100, 'Enabled'),
@@ -787,12 +809,12 @@ CREATE TABLE `refund` (
 --
 
 INSERT INTO `refund` (`refund_id`, `order_id`, `request_date`, `refund_date`, `refund_reason`, `refund_amt`, `refund_status`) VALUES
-(2, 76, '2024-04-01', '0000-00-00', 'wrong color', 520, 'pending'),
+(2, 76, '2024-04-01', '2024-04-18', 'wrong color', 520, 'done'),
 (3, 79, '2024-03-29', '2024-04-05', 'Wrong product', 369, 'done'),
 (4, 82, '2024-04-02', '0000-00-00', 'defected product', 620, 'pending'),
 (5, 85, '2024-04-03', '2024-04-05', 'Wrong size', 580, 'done'),
 (12, 86, '2024-04-04', '2024-04-05', 'Wrong product', 924, 'done'),
-(13, 80, '2024-04-04', '2024-04-05', 'Wrong product', 1049, 'done');
+(13, 80, '2024-04-04', '2024-04-13', 'Wrong product', 1049, 'done');
 
 -- --------------------------------------------------------
 
@@ -1053,7 +1075,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart_tbl`
 --
 ALTER TABLE `cart_tbl`
-  MODIFY `cartID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `cartID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -1071,7 +1093,7 @@ ALTER TABLE `color`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `feedback_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `feedback_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `image`
@@ -1089,13 +1111,13 @@ ALTER TABLE `offer`
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `orderdetail_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `orderdetail_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `order_tbl`
 --
 ALTER TABLE `order_tbl`
-  MODIFY `order_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `order_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `product_desc`
@@ -1107,7 +1129,7 @@ ALTER TABLE `product_desc`
 -- AUTO_INCREMENT for table `refund`
 --
 ALTER TABLE `refund`
-  MODIFY `refund_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `refund_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user`

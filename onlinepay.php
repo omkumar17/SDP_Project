@@ -317,6 +317,7 @@ if(isset($_GET['orderid'])){
 
             // Now $number contains a unique 12-digit number          
     $paystatus="paid";
+    $date=date('Y-m-d');
     
 
     // Start the transaction
@@ -327,7 +328,7 @@ if(isset($_GET['orderid'])){
     $orderResult = $conn->query($orderSql);
 
     // Attempt to update payment status
-    $paymentSql="INSERT INTO `payment`(`transaction_id`, `order_id`, `payment_mode`, `payment_status`) VALUES ('$number','$order','online','$paystatus')";
+    $paymentSql="INSERT INTO `payment`(`transaction_id`, `order_id`, `payment_mode`,`payment_date`, `payment_status`) VALUES ('$number','$order','online','$date','$paystatus')";
     $paymentResult=$conn->query($paymentSql);
     
 
@@ -412,7 +413,17 @@ if(isset($_GET['orderid'])){
                 <div class="d-flex flex-column mb-4"> <span class="far fa-file-alt text"><span class="ps-2">Invoice
                             ID:</span></span> <span class="ps-3">SN8478042099</span> </div>
                 <div class="d-flex flex-column mb-5"> <span class="far fa-calendar-alt text"><span class="ps-2">Date of 
-                            payment:</span></span> <span class="ps-3"><?php echo $row['order_date']; ?></span> </div>
+                            payment:</span></span> <span class="ps-3"><?php
+                                    $currentDate = $row['order_date']; 
+
+                                    $timestamp2 = strtotime($currentDate); 
+
+                                    $formattedDate2 = date("d F, Y", $timestamp2);
+                                    if($formattedDate2=="30 November, -0001" || $formattedDate2=="01 January, 1970" )
+                                    $formattedDate2="null";
+                                    echo $formattedDate2;
+                                
+                              ?></span> </div>
                 <div class="d-flex align-items-center justify-content-between text mt-5">
                     <div class="d-flex flex-column text"> <span>Customer Support:</span> <span>online chat 24/7</span>
                     </div>
