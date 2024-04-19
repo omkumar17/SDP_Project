@@ -456,8 +456,8 @@ if(isset($_GET['orderid'])){
                 <div class="row">
                     <div class="col-12">
                         <div class="d-flex flex-column px-md-5 px-4 mb-4"> <span>Credit Card</span>
-                            <div class="inputWithIcon"> <input class="form-control" type="text"
-                                    placeholder="Enter Card number" maxlength="16" minlength="16" required> <span class=""> <img
+                            <div class="inputWithIcon"> <input class="form-control" id="cardNumber" type="text"
+                                    placeholder="Enter Card number" maxlength="16" minlength="16" pattern="^[0-9]{16}" required> <span class=""> <img
                                         src="https://www.freepnglogos.com/uploads/mastercard-png/mastercard-logo-logok-15.png"
                                         alt=""></span> </div>
                         </div>
@@ -465,37 +465,37 @@ if(isset($_GET['orderid'])){
                     <div class="col-md-6">
                         <div class="d-flex flex-column ps-md-5 px-md-0 px-4 mb-4"> <span>Expiration<span
                                     class="ps-1">Date</span></span>
-                            <div class="inputWithIcon"> <input type="text" class="form-control" placeholder="mm/yy" required>
+                            <div class="inputWithIcon"> <input type="text" class="form-control" id="cardNumber" pattern="^[0-1][0-9]/[0-9][0-9]" placeholder="mm/yy" required>
                              <!-- <span class="fas fa-calendar-alt"></span> -->
                              </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex flex-column pe-md-5 px-md-0 px-4 mb-4"> <span>Code CVV</span>
-                            <div class="inputWithIcon"> <input type="password" class="form-control" maxlength="3" minlength="3" required> <span
+                            <div class="inputWithIcon"> <input type="password" class="form-control" id="cardNumber" maxlength="3" minlength="3" required> <span
                                     class="fas fa-lock"></span> </div>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="d-flex flex-column px-md-5 px-4 mb-4"> <span>Name</span>
-                            <div class="inputWithIcon"> <input class="form-control text-uppercase" type="text"
+                            <div class="inputWithIcon"> <input class="form-control text-uppercase" id="cardNumber" type="text"
                                     placeholder="Your name " required> <span class="far fa-user"></span> </div>
                         </div>
                     </div>
                     <input type="hidden" value="<?php echo $oid;?>" class="hidden" name="orderid">
                     <div class="col-12 px-md-5 px-4 mt-3">
-                        <div class="btn submit btn-primary w-100" onclick="myFunction('paymentFormCredit')">Pay &#8377;<?php echo ($row['order_amount']+1.99); ?> </div>
+                        <input type="submit" class="btn submit btn-primary w-100" value="Pay &#8377;<?php echo ($row['order_amount']+1.99); ?>"> </input>
                     </div>
                 </div>
             </form>
             </div>
             <div class="debitcrd filterdiv debit show">
-            <form id="paymentForm" action="#">
+            <form id="paymentFormDebit" action="#" >
                 <div class="row">
                     <div class="col-12">
                         <div class="d-flex flex-column px-md-5 px-4 mb-4"> <span>Debit Card</span>
-                            <div class="inputWithIcon"> <input class="form-control" type="text"
-                                    placeholder="Enter card number" maxlength="16" minlength="16" required> <span class=""> <img
+                            <div class="inputWithIcon"> <input class="form-control" id="cardNumberdd" type="text"
+                                    placeholder="Enter card number" maxlength="16" minlength="16"  pattern="^[0-9]{16}" required> <span class=""> <img
                                         src="https://www.freepnglogos.com/uploads/mastercard-png/mastercard-logo-logok-15.png"
                                         alt=""></span> </div>
                         </div>
@@ -503,26 +503,26 @@ if(isset($_GET['orderid'])){
                     <div class="col-md-6">
                         <div class="d-flex flex-column ps-md-5 px-md-0 px-4 mb-4"> <span>Expiration<span
                                     class="ps-1">Date</span></span>
-                            <div class="inputWithIcon"> <input type="text" class="form-control" placeholder="mm/yy" required>
+                            <div class="inputWithIcon"> <input type="text" id="expirationDatedd" class="form-control" pattern="^[0-1][0-9]/[0-9][0-9]" placeholder="mm/yy" required>
                              <!-- <span class="fas fa-calendar-alt"></span> -->
                              </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex flex-column pe-md-5 px-md-0 px-4 mb-4"> <span>Code CVV</span>
-                            <div class="inputWithIcon"> <input type="password" class="form-control" maxlength="3" minlength="3" required> <span
+                            <div class="inputWithIcon"> <input type="password" id="cvvdd" class="form-control" maxlength="3" minlength="3" required> <span
                                     class="fas fa-lock"></span> </div>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="d-flex flex-column px-md-5 px-4 mb-4"> <span>Name</span>
-                            <div class="inputWithIcon"> <input class="form-control text-uppercase" type="text"
-                                    placeholder="Your name " required> <span class="far fa-user"></span> </div>
+                            <div class="inputWithIcon"> <input class="form-control text-uppercase" id="namedd" type="text"
+                                    placeholder="Your name "  required> <span class="far fa-user"></span> </div>
                         </div>
                     </div>
                     <input type="hidden" value="<?php echo $oid;?>" class="hidden" name="orderid">
                     <div class="col-12 px-md-5 px-4 mt-3">
-                        <div class="btn submit btn-primary w-100" onclick="myFunction('paymentForm')" >Pay &#8377;<?php echo ($row['order_amount']+1.99); ?></div>
+                        <input type="submit" class="btn submit btn-primary w-100" value="Pay &#8377;<?php echo ($row['order_amount']+1.99); ?>"></input>
                     </div>
                 </div>
             </form>
@@ -642,6 +642,48 @@ for (var i = 0; i < btns.length; i++) {
 }
 
 </script>
+<!-- <script>
+    function validateForm() {
+        var cardNumber = document.getElementById('cardNumber').value;
+        var expirationDate = document.getElementById('expirationDate').value;
+        var cvv = document.getElementById('cvv').value;
+        var name = document.getElementById('name').value;
+
+        // Regular expressions for validation
+        var cardNumberPattern = /^\d{16}$/;
+        var expirationDatePattern = /^(0[1-9]|1[0-2])\/\d{2}$/;
+        var cvvPattern = /^\d{3}$/;
+        var namePattern = /^[a-zA-Z ]+$/;
+
+        // Validate card number
+        if (!cardNumber.match(cardNumberPattern)) {
+            alert("Please enter a valid 16-digit card number.");
+            return false;
+        }
+
+        // Validate expiration date
+        if (!expirationDate.match(expirationDatePattern)) {
+            alert("Please enter a valid expiration date in MM/YY format.");
+            return false;
+        }
+
+        // Validate CVV
+        if (!cvv.match(cvvPattern)) {
+            alert("Please enter a valid 3-digit CVV.");
+            return false;
+        }
+
+        // Validate name
+        if (!name.match(namePattern)) {
+            alert("Please enter a valid name with alphabets and spaces only.");
+            return false;
+        }
+
+        // If all validations pass, return true
+        return true;
+    }
+</script> -->
+
 </body>
 
 </html>
