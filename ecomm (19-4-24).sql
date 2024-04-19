@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2024 at 06:20 PM
+-- Generation Time: Apr 19, 2024 at 07:27 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -332,30 +332,7 @@ INSERT INTO `order_detail` (`orderdetail_id`, `order_id`, `product_id`, `quantit
 (46, 81, 5002, 1, 227, 9, 'blue', 0, 227),
 (47, 82, 5002, 21, 227, 9, 'blue', 953, 3814),
 (48, 82, 1026, 20, 999, 9, 'blue', 3996, 15984),
-(49, 83, 5002, 1, 227, 6, 'blue', 0, 227),
-(50, 84, 1026, 1, 999, 10, 'blue', 0, 999),
-(51, 85, 1026, 1, 999, 9, 'blue', 0, 999),
-(52, 85, 5002, 1, 227, 9, 'blue', 0, 227),
-(53, 86, 1026, 1, 999, 6, 'blue', 0, 999),
-(54, 87, 5687, 1, 227, 8, 'brown', 0, 227),
-(55, 87, 1026, 1, 999, 8, 'blue', 0, 999),
-(56, 88, 1026, 20, 999, 6, 'blue', 3996, 15984),
-(57, 88, 5002, 1, 227, 6, 'blue', 0, 227),
-(58, 89, 1026, 1, 999, 6, 'blue', 0, 999),
-(59, 89, 5002, 1, 227, 6, 'blue', 0, 227),
-(60, 90, 5100, 1, 1499, 40, 'blue', 0, 1499),
-(61, 91, 1026, 1, 999, 6, 'white', 0, 999),
-(62, 92, 1026, 20, 999, 6, 'blue', 3996, 15984),
-(63, 92, 5002, 1, 227, 6, 'blue', 0, 227),
-(64, 93, 1026, 20, 999, 6, 'blue', 3996, 15984),
-(65, 93, 5002, 1, 227, 6, 'blue', 0, 227),
-(66, 94, 4866, 1, 194, 5, 'creambro', 0, 194),
-(67, 95, 4866, 1, 194, 5, 'creambro', 0, 194),
-(68, 96, 4866, 1, 194, 5, 'creambro', 0, 194),
-(69, 97, 4866, 1, 194, 5, 'creambro', 0, 194),
-(70, 97, 5002, 1, 227, 6, 'blue', 0, 227),
-(71, 98, 5100, 1, 1499, 40, 'blue', 0, 1499),
-(72, 99, 5100, 1, 1499, 40, 'blue', 0, 1499);
+(49, 83, 5002, 1, 227, 6, 'blue', 0, 227);
 
 -- --------------------------------------------------------
 
@@ -390,23 +367,7 @@ INSERT INTO `order_tbl` (`order_id`, `user_id`, `order_date`, `order_status`, `o
 (80, 33, '2024-04-04', 'cancelled', 1049, 0, 'kruparth', 'kanzariya', 7874773789, 'kruparth1610@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 ', 'shipped'),
 (81, 38, '2024-04-04', 'packed', 1123, 153, 'rocky', 'bhai', 8580250157, 'rocky12@gmail.com', 'green pg navrangpura', 'processing'),
 (82, 33, '2023-11-17', 'cancelled', 16873, 7924, 'kruparth', 'kanzariya', 8580250157, 'kruparth1610@gmail.com', 'samras boys hostel', 'shipped'),
-(83, 32, '2024-04-04', 'placed', 244, 33, 'om', 'kumar', 9693808798, 'omk738774@gmail.com', 'hn 49 shivpuri colony', 'processing'),
-(84, 35, '2024-04-04', 'placed', 924, 125, 'rohan', 'rathod', 9944663322, 'rohanrathod@gmail.com', 'sharad apartment navranpura', 'processing'),
-(85, 36, '2024-04-04', 'complete', 1276, 0, 'Saurabh', 'garg', 8585220013, 'saurabh@gmail.com', 'b11 pratistha 20 ', 'shipped'),
-(86, 39, '2024-04-04', 'cancelled', 924, 125, 'kashyap', 'kanzariya', 9546541254, 'kruparth2000@gmail.com', 'nava Amrapar Halvad', 'shipped'),
-(87, 39, '2024-04-04', 'placed', 277, 0, 'kashyap', 'kannzariya', 9546541254, 'kruparth2000@gmail.com', 'Isanpur, halvad', 'processing'),
-(88, 33, '2024-04-04', 'packed', 13831, 6426, 'Kruparth', 'Kanzariya', 7874773789, 'kruparth1610@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
-(89, 27, '2024-04-06', 'placed', 1123, 153, 'Om', 'Kumar', 9693808798, 'omkumar1870@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
-(90, 32, '2024-04-09', 'placed', 1364, 185, 'Om', 'Kumar', 9693808798, 'omk738774@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
-(91, 32, '2024-04-09', 'placed', 1049, 0, 'Om', 'Kumar', 9693808798, 'omkumar1870@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
-(92, 33, '2024-04-13', 'placed', 13831, 6426, 'Om', 'Kumar', 9693808798, 'omk738774@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
-(93, 33, '2024-04-13', 'pending', 13831, 6426, 'Om', 'Kumar', 9693808798, 'omkumar1870@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
-(94, 27, '2024-04-15', 'placed', 244, 0, 'Om', 'Kumar', 9693808798, 'omkumar1870@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
-(95, 27, '2024-04-15', 'placed', 244, 0, 'Om', 'Kumar', 9693808798, 'omkumar1870@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
-(96, 27, '2024-04-15', 'placed', 244, 0, 'Om', 'Kumar', 9693808798, 'omkumar1870@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
-(97, 27, '2024-04-18', 'placed', 471, 0, 'Om', 'Kumar', 9693808798, 'omkumar1870@gmail.com', '2nd floor, sharad apartment, behind pratistha 20 near mocha cafe c.a. circle , navrangpura, ahmedabad', 'processing'),
-(98, 27, '2024-04-18', 'placed', 1549, 0, 'Om', 'Kumar', 9693808798, 'omk738774@gmail.com', 'HN-49, Shivpuri colony, Bistupur', 'processing'),
-(99, 27, '2024-04-18', 'placed', 1549, 0, 'Om', 'Kumar', 9693808798, 'omk738774@gmail.com', 'HN-49, Shivpuri colony, Bistupur', 'processing');
+(83, 32, '2024-04-04', 'placed', 244, 33, 'om', 'kumar', 9693808798, 'omk738774@gmail.com', 'hn 49 shivpuri colony', 'processing');
 
 -- --------------------------------------------------------
 
@@ -434,18 +395,7 @@ INSERT INTO `payment` (`transaction_id`, `order_id`, `payment_mode`, `payment_da
 (1712176683680713465, 80, 'online', '2024-01-09', 'paid'),
 (1712176881285650990, 81, 'COD', '2024-04-13', 'paid'),
 (1712177158761875198, 82, 'COD', '2023-12-05', 'paid'),
-(1712177427689482992, 83, 'online', '2024-01-16', 'paid'),
-(1712177543746614541, 84, 'online', '2024-04-04', 'paid'),
-(1712177659503712739, 85, 'COD', '2024-04-04', 'paid'),
-(1712202169158318824, 86, 'COD', '2024-04-04', 'paid'),
-(1712204939863586094, 87, 'COD', '0000-00-00', 'pending'),
-(1712237976761126362, 88, 'online', '2024-04-04', 'paid'),
-(1712342378316141978, 89, 'COD', '0000-00-00', 'pending'),
-(1712683469868531538, 90, 'online', '2024-04-09', 'paid'),
-(1712683797382608089, 91, 'online', '2024-04-09', 'paid'),
-(1713003119994259741, 92, 'COD', '0000-00-00', 'pending'),
-(1713456433465357430, 97, 'online', '2024-04-18', 'paid'),
-(1713456526155372585, 99, 'COD', NULL, 'pending');
+(1712177427689482992, 83, 'online', '2024-01-16', 'paid');
 
 -- --------------------------------------------------------
 
@@ -698,7 +648,7 @@ INSERT INTO `product_desc` (`prodesc_ID`, `cid`, `product_type`, `size`, `quanti
 (44, 10, 'rubber-slipper', 8, 100, 'Enabled'),
 (45, 11, 'solid-slipper', 6, 94, 'Enabled'),
 (46, 11, 'solid-slipper', 7, 99, 'Enabled'),
-(47, 11, 'solid-slipper', 8, 99, 'Enabled'),
+(47, 11, 'solid-slipper', 8, 98, 'Enabled'),
 (48, 11, 'solid-slipper', 9, 98, 'Enabled'),
 (49, 11, 'solid-slipper', 10, 100, 'Enabled'),
 (50, 11, 'solid-slipper', 11, 100, 'Enabled'),
@@ -812,8 +762,6 @@ INSERT INTO `refund` (`refund_id`, `order_id`, `request_date`, `refund_date`, `r
 (2, 76, '2024-04-01', '2024-04-18', 'wrong color', 520, 'done'),
 (3, 79, '2024-03-29', '2024-04-05', 'Wrong product', 369, 'done'),
 (4, 82, '2024-04-02', '0000-00-00', 'defected product', 620, 'pending'),
-(5, 85, '2024-04-03', '2024-04-05', 'Wrong size', 580, 'done'),
-(12, 86, '2024-04-04', '2024-04-05', 'Wrong product', 924, 'done'),
 (13, 80, '2024-04-04', '2024-04-13', 'Wrong product', 1049, 'done');
 
 -- --------------------------------------------------------
@@ -1075,7 +1023,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart_tbl`
 --
 ALTER TABLE `cart_tbl`
-  MODIFY `cartID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `cartID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -1111,13 +1059,13 @@ ALTER TABLE `offer`
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `orderdetail_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `orderdetail_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `order_tbl`
 --
 ALTER TABLE `order_tbl`
-  MODIFY `order_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `order_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `product_desc`
