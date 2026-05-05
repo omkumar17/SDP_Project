@@ -1,6 +1,6 @@
 <?php
 session_start();
-$otp=rand(1111,9999);
+$otp=rand(1000,9999);
 $_SESSION['otp']=$otp;
 if(isset($_POST['email']))
 {
@@ -18,7 +18,8 @@ if(isset($_POST['email']))
         $currentDateTime = time();
         echo $currentDateTime;
         $_SESSION['currentDateTime']=$currentDateTime;
-        header("Refresh:10;url=otp.php");
+        header("Location: otp.php");
+        exit();
     }
     else
     {

@@ -8,6 +8,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['otp']) && isset($_SESSION['cur
 
 else{
     header("location:login.php");
+    exit();
 }
 // $currentDateTime = time();
 
@@ -21,8 +22,6 @@ $subject = "Unlock Your Account with a New Password";
 // $body = "Your Otp is " . $otp;
 // $headers = "From: footfusion16@gmail.com";
 $body = '
-    <html>
-    <head>
     <html>
     <head>
         <style>
@@ -73,15 +72,52 @@ $body = '
     </html>
 ';
 
-$headers = "MIME-Version: 1.0" . "\r\n";
-$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-$headers .= "From: <footfusion16@gmail.com>" . "\r\n";
+// Use PHPMailer to send email
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-// Sending email
-// mail($to_email, $subject, $body, $headers);
+require 'vendor/autoload.php';
 
+// Prevent email sending on every page refresh
+if (!isset($_SESSION['email_sent'])) {
+    $mail = new PHPMailer(true);
 
-if (mail($to_email, $subject, $body, $headers)) {
+    try {
+        // Server settings - Disable debug for security
+        $mail->SMTPDebug = 0;
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'omk738774@gmail.com'; // Your Gmail address
+        $mail->Password   = 'exnj lhrv ejdw vjhj'; // Your App Password (16 characters)
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
+
+        // Recipients
+        $mail->setFrom('omk738774@gmail.com', 'FootFusion');
+        $mail->addAddress($to_email);
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body    = $body;
+        $mail->AltBody = 'Your OTP is: ' . $otp;
+
+        $mail->send();
+        $_SESSION['email_sent'] = true;
+        $emailSent = true;
+
+    } catch (Exception $e) {
+        $emailSent = false;
+        $errorMessage = $mail->ErrorInfo;
+    }
+} else {
+    // Email already sent, just check the status
+    $emailSent = true;
+}
+
+if ($emailSent) {
     echo <<<_END
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Email successfully sent to $to_email...
@@ -105,7 +141,17 @@ if(isset($_POST['n1']) && isset($_POST['n2']) && isset($_POST['n3']) && isset($_
     $n4=$_POST['n4'];
 
     $otp1=$n1.$n2.$n3.$n4;
-    if (time() <= $tenMinutesAhead){
+    
+    // Validate OTP input - must be digits
+    if (!ctype_digit($otp1)) {
+        echo<<<_END
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Invalid OTP format
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        _END;
+    }
+    elseif (time() <= $tenMinutesAhead){
         if($otp1==$otp)
         {
             echo<<<_END
@@ -114,7 +160,15 @@ if(isset($_POST['n1']) && isset($_POST['n2']) && isset($_POST['n3']) && isset($_
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             _END;
-            header("Refresh:10;url=changepassclick.php");
+            
+            // Clear session after successful verification
+            unset($_SESSION['otp']);
+            unset($_SESSION['currentDateTime']);
+            unset($_SESSION['email_sent']);
+            
+            // Use proper header redirect (avoid output before header)
+            header("Location: changepassclick.php");
+            exit();
         }
         else
         {
@@ -133,7 +187,14 @@ if(isset($_POST['n1']) && isset($_POST['n2']) && isset($_POST['n3']) && isset($_
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         _END;
-        header("Refresh:1;url=forgotpass.php");
+        
+        // Clear expired session
+        unset($_SESSION['otp']);
+        unset($_SESSION['currentDateTime']);
+        unset($_SESSION['email_sent']);
+        
+        header("Location: forgotpass.php");
+        exit();
     }
    
 }
@@ -187,13 +248,13 @@ echo<<<_END
                 </div>
                 <div class="text">Enter OTP </div>
                 <div class="col-2 ms-5 mt-3 ps-3">
-                    <input type="text" name="n1" class="form-control" id="otp1" maxlength="1" oninput="moveFocus(this,'otp2')" oninput="remfocus(this, 'null')" required>
+                    <input type="text" name="n1" class="form-control" id="otp1" maxlength="1" oninput="moveFocus(this,'otp2'); remfocus(this, 'null')" required>
                 </div>
                 <div class="col-2 mt-3">
-                    <input type="text" name="n2" class="form-control" id="otp2" maxlength="1" oninput="moveFocus(this,'otp3')" oninput="remfocus(this, 'otp1')" required>
+                    <input type="text" name="n2" class="form-control" id="otp2" maxlength="1" oninput="moveFocus(this,'otp3'); remfocus(this, 'otp1')" required>
                 </div>
                 <div class="col-2 mt-3">
-                    <input type="text" name="n3" class="form-control" id="otp3" maxlength="1" oninput="moveFocus(this,'otp4')" oninput="remfocus(this, 'otp2')" required>
+                    <input type="text" name="n3" class="form-control" id="otp3" maxlength="1" oninput="moveFocus(this,'otp4'); remfocus(this, 'otp2')" required>
                 </div>
                 <div class="col-2 mt-3">
                     <input type="text" name="n4" class="form-control" id="otp4" maxlength="1" oninput="remfocus(this, 'otp3')" required>

@@ -257,13 +257,13 @@ include 'connection.php';
             </div>
             <div class="col-md-6 mb-3">
               <label for="validationDefault03">City</label>
-              <input class="form-control" id="disabledInput" type="text" placeholder="Ahmedabad" value="Ahmedabad" name="city" disabled>
-              <input class="form-control" id="disabledInput" type="hidden" placeholder="Ahmedabad" value="Ahmedabad" name="city">    </div>
+              <input class="form-control" id="disabledInput" type="text" placeholder="Jamshedpur" value="jamshedpur" name="city" disabled>
+              <input class="form-control" id="disabledInput" type="hidden" placeholder="Jamshedpur" value="jamshedpur" name="city">    </div>
 
             <div class="col-md-3 mb-3">
               <label for="validationDefault04">State</label>
-              <input class="form-control" id="disabledInput" type="text" placeholder="Gujarat" value="Gujarat" name="state" disabled> 
-              <input class="form-control" id="disabledInput" type="hidden" placeholder="Gujarat" value="Gujarat" name="state">  </div>
+              <input class="form-control" id="disabledInput" type="text" placeholder="Jharkhand" value="jharkhand" name="state" disabled> 
+              <input class="form-control" id="disabledInput" type="hidden" placeholder="Jharkhand" value="jharkhand" name="state">  </div>
             <div class="col-md-3 mb-3">
               <label for="validationDefault05">Zip</label>
               <input type="text" class="form-control" id="validationDefault05" name="zip" placeholder="Zip" required>

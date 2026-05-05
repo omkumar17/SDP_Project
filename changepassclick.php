@@ -21,30 +21,39 @@ if(isset($_POST['newp']) && isset($_POST['confirmp']))
     $conn=new mysqli($servername,$username,$password,$database);
     if($newp!=$confirmp)
     {
-        echo<<<_END
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        echo <<<_END
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>new and confirm password must be same
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+                </div>
         _END;
     }
     else
     {
-        $sql="SELECT * FROM `user` WHERE email='$email'";
+$sql="SELECT * FROM `user` WHERE email='$email'";
         $result1=$conn->query($sql);
         if($result1->num_rows==1)
         {
-            $sql1="UPDATE `user` SET pass='$newp' WHERE email='$email'";
+            // Hash the password before storing
+            $hashed_password = password_hash($newp, PASSWORD_DEFAULT);
+            $sql1="UPDATE `user` SET pass='$hashed_password' WHERE email='$email'";
             $result2=$conn->query($sql1);
             if($conn->affected_rows>0)
             {
                 echo<<<_END
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Your password has been changed successfully
+                <strong>Your password has been changed successfully
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 _END;
-                header("Refresh:10;url=login.php");
+                    unset($_SESSION['email']);
+                    unset($_SESSION['otp']);
+                    unset($_SESSION['currentDateTime']);
+                    unset($_SESSION['email_sent']);
+                
+                header("Location: login.php");
+                exit();
+                
             }
             else
             {
@@ -143,8 +152,4 @@ function togglePasswordVisibility() {
 </script>
 </body>
 _END;
-   
-
-?>
-
 ?>

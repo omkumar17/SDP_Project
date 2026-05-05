@@ -1616,8 +1616,8 @@ $res=$conn->query($order);
                 <div class="cmcontainer"> 
                 <div class="cmheader">
                         <div class="heading">profile</div>
-                        <a href="chanpass.php" style="text-decoration:none"><div class="add1" style="background-color:red;">Change Pasword</div></a>
-                        <div class="add add1">Edit profile</div>
+                        <!-- <a href="chanpass.php" style="text-decoration:none"><div class="add1" style="background-color:red;">Change Pasword</div></a>
+                        <div class="add add1">Edit profile</div> -->
                     </div> 
                     
                     <?php
@@ -1667,7 +1667,7 @@ $res=$conn->query($order);
                         </div>
                     </div>
                     <div class="addcontainer">
-                    <form class="addcat" action="" method="get">
+                    <form class="addcat" action="customerpanel.php" method="post">
                         <label for="" style="font-size:30px;font-weight:600;color:green;">User Details</label>
                         <label for="fname" class="label">First name</label>
                         <input type="text" id="fname" class="input" name="fname" value="{$row['fname']}" pattern="[A-Za-z]+" title="(Please enter only alphabets)" required>
@@ -1889,6 +1889,27 @@ $res=$conn->query($order);
         </section>
     </section>
                         <?php
+// Handle Profile Update
+                           if (isset($_POST['fname']) && isset($_POST['email'])) {
+                               $fname = $_POST['fname'];
+                               $lname = $_POST['lname'];
+                               $email = $_POST['email'];
+                               $phone = $_POST['phone'];
+                               $gender = $_POST['gender'];
+                               $address = $_POST['address'];
+                               $pin = $_POST['pin'];
+                               $city = $_POST['city'];
+                               
+                               $sql = "UPDATE `user` SET fname='$fname', lname='$lname', email='$email', phone='$phone', gender='$gender', address='$address', pin='$pin', city='$city' WHERE `userID`='$user'";
+                               $result = $conn->query($sql);
+                               if($result)
+                               {
+                                   // Refresh the page to show updated values
+                                   header("Location: customerpanel.php");
+                                   exit();
+                               }
+                           }
+
                            $pan = "";
 
                            if (isset($_POST['pan'])) {

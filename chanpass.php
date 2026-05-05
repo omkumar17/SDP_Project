@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+// Check if user is logged in
+if(!isset($_SESSION['email'])){
+    header("location:login.php");
+    exit();
+}
+
+$email = $_SESSION['email'];
 
 if(isset($_POST['oldp']) && isset($_POST['newp']) && isset($_POST['confirmp']))
 {
@@ -23,11 +32,18 @@ if(isset($_POST['oldp']) && isset($_POST['newp']) && isset($_POST['confirmp']))
     }
     else
     {
-        $sql="SELECT * FROM `user` WHERE pass='$oldp'";
+        // Get stored password for the user
+        $sql="SELECT pass FROM `user` WHERE email='$email'";
         $result1=$conn->query($sql);
-        if($result1->num_rows==1)
+        $row = $result1->fetch_assoc();
+        $stored_password = $row['pass'];
+        
+        // Verify old password using password_verify
+        if(password_verify($oldp, $stored_password))
         {
-            $sql1="UPDATE `user` SET pass='$newp' WHERE pass='$oldp'";
+            // Hash the new password before storing
+            $hashed_password = password_hash($newp, PASSWORD_DEFAULT);
+            $sql1="UPDATE `user` SET pass='$hashed_password' WHERE email='$email'";
             $result2=$conn->query($sql1);
             if($conn->affected_rows>0)
             {
@@ -47,6 +63,15 @@ if(isset($_POST['oldp']) && isset($_POST['newp']) && isset($_POST['confirmp']))
                 </div>
                 _END;
             }
+        }
+        else
+        {
+            echo<<<_END
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Old password is incorrect
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            _END;
         }
     }
 
